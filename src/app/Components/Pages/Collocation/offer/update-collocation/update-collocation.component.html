@@ -1,0 +1,89 @@
+<app-header></app-header>
+
+<div class="col-lg-8 col-12 text-center mx-auto">
+  <form class="custom-form hero-form" (ngSubmit)="onSubmit()" role="form">
+    <div class="row">
+      <div class="col-lg-5 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="Localisation">Localisation</label>
+          <input type="text" name="localisataion-name" id="localisataion*-name" class="form-control"  required [(ngModel)]="collocationOffer.location">
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-6 col-12">
+        <div class="input-group align-items-center">
+            <label for="product-name">Price</label>
+            <input type="text" name="product-name" id="product-name" class="form-control"  required [(ngModel)]="collocationOffer.price">
+          </div>
+      </div>
+
+  
+    </div>
+    
+    <div class="row mt-4">
+      <div class="col-lg-5 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="house-type">House Type</label>
+          <input type="number" name="house-type" id="house-type" class="form-control" [(ngModel)]="collocationOffer.houseType">
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="available-places">Available Places</label>
+          <input type="number" name="available-places" id="available-places" class="form-control" [(ngModel)]="collocationOffer.availablePlaces">
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="date-rent">Date Rent</label>
+          <input type="date" name="date-rent" id="date-rent" class="form-control" [(ngModel)]="collocationOffer.dateRent">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col-lg-12 col-12">
+        <div class="input-group align-items-center">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" class="form-control" [(ngModel)]="collocationOffer.descriptionCollocation"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-5 col-md-6 col-12">
+            <div class="input-group align-items-center">
+          <label for="images">Images</label>
+          <input type="file" name="images" id="images" class="form-control" multiple [(ngModel)]="collocationOffer.imageCollocation">
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="furniture-collocation">Furniture Collocation</label>
+          <select name="furniture-collocation" class="form-select form-control" id="furniture-collocation" [(ngModel)]="collocationOffer.furnitureCollocation">
+            <option *ngFor="let furniture of furnitureOptions" [value]="furniture">{{ furniture }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-6 col-12">
+        <div class="input-group align-items-center">
+          <label for="gender">Gender</label>
+          <select name="gender" class="form-select form-control" id="gender" [(ngModel)]="collocationOffer.gender">
+            <option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</option>
+          </select>
+        </div>
+      </div>
+      
+      
+      
+     
+    </div>
+    <div class="col-lg-2 col-md-6 col-12">
+        <button type="submit" class="form-control">update</button>
+      </div>
+  </form>
+</div>
+<app-footor></app-footor>
