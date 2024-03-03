@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'showOffer', component: ShowCollocationComponent },
       { path: 'updateOffer/:id', component: UpdateCollocationComponent },
       { path: 'showDetailsOffer/:id', component: ShowDetailsCollocatinComponent },
-      {path : 'addFeedback', component: AddFeedbackComponent}
+      { path: 'addFeedback/:idOffer', component: AddFeedbackComponent },
     ]
   }
   

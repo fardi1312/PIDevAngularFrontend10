@@ -45,7 +45,7 @@
   
           <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2" (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
           <p class="vertical-space"></p>
-          <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback()">Add Feedback</button>
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback(offer.idCollocationOffer)">Add Feedback</button>
           <button *ngIf="card.classList.contains('hovered')" class="btn btn-danger mt-2" (click)="deleteOffer(offer.idCollocationOffer)">delete</button>
           <button *ngIf="card.classList.contains('hovered')" class="btn btn-success mt-2" (click)="updateOffer(offer.idCollocationOffer)">update</button>
 

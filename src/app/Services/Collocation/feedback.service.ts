@@ -23,8 +23,8 @@ export class FeedbackService {
   }
   
 
-  createCollocationFeedback(collocationFeedback: CollocationFedback): Observable<CollocationFedback> {
-    return this.httpClient.post<CollocationFedback>(this.apiUrl, collocationFeedback);
+  createCollocationFeedback(collocationFeedback: CollocationFedback, id:number): Observable<CollocationFedback> {
+    return this.httpClient.post<CollocationFedback>(`${this.apiUrl}/${id}`, collocationFeedback, { withCredentials: true });
   }
 
   updateFeedback(id: number, feedback: CollocationFedback): Observable<CollocationFedback> {

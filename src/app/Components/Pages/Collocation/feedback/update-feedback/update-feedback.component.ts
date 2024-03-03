@@ -12,7 +12,8 @@ export class UpdateFeedbackComponent implements OnInit {
   id!: number;
   collocationFeedback: CollocationFedback = {  
     idCollocationFeedback:0, 
-    feedbackDescription:"", 
+    feedbackDescription:"",  
+    feedbackDate : new Date(),
     rating:0
   } 
            
