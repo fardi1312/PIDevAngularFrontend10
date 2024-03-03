@@ -18,6 +18,11 @@ import { ShowCollocationComponent } from './Components/Pages/Collocation/offer/s
 import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer/update-collocation/update-collocation.component';
 import { DeleteCollocationComponent } from './Components/Pages/Collocation/offer/delete-collocation/delete-collocation.component';
 import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
+import { AddFeedbackComponent } from './Components/Pages/Collocation/feedback/add-feedback/add-feedback.component';
+import { ShowFeedbackComponent } from './Components/Pages/Collocation/feedback/show-feedback/show-feedback.component';
+import { DeleteFeedbackComponent } from './Components/Pages/Collocation/feedback/delete-feedback/delete-feedback.component';
+import { UpdateFeedbackComponent } from './Components/Pages/Collocation/feedback/update-feedback/update-feedback.component';
+import { ShowDetailsFeedbackComponent } from './Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component';
 
 
 @NgModule({
@@ -33,7 +38,12 @@ AddCollocationComponent,
 ShowCollocationComponent,
 UpdateCollocationComponent,
 DeleteCollocationComponent,
-ShowDetailsCollocatinComponent
+ShowDetailsCollocatinComponent,
+AddFeedbackComponent,
+ShowFeedbackComponent,
+DeleteFeedbackComponent,
+UpdateFeedbackComponent,
+ShowDetailsFeedbackComponent
   ],
   imports: [
     BrowserModule,
