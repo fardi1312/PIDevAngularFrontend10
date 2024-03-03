@@ -9,6 +9,7 @@ import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer
 import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
 import { AddFeedbackComponent } from './Components/Pages/Collocation/feedback/add-feedback/add-feedback.component';
 import { AddPreferencesComponent } from './Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component';
+import { AddRequestComponent } from './Components/Pages/Collocation/Request/add-request/add-request.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: 'updateOffer/:id', component: UpdateCollocationComponent },
       { path: 'showDetailsOffer/:id', component: ShowDetailsCollocatinComponent },
       { path: 'addFeedback/:idOffer', component: AddFeedbackComponent }, 
-      { path: 'addPreferences', component: AddPreferencesComponent }
+      { path: 'addPreferences', component: AddPreferencesComponent } , 
+      {path : 'addRequest/:idOffer', component: AddRequestComponent}  
     ]
   }
   

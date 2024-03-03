@@ -43,6 +43,11 @@ offerDetails(id: number){
 addFeedback(id: number): void { 
 
   this.router.navigate(['Collocation/addFeedback',id ]);
+} 
+addRequest(id:number) : void 
+{ 
+  this.router.navigate(['Collocation/addRequest',id ]);
+
 }
 
 }

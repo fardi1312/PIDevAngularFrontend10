@@ -24,6 +24,7 @@ import { DeleteFeedbackComponent } from './Components/Pages/Collocation/feedback
 import { UpdateFeedbackComponent } from './Components/Pages/Collocation/feedback/update-feedback/update-feedback.component';
 import { ShowDetailsFeedbackComponent } from './Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component';
 import { AddPreferencesComponent } from './Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component';
+import { AddRequestComponent } from './Components/Pages/Collocation/Request/add-request/add-request.component';
 
 
 @NgModule({
@@ -45,7 +46,9 @@ ShowFeedbackComponent,
 DeleteFeedbackComponent,
 UpdateFeedbackComponent,
 ShowDetailsFeedbackComponent,
-AddPreferencesComponent
+AddPreferencesComponent, 
+AddRequestComponent, 
+
   ],
   imports: [
     BrowserModule,
