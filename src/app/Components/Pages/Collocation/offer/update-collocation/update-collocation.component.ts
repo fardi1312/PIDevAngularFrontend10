@@ -23,7 +23,7 @@ export class UpdateCollocationComponent implements OnInit {
     gender: Gender.MALE,
     price: 0,
     furnitureCollocation: FurnitureCollocation.Furnitured,
-
+    roomDetailsList: [],
     descriptionCollocation: '',
     imageCollocation: []
   }
