@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Gender } from 'src/app/Model/Collocation/CollocationOffer';
 import { CollocationPreferences, Interest, Pets } from 'src/app/Model/Collocation/CollocationPreferences';
 import { RoomType } from 'src/app/Model/Collocation/RoomDetails';
-import { PreferencesService } from 'src/app/Services/Collocation/preferences.service';
+import { PreferencesService } from 'src/app/Services/Collocation/preferences.service'; 
+
+
 
 @Component({
   selector: 'app-add-preferences',
   templateUrl: './add-preferences.component.html',
   styleUrls: ['./add-preferences.component.css']
 })
-export class AddPreferencesComponent {
-  preferences: CollocationPreferences[] = [];
 
-
+@Component({
+  selector: 'app-add-preferences',
+  templateUrl: './add-preferences.component.html',
+  styleUrls: ['./add-preferences.component.css']
+})
+export class AddPreferencesComponent { 
   collocationPreferences: CollocationPreferences = {
     idCollocationPreferences: 0,
     pets: Pets.No,
@@ -41,7 +46,8 @@ export class AddPreferencesComponent {
     private router: Router,
   ) {}
 
- 
+  ngOnInit(): void { 
+  }
 
   savePreferences(): void { 
     this.preferencesService.createCollocationPreferences(this.collocationPreferences).subscribe(
@@ -53,35 +59,13 @@ export class AddPreferencesComponent {
       }
     );
   }
-  ngOnInit(): void {
-    this.loadPreferences();
-  }
-  loadPreferences() {
-    this.preferencesService.getCollocationPreferences().subscribe(
-      (data) => {
-        this.preferences = data;
-      },
-      (error) => {
-        console.error('Error loading offers:', error);
-      }
-    );
-  }
-
   
   onSubmit(): void {
     this.savePreferences();  
     console.log("saved"); 
+    this.goToPreferencesList(); 
   }
-  deletePrefernce(id: number){
-    this.preferencesService.deleteCollocationPreferences(id).subscribe( data => {
-        console.log(data);
-        this.loadPreferences();
-    })
-} 
 
-
-updatePrefernce(id: number){
-  this.router.navigate(['Preferences/update', id]);
-}
-
+  goToPreferencesList(): void {
+  }
 }
