@@ -18,12 +18,7 @@ export class OfferService {
   getCollocationOfferById(id: number): Observable<CollocationOffer> {
     return this.httpClient.get<CollocationOffer>(`${this.apiUrl}/${id}`);
   }
-  uploadImage(id: number, image: File): Observable<Object> {
-    const formData = new FormData();
-    formData.append('image', image, image.name);
-  
-    return this.httpClient.post(`${this.apiUrl}/${id}/image`, formData);
-  }
+
   
 
   createCollocation(collocationOffer: CollocationOffer): Observable<CollocationOffer> {

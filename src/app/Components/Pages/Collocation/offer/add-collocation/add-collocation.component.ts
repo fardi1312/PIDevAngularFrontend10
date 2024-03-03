@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/Model/Collocation/CollocationOffer';
+import { RoomDetails, RoomType } from 'src/app/Model/Collocation/RoomDetails';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 
 @Component({
@@ -9,7 +10,6 @@ import { OfferService } from 'src/app/Services/Collocation/offer.service';
   styleUrls: ['./add-collocation.component.css']
 })
 export class AddCollocationComponent  implements OnInit {
-
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
     location: '',
@@ -20,13 +20,22 @@ export class AddCollocationComponent  implements OnInit {
     gender: Gender.MALE,
     price: 0,
     furnitureCollocation: FurnitureCollocation.Furnitured,
-
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: [],
+    roomDetailsList: []
   };
+  addRoomDetail(): void {
+    this.collocationOffer.roomDetailsList.push({
+      idRoomDetails: 0, // or assign a valid id
+      roomType: RoomType.SINGLE,
+      availablePlaces: 0, // assign the correct value
+      prix: 0, // assign the correct value
+    });
+  }
+  
+  
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);
-
 
   constructor(private offerService: OfferService, private router: Router) { }
   model = {
@@ -34,36 +43,45 @@ export class AddCollocationComponent  implements OnInit {
   };
   ngOnInit(): void {
          this.setDateOfferToSystemDate();
+}
 
-
-  }
-
-  setDateOfferToSystemDate() {
-    this.model.dateOffer = new Date(); // This will set dateOffer to the current system date
-  }
+  
+  houseType: number = 1;
 
  
-  saveOffer(): void {
 
+
+  setDateOfferToSystemDate() {
+    this.model.dateOffer = new Date(); 
+  }
+
+  onSubmit() {
+    if (!Array.isArray(this.collocationOffer.roomDetailsList)) {
+      console.error('RoomDetails is not an array');
+      return;
+    }
+  
+    this.collocationOffer.roomDetailsList = this.collocationOffer.roomDetailsList.map((roomDetail: RoomDetails) => ({
+      idRoomDetails: roomDetail.idRoomDetails,
+      availablePlaces: roomDetail.availablePlaces,
+      roomType: roomDetail.roomType,
+      prix: roomDetail.prix,
+      
+    }));
+  
     this.offerService.createCollocation(this.collocationOffer).subscribe(
       (createdOffer: CollocationOffer) => {
-        // Handle the successful response from the server
         console.log('Offer saved successfully:', createdOffer);
-        // You can also perform any other actions you need here
       },
       (error) => {
-        // Handle any errors that occurred during the request
         console.error('Error saving offer:', error);
       }
     );
-  }
+}
 
-  onSubmit(): void {
 
-    this.saveOffer();
-    this.goToOfferList();
 
-  }
+
   goToOfferList() {
     this.router.navigate(['/Collocation/showOffer']);
   }

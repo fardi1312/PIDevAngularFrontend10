@@ -78,12 +78,27 @@
       </div>
       
       
-      
-     
-    </div>
-    <div class="col-lg-2 col-md-6 col-12">
-        <button type="submit" class="form-control">update</button>
+      <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="room-details">
+        <h4>Room {{ i + 1 }}</h4>
+        <div class="form-group">
+          <label for="roomType{{ i }}">Room Type:</label>
+          <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" required [(ngModel)]="room.roomType">
+            <option value="Single">Single</option>
+            <option value="Double">Double</option>
+            <option value="Triple">Triple</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="availablePlaces{{ i }}">Available Places:</label>
+          <input type="number" class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" required [(ngModel)]="room.availablePlaces">
+        </div>
+        <div class="form-group">
+          <label for="prix{{ i }}">Price:</label>
+          <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" required [(ngModel)]="room.prix">
+        </div>
       </div>
-  </form>
+      
+      <button type="button" (click)="addRoomDetail()">Add Room Detail</button>
+      <button type="submit" class="btn btn-primary">Update</button>
 </div>
 <app-footor></app-footor>

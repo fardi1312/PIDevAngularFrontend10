@@ -24,7 +24,9 @@ export class ShowDetailsCollocatinComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
 
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: [],
+    roomDetailsList: []
+
   }
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);

@@ -2,35 +2,31 @@
 <section class="shop-detail-section section-padding">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-6 col-12 m-auto">
                 <div class="custom-block shop-detail-custom-block">
                     <h3 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h3>
-
                     <p>Location: {{ collocationOffer.location }}</p>
-
                     <p>Furniture: {{ collocationOffer.furnitureCollocation }}</p>
                     <p>House Type: {{ collocationOffer.houseType }}</p>
-
-
                     <p>Available Places: {{ collocationOffer.availablePlaces }}</p>
-
                     <p>Price: ${{ collocationOffer.price }}</p>
-
                     <p>Date Offer: {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
-                    <p>Gender: {{ collocationOffer.gender  }}</p>
+                    <p>Gender: {{ collocationOffer.gender }}</p>
 
+                    <div *ngIf="collocationOffer.roomDetailsList && collocationOffer.roomDetailsList.length > 0">
+                        <h4>Room Details:</h4>
+                        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+                            <p>Room {{ i + 1 }} - Type: {{ room.roomType }}, Available Places: {{ room.availablePlaces }}, Price: ${{ room.prix }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="col-lg-6 col-12">
                 <div class="shop-image-wrap">
                     <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
                 </div>
             </div>
-
         </div>
     </div>
 </section>
-
 <app-footor></app-footor>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/Model/Collocation/CollocationOffer';
+import { RoomDetails, RoomType } from 'src/app/Model/Collocation/RoomDetails';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 
 @Component({
@@ -24,7 +25,9 @@ export class UpdateCollocationComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
 
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: [],
+    roomDetailsList: []
+
   }
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);
@@ -50,14 +53,37 @@ model = {
       this.collocationOffer = data;
     }, error => console.log(error));
   }
-
   onSubmit() {
-    this.offerService.updateOffer(this.id, this.collocationOffer).subscribe(data => {
-      this.goToOfferList();
-    }, error => console.log(error));
-  }
+    if (!Array.isArray(this.collocationOffer.roomDetailsList)) {
+      console.error('RoomDetails is not an array');
+      return;
+    }
+  
+    this.collocationOffer.roomDetailsList = this.collocationOffer.roomDetailsList.map((roomDetail: RoomDetails) => ({
+      idRoomDetails: roomDetail.idRoomDetails,
+      availablePlaces: roomDetail.availablePlaces,
+      roomType: roomDetail.roomType,
+      prix: roomDetail.prix,
+      
+    }));
+  
+    this.offerService.updateOffer(this.id,this.collocationOffer).subscribe
+      (data => {
+        this.goToOfferList();
+      }, error => console.log(error));
+    }
+
 
   goToOfferList() {
     this.router.navigate(['/Collocation/showOffer']);
   }
+  addRoomDetail(): void {
+    this.collocationOffer.roomDetailsList.push({
+      idRoomDetails: 0, // or assign a valid id
+      roomType: RoomType.SINGLE,
+      availablePlaces: 0, // assign the correct value
+      prix: 0, // assign the correct value
+    });
+  }
+
 }
