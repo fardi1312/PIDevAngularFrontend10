@@ -18,10 +18,6 @@ import { ShowCollocationComponent } from './Components/Pages/Collocation/offer/s
 import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer/update-collocation/update-collocation.component';
 import { DeleteCollocationComponent } from './Components/Pages/Collocation/offer/delete-collocation/delete-collocation.component';
 import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
-import { AddRoomComponent } from './Components/Pages/Collocation/RoomDetails/add-room/add-room.component';
-import { AddPreferencesComponent } from './Components/Pages/Collocation/preferences/add-preferences/add-preferences.component';
-import { ShowPreferencesComponent } from './Components/Pages/Collocation/preferences/show-preferences/show-preferences.component';
-import { UpdatePreferencesComponent } from './Components/Pages/Collocation/preferences/update-preferences/update-preferences.component';
 
 
 @NgModule({
@@ -37,13 +33,7 @@ AddCollocationComponent,
 ShowCollocationComponent,
 UpdateCollocationComponent,
 DeleteCollocationComponent,
-ShowDetailsCollocatinComponent,
-AddRoomComponent,
-AddPreferencesComponent,
-ShowPreferencesComponent,
-UpdatePreferencesComponent
-
-
+ShowDetailsCollocatinComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+ <app-header></app-header> 
+ 
+<div class="container">
+    <h2>Add Request</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="places">Places:</label>
+        <input type="number" id="places" name="places" [(ngModel)]="collocationRequest.places" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="collocationRequest.description" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <button (click)="goToRequestList()">Go to Request List</button>
+  </div> 
+  <app-footor></app-footor>  

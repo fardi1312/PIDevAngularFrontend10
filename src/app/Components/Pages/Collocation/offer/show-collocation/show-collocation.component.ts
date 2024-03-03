@@ -39,5 +39,15 @@ updateOffer(id: number){
 }
 offerDetails(id: number){
   this.router.navigate(['Collocation/showDetailsOffer', id]);
+} 
+addFeedback(id: number): void { 
+
+  this.router.navigate(['Collocation/addFeedback',id ]);
+} 
+addRequest(id:number) : void 
+{ 
+  this.router.navigate(['Collocation/addRequest',id ]);
+
 }
+
 }

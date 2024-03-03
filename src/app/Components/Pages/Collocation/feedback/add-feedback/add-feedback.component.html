@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<section class="shop-detail-section section-padding">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-6 col-12">
+        <div class="shop-image-wrap">
+          <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-12">
+        <div class="custom-block shop-detail-custom-block">
+          <h1 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h1>
+
+          <div class="detail-info">
+            <p><strong>Location:</strong> {{ collocationOffer.location }}</p>
+            <p><strong>Furniture:</strong> {{ collocationOffer.furnitureCollocation }}</p>
+            <p><strong>House Type:</strong> {{ collocationOffer.houseType }}</p>
+            <p><strong>Available Places:</strong> {{ collocationOffer.availablePlaces }}</p>
+            <p><strong>Price:</strong> ${{ collocationOffer.price }}</p>
+            <p><strong>Date Offer:</strong> {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
+            <p><strong>Gender:</strong> {{ collocationOffer.gender  }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="feedback-container">
+  <h2 class="feedback-title">Collocation Feedback</h2>
+  <div class="form-group">
+    <label for="feedbackDescription" class="label">Feedback Description:</label>
+    <textarea id="feedbackDescription" class="input-field description-field" [(ngModel)]="collocationFeedback.feedbackDescription"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="rating" class="label">Rating:</label>
+    <input type="number" id="rating" class="input-field" [(ngModel)]="collocationFeedback.rating" min="0" max="5" />
+  </div>
+  <button class="btn btn-primary save-btn" (click)="saveFeedback()">Save Feedback</button>
+</div>
+
+<app-footor></app-footor>
