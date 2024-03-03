@@ -47,12 +47,9 @@ export class AddCollocationComponent  implements OnInit {
 
     this.offerService.createCollocation(this.collocationOffer).subscribe(
       (createdOffer: CollocationOffer) => {
-        // Handle the successful response from the server
         console.log('Offer saved successfully:', createdOffer);
-        // You can also perform any other actions you need here
       },
       (error) => {
-        // Handle any errors that occurred during the request
         console.error('Error saving offer:', error);
       }
     );
