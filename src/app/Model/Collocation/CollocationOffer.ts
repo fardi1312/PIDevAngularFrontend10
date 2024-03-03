@@ -9,7 +9,7 @@ export interface CollocationOffer {
   price: number;
   furnitureCollocation: FurnitureCollocation;
   descriptionCollocation: string;
-  imageCollocation: string[];
+  imageCollocation: string;
 }
 export enum Gender {
   MALE = 'Male',

@@ -30,7 +30,7 @@ export class AddFeedbackComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
 
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: ''
   };
 
   idOffer: number = 0;

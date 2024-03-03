@@ -22,7 +22,7 @@ export class AddCollocationComponent  implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
 
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: ''
   };
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);
@@ -54,8 +54,21 @@ export class AddCollocationComponent  implements OnInit {
       }
     );
   }
+  convertFileToBase64(file: File): void { 
+    console.log('ahla'); 
 
-  onSubmit(): void {
+    const reader = new FileReader(); 
+    console.log('ahla'); 
+  
+    reader.onloadend = () => {
+      this.collocationOffer.imageCollocation = reader.result as string;
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+    onSubmit(): void {
 
     this.saveOffer();
     this.goToOfferList();
@@ -63,6 +76,17 @@ export class AddCollocationComponent  implements OnInit {
   }
   goToOfferList() {
     this.router.navigate(['/Collocation/showOffer']);
+  } 
+  handleFileInput(event: any): void { 
+    const file: File = event.target.files[0];
+
+    if (file) { 
+      console.log('ahla'); 
+
+      this.convertFileToBase64(file);
+    }
   }
+
+
 
 }
