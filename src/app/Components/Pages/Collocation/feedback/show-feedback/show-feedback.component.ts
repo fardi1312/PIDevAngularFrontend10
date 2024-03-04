@@ -14,32 +14,30 @@ export class ShowFeedbackComponent implements OnInit {
   ngOnInit() { this.loadFeedback() ; 
     
   }  
-  loadFeedback() { 
-    this.feedbackService.getCollocationFeedbacks().subscribe( 
-      (data)=>{ 
-        this.feedbacks = data ; 
-      }, 
-      (error) => { 
-        console.error('Error :' ,error) ; 
+  loadFeedback(): void {
+    this.feedbackService.getCollocationFeedbacks().subscribe(
+      (data) => {
+        this.feedbacks = data;
+      },
+      (error) => {
+        console.error('Error loading feedback:', error);
+      },
+      () => {
+        console.log('Load feedback completed.'); 
       }
-    ); 
-  }  
-  deleteFeedback(id:number)  {
+    );
+  }
+    deleteFeedback(id:number)  {
     this.feedbackService.deleteFeedback(id).subscribe(data=> { 
       console.log(data); 
       this.loadFeedback(); 
     })
   } 
-  deleteOffer(id: number){
-    this.feedbackService.deleteFeedback(id).subscribe( data => {
-        console.log(data);
-        this.loadFeedback();
-    })
-}
-updateOffer(id: number){
+
+updateFeedback(id: number){
   this.router.navigate(['Collocation/updateFeedback', id]);
 }
-offerDetails(id: number){
+showDetailsFeedback(id: number){
   this.router.navigate(['Collocation/showDetailsFeedback', id]);
 }
 

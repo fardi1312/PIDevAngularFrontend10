@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CollocationFedback } from 'src/app/Model/Collocation/CollocationFeedback';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/Model/Collocation/CollocationOffer';
-import { FeedbackService } from 'src/app/Services/Collocation/feedback.service';  
+import { FeedbackService } from 'src/app/Services/Collocation/feedback.service';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 
 @Component({
@@ -10,15 +10,15 @@ import { OfferService } from 'src/app/Services/Collocation/offer.service';
   templateUrl: './add-feedback.component.html',
   styleUrls: ['./add-feedback.component.css']
 })
-export class AddFeedbackComponent implements OnInit { 
+export class AddFeedbackComponent implements OnInit {
   collocationFeedback: CollocationFedback = {
     idCollocationFeedback: 0,
     feedbackDescription: '',
-    rating: 0 , 
+    rating: 0,
     feedbackDate: new Date()
   };
 
-  collocationOffer: CollocationOffer = { 
+  collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
     location: '',
     houseType: 0,
@@ -28,9 +28,9 @@ export class AddFeedbackComponent implements OnInit {
     gender: Gender.MALE,
     price: 0,
     furnitureCollocation: FurnitureCollocation.Furnitured,
-
     descriptionCollocation: '',
-    imageCollocation: ''
+    imageCollocation: '',
+    roomDetailsList: []
   };
 
   idOffer: number = 0;
@@ -42,7 +42,7 @@ export class AddFeedbackComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.idOffer = +params['idOffer'] || 0;
       console.log('idOffer:', this.idOffer);
@@ -53,24 +53,22 @@ export class AddFeedbackComponent implements OnInit {
     });
   }
 
-  saveFeedback(): void { 
+  saveFeedback(): void {
     this.offerFeedback.createCollocationFeedback(this.collocationFeedback, this.idOffer).subscribe(
-      (createdOffer: CollocationFedback) => {  
+      (createdOffer: CollocationFedback) => {
         console.log('Offer saved successfully:', createdOffer);
-        this.goToOfferList();  // Navigate here after successful save
+        this.goToOfferList();
       },
       (error) => {
-        console.error('Error saving offer:', error); 
-        this.goToOfferList();  // Navigate here after successful save
+        console.error('Error saving offer:', error);
+        this.goToOfferList();
       }
     );
   }
-  
+
   onSubmit(): void {
-    console.log("ahla");
-    this.saveFeedback();  
-    console.log("saved");
-    this.goToOfferList();
+    console.log('Submitting feedback...');
+    this.saveFeedback();
   }
 
   goToOfferList(): void {

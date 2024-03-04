@@ -1,1 +1,27 @@
-<p>update-feedback works!</p>
+<app-head-back></app-head-back>
+<div class="container mt-4">
+    <h2>Update Feedback</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="feedbackDescription" class="form-label">Feedback Description:</label>
+        <textarea class="form-control" id="feedbackDescription" name="feedbackDescription" [(ngModel)]="collocationFeedback.feedbackDescription" required></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating:</label>
+        <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="collocationFeedback.rating" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="feedbackDate" class="form-label">Feedback Date:</label>
+        <input type="date" class="form-control" id="feedbackDate" name="feedbackDate" [(ngModel)]="collocationFeedback.feedbackDate" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Update Feedback</button>
+    </form>
+  </div> 
+  <app-footer-back></app-footer-back>
+
+  
+  

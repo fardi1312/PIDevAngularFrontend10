@@ -1,0 +1,29 @@
+<app-head-back></app-head-back>
+<div class="container mt-4">
+    <h2>Update Collocation Request</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="request" class="form-label">Request Status</label>
+        <select id="request" class="form-select" [(ngModel)]="collocationRequest.request" name="request">
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="places" class="form-label">Number of Places</label>
+        <input type="number" id="places" class="form-control" [(ngModel)]="collocationRequest.places" name="places" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" [(ngModel)]="collocationRequest.description" name="description"></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Update Request</button>
+    </form>
+  </div> 
+  <app-footer-back></app-footer-back>
+  

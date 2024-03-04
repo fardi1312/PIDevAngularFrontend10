@@ -11,7 +11,7 @@ import { RoomDetails } from "./RoomDetails";
     price: number;
     furnitureCollocation: FurnitureCollocation;
     descriptionCollocation: string;
-    imageCollocation: string[];
+    imageCollocation: string;
     roomDetailsList: RoomDetails[]; 
   }
 export enum Gender {

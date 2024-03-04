@@ -24,7 +24,7 @@ export class ShowDetailsCollocatinComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
 
     descriptionCollocation: '',
-    imageCollocation: [],
+    imageCollocation: '',
     roomDetailsList: []
 
   }

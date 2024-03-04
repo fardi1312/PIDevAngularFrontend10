@@ -25,7 +25,7 @@ export class UpdateCollocationComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
     roomDetailsList: [],
     descriptionCollocation: '',
-    imageCollocation: []
+    imageCollocation: ''
   }
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);
