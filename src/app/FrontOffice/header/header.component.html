@@ -43,7 +43,30 @@
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#section_5">Contact</a>
                     </li>
+
+
                 </ul>
+                <a href="/user/profile" class="rounded-pill ps-2 pt-1 pe-3 pb-1 text-white text-decoration-none">
+                    <span class="rounded-circle d-inline-block align-middle centered-bg-image"
+                        style="width: 30px; height: 30px; background-color: rgb(214, 171, 171); 
+                        background-image: url('{{imageUrl}}'); background-size: cover; background-position: center;"></span>
+                    <span class="mat-body-strong d-inline-block align-middle ps-2" *ngIf="user" [style.color]="'black'">{{ user.firstName }}</span>
+                </a>
+                
+
+                <button mat-icon-button >
+                    <mat-icon>notifications</mat-icon>
+                    <span class="position-absolute translate-middle p-2 bg-danger rounded-circle" style="top: 10px; right: -5px;" ></span>
+                </button>
+                
+                <button mat-icon-button [matMenuTriggerFor]="mainMenu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #mainMenu="matMenu" xPosition="before">
+                    <a mat-menu-item href="/user/profile">Profile</a>
+                    <a mat-menu-item href="/user/showphotoprofile">Settings</a>
+                    <a mat-menu-item (click)="logout()">Logout</a>
+                </mat-menu>
             </div>
         </div>
     </nav>
