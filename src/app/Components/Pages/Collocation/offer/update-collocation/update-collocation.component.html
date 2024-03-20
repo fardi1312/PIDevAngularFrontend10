@@ -1,25 +1,24 @@
-<app-header></app-header>
+<div>
+  <app-header></app-header>
 
-<div class="col-lg-8 col-12 text-center mx-auto">
-  <form class="custom-form hero-form" (ngSubmit)="onSubmit()" role="form">
-    <div class="row">
-      <div class="col-lg-5 col-md-6 col-12">
-        <div class="input-group align-items-center">
-          <label for="Localisation">Localisation</label>
-          <input type="text" name="localisataion-name" id="localisataion*-name" class="form-control"  required [(ngModel)]="collocationOffer.location">
+  <div class="col-lg-8 col-12 text-center mx-auto">
+    <form class="custom-form hero-form" (ngSubmit)="onSubmit()" role="form">
+      <div class="row">
+        <div class="col-lg-5 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="localisataion-name">Localisation:</label>
+            <input type="text" name="localisataion-name" id="localisataion-name" class="form-control" required [(ngModel)]="collocationOffer.location">
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="product-name">Price</label>
+            <input type="text" name="product-name" id="product-name" class="form-control" required [(ngModel)]="collocationOffer.price">
+          </div>
         </div>
       </div>
-
-      <div class="col-lg-5 col-md-6 col-12">
-        <div class="input-group align-items-center">
-            <label for="product-name">Price</label>
-            <input type="text" name="product-name" id="product-name" class="form-control"  required [(ngModel)]="collocationOffer.price">
-          </div>
-      </div>
-
-  
-    </div>
-    
+      
     <div class="row mt-4">
       <div class="col-lg-5 col-md-6 col-12">
         <div class="input-group align-items-center">
@@ -99,6 +98,10 @@
       </div>
       
       <button type="button" (click)="addRoomDetail()">Add Room Detail</button>
-      <button type="submit" class="btn btn-primary">Update</button>
-</div>
-<app-footor></app-footor>
+      <button type="submit" class="btn btn-primary">Update</button> 
+  
+    
+  </div>
+  <app-footer></app-footer>
+   
+

@@ -16,7 +16,15 @@ export class AddFeedbackComponent implements OnInit {
     feedbackDescription: '',
     rating: 0,
     feedbackDate: new Date()
-  };
+  }; 
+  selectedRating: number = 0;
+  hoveredRating: number | null = null;
+  stars: number[] = [1, 2, 3, 4, 5];
+
+setRating(rating: number) {
+  this.collocationFeedback.rating = rating;
+}
+
 
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,

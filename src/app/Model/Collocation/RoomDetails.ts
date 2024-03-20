@@ -4,7 +4,8 @@ export interface RoomDetails {
     idRoomDetails: number;
     availablePlaces: number;
     roomType: RoomType;
-    prix: number;
+    prix: number; 
+    selected?:boolean;
   }
   
   export enum RoomType {

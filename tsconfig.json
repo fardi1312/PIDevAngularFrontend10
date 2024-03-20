@@ -24,7 +24,9 @@
       "dom"
     ]
   },
-  "angularCompilerOptions": {
+  "angularCompilerOptions": { 
+    "inlineStyleLanguage": "css" ,
+
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

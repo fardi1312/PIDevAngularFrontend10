@@ -21,7 +21,7 @@ export class UpdateFeedbackComponent implements OnInit {
     private feedbackService: FeedbackService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

@@ -1,3 +1,5 @@
+import { RoomDetails } from "./RoomDetails";
+
 export enum RequestEnum {
     Approved = "Approved",
     Pending = "Pending",
@@ -8,6 +10,7 @@ export enum RequestEnum {
     idCollocationRequest: number;
     request: RequestEnum;
     places: number;
-    description: string;
+    description: string;  
+    roomDetailsList:RoomDetails[]; 
   }
   

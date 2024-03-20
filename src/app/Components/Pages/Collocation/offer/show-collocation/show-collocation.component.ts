@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CollocationOffer } from 'src/app/Model/Collocation/CollocationOffer';
+import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/Model/Collocation/CollocationOffer';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 
 @Component({
@@ -10,7 +10,21 @@ import { OfferService } from 'src/app/Services/Collocation/offer.service';
 })
 export class ShowCollocationComponent  implements OnInit{
 
-  offers: CollocationOffer[] = [];
+  offers: CollocationOffer[] = []; 
+  offer:CollocationOffer = {
+    idCollocationOffer: 0,
+    location: '',
+    houseType: 0,
+    availablePlaces: 0,
+    dateRent: new Date(),
+    dateOffer: new Date(),
+    gender: Gender.MALE,
+    price: 0,
+    furnitureCollocation: FurnitureCollocation.Furnitured,
+    descriptionCollocation: '',
+    imageCollocation: '',
+    roomDetailsList: []
+  }; 
 
   constructor(private offerService: OfferService,private router: Router) { }
 
@@ -50,5 +64,12 @@ addRequest(id:number) : void
   this.router.navigate(['Collocation/addRequest',id ]);
 
 }
-
+showRooms(id:number):void
+{ 
+  this.offerService.getCollocationOfferById(id).subscribe(
+    (data) => {
+      this.offer= data;
+    });
+    this.offer.roomDetailsList
+}
 }

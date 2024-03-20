@@ -37,18 +37,30 @@ export class ShowDetailsCollocatinComponent implements OnInit {
               ngOnInit(): void {
                
             
-                this.id = this.route.snapshot.params['id'];
+                this.id = this.route.snapshot.params['id']; 
             
                 this.offerService.getCollocationOfferById(this.id).subscribe(data => {
-                  this.collocationOffer = data;
-                }, error => console.log(error));
+                  this.collocationOffer = data; 
+                }, error => console.log(error)); 
+
               }
             
               onSubmit() {
                 this.offerService.updateOffer(this.id, this.collocationOffer).subscribe(data => {
                 }, error => console.log(error));
+              } 
+              addFeedback(id: number): void {  
+                console.log(id);
+              
+                this.router.navigate(['Collocation/addFeedback',id ]);
+              } 
+              
+              addRequest(id:number) : void 
+              { 
+                this.router.navigate(['Collocation/addRequest',id ]);
+              
               }
-      
+              
 
 
 }

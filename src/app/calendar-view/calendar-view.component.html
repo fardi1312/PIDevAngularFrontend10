@@ -1,0 +1,70 @@
+<router-outlet></router-outlet>
+<app-header></app-header>
+
+<div id="calendrier-container">
+  <div id="cal-date-nav-buttons">
+    <button id="previous" mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view">Previous</button>
+    <button id="today" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+    <button id="next" mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">Next</button>
+  </div>
+
+  <div id="cal-date-field">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</div>
+
+  <div id="cal-view-nav-buttons">
+    <button class="view-button" id="month" (click)="setView(CalendarView.Month)">Month</button>
+    <button class="view-button" id="week" (click)="setView(CalendarView.Week)">Week</button>
+    <button class="view-button" id="day" (click)="setView(CalendarView.Day)">Day</button>
+  </div>
+
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [activeDayIsOpen]="activeDayIsOpen"(dayClicked)="dayClicked($event.day)"></mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"></mwl-calendar-day-view>
+  </div>
+
+  <!-- Move the "Add new" button inside the calendrier-container -->
+  <h3>
+    Edit events
+    <button class="btn btn-primary float-end" (click)="addEvent()">
+      Add new
+    </button>
+    <div class="clearfix"></div>
+  </h3>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Primary color</th>
+          <th>Secondary + text color</th>
+          <th>Starts at</th>
+          <th>Ends at</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>{{ event.title }}</td>
+          <td>{{ event.color?.primary }}</td>
+          <td>{{ event.color?.secondary }}</td>
+          <td>{{ event.start | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ event.end | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>
+            <button class="btn btn-warning" (click)="addEvent()">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteEvent(event)">
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-footer></app-footer>

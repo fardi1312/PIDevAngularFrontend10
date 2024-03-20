@@ -1,19 +1,16 @@
 <app-header></app-header>
 
 <section class="shop-detail-section section-padding">
-  <div class="container">
+  <div class="container mx-auto"> <!-- Added mx-auto class -->
     <div class="row">
-
       <div class="col-lg-6 col-12">
         <div class="shop-image-wrap">
           <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
         </div>
       </div>
-
       <div class="col-lg-6 col-12">
         <div class="custom-block shop-detail-custom-block">
           <h1 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h1>
-
           <div class="detail-info">
             <p><strong>Location:</strong> {{ collocationOffer.location }}</p>
             <p><strong>Furniture:</strong> {{ collocationOffer.furnitureCollocation }}</p>
@@ -21,26 +18,51 @@
             <p><strong>Available Places:</strong> {{ collocationOffer.availablePlaces }}</p>
             <p><strong>Price:</strong> ${{ collocationOffer.price }}</p>
             <p><strong>Date Offer:</strong> {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
-            <p><strong>Gender:</strong> {{ collocationOffer.gender  }}</p>
+            <p><strong>Gender:</strong> {{ collocationOffer.gender }}</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<div class="feedback-container">
-  <h2 class="feedback-title">Collocation Feedback</h2>
-  <div class="form-group">
+<div class="container mx-auto"> <!-- Added mx-auto class -->
+  <div class="text">Add Feedback</div>
+  <div class="underline">
     <label for="feedbackDescription" class="label">Feedback Description:</label>
-    <textarea id="feedbackDescription" class="input-field description-field" [(ngModel)]="collocationFeedback.feedbackDescription"></textarea>
+    <textarea rows="8" cols="80" id="feedbackDescription" class="input-field description-field" [(ngModel)]="collocationFeedback.feedbackDescription"></textarea>
   </div>
-  <div class="form-group">
-    <label for="rating" class="label">Rating:</label>
-    <input type="number" id="rating" class="input-field" [(ngModel)]="collocationFeedback.rating" min="0" max="5" />
+  <div class="col-lg-8 col-12 text-center mx-auto">
+    <div class="row">
+      <div class="col-lg-8 col-12 text-center mx-auto">
+        <form class="custom-form hero-form" role="form" (ngSubmit)="onSubmit()">
+          <!-- Existing form content goes here -->
+
+<!-- Rating Stars -->
+<p>Rating: <span class="star-rating">
+  <input type="radio" name="rating" id="rate-1" [(ngModel)]="collocationFeedback.rating" value="1">
+  <label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+  <input type="radio" name="rating" id="rate-2" [(ngModel)]="collocationFeedback.rating" value="2" checked>
+  <label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+  <input type="radio" name="rating" id="rate-3" [(ngModel)]="collocationFeedback.rating" value="3">
+  <label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+  <input type="radio" name="rating" id="rate-4" [(ngModel)]="collocationFeedback.rating" value="4">
+  <label for="rate-4" style="--i:4"><i class="fa-solid  fa-star"></i></label>
+  <input type="radio" name="rating" id="rate-5" [(ngModel)]="collocationFeedback.rating" value="5">
+  <label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+</span></p>
+    </form>
+    </div>
   </div>
-  <button class="btn btn-primary save-btn" (click)="saveFeedback()">Save Feedback</button>
 </div>
 
-<app-footor></app-footor>
+<!-- Button with text-center class to center it -->
+<div class="text-center">
+  <button class="btn btn-warning button-5" (click)="saveFeedback()">Submit</button>
+</div>
+</div> 
+<div class="wraper">
+  <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="gitlabBilal" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+</div>
+
+<app-footer></app-footer>

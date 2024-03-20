@@ -2,8 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './FrontOffice/header/header.component';
-import { FootorComponent } from './FrontOffice/footor/footor.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { TemplateFrontComponent } from './FrontOffice/template-front/template-front.component';
 import { AppRoutingModule } from './app.routing.module';
 import { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
@@ -29,20 +29,18 @@ import { UpdateFeedbackComponent } from './Components/Pages/Collocation/feedback
 import { UpdateRequestComponent } from './Components/Pages/Collocation/update-request/update-request.component';
 import { ShowRequestComponent } from './Components/Pages/Collocation/show-request/show-request.component';
 import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-request/delete-request.component';
-
+import { ScheduleModule, RecurrenceEditorModule, DayService,MonthService,WeekService,WorkWeekService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule'; 
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent, 
     UpdateFeedbackComponent, 
-    ShowRequestComponent, 
-    FooterBackComponent, 
+    ShowRequestComponent,  
     HeadBackComponent,  
-    HeaderComponent, 
     AddFeedbackComponent, 
     ShowFeedbackComponent, 
     ShowDetailsFeedbackComponent, 
-    FootorComponent,
     TemplateFrontComponent,
     AddRequestComponent, 
 FooterBackComponent,
@@ -62,9 +60,11 @@ UpdateCollocationComponent,ShowPreferencesComponent,UpdatePreferencesComponent, 
     RouterModule,
     FormsModule,
     HttpClientModule,
-    CommonModule
-  ],
-  providers: [],
+    CommonModule,
+    ScheduleModule, RecurrenceEditorModule,
+    SharedModule
+  ], 
+  exports : [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,7 +42,16 @@ export class AddCollocationComponent implements OnInit {
 
   setDateOfferToSystemDate() {
     this.model.dateOffer = new Date();
+  }  
+  maxRoomsAllowed: number = 0;
+
+  updateMaxRoomsAllowed() {
+    this.maxRoomsAllowed = this.collocationOffer.houseType;
+    if (this.collocationOffer.roomDetailsList.length > this.maxRoomsAllowed) {
+      this.collocationOffer.roomDetailsList = this.collocationOffer.roomDetailsList.slice(0, this.maxRoomsAllowed);
+    }
   }
+  
 
   addRoomDetail(): void {
     this.collocationOffer.roomDetailsList.push({
@@ -53,15 +62,17 @@ export class AddCollocationComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit(): void { 
+
     // Convert roomDetailsList to the correct format
     this.collocationOffer.roomDetailsList = this.collocationOffer.roomDetailsList.map(
       (roomDetail: RoomDetails) => ({
         idRoomDetails: roomDetail.idRoomDetails,
         availablePlaces: roomDetail.availablePlaces,
         roomType: roomDetail.roomType,
-        prix: roomDetail.prix,
-      })
+        prix: roomDetail.prix, 
+      }) 
+
     );
 
     // Call the service to create the collocation offer
@@ -75,6 +86,9 @@ export class AddCollocationComponent implements OnInit {
       }
     );
   }
+  errorMessage: string = '';
+
+  
 
   goToOfferList(): void {
     this.router.navigate(['/Collocation/showOffer']);
@@ -85,7 +99,7 @@ export class AddCollocationComponent implements OnInit {
     const file: File = event.target.files[0];
 
     if (file) { 
-      console.log('converting ... '); 
+      console.log('converting ... ');  
       this.convertFileToBase64(file); 
     } 
 

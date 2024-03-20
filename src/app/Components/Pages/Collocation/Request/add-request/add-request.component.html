@@ -1,47 +1,72 @@
- <app-header></app-header> 
- <section class="shop-detail-section section-padding">
+<app-header></app-header>
+<section class="shop-detail-section section-padding">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-6 col-12 m-auto">
-              <div class="custom-block shop-detail-custom-block">
-                  <h3 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h3>
-                  <p>Location: {{ collocationOffer.location }}</p>
-                  <p>Furniture: {{ collocationOffer.furnitureCollocation }}</p>
-                  <p>House Type: {{ collocationOffer.houseType }}</p>
-                  <p>Available Places: {{ collocationOffer.availablePlaces }}</p>
-                  <p>Price: ${{ collocationOffer.price }}</p>
-                  <p>Date Offer: {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
-                  <p>Gender: {{ collocationOffer.gender }}</p>
-
-                  <div *ngIf="collocationOffer.roomDetailsList && collocationOffer.roomDetailsList.length > 0">
-                      <h4>Room Details:</h4>
-                      <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
-                          <p>Room {{ i + 1 }} - Type: {{ room.roomType }}, Available Places: {{ room.availablePlaces }}, Price: ${{ room.prix }}</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-6 col-12">
-              <div class="shop-image-wrap">
-                  <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
-              </div>
-          </div>
+    <div class="row">
+      <div class="col-lg-6 col-12 m-auto">
+        <div class="custom-block shop-detail-custom-block">
+          <h3 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h3>
+          <p>Location: {{ collocationOffer.location }}</p>
+          <p>Furniture: {{ collocationOffer.furnitureCollocation }}</p>
+          <p>House Type: {{ collocationOffer.houseType }}</p>
+          <p>Available Places: {{ collocationOffer.availablePlaces }}</p>
+          <p>Price: ${{ collocationOffer.price }}</p>
+          <p>Date Offer: {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
+          <p>Gender: {{ collocationOffer.gender }}</p>
+        </div>
       </div>
+      <div class="col-lg-6 col-12">
+        <div class="shop-image-wrap">
+          <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="room-details">
+      <h4>Room {{ i + 1 }}</h4>
+      <div class="form-group">
+        <label for="roomType{{ i }}">Room Type:</label>
+        <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" [(ngModel)]="room.roomType" disabled>
+          <option value="Single">Single</option>
+          <option value="Double">Double</option>
+          <option value="Triple">Triple</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="availablePlaces{{ i }}">Requested Places:</label>
+        <input type="number" class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" [(ngModel)]="room.availablePlaces" disabled>
+      </div>
+      <div class="form-group">
+        <label for="prix{{ i }}">Price:</label>
+        <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" [(ngModel)]="room.prix" disabled>
+      </div>
+    </div>
   </div>
+</section>
+<div class="container mx-auto">
+  <div class="text">Add Request</div>
+  <div class="underline">
+    <label for="places">Places:</label>
+    <input type="number" id="places" name="places" [(ngModel)]="collocationRequest.places" 
+           required [min]="1" [max]="collocationOffer.availablePlaces" class="form-control"> 
+  </div>
+  <form (ngSubmit)="onSubmit()"> 
+    <div class="underline" style="margin-bottom: 20px;"> <!-- Adjusted margin-bottom here -->
+      <label for="description">Description:</label>
+      <textarea rows="8" cols="80" id="description" name="description" class="input-field description-field" [(ngModel)]="collocationRequest.description" required class="form-control"></textarea>
+    </div>  
 
-<div class="container">
-    <h2>Add Request</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="places">Places:</label>
-        <input type="number" id="places" name="places" [(ngModel)]="collocationRequest.places" required>
+    <!-- Room selection -->
+    <div class="room-selection">
+      <p>Select rooms:</p>
+      <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+        <input type="checkbox" id="room{{ i }}" name="rooms" [(ngModel)]="room.selected">
+        <label for="room{{ i }}">Room {{ i + 1 }}</label>
       </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" [(ngModel)]="collocationRequest.description" required></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-    <button (click)="goToRequestList()">Go to Request List</button>
-  </div> 
-  <app-footor></app-footor>  
+          </div>
+
+    <div class="text-center"> 
+      <button class="btn btn-warning button-5" type="submit" (click)="saveRequest()">Submit</button> 
+    </div>
+  </form>
+</div> 
+
+<app-footer></app-footer>

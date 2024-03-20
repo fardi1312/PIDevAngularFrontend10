@@ -16,7 +16,8 @@ export class UpdateRequestComponent implements OnInit {
     idCollocationRequest: 0,
     request: RequestEnum.Pending,
     places: 0,
-    description: ''
+    description: '', 
+    roomDetailsList:[]
   };
 
   constructor(

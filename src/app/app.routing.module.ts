@@ -22,45 +22,45 @@ import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-re
 
 
 const routes: Routes = [
-  {path:"admin",component:TemplateBackComponent},
-
+  { path: "admin", component: TemplateBackComponent },
 
   { path: '', component: TemplateFrontComponent },
-  { 
-    path: 'Collocation', 
+  {
+    path: 'schedule',
+    loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule),
+  },
+  {
+    path: 'Collocation',
     children: [
       { path: 'addOffer', component: AddCollocationComponent },
       { path: 'showOffer', component: ShowCollocationComponent },
       { path: 'updateOffer/:id', component: UpdateCollocationComponent },
-      { path: 'showDetailsOffer/:id', component: ShowDetailsCollocatinComponent } ,
-      { path:'showFeedback', component:ShowFeedbackComponent}, 
-      {path:'showFeedbackDetails', component:ShowDetailsFeedbackComponent},   
-      {path:'addRequest/:idOffer', component:AddRequestComponent},
-      {path:'addFeedback/:idOffer', component:AddFeedbackComponent}, 
-      {path:'updateFeedback/:id',component:UpdateFeedbackComponent}, 
-      {path:'deleteFeedback/:id',component:DeleteFeedbackComponent}, 
-      {path:'showRequest',component:ShowRequestComponent} ,
-      {path:'updateRequest/:idRequest',component:UpdateRequestComponent} ,
-      {path:'deleteRequest/:idRequest',component:DeleteRequestComponent}
-
-    ]
+      { path: 'showDetailsOffer/:id', component: ShowDetailsCollocatinComponent },
+      { path: 'showFeedback', component: ShowFeedbackComponent },
+      { path: 'showFeedbackDetails', component: ShowDetailsFeedbackComponent },
+      { path: 'addRequest/:idOffer', component: AddRequestComponent },
+      { path: 'addFeedback/:idOffer', component: AddFeedbackComponent },
+      { path: 'updateFeedback/:id', component: UpdateFeedbackComponent },
+      { path: 'deleteFeedback/:id', component: DeleteFeedbackComponent },
+      { path: 'showRequest', component: ShowRequestComponent },
+      { path: 'updateRequest/:idRequest', component: UpdateRequestComponent },
+      { path: 'deleteRequest/:idRequest', component: DeleteRequestComponent },
+    ],
   },
-  { 
-    path: 'Preferences', 
+  {
+    path: 'Preferences',
     children: [
       { path: 'addPreferences', component: AddPreferencesComponent },
       { path: 'showPreferences', component: ShowPreferencesComponent },
-      { path: 'update/:id', component: UpdatePreferencesComponent }
-    
-
-    ]
+      { path: 'update/:id', component: UpdatePreferencesComponent },
+    ],
   },
-  
-
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes)], 
+    declarations: [],
+
     exports: [RouterModule]
   })
 export class AppRoutingModule { }
