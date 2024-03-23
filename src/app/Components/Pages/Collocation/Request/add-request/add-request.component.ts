@@ -104,7 +104,17 @@ export class AddRequestComponent implements OnInit {
       });
     });
   
-    console.log('Room details selected for collocation request:', this.collocationRequest.roomDetailsList);
+    console.log('Room details selected for collocation request:', this.collocationRequest.roomDetailsList); 
+    const updatedRoomDetailsList = this.collocationRequest.roomDetailsList.map((roomDetail: RoomDetails) => ({
+      idRoomDetails: roomDetail.idRoomDetails,
+      availablePlaces: roomDetail.availablePlaces,
+      roomType: roomDetail.roomType,
+      prix: roomDetail.prix,
+      selected: true 
+    }));
+  
+    this.collocationRequest.roomDetailsList = updatedRoomDetailsList;
+
   
     this.requestService.createCollocationRequest(this.collocationOffer.idCollocationOffer, this.collocationRequest).subscribe(
       (createdRequest: CollocationRequest) => {
@@ -116,20 +126,7 @@ export class AddRequestComponent implements OnInit {
     );
   }
   
-  onSubmit(): void {
-    // Update the roomDetailsList of the collocationRequest object
-    const updatedRoomDetailsList = this.collocationRequest.roomDetailsList.map((roomDetail: RoomDetails) => ({
-      idRoomDetails: roomDetail.idRoomDetails,
-      availablePlaces: roomDetail.availablePlaces,
-      roomType: roomDetail.roomType,
-      prix: roomDetail.prix,
-      selected: true // Ensure all rooms are selected before saving
-    }));
-  
-    // Assign the updated roomDetailsList to collocationRequest
-    this.collocationRequest.roomDetailsList = updatedRoomDetailsList;
-  
-    console.log('Before adding room details:', this.collocationRequest);
+  onSubmit(): void {  
      this.saveRequest();
     this.goToOfferList();
   }
