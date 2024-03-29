@@ -1,3 +1,4 @@
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,41 +7,43 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Body Styles */
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding: 10px;
-  background: linear-gradient(115deg, #f76e6e 10%, #ffa68d 90%); /* Updated gradient colors */
+  background: linear-gradient(115deg, #f76e6e 10%, #ffa68d 90%);
 }
 
+/* Container Styles */
 .container {
   max-width: 800px;
+  width: 100%;
   background: #fff;
-  width: 800px;
   padding: 25px 40px 10px 40px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Text Styles */
 .container .text {
   text-align: center;
   font-size: 41px;
   font-weight: 600;
-  background: -webkit-linear-gradient(right, #f76e6e, #ffa68d, #f76e6e, #ffa68d); /* Updated gradient colors */
+  background: -webkit-linear-gradient(right, #f76e6e, #ffa68d, #f76e6e, #ffa68d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 20px; /* Add margin bottom for spacing */
+  line-height: 1.2; /* Increase line height */
 }
 
+/* Form Styles */
 .container form {
-  padding: 30px 0 0 0;
+  padding-top: 30px;
 }
 
-.container form .form-row {
-  display: flex;
-  margin: 32px 0;
-}
-
+/* Input Styles */
 form .form-row .input-data {
   width: 100%;
   position: relative;
@@ -48,7 +51,6 @@ form .form-row .input-data {
 
 .input-data input,
 .textarea textarea {
-  display: block;
   width: 100%;
   border: none;
   font-size: 17px;
@@ -62,11 +64,6 @@ form .form-row .input-data {
   transform: translateY(-20px);
   font-size: 14px;
   color: #ff8c00; /* Orange color */
-}
-
-.textarea textarea {
-  resize: none;
-  padding-top: 10px;
 }
 
 .input-data label {
@@ -102,10 +99,11 @@ form .form-row .input-data {
   transform: scale(1);
 }
 
+/* Submit Button Styles */
 .submit-btn .input-data {
   overflow: hidden;
-  height: 45px!important;
-  width: 25%!important;
+  height: 45px;
+  width: 25%;
 }
 
 .submit-btn .input-data .inner {
@@ -132,23 +130,4 @@ form .form-row .input-data {
   cursor: pointer;
   position: relative;
   z-index: 2;
-}
-
-.star-rating {
-  display: inline-block;
-  font-size: 0; /* Remove the gap between inline-block elements */
-}
-
-.star {
-  cursor: pointer;
-  font-size: 30px;
-  color: #ddd;
-}
-
-.star.active, .star.filled {
-  color: orange;
-}
-
-.star.active {
-  transition: color 0.3s;
 }

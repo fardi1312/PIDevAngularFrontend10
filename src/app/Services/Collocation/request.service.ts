@@ -20,15 +20,18 @@ export class RequestService {
     return this.httpClient.get<CollocationRequest>(`${this.apiUrl}/${id}`);
   }
 
-  createCollocationRequest(idOffer: number, request: CollocationRequest): Observable<CollocationRequest> {
-    return this.httpClient.post<CollocationRequest>(`${this.apiUrl}/${idOffer}`, request);
+  createCollocationRequest(idOffer: number, userId: number, request: CollocationRequest): Observable<CollocationRequest> {
+    return this.httpClient.post<CollocationRequest>(`${this.apiUrl}/${idOffer}/${userId}`, request);
   }
-
+  getRequestsForOffer(offerId: number): Observable<CollocationRequest[]> {
+    return this.httpClient.get<CollocationRequest[]>(`${this.apiUrl}/${offerId}/requests`);
+  }
+  
   updateRequest(id: number, request: CollocationRequest): Observable<CollocationRequest> {
     return this.httpClient.put<CollocationRequest>(`${this.apiUrl}/${id}`, request);
   }
 
   deleteCollocationRequest(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
-  }
+  } 
 }

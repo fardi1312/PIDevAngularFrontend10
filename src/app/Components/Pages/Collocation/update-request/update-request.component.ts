@@ -12,12 +12,15 @@ import { RequestService } from 'src/app/Services/Collocation/request.service';
 })
 export class UpdateRequestComponent implements OnInit {
   idRequest: number = 0;
-  collocationRequest: CollocationRequest = {
-    idCollocationRequest: 0,
+  collocationRequest: CollocationRequest = { 
+    idCollocationRequest: 0, 
+    date: new Date(), 
     request: RequestEnum.Pending,
     places: 0,
     description: '', 
-    roomDetailsList:[]
+    roomDetailsList:[], 
+    selectedDate: [] as Date[] // Declare it as an array of Date objects
+ 
   };
 
   constructor(

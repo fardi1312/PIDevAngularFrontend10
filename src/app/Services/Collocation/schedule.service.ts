@@ -1,35 +1,33 @@
-// src/app/services/schedule.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs'; 
-import { Schedule } from '../../Model/Collocation/Schedule';
+import { Observable } from 'rxjs';
+import { CalendarEvent } from 'angular-calendar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScheduleService {
-  private apiUrl = 'http://8083/api/schedule'; // Replace with your actual API endpoint
+  private apiUrl = 'http://localhost:8083/api/calendar-events';
 
   constructor(private http: HttpClient) {}
 
-  getAllSchedulers(): Observable<Schedule[]> {
-    return this.http.get<Schedule[]>(this.apiUrl);
+  getAllEventsByUser(userId: number): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  getSchedulerById(id: number): Observable<Schedule> {
-    return this.http.get<Schedule>(`${this.apiUrl}/${id}`);
+  getEventByIdAndUser(id: number, userId: number): Observable<CalendarEvent> {
+    return this.http.get<CalendarEvent>(`${this.apiUrl}/${id}/user/${userId}`);
   }
 
-  createScheduler(schedule: Schedule): Observable<Schedule> {
-    return this.http.post<Schedule>(this.apiUrl, schedule);
+  createEventForUser(userId: number, event: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.post<CalendarEvent>(`${this.apiUrl}/user/${userId}`, event);
   }
 
-  updateScheduler(id: number, updatedScheduler: Schedule): Observable<Schedule> {
-    return this.http.put<Schedule>(`${this.apiUrl}/${id}`, updatedScheduler);
+  updateEventForUser(id: number, userId: number, updatedEvent: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.put<CalendarEvent>(`${this.apiUrl}/${id}/user/${userId}`, updatedEvent);
   }
 
-  deleteScheduler(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteEventForUser(id: number, userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/user/${userId}`);
   }
 }

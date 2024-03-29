@@ -1,4 +1,3 @@
-// schedule.module.ts
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,8 +7,23 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarViewComponent } from '../calendar-view/calendar-view.component';
 import { AppModule } from '../app.module';
 import { SharedModule } from '../shared/shared.module'; 
-import { RecurrenceEditor, RecurrenceEditorModule, Schedule, ScheduleAllModule,DayService,WeekService,MonthService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 import { TemplateFrontComponent } from '../FrontOffice/template-front/template-front.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {  FlatpickrModule } from 'angularx-flatpickr';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app.routing.module';  
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';  
+import { AddEventDialogComponent } from '../calendar-view/add-event-dialog/add-event-dialog.component'; 
+import { MatDialogModule,MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'; 
+
+
+
+
+
+
 
 const routes: Routes = [
   { path: '', component: TemplateFrontComponent },
@@ -17,11 +31,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CalendarViewComponent],
-  imports: [SharedModule,  
-    ScheduleAllModule,RecurrenceEditorModule,
-    CommonModule, 
+  declarations: [CalendarViewComponent,AddEventDialogComponent],
+  imports: [SharedModule,
+    
+
     RouterModule, 
+    CommonModule,  
+    MatDialogModule, 
+    NgbModalModule,  
+    NgxMaterialTimepickerModule, 
+    FormsModule,    
+    FlatpickrModule.forRoot(),
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule, 
     RouterModule.forChild(routes),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -29,6 +52,9 @@ const routes: Routes = [
     }),
   ],
   exports: [CalendarViewComponent],
-  providers: [CalendarUtils,DayService,WeekService,MonthService,MonthAgendaService],
-})
+  providers: [
+    CalendarUtils,
+    { provide: MAT_DIALOG_DATA, useValue: {} }
+  ],
+  })
 export class ScheduleModule {}

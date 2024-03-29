@@ -18,11 +18,18 @@ export class OfferService {
   getCollocationOfferById(id: number): Observable<CollocationOffer> {
     return this.httpClient.get<CollocationOffer>(`${this.apiUrl}/${id}`);
   }
-
+  getCollocationOffersByUserId(userId: number): Observable<CollocationOffer[]> {
+    return this.httpClient.get<CollocationOffer[]>(`${this.apiUrl}/user/${userId}`);
+  }
   
+  refuseCollocationRequest(offerId: number, requestId: number): Observable<string> {
+    const url = `${this.apiUrl}/refuse/${offerId}/${requestId}`;
+    return this.httpClient.put<string>(url, {});
+  }
 
-  createCollocation(collocationOffer: CollocationOffer): Observable<CollocationOffer> {
-    return this.httpClient.post<CollocationOffer>(this.apiUrl, collocationOffer);
+
+  createCollocation(collocationOffer: CollocationOffer,userId:number): Observable<CollocationOffer> {
+    return this.httpClient.post<CollocationOffer>(`${this.apiUrl}/${userId}`, collocationOffer);
   }
 
   updateOffer(id: number, offer: CollocationOffer): Observable<CollocationOffer> {
@@ -31,6 +38,10 @@ export class OfferService {
 
   deleteCollocationOffer(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
-  }
+  } 
+  acceptCollocationRequest(offerId: number, requestId: number): Observable<string> {
+    return this.httpClient.put<string>(`${this.apiUrl}/${offerId}/${requestId}`, {})
+  };
+
 
 }

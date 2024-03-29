@@ -1,18 +1,23 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routing.module';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TemplateFrontComponent } from './FrontOffice/template-front/template-front.component';
-import { AppRoutingModule } from './app.routing.module';
 import { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
 import { HeadBackComponent } from './BackOffice/head-back/head-back.component';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { AddCollocationComponent } from './Components/Pages/Collocation/offer/add-collocation/add-collocation.component';
 import { ShowCollocationComponent } from './Components/Pages/Collocation/offer/show-collocation/show-collocation.component';
 import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer/update-collocation/update-collocation.component';
@@ -29,13 +34,18 @@ import { UpdateFeedbackComponent } from './Components/Pages/Collocation/feedback
 import { UpdateRequestComponent } from './Components/Pages/Collocation/update-request/update-request.component';
 import { ShowRequestComponent } from './Components/Pages/Collocation/show-request/show-request.component';
 import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-request/delete-request.component';
-import { ScheduleModule, RecurrenceEditorModule, DayService,MonthService,WeekService,WorkWeekService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule'; 
-import { SharedModule } from './shared/shared.module';
+import { MyOffersComponent } from './my-offers/my-offers.component'; 
+import { MyOfferComponent } from './my-offer/my-offer.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import * as dayjs from 'dayjs/esm'; 
+import {saveAs} from 'file-saver'
+
+
 
 @NgModule({
   declarations: [ 
     AppComponent, 
-    UpdateFeedbackComponent, 
+    UpdateFeedbackComponent,  
     ShowRequestComponent,  
     HeadBackComponent,  
     AddFeedbackComponent, 
@@ -43,28 +53,40 @@ import { SharedModule } from './shared/shared.module';
     ShowDetailsFeedbackComponent, 
     TemplateFrontComponent,
     AddRequestComponent, 
-FooterBackComponent,
-TemplateBackComponent,
-HeadBackComponent,
-AddCollocationComponent,
-ShowCollocationComponent,
-UpdateCollocationComponent,
-DeleteCollocationComponent,
-ShowDetailsCollocatinComponent,
-AddPreferencesComponent,
-UpdateCollocationComponent,ShowPreferencesComponent,UpdatePreferencesComponent, UpdateRequestComponent, DeleteRequestComponent
+    FooterBackComponent,
+    TemplateBackComponent,
+    HeadBackComponent, 
+    AddCollocationComponent,
+    ShowCollocationComponent,
+    UpdateCollocationComponent,
+    DeleteCollocationComponent,
+    ShowDetailsCollocatinComponent,
+    AddPreferencesComponent,
+    ShowPreferencesComponent,
+    UpdatePreferencesComponent, 
+    UpdateRequestComponent,
+    DeleteRequestComponent, 
+    MyOffersComponent,  
+    MyOfferComponent, 
+    
   ],
-  imports: [
-    BrowserModule,
+  imports: [ 
+    BrowserModule, 
+    MatDatepickerModule,
+    MatNativeDateModule, 
+    NgxDaterangepickerMd.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
     HttpClientModule,
     CommonModule,
-    ScheduleModule, RecurrenceEditorModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ], 
   exports : [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

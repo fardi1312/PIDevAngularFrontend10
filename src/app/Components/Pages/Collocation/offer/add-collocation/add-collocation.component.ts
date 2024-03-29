@@ -23,7 +23,8 @@ export class AddCollocationComponent implements OnInit {
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [] as RoomDetails[], // Initialize roomDetailsList as an array
-  };
+  }; 
+   userId=1  ; 
 
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);
@@ -76,7 +77,7 @@ export class AddCollocationComponent implements OnInit {
     );
 
     // Call the service to create the collocation offer
-    this.offerService.createCollocation(this.collocationOffer).subscribe(
+    this.offerService.createCollocation(this.collocationOffer,this.userId).subscribe(
       (createdOffer: CollocationOffer) => {
         console.log('Offer saved successfully:', createdOffer);
         this.goToOfferList();

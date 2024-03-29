@@ -19,6 +19,9 @@ import { DeleteFeedbackComponent } from './Components/Pages/Collocation/feedback
 import { ShowRequestComponent } from './Components/Pages/Collocation/show-request/show-request.component';
 import { UpdateRequestComponent } from './Components/Pages/Collocation/update-request/update-request.component';
 import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-request/delete-request.component';
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { MyOffersComponent } from './my-offers/my-offers.component'; 
+import { MyOfferComponent } from './my-offer/my-offer.component';
 
 
 const routes: Routes = [
@@ -44,7 +47,10 @@ const routes: Routes = [
       { path: 'deleteFeedback/:id', component: DeleteFeedbackComponent },
       { path: 'showRequest', component: ShowRequestComponent },
       { path: 'updateRequest/:idRequest', component: UpdateRequestComponent },
-      { path: 'deleteRequest/:idRequest', component: DeleteRequestComponent },
+      { path: 'deleteRequest/:idRequest', component: DeleteRequestComponent }, 
+      {path: 'myOffers',component:MyOffersComponent}  ,
+      {path:'myOffer/:id',component:MyOfferComponent} 
+
     ],
   },
   {

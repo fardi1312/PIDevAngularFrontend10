@@ -11,15 +11,21 @@ import { RequestService } from 'src/app/Services/Collocation/request.service';
   selector: 'app-add-request',
   templateUrl: './add-request.component.html',
   styleUrls: ['./add-request.component.css']
-})
-export class AddRequestComponent implements OnInit {
+}) 
+
+export class AddRequestComponent implements OnInit { 
+  dateRange: any; // Define dateRange property to store selected date range
+
   collocationRequest: CollocationRequest = {
-    idCollocationRequest: 0,
+    idCollocationRequest: 0, 
+    date:new Date(),
     request: RequestEnum.Pending,
     places: 0,
     description: '',
-    roomDetailsList: [] as RoomDetails[] 
-  };
+    roomDetailsList: [] as RoomDetails[] , 
+    selectedDate: [] as Date[] // Declare it as an array of Date objects
+  }; 
+idUser= 2 ;  
   addRoomDetail(): void {
     if (this.collocationOffer.roomDetailsList.length < this.maxRoomsAllowed) {
       this.collocationOffer.roomDetailsList.push({
@@ -29,7 +35,11 @@ export class AddRequestComponent implements OnInit {
         prix: 0, // assign the correct value
       });
     }
-  } 
+  }  
+  change(event: any) {
+    console.log('Selected date or range:', this.collocationRequest.selectedDate);
+  }
+
   maxRoomsAllowed: number = 0;
   updateMaxRoomsAllowed() {
     this.maxRoomsAllowed = this.collocationOffer.houseType;
@@ -87,6 +97,10 @@ export class AddRequestComponent implements OnInit {
     this.initializeRoomDetails();
   } 
   
+  onDateRangeChange(event: any) {
+    // Update selectedDate array with the start and end dates of the selected range
+    this.collocationRequest.selectedDate = [new Date(event.start), new Date(event.end)];
+}
 
   // Add a room to roomDetailsList based on the requested places
   
@@ -116,7 +130,7 @@ export class AddRequestComponent implements OnInit {
     this.collocationRequest.roomDetailsList = updatedRoomDetailsList;
 
   
-    this.requestService.createCollocationRequest(this.collocationOffer.idCollocationOffer, this.collocationRequest).subscribe(
+    this.requestService.createCollocationRequest(this.collocationOffer.idCollocationOffer,this.idUser, this.collocationRequest).subscribe(
       (createdRequest: CollocationRequest) => {
         console.log('Request with room details saved successfully', createdRequest);
       },

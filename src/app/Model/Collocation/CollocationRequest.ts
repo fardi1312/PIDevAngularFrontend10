@@ -8,9 +8,11 @@ export enum RequestEnum {
   
   export interface CollocationRequest {
     idCollocationRequest: number;
-    request: RequestEnum;
+    request: RequestEnum; 
+    date:Date; 
     places: number;
     description: string;  
-    roomDetailsList:RoomDetails[]; 
+    roomDetailsList:RoomDetails[];  
+    selectedDate:Date[]; 
   }
   

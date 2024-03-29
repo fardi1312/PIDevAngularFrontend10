@@ -18,7 +18,8 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": false, 
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "ES2022",
       "dom"
@@ -31,5 +32,11 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
-}
+  } ,
+/*   "paths": {
+    "file-saver-es": [
+      "@types/file-saver"
+    ]
+   }*/  
+
+} 
