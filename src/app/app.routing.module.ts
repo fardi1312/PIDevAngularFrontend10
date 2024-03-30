@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClientModule } from '@angular/common/http'; 
 import { LoginComponent } from './Components/Pages/User/login/login.component';
 import { TemplateFrontComponent } from './FrontOffice/template-front/template-front.component';
 import { ProfileComponent } from './Components/Pages/User/profile/profile.component';
@@ -16,12 +16,33 @@ import { AuthGuard } from './Environments/AuthGuard';
 import { SignupComponent } from './Components/Pages/User/signup/signup.component';
 import { ForgotPasswordComponent } from './Components/Pages/User/forgot-password/forgot-password.component';
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
+import { AdminUsersComponent } from './Components/Pages/User/admin-users/admin-users.component';
+import { AdminProfileComponent } from './Components/Pages/User/admin-profile/admin-profile.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "forgot-password", component: ForgotPasswordComponent },
-  { path: 'admin', component: TemplateBackComponent, canActivate: [AuthGuard]  },
+
+  
+  
+
+  { 
+    path: "admin", canActivate: [AuthGuard], 
+    children: [
+      {path: "dashboard", component: TemplateBackComponent, canActivate: [AuthGuard]}, 
+      { path: "admin-users", component: AdminUsersComponent},
+      { path: "admin-profile", component: AdminProfileComponent},
+       ]
+  },
+
+
+
+
+
+
+
+  
   { 
     path: "user", 
     canActivate: [AuthGuard], 

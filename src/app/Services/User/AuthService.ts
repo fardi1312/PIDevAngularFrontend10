@@ -44,9 +44,35 @@ export class AuthService {
       );
   }
 
+  github(): Observable<any> {
+    return this.http.get(BASE_URL + 'oauth2/authorization/github');
+  }
+  
+
+
+
+
+
+
+
   logout(): void {
     this.cookieService.delete('JWT');
   }
+
+
+
+
+
+
+  forgotPassword(email: string): Observable<any> {
+    const url = `${BASE_URL}forgot-password?email=${email}`;
+    return this.http.get(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error occurred';
@@ -59,10 +85,4 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.cookieService.get('JWT')
-    });
-    return headers;
-   } 
 }

@@ -1,4 +1,3 @@
-
 export class User {
     id!: number;
     email!: string;
@@ -22,4 +21,5 @@ export class User {
     joinDate!: string; 
     dateLastModified!: string;
     phoneNumber!: string;
+
 }

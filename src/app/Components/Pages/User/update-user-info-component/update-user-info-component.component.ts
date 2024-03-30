@@ -13,7 +13,8 @@ export class UpdateUserInfoComponentComponent {
   updateUserInfoForm: FormGroup;
   updateUserInfo: UpdateUserInfo | undefined;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder) 
+  {
     this.updateUserInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],

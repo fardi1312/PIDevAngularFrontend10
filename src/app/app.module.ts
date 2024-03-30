@@ -46,6 +46,9 @@ import { ShowPhotoProfileComponent  } from './Components/Pages/User/show-photo-p
 import { PhotoUploadDialogComponent } from './Components/Pages/User/photo-upload-dialog/photo-upload-dialog.component';
 import { ViewPhotoDialogComponent } from './Components/Pages/User/view-photo-dialog/view-photo-dialog.component';
 import { TokenInterceptor } from './token.interceptor';
+import { AdminUsersComponent } from './Components/Pages/User/admin-users/admin-users.component';
+import { UserDetailsDialogComponent } from './Components/Pages/User/user-details-dialog/user-details-dialog.component';
+import { AdminProfileComponent } from './Components/Pages/User/admin-profile/admin-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +69,9 @@ import { TokenInterceptor } from './token.interceptor';
     UpdatePasswordComponent,
     ShowPhotoProfileComponent,
     PhotoUploadDialogComponent,
+    AdminUsersComponent,
+    UserDetailsDialogComponent,
+    AdminProfileComponent,
     ViewPhotoDialogComponent
   ],
   imports: [

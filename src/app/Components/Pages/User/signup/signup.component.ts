@@ -40,4 +40,21 @@ export class SignupComponent implements OnInit {
       console.log(response);
     });
   }
+  callGithubMethod() {
+    this.service.github().subscribe((data: any) => {
+      console.log(data); // Manipulate response data as needed
+    }, (error: any) => {
+      console.error(error); // Handle errors if any
+    });
+  }
+
+  redirectToGitHubAuthorization() {
+    // Rediriger vers l'URL d'autorisation OAuth2 pour GitHub
+    window.location.href = 'http://localhost:8083/oauth2/authorization/github';
+  }
+
+  redirectToGoogleAuthorization() {
+    // Rediriger vers l'URL d'autorisation OAuth2 pour GitHub
+    window.location.href = 'http://localhost:8083/oauth2/authorization/google';
+  }
 }
