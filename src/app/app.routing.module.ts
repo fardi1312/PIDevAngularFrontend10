@@ -16,62 +16,25 @@ import { AuthGuard } from './Environments/AuthGuard';
 import { SignupComponent } from './Components/Pages/User/signup/signup.component';
 import { ForgotPasswordComponent } from './Components/Pages/User/forgot-password/forgot-password.component';
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
-import { AdminUsersComponent } from './Components/Pages/User/admin-users/admin-users.component';
-import { AdminProfileComponent } from './Components/Pages/User/admin-profile/admin-profile.component';
+import { SubmitPropertyComponent } from './Components/Pages/Carpooling/submit-property/submit-property.component';
+//import { CarpoolingAskComponent } from './Components/Pages/Carpooling/carpooling-ask/carpooling-ask.component';
+import { AgentListComponent } from './Components/Pages/Carpooling/agent-list/agent-list.component';
+
 
 const routes: Routes = [
-  { path: "", component: LoginComponent },
-  { path: "signup", component: SignupComponent },
-  { path: "forgot-password", component: ForgotPasswordComponent },
+  {path:"admin",component:TemplateBackComponent},
 
+
+    {path:"",component:TemplateFrontComponent},
+    { 
+      path: 'Carpooling', 
+      children: [
+        { path: 'addC', component: SubmitPropertyComponent },
+        { path: 'askC', component: AgentListComponent }
+      
   
-  
-
-  { 
-    path: "admin", canActivate: [AuthGuard], 
-    children: [
-      {path: "dashboard", component: TemplateBackComponent, canActivate: [AuthGuard]}, 
-      { path: "admin-users", component: AdminUsersComponent},
-      { path: "admin-profile", component: AdminProfileComponent},
-       ]
-  },
-
-
-
-
-
-
-
-  
-  { 
-    path: "user", 
-    canActivate: [AuthGuard], 
-    children: [
-      { path: "client", component: TemplateFrontComponent },
-      { path: "profile", component: ProfileComponent },
-      { path: "updateuserinfo", component: UpdateUserInfoComponentComponent },
-      { path: "deleteuser", component: DeleteUserComponent },
-      { path: "updatephotoprofile", component: UpdatePhotoProfileComponent },
-      { path: "updatecoverphotoprofile", component: UpdateCoverPhotoProfileComponent },
-      { path: "showphotoprofile", component: ShowPhotoProfileComponent },
-      { path: "photo-upload-dialog", component: PhotoUploadDialogComponent },
-      { path: "view-photo-dialog", component: ViewPhotoDialogComponent },
-      { path: "updatepassword", component: UpdatePasswordComponent },
-    ]
-  },
-
-
- 
-
-
- 
-
-
-
-
-
-
-
+      ]
+    },
 
 ];
 
