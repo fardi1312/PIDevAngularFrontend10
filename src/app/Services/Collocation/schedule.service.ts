@@ -23,8 +23,8 @@ export class ScheduleService {
     return this.http.post<CalendarEvent>(`${this.apiUrl}/user/${userId}`, event);
   }
 
-  updateEventForUser(id: number, userId: number, updatedEvent: CalendarEvent): Observable<CalendarEvent> {
-    return this.http.put<CalendarEvent>(`${this.apiUrl}/${id}/user/${userId}`, updatedEvent);
+  updateEventForUser(userId: number, updatedEvent: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.put<CalendarEvent>(`${this.apiUrl}/user/${userId}`, updatedEvent);
   }
 
   deleteEventForUser(id: number, userId: number): Observable<void> {

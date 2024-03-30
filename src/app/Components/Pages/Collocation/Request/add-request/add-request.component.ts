@@ -16,8 +16,13 @@ import { RequestService } from 'src/app/Services/Collocation/request.service';
 export class AddRequestComponent implements OnInit { 
   dateRange: any; // Define dateRange property to store selected date range
 
-  collocationRequest: CollocationRequest = {
-    idCollocationRequest: 0, 
+
+  collocationRequest: CollocationRequest = { 
+    
+
+    idCollocationRequest: 0,  
+    roomPlaces: [] ,// Initialize an empty array for roomPlaces
+
     date:new Date(),
     request: RequestEnum.Pending,
     places: 0,
@@ -25,7 +30,7 @@ export class AddRequestComponent implements OnInit {
     roomDetailsList: [] as RoomDetails[] , 
     selectedDate: [] as Date[] // Declare it as an array of Date objects
   }; 
-idUser= 2 ;  
+idUser= 1 ;  
   addRoomDetail(): void {
     if (this.collocationOffer.roomDetailsList.length < this.maxRoomsAllowed) {
       this.collocationOffer.roomDetailsList.push({
@@ -76,7 +81,9 @@ idUser= 2 ;
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: []
-  };
+  }; 
+  maxRooms:number = this.collocationOffer.availablePlaces; 
+
 
   constructor(
     private offerService: OfferService,

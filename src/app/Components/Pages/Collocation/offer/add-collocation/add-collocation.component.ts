@@ -24,7 +24,7 @@ export class AddCollocationComponent implements OnInit {
     imageCollocation: '',
     roomDetailsList: [] as RoomDetails[], // Initialize roomDetailsList as an array
   }; 
-   userId=1  ; 
+   userId=2  ; 
 
   furnitureOptions = Object.values(FurnitureCollocation);
   genderOptions = Object.values(Gender);

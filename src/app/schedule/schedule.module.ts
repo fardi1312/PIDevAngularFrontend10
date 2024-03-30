@@ -21,10 +21,6 @@ import { MatDialogModule,MAT_DIALOG_DATA, MatDialog } from '@angular/material/di
 
 
 
-
-
-
-
 const routes: Routes = [
   { path: '', component: TemplateFrontComponent },
   { path: 'calendar', component: CalendarViewComponent },

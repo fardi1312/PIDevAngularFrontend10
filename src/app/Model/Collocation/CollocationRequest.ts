@@ -13,6 +13,7 @@ export enum RequestEnum {
     places: number;
     description: string;  
     roomDetailsList:RoomDetails[];  
-    selectedDate:Date[]; 
+    selectedDate:Date[];  
+    roomPlaces:number[] ,
   }
   

@@ -30,7 +30,7 @@ export class MyOffersComponent {
   ngOnInit(): void {
     this.loadOffers();
   }
-idUser=1 ; 
+idUser=2 ; 
   loadOffers() {
     this.offerService.getCollocationOffersByUserId(this.idUser).subscribe(
       (data) => {
@@ -70,7 +70,10 @@ showRooms(id:number):void
       this.offer= data;
     });
     this.offer.roomDetailsList
-}
+} 
+
+
+
 }
 
 

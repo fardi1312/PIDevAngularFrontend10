@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { addHours } from 'date-fns';
+import { addHours } from 'date-fns'; 
+import { FlatpickrModule } from 'angularx-flatpickr';
+ 
+
 
 @Component({
   selector: 'app-add-event-dialog',

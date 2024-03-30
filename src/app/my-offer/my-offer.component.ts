@@ -5,7 +5,8 @@ import { CollocationOffer, FurnitureCollocation, Gender } from '../Model/Colloca
 import { RequestService } from '../Services/Collocation/request.service';
 import { CollocationRequest, RequestEnum } from '../Model/Collocation/CollocationRequest';
 import { RoomDetails } from '../Model/Collocation/RoomDetails'; 
-import { saveAs } from 'file-saver-es';
+import { saveAs } from 'file-saver'; 
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 
 @Component({
@@ -22,9 +23,10 @@ export class MyOfferComponent implements OnInit {
     places: 0,
     description: '',
     roomDetailsList: [] as RoomDetails[], 
-    selectedDate: [] as Date[] 
+    selectedDate: [] as Date[],  
+    roomPlaces:[] 
   }; 
-  collocationRequests: CollocationRequest[] = []; // Corrected type declaration
+  collocationRequests: CollocationRequest[] = []; 
 
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
@@ -39,7 +41,8 @@ export class MyOfferComponent implements OnInit {
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [] 
-  }
+  } 
+  idUser:number=2;  
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']; 
@@ -56,30 +59,35 @@ export class MyOfferComponent implements OnInit {
       }
     );
   }   
+
   acceptRequest(idRequest: number): void {
     this.offerService.acceptCollocationRequest(this.id, idRequest)
       .subscribe(
         response => {
-          console.log(response); 
-          
+          console.log(response);
+          const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
+          if (acceptedRequest) {
+            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
+            this.saveContractAsPDF(contractData);
+          } else {
+            console.error("Accepted request not found.");
+          }
         },
         error => {
-          console.error(error);  
+          console.error(error);
+          // Even if there's an error, attempt to generate and save the contract
+          const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
+          if (acceptedRequest) {
+            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
+            this.saveContractAsPDF(contractData);
+          } else {
+            console.error("Accepted request not found.");
+          }
           window.location.reload();
-
         }
-      ); 
-      const contractData = this.generateContract(this.collocationRequest); 
-      console.log(contractData)
-
-      // Convert the contract data to a Blob
-      const blob = new Blob([contractData], { type: 'application/pdf' });
-
-      // Save the Blob as a file using FileSaver.js
-      saveAs(blob, 'contract.pdf');
-
-  }   
-
+      );
+  }
+  
   refuseRequest(idRequest:number): void {
     this.offerService.refuseCollocationRequest(this.id,idRequest)
       .subscribe(
@@ -90,58 +98,86 @@ export class MyOfferComponent implements OnInit {
         error => {
           console.error(error); 
           window.location.reload();
-
         }
       );
   } 
-  generateContract(response: CollocationRequest): string {
-    // Extract necessary information from the response to populate the contract
-/*     const clientName: string = response.clientName;
- */    const startDate: Date = response.date;
+  
+  generateContract(request: CollocationRequest, offer: CollocationOffer): string {
+    // Check if request.date is a Date object before calling toDateString
+    const startDate: string = request.date.toString();    
+    const rentDate: string = offer.dateRent.toString();
+    const priceToPay: number = offer.price; 
+    const place: string = offer.location; 
+    const roomDetails: RoomDetails[] = request.roomDetailsList; 
+    const clientName: number = this.idUser;  
+    const serviceDescription: string = offer.descriptionCollocation; 
 
-    // Example of terms with placeholders for dynamic values
-    const dynamicTerms = `
-        1. Service Description:
-        The service provider agrees to provide  with [description of service] starting from ${startDate}.
-
-        2. Payment Terms:
-         agrees to pay ${[this.collocationOffer.price]} for the service provided on a payment frequency basis.
-
-        3. Termination:
-        Either party may terminate this contract with a month written notice to the other party.
-
-        4. Governing Law:
-        This contract shall be governed by and construed in accordance with the laws of Collocation.
-
-        
-    `;
-
-    // Construct the contract content by replacing the placeholder with dynamic values
     const contractContent = `
         Contract
         --------
         
-        This contract is made between  and the service provider.
+        This contract is made between ${clientName} and the service provider.
         
-        Start Date: ${startDate}
-        
+        ON: ${startDate} 
+        Rent Date: ${rentDate}
+        Location: ${place}
+        Price to Pay: ${priceToPay}
+        Service Description: ${serviceDescription}  
+        Room Details: ${JSON.stringify(roomDetails)} 
+
         Terms:
-        
+        - Service Description:
+          The service provider agrees to provide ${serviceDescription} starting from ${startDate}.
+        - Payment Terms:
+          The client agrees to pay ${priceToPay} for the service provided on a payment frequency basis.
+        - Termination:
+          Either party may terminate this contract with a month written notice to the other party.
+        - Governing Law:
+          This contract shall be governed by and construed in accordance with the laws of Collocation. 
+
+
+
+
+         Co&Co all rights are reserved
     `;
 
     return contractContent;
 }
-  
 
-isAcceptDisabled(request: CollocationRequest): boolean {
-  // Check if request is already canceled or available places are 0
-  return request.request === 'Canceled' || this.collocationOffer.availablePlaces === 0;
-}
+  async saveContractAsPDF(contractData: string): Promise<void> {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage();
+    page.drawText(contractData, {
+      x: 50,
+      y: page.getHeight() - 100,
+      size: 12,
+      font: await pdfDoc.embedFont(StandardFonts.Helvetica),
+      color: rgb(0, 0, 0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'contract.pdf';
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+  isAcceptDisabled(request: CollocationRequest): boolean {
+    return request.request === 'Canceled' || this.collocationOffer.availablePlaces === 0;
+  }
 
   constructor(
     private offerService: OfferService, 
     private requestService: RequestService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
-}
+  ) { } 
+
+
+  formatDate(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return date.toLocaleDateString(undefined, options).replace(/\//g, ' / ');
+}}

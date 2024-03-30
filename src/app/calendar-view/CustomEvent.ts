@@ -10,7 +10,10 @@ export class CustomEvent implements CalendarEvent {
     id?: number;
     start: Date;
     end: Date;
-    title: string;
+    title: string; 
+    Requester?:string;  
+
+    Offerer?:string ; 
     color?: EventColor;
     actions?: CalendarEventAction[];
     allDay?: boolean;
@@ -24,21 +27,29 @@ export class CustomEvent implements CalendarEvent {
     idUser=1 ; 
     constructor(eventData: CalendarEvent, private scheduleService: ScheduleService) {
         this.id = eventData.id;
-        this.start = eventData.start;
+        this.start = eventData.start; 
+        
         if (eventData.end !== undefined) {
             this.end = eventData.end;
         } else {
             // Provide a default value or handle the case accordingly
             this.end = new Date(); // For example, you can assign the current date
         }
-        this.title = eventData.title;
+        this.title = eventData.title; 
+        this.Requester= eventData.Requester ;  
+        this.Offerer= eventData.Offerer ; 
+
         this.color = eventData.color;
         this.actions = eventData.actions;
         this.allDay = eventData.allDay;
         this.cssClass = eventData.cssClass;
         this.resizable = eventData.resizable;
         this.draggable = eventData.draggable;
-        this.meta = eventData.meta;
+        this.meta = eventData.meta; 
+        console.log('Event Data:', eventData); // Log the entire eventData object
+        console.log('Requester:', eventData.Requester); // Log the value of Requester
+        console.log('Offerer:', eventData.Offerer); // Log the value of Offerer
+    
     }  
 
     addEvent(event: CalendarEvent): void {
@@ -61,7 +72,7 @@ export class CustomEvent implements CalendarEvent {
       
         // Update the event start and end properties with the new Date objects
         event.start = startDateWithTime;
-        event.end = endDateWithTime;
+        event.end = endDateWithTime; 
       
         // Now you can call your service method to save the event
         this.scheduleService.createEventForUser(this.idUser,event).subscribe(
@@ -84,7 +95,9 @@ export class CustomEvent implements CalendarEvent {
             id: this.id,
             start: startDate,
             end: endDate,
-            title: this.title,
+            title: this.title, 
+            Requester:this.Requester, 
+            Offerer:this.Offerer, 
             color: this.color,
             actions: this.actions,
             draggable: this.draggable,

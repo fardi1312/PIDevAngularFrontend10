@@ -7,21 +7,31 @@ import { CustomEvent } from './CustomEvent';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 import { addHours, isSameDay, isSameMonth } from 'date-fns';
+import { ExternalEventService } from '../Services/Collocation/external-event.service';
+import { ExternalEvent } from '../Model/Collocation/ExternalEvent';
 
 @Component({
   selector: 'app-calendar-view',
   templateUrl: './calendar-view.component.html',
-  styleUrls: ['./calendar-view.component.css'],
+  styleUrls: ['./calendar-view.component.css'], 
+  styles: [
+    `
+      .drag-active {
+        position: relative;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .drag-over {
+        background-color: #eee;
+      }
+    `,
+  ],
+
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarViewComponent implements OnInit {
-  externalEvents: CalendarEvent[] =    [ {
-    title: 'Event 1',
-    start: new Date(),
-    draggable: true,
-  }]
-; 
-  idUser = 1;
+  externalEvents: CalendarEvent[] = [];
+  idUser = 2;
   schedules: CustomEvent[] = [];
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -51,6 +61,7 @@ export class CalendarViewComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
   constructor(
+    private externalEventService: ExternalEventService,
     private modal: NgbModal,
     private scheduleService: ScheduleService,
     private dialog: MatDialog,
@@ -61,8 +72,8 @@ export class CalendarViewComponent implements OnInit {
     this.fetchSchedules();
   }
 
-  fetchSchedules(): void { 
-    console.log("fetch initialized") ;  
+  fetchSchedules(): void {
+    console.log("fetch initialized");
     this.scheduleService.getAllEventsByUser(this.idUser).subscribe(schedules => {
       this.schedules = schedules.map(schedule => new CustomEvent(schedule, this.scheduleService));
       this.events = this.schedules.map(schedule => {
@@ -71,10 +82,11 @@ export class CalendarViewComponent implements OnInit {
         calendarEvent.resizable = {
           beforeStart: true,
           afterEnd: true
-        }; // Set resizable to true
+        }; // Set resizable to true 
+        console.log(calendarEvent.Offerer) ;
         return calendarEvent;
       });
-      this.refresh.next(); 
+      this.refresh.next();
     });
   }
   
@@ -91,32 +103,6 @@ export class CalendarViewComponent implements OnInit {
     }
   }
 
-/*   eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    if (newStart && newEnd) { // Check if newStart and newEnd are defined
-      // Update the corresponding event in the events array
-      this.events = this.events.map((iEvent) => {
-        if (iEvent === event) {
-          return {
-            ...iEvent,
-            start: newStart,
-            end: newEnd,
-          };
-        }
-        return iEvent;
-      });
-  
-      this.handleEvent('Dropped or resized', {
-        ...event,
-        start: newStart,
-        end: newEnd,
-      });
-    }
-  }
- */  
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
@@ -187,15 +173,24 @@ export class CalendarViewComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  saveAndClose(event: CalendarEvent): void {
-    this.saveEvent(event);
-    this.modal.dismissAll();
-  }
+saveAndClose(event: CalendarEvent): void {
+  this.scheduleService.updateEventForUser(this.idUser, event).subscribe(
+    (updatedEvent: CalendarEvent) => {
+      console.log('Event updated successfully:', updatedEvent);
+      this.modal.dismissAll();
+    },
+    (error: any) => {
+      console.error('Error updating event:', error);
+      // Optionally handle the error, e.g., display an error message to the user
+    }
+  );
+}
 
   deleteAndClose(event: CalendarEvent): void {
     this.deleteEvent(event);
     this.modal.dismissAll();
-  }  
+  }
+
   eventDropped({
     event,
     newStart,
@@ -203,22 +198,43 @@ export class CalendarViewComponent implements OnInit {
     allDay,
   }: CalendarEventTimesChangedEvent): void {
     const isExternalEvent = this.isExternalEvent(event); // Check if it's an external event
+
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
-    if (!isExternalEvent) { // Call eventTimesChanged if it's not an external event
-      this.eventTimesChanged({ event, newStart, newEnd, type: CalendarEventTimesChangedEventType.Drag });
-      return;
+
+    if (isExternalEvent) { // Handle external event
+      const externalIndex = this.externalEvents.indexOf(event);
+      if (externalIndex > -1) {
+        this.externalEvents.splice(externalIndex, 1);
+        this.events.push(event);
+      } 
+      event.start = newStart;
+      if (newEnd) {
+        event.end = newEnd;
+      }
+  
+    } else { 
+      if (newStart && newEnd) {
+        this.events = this.events.map((iEvent) => {
+          if (iEvent === event) {
+            return {
+              ...iEvent,
+              start: newStart,
+              end: newEnd,
+            };
+          }
+          return iEvent;
+        });
+
+        this.handleEvent('Dropped or resized', {
+          ...event,
+          start: newStart,
+          end: newEnd,
+        });
+      }
     }
-      
-    // Handle external drop if it's an external event
-    const externalIndex = this.externalEvents.indexOf(event);
-    if (externalIndex > -1) {
-      this.externalEvents.splice(externalIndex, 1);
-      this.events.push(event);
-      // Save the event after dropping it
-      this.saveEvent(event);
-    }
+
     event.start = newStart;
     if (newEnd) {
       event.end = newEnd;
@@ -228,8 +244,10 @@ export class CalendarViewComponent implements OnInit {
       this.activeDayIsOpen = true;
     }
     this.events = [...this.events];
+
+    this.saveEvent(event);
   }
-  
+
   eventTimesChanged({
     event,
     newStart,
@@ -251,7 +269,7 @@ export class CalendarViewComponent implements OnInit {
         }
         return iEvent;
       });
-  
+
       this.handleEvent('Dropped or resized', {
         ...event,
         start: newStart,
@@ -259,22 +277,24 @@ export class CalendarViewComponent implements OnInit {
       });
     }
   }
-  
+
   isExternalEvent(event: CalendarEvent): boolean {
     return this.externalEvents.includes(event);
   }
-  
+
   externalDrop(event: CalendarEvent) {
-    console.log("external drop initialized");
+    console.log("External drop initialized");
+    console.log("External event:", event);
+    
     if (!this.events.includes(event)) {
+      console.log("Adding external event to the calendar:", event);
       this.externalEvents = this.externalEvents.filter((iEvent) => iEvent !== event);
       this.events.push(event);
       // Save the event after dropping it
       this.saveEvent(event);
+      console.log("External event added to the calendar.");
+    } else {
+      console.log("External event already exists on the calendar.");
     }
   }
-  
-  
-
-  
-}
+}  

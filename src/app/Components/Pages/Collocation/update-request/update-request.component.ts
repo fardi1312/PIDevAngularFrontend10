@@ -17,7 +17,8 @@ export class UpdateRequestComponent implements OnInit {
     date: new Date(), 
     request: RequestEnum.Pending,
     places: 0,
-    description: '', 
+    description: '',  
+    roomPlaces :[], 
     roomDetailsList:[], 
     selectedDate: [] as Date[] // Declare it as an array of Date objects
  

@@ -1,3 +1,7 @@
-@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';   
+@import '~flatpickr/dist/flatpickr.css';
+
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

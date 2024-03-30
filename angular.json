@@ -10,6 +10,13 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "builder": "@angular-devkit/build-angular:browser",
+        "options": {
+           "allowedCommonJsDependencies": [
+              "lodash"
+           ]
+         },
+      
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
