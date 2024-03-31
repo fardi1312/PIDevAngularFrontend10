@@ -31,6 +31,10 @@ export class OfferService {
   createCollocation(collocationOffer: CollocationOffer,userId:number): Observable<CollocationOffer> {
     return this.httpClient.post<CollocationOffer>(`${this.apiUrl}/${userId}`, collocationOffer);
   }
+  sendMail(offerId: number, requestId: number): Observable<string> {
+    const url = `${this.apiUrl}/send-mail/${offerId}/${requestId}`;
+    return this.httpClient.post<string>(url, null);
+  }
 
   updateOffer(id: number, offer: CollocationOffer): Observable<CollocationOffer> {
     return this.httpClient.put<CollocationOffer>(`${this.apiUrl}/${id}`, offer);

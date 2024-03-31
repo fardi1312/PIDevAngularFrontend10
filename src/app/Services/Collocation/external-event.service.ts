@@ -22,7 +22,8 @@ export class ExternalEventService {
 
   createExternalEvent(externalEvent: ExternalEvent): Observable<ExternalEvent> {
     return this.httpClient.post<ExternalEvent>(this.baseUrl, externalEvent);
-  }
+  } 
+
 
   updateExternalEvent(id: number, updatedEvent: ExternalEvent): Observable<ExternalEvent> {
     const url = `${this.baseUrl}/${id}`;

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Inject } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarEventTimesChangedEventType, CalendarView } from 'angular-calendar';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleService } from '../Services/Collocation/schedule.service';
 import { CustomEvent } from './CustomEvent';
@@ -31,7 +31,7 @@ import { ExternalEvent } from '../Model/Collocation/ExternalEvent';
 })
 export class CalendarViewComponent implements OnInit {
   externalEvents: CalendarEvent[] = [];
-  idUser = 2;
+  idUser = 1;
   schedules: CustomEvent[] = [];
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -74,7 +74,11 @@ export class CalendarViewComponent implements OnInit {
 
   fetchSchedules(): void {
     console.log("fetch initialized");
-    this.scheduleService.getAllEventsByUser(this.idUser).subscribe(schedules => {
+    this.scheduleService.getAllEventsByUser(this.idUser).subscribe(schedules => {   
+      schedules.forEach(event => {
+
+      });
+    
       this.schedules = schedules.map(schedule => new CustomEvent(schedule, this.scheduleService));
       this.events = this.schedules.map(schedule => {
         const calendarEvent = schedule.toCalendarEvent();
@@ -82,8 +86,7 @@ export class CalendarViewComponent implements OnInit {
         calendarEvent.resizable = {
           beforeStart: true,
           afterEnd: true
-        }; // Set resizable to true 
-        console.log(calendarEvent.Offerer) ;
+        };  
         return calendarEvent;
       });
       this.refresh.next();
@@ -123,22 +126,25 @@ export class CalendarViewComponent implements OnInit {
   addEvent(): void {
     const currentDateTime = new Date();
     const oneHourLaterDateTime = addHours(currentDateTime, 1);
-
+  
     const newEvent: CalendarEvent = {
       id: this.events.length + 1,
       title: 'New event',
       start: currentDateTime,
-      end: oneHourLaterDateTime,
+      end: oneHourLaterDateTime, 
+      offerer:'',  
+      qrCodeOfferer:  new Uint8Array(0),
+      qrCodeRequester:new Uint8Array(0), 
+      requester:'', 
       draggable: true,
       resizable: { beforeStart: true, afterEnd: true },
       actions: this.actions,
       meta: { id: this.schedules.length + 1 }
     };
-
-    this.events = [...this.events, newEvent];
+  
+    this.saveEvent(newEvent); // Save the newly added event
   }
-
-  saveEvent(event: CalendarEvent): void {
+      saveEvent(event: CalendarEvent): void {
     this.scheduleService.createEventForUser(this.idUser, event).subscribe(
       (savedEvent: CalendarEvent) => {
         console.log('Event saved successfully:', savedEvent);
@@ -148,7 +154,9 @@ export class CalendarViewComponent implements OnInit {
         console.error('Error saving event:', error);
       }
     );
-  }
+  } 
+
+  
 
   deleteEvent(event: CalendarEvent): void {
     const eventId = event.id;

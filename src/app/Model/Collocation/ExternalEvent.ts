@@ -10,6 +10,8 @@ export interface ExternalEvent {
     requestEnd: Date;
     draggable: boolean;
     collocationRequest: CollocationRequest;
-    collocationOffer: CollocationOffer;
+    collocationOffer: CollocationOffer;  
+    
+
   }
   

@@ -59,12 +59,11 @@
     <div class="room-selection">
       <p>Select rooms:</p>
       <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+        <input type="checkbox" id="room{{ i }}" name="rooms" [(ngModel)]="room.selected">
         <label for="room{{ i }}">Room {{ i + 1 }}</label>
-        <input type="number" id="room{{ i }}" name="rooms" [(ngModel)]="room.selected" [min]="0" [max]="maxRooms">
       </div>
-    </div>
-                
-        <p>Select date range:</p>
+    </div> 
+    <p>Select date range:</p>
     <input type="text" matInput
     ngxDaterangepickerMd
     [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"

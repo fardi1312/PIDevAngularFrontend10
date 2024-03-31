@@ -42,7 +42,7 @@ export class MyOfferComponent implements OnInit {
     imageCollocation: '',
     roomDetailsList: [] 
   } 
-  idUser:number=2;  
+  idUser:number=1;  
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']; 
@@ -66,16 +66,19 @@ export class MyOfferComponent implements OnInit {
         response => {
           console.log(response);
           const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
-          if (acceptedRequest) {
+          if (acceptedRequest) { 
+            window.location.reload(); // Reload the page after an error 
+
             const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
             this.saveContractAsPDF(contractData);
           } else {
             console.error("Accepted request not found.");
           }
         },
-        error => {
+        error => { 
+          window.location.reload(); // Reload the page after an error 
+
           console.error(error);
-          // Even if there's an error, attempt to generate and save the contract
           const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
           if (acceptedRequest) {
             const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
@@ -83,12 +86,26 @@ export class MyOfferComponent implements OnInit {
           } else {
             console.error("Accepted request not found.");
           }
-          window.location.reload();
+          this.sendMail(idRequest);
+
         }
       );
   }
   
-  refuseRequest(idRequest:number): void {
+  sendMail(idRequest: number): void {
+    this.offerService.sendMail(this.id, idRequest)
+      .subscribe(
+        response => {
+          console.log('Email sent successfully', response);
+          // Handle success response
+        },
+        error => {
+          console.error('Failed to send email', error);
+          // Handle error response
+        }
+      );
+  }
+    refuseRequest(idRequest:number): void {
     this.offerService.refuseCollocationRequest(this.id,idRequest)
       .subscribe(
         response => {
@@ -177,7 +194,4 @@ export class MyOfferComponent implements OnInit {
   ) { } 
 
 
-  formatDate(date: Date): string {
-    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    return date.toLocaleDateString(undefined, options).replace(/\//g, ' / ');
-}}
+  }

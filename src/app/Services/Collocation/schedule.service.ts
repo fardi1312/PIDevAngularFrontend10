@@ -11,9 +11,11 @@ export class ScheduleService {
 
   constructor(private http: HttpClient) {}
 
-  getAllEventsByUser(userId: number): Observable<CalendarEvent[]> {
-    return this.http.get<CalendarEvent[]>(`${this.apiUrl}/user/${userId}`);
-  }
+  getAllEventsByUser(userId:number): Observable<CalendarEvent[]> { 
+    return this.http.get<CalendarEvent[]>(`${this.apiUrl}/user/${userId}`);  
+    
+  } 
+
 
   getEventByIdAndUser(id: number, userId: number): Observable<CalendarEvent> {
     return this.http.get<CalendarEvent>(`${this.apiUrl}/${id}/user/${userId}`);
@@ -29,5 +31,7 @@ export class ScheduleService {
 
   deleteEventForUser(id: number, userId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}/user/${userId}`);
-  }
+  } 
+
+
 }

@@ -13,7 +13,9 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 export class AddEventDialogComponent {
   eventTitle: string = ''; // Input field for event title
   startTime: Date = new Date(); // Input field for event start time
-  endTime: Date = new Date(); // Input field for event end time
+  endTime: Date = new Date();  
+  Requester:String = "";  
+  Offerer:String="";   
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialogComponent>,
@@ -30,7 +32,8 @@ export class AddEventDialogComponent {
     const newEvent = {
       title: this.eventTitle,
       start: this.startTime,
-      end: this.endTime
+      end: this.endTime ,
+      Requester:this.Requester, 
     }; 
     
 

@@ -12,6 +12,8 @@ export class CustomEvent implements CalendarEvent {
     end: Date;
     title: string; 
     Requester?:string;  
+    qrCodeOfferer:  Uint8Array; ;
+    qrCodeRequester:  Uint8Array;
 
     Offerer?:string ; 
     color?: EventColor;
@@ -28,7 +30,7 @@ export class CustomEvent implements CalendarEvent {
     constructor(eventData: CalendarEvent, private scheduleService: ScheduleService) {
         this.id = eventData.id;
         this.start = eventData.start; 
-        
+
         if (eventData.end !== undefined) {
             this.end = eventData.end;
         } else {
@@ -36,9 +38,11 @@ export class CustomEvent implements CalendarEvent {
             this.end = new Date(); // For example, you can assign the current date
         }
         this.title = eventData.title; 
-        this.Requester= eventData.Requester ;  
-        this.Offerer= eventData.Offerer ; 
-
+        this.Requester= eventData.requester ;  
+        this.Offerer= eventData.offerer ;   
+        this.qrCodeOfferer = eventData.qrCodeOfferer; 
+        this.qrCodeRequester=eventData.qrCodeRequester ; 
+                  
         this.color = eventData.color;
         this.actions = eventData.actions;
         this.allDay = eventData.allDay;
@@ -46,10 +50,6 @@ export class CustomEvent implements CalendarEvent {
         this.resizable = eventData.resizable;
         this.draggable = eventData.draggable;
         this.meta = eventData.meta; 
-        console.log('Event Data:', eventData); // Log the entire eventData object
-        console.log('Requester:', eventData.Requester); // Log the value of Requester
-        console.log('Offerer:', eventData.Offerer); // Log the value of Offerer
-    
     }  
 
     addEvent(event: CalendarEvent): void {
@@ -73,6 +73,7 @@ export class CustomEvent implements CalendarEvent {
         // Update the event start and end properties with the new Date objects
         event.start = startDateWithTime;
         event.end = endDateWithTime; 
+        
       
         // Now you can call your service method to save the event
         this.scheduleService.createEventForUser(this.idUser,event).subscribe(
@@ -89,15 +90,19 @@ export class CustomEvent implements CalendarEvent {
       toCalendarEvent(): CalendarEvent {
         // Convert start and end properties to JavaScript date objects
         const startDate = new Date(this.start);
-        const endDate = new Date(this.end);
+        const endDate = new Date(this.end); 
+        console.log(  this.qrCodeOfferer) ; 
     
         return {
             id: this.id,
             start: startDate,
             end: endDate,
             title: this.title, 
-            Requester:this.Requester, 
-            Offerer:this.Offerer, 
+            requester:this.Requester, 
+            offerer:this.Offerer,   
+            qrCodeOfferer:this.qrCodeOfferer,  
+            qrCodeRequester:this.qrCodeRequester,  
+            
             color: this.color,
             actions: this.actions,
             draggable: this.draggable,
