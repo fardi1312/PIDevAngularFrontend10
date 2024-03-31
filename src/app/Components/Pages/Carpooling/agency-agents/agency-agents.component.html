@@ -1,0 +1,102 @@
+
+
+<div   class="property-box">
+  <div *ngIf="carpoolingOffers.carpoolingType === 'Aller_et_Retour' || carpoolingOffers.carpoolingType === 'Aller' " class="agent-content">
+    <li><i  class="fa fa-map-marker-alt"> From {{ carpoolingOffers.location}}</i></li>
+    
+  
+    <ul class="agent-contact">
+       <li>  <i class="fas fa-car" ></i> <span>{{carpoolingOffers.dateAller}}</span></li>
+       <li> <i class="fas fa-phone-alt"></i> <span>25998439</span></li>          
+       <li style="display: flex;">
+        for :
+        <div>
+            
+          <img *ngIf="carpoolingOffers.forWho == 'Male' || carpoolingOffers.forWho == 'Male_or_Female'" src="assetsaif/images/female.jpg" class="bg-img" alt="agency-image" style="width: 20px;">
+        </div>   
+        <div>
+          <img *ngIf="carpoolingOffers.forWho == 'Female' || carpoolingOffers.forWho == 'Male_or_Female'" src="assetsaif/images/male.jpg" class="bg-img" alt="agency-image" style="width: 20px;">
+        </div>
+      </li>
+      <li><img _ngcontent-ng-c1891803766="" src="assetsaif/images/svg/icon/double-bed.svg" alt="bed-icon" class="img-fluid" style="width: 20px;"> places disp:</li>
+      <li style="display: flex; align-items: center;">
+        
+        <select class="form-control" style="margin-right: 10px;" [(ngModel)]="selectedNbPlacesAller">
+          
+          <ng-container *ngFor="let i of maxPlacesAller">
+            <option [value]="i" class="ng-star-inserted">{{ i }}</option>
+          </ng-container>
+        </select>
+        <a _ngcontent-ng-c2966600256="" (click)="addReq(1, carpoolingOffers.carpoolingOfferID || 0, selectedNbPlacesAller,0)" class="btn btn-outline-warning ng-star-inserted" style="font-size: 12px; padding: 5px 10px;">Book</a>
+      </li>
+      <li *ngIf="alert==1   && carpoolingRequest.requestType=='Aller' " class="alert alert-success" role="alert" style="font-size: 12px; padding: 5px 10px;" >
+        success
+      </li>
+      
+    </ul>
+    
+  </div>
+  
+       
+  <div class="agent-image">
+    <div class="bg-size" [style.background-image]="'url('+carpoolingOffers.img+')'">
+      <img [src]="carpoolingOffers.img" class="bg-img" alt="agency-image">
+    
+      <span class="label label-danger label-pill">${{ carpoolingOffers.price}}</span>
+    
+      
+      
+      <div class="overlay-content">
+        <ul>
+          <li><a href="https://accounts.google.com/" target="_blank"><img src="assetsaif/images/about/icon-1.png" alt="google-logo"></a>
+          </li>
+          <li><a href="https://twitter.com/" target="_blank"><img src="assetsaif/images/about/icon-2.png" alt="twitter-logo"></a>
+          </li>
+          <li><a href="https://www.facebook.com/" target="_blank"><img src="assetsaif/images/about/icon-3.png" alt="facebook-logo"></a>
+          </li>
+        </ul>
+        <span>Connect</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="carpoolingOffers.carpoolingType === 'Aller_et_Retour' || carpoolingOffers.carpoolingType === 'Retour'  "class="agent-content">
+    
+    <i  class="fa fa-map-marker-alt" > To {{ carpoolingOffers.location}}</i>
+  
+    <ul class="agent-contact">
+      <li>  <i class="fas fa-car"></i> <span>{{carpoolingOffers.dateRetour}}</span></li>
+      <li> <i class="fas fa-phone-alt"></i> <span>25998439</span></li> 
+      <li style="display: flex;">
+        for :
+        <div>
+          <img *ngIf="carpoolingOffers.forWho == 'Male' || carpoolingOffers.forWho == 'Male_or_Female'" src="assetsaif/images/female.jpg" class="bg-img" alt="agency-image" style="width: 20px;">
+        </div>   
+        <div>
+
+          <img *ngIf="carpoolingOffers.forWho == 'Female' || carpoolingOffers.forWho == 'Male_or_Female'" src="assetsaif/images/male.jpg" class="bg-img" alt="agency-image" style="width: 20px;">
+        </div>
+
+      </li>
+      <li><img _ngcontent-ng-c1891803766="" src="assetsaif/images/svg/icon/double-bed.svg" alt="bed-icon" class="img-fluid" style="width: 20px;"> places disp:</li>
+      
+      <li style="display: flex; align-items: center;">
+        <select class="form-control" style="margin-right: 10px;"[(ngModel)]="selectedNbPlacesRetour">
+         
+          <ng-container *ngFor="let i of maxPlacesRetour">
+            <option [value]="i" class="ng-star-inserted">{{ i }}</option>
+          </ng-container>
+        </select>
+        
+        <a _ngcontent-ng-c2966600256="" (click)="addReq(1, carpoolingOffers.carpoolingOfferID || 0,0,selectedNbPlacesRetour)" class="btn btn-outline-warning ng-star-inserted" style="font-size: 12px; padding: 5px 10px;">Book</a>
+      </li>
+      
+
+      <li *ngIf="alert==1  && carpoolingRequest.requestType=='Retour' " class="alert alert-success" role="alert" style="font-size: 12px; padding: 5px 10px;" >
+        success
+      </li>
+   </ul>
+    
+  </div>
+  
+</div>

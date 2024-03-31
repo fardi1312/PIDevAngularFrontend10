@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, Input, AfterViewInit, ElementRef, Inje
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
 //import { Input, OnInit } from '@angular/core';
 
 

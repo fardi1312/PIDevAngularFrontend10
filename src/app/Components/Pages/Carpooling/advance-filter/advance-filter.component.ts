@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { agencyParams, areaFilter, bathParams, bedParams, categoryParams, img, priceFilter, roomsParams, statusParams } from '../../../../shared/interface/property';
 
 import { CarpoolingPreferences } from 'src/app/models/modelSM/CarpoolingPreferenes';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
 @Component({
   selector: 'app-advance-filter',

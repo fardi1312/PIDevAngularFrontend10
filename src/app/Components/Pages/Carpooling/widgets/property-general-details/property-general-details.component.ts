@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { propertyStatus } from 'src/app/shared/data/advance-filter';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
 
 @Component({
   selector: 'app-property-general-details',

@@ -2,7 +2,8 @@
 import { Router } from '@angular/router';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
 import { Component,  Input } from '@angular/core';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+
 @Component({
   selector: 'app-property-confirmation',
   templateUrl: './property-confirmation.component.html',

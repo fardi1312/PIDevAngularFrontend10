@@ -1,0 +1,17 @@
+.plus-symbol {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: white; /* Couleur de l'icône */
+    font-size: 24px; /* Taille de l'icône */
+  }
+  .circle-image {
+    display: inline-block;
+    width: 250px; /* Définissez la largeur et la hauteur du cercle */
+    height: 250px;
+    border-radius: 100%; /* Rend le conteneur un cercle */
+  }
+  
+  
+
+  

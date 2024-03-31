@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { agencyAgent } from 'src/app/shared/interface/property';
 import { Marker, marker, CircleMarker } from 'leaflet';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
 import { CarpoolingRequest } from 'src/app/models/modelSM/CarpoolingRequest';
 import { getLocaleDateFormat } from '@angular/common';
 import { ActivatedRoute, Route, Router } from '@angular/router';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
+import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
 import { agencyAgent ,propertyDetailsData } from 'src/app/shared/interface/property';
 //import { PropertyService } from 'src/app/shared/services/property.service';
 
