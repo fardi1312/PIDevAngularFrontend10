@@ -1,0 +1,44 @@
+
+
+<app-header></app-header>
+
+  
+<section class="property-wizard">
+  <div class="container">
+    <div class="filter-panel">
+      <div class="top-panel">
+      <app-customizer></app-customizer>
+       
+        <div _ngcontent-ng-c1193402911="" class="title-2 ng-star-inserted">
+          <h2 _ngcontent-ng-c1193402911="">Add Your CARPOOLING OFFER</h2></div>
+       
+      </div>
+    </div>
+    <div class="row wizard-box">
+      <div class="col-sm-12">
+        <div class="wizard-step-container row">
+          <div class="col-xxl-3 col-lg-4">
+            <app-add-property-steps [addPropertyStepsData]="addPropertyStepsData" [activeSteps]="activeSteps"></app-add-property-steps>
+          </div>
+          <div class="wizard-form-details col-xxl-9 col-lg-8">
+            <div class="theme-card my-3">
+              <div class="wizard-step-1" [ngClass]="activeSteps == 1 ? 'd-block' : 'd-none'">
+                <app-property-general-details  (activeCO)="receiveCarpoolingOffer($event)"   (activeSteps)="receiveChildData($event)"></app-property-general-details>
+              </div>
+              <div class="wizard-step-2" [ngClass]="activeSteps == 2 ? 'd-block' : 'd-none'">
+                <app-property-address-details     [activeCoo]="activeCo" (activeCOO)="receiveCarpoolingOffer($event)"    (activeSteps)="receiveChildData($event)"></app-property-address-details>
+              </div>
+              <div class="wizard-step-3" [ngClass]="activeSteps == 3 ? 'd-block' : 'd-none'">
+                <app-property-gallery  [activeCoo]="activeCo"  (activeCOO)="receiveCarpoolingOffer($event)"  (activeSteps)="receiveChildData($event)"></app-property-gallery>
+              </div>
+              <div class="wizard-step-4" [ngClass]="activeSteps == 4 ? 'd-block' : 'd-none'">
+                <app-property-confirmation [carpoolingOffers]="activeCo" ></app-property-confirmation>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footor></app-footor>

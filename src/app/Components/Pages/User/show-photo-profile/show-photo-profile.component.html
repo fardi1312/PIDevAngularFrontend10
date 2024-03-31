@@ -1,0 +1,37 @@
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update User Info</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+<link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+<link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<app-header></app-header>
+<router-outlet></router-outlet>
+
+<br>
+<br>
+<mat-tab-group class="custom-tab-group">
+  <mat-tab label="Update User Info">
+    <ng-template matTabContent>
+      <app-update-user-info-component></app-update-user-info-component>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Update Password">
+    <ng-template matTabContent>
+      <app-update-password></app-update-password>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Update User Info">
+    <ng-template matTabContent>
+      <app-update-user-info-component></app-update-user-info-component>
+    </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

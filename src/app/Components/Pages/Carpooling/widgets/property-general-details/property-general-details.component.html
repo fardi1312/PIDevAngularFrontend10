@@ -1,0 +1,131 @@
+<h2>General</h2>
+<p class="font-roboto">Basic information about property</p>
+<form class="row gx-3" novalidate [formGroup]="myForm1" >
+  <div class="form-group col-sm-4">
+    <label>For Who</label>
+  <select class="form-control" formControlName="property_status" [ngClass]="{ 'is-invalid' : (property_status?.touched || validate) && property_status?.errors , 'is-valid' : !property_status?.errors}"  required [(ngModel)]="forwho">
+   
+  
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Male_or_Female">Male_or_Female</option>
+    
+    
+  </select>
+  </div>
+
+
+  <div class="form-group col-sm-4">
+    <label>Price for place</label>
+    <input type="number" class="form-control" placeholder="$2800" formControlName="property_price" [ngClass]="{ 'is-invalid' : (property_price?.touched || validate) && property_price?.errors , 'is-valid' : !property_price?.errors}" required [(ngModel)]="price">
+  </div>
+
+  <div class="form-group col-sm-4">
+    <label>Carpooling Type</label>
+    <select class="form-control" formControlName="typee"   [ngClass]="{ 'is-invalid' : (typee?.touched || validate) && typee?.errors , 'is-valid' : !typee?.errors} "  required [(ngModel)]="type">
+      <ng-container> 
+        <option value="Aller"  class="ng-star-inserted" >Aller</option>
+        <option value="Aller_et_Retour"  class="ng-star-inserted">Aller_et_Retour</option>
+        <option value="Retour"  class="ng-star-inserted">Retour</option></ng-container>
+     
+  </select>
+  </div>
+</form>
+
+  <form class="row gx-3" novalidate [formGroup]="myForm3" >
+
+  <div *ngIf="type=='Aller' ||type=='Aller_et_Retour' " class="form-group col-sm-4"  >
+    <label>Places Aller</label>
+    <select class="form-control" formControlName="paa"   [ngClass]="{ 'is-invalid' : (paa?.touched || validate) && paa?.errors , 'is-valid' : !paa?.errors} "  required [(ngModel)]="pa" >
+     
+     
+        <option >1</option>
+        <option >2</option>
+        <option >3</option>
+        <option >4</option>
+        <option >5</option>
+        <option >6</option>
+      
+    </select>
+  </div>
+
+  <div *ngIf="type === 'Aller' || type === 'Aller_et_Retour'" class="form-group col-sm-4">
+    <label>Date of Departure Aller</label>
+    <input type="date" class="form-control" formControlName="daa"
+           [ngClass]="{ 'is-invalid': (daa?.touched || validate) && daa?.errors, 'is-valid': !daa?.errors }"
+           required [(ngModel)]="da">
+           <div *ngIf="daa?.errors?.['dateAllerInvalide'] && (daa?.touched || validate)" class="invalid-feedback">
+            La date de départ Aller doit être ultérieure à la date actuelle.
+          </div>
+  </div>
+  
+
+  <div *ngIf="type=='Aller' ||type=='Aller_et_Retour' " class="form-group col-sm-4" >
+    <label>Time of Departure Aller</label>
+    <input type="time" class="form-control" formControlName="haa"   [ngClass]="{ 'is-invalid' : (haa?.touched || validate) && haa?.errors , 'is-valid' : !haa?.errors} "  required [(ngModel)]="ha" >
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+ 
+ <form class="row gx-3" novalidate [formGroup]="myForm2" >
+
+
+  <div *ngIf="type=='Retour' ||type=='Aller_et_Retour'  " class="form-group col-sm-4"  >
+    <label>Places Retour</label>
+    <select class="form-control" formControlName="prr"   [ngClass]="{ 'is-invalid' : (prr?.touched || validate) && prr?.errors , 'is-valid' : !prr?.errors} "  required [(ngModel)]="pr">
+      
+     
+        <option >1</option>
+        <option >2</option>
+        <option >3</option>
+        <option >4</option>
+        <option >5</option>
+        <option >6</option>
+      
+    </select>
+  </div>
+
+
+  <div *ngIf="type === 'Retour' || type === 'Aller_et_Retour'" class="form-group col-sm-4">
+    <label>Date of Departure Retour</label>
+    <input type="date" class="form-control" formControlName="drr"
+           [ngClass]="{ 'is-invalid': (drr?.touched || validate) && drr?.errors, 'is-valid': !drr?.errors }"
+           required [(ngModel)]="dr">
+           <div *ngIf="drr?.errors?.['dateRetourInvalide'] && (drr?.touched || validate)" class="invalid-feedback">
+            La date de départ Retour doit être ultérieure à la date actuelle.
+          </div>
+  </div>
+  
+
+  <div *ngIf="type=='Retour' ||type=='Aller_et_Retour' " class="form-group col-sm-4" >
+    <label>Time of Departure Retour</label>
+    <input type="time" class="form-control" formControlName="hrr"   [ngClass]="{ 'is-invalid' : (hrr?.touched || validate) && hrr?.errors , 'is-valid' : !hrr?.errors} "  required [(ngModel)]="hr" >
+  </div>
+  </form>
+
+
+
+
+
+
+
+
+
+<form class="row gx-3" novalidate [formGroup]="myForm1" >
+  <div class="form-group col-sm-12">
+    <label>Description</label>
+    <textarea class="form-control" rows="4" formControlName="description" [ngClass]="{ 'is-invalid' : (description?.touched || validate) && description?.errors , 'is-valid' : !description?.errors}"  required [(ngModel)]="desc" ></textarea>
+  </div>
+</form>
+
+<div class="next-btn text-end">
+  <button type="button" class="btn btn-gradient color-2 next1 btn-pill" (click)="next(5,forwho,price!,type,pa!,da,ha,pr!,dr,hr)">Next <i class="fas fa-arrow-right ms-2"></i></button>
+</div>

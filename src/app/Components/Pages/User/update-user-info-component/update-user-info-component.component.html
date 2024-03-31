@@ -1,0 +1,107 @@
+
+
+<div class="container">
+  <div class="row flex-lg-nowrap">
+    <div class="col">
+      <div class="tab-content pt-3">
+        <div class="tab-pane active">
+          <form class="form" [formGroup]="updateUserInfoForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>First Name</label>
+                      <input class="form-control" type="text" formControlName="firstName" placeholder="John">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Last Name</label>
+                      <input class="form-control" type="text" formControlName="lastName" placeholder="Smith">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Gender</label>
+                      <input class="form-control" type="text" formControlName="gender" placeholder="Male/Female/Other">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Introduction</label>
+                      <textarea class="form-control" rows="5" formControlName="intro" placeholder="Tell something about yourself"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Hometown</label>
+                      <input class="form-control" type="text" formControlName="hometown" placeholder="Your hometown">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Current City</label>
+                      <input class="form-control" type="text" formControlName="currentCity" placeholder="Your current city">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Educational Institution</label>
+                      <input class="form-control" type="text" formControlName="eduInstitution" placeholder="Your educational institution">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Workplace</label>
+                      <input class="form-control" type="text" formControlName="workplace" placeholder="Your workplace">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Birth Date</label>
+                      <input class="form-control" type="date" formControlName="birthDate">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Phone Number</label>
+                      <input class="form-control" type="tel" formControlName="phoneNumber" placeholder="Your phone number">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+            <br>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

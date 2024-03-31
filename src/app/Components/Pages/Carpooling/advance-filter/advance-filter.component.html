@@ -1,0 +1,74 @@
+<div class="left-sidebar sticky-cls single-sidebar">
+  <div class="filter-cards">
+    <div class="advance-card">
+      <div class="title-2 ng-star-inserted">
+        <h2>Add Your Preferences</h2>
+      </div>
+      <div class="category-property">
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="budget" required [(ngModel)]="carpoolingPreferences.budget" (ngModelChange)="updatePreferences()">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="location" required [(ngModel)]="carpoolingPreferences.location" (ngModelChange)="updatePreferences()">
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="NbPlaces" required [(ngModel)]="carpoolingPreferences.nbPlaces" (ngModelChange)="updatePreferences()">
+        </div>
+        <div class="form-group">
+          <select class="form-control" required [(ngModel)]="carpoolingPreferences.carpoolingType" (ngModelChange)="updatePreferences()">
+            <option value="" disabled selected>Carpooling Type</option>
+            <option value="Aller">Aller</option>
+            <option value="Aller_et_Retour">Aller et Retour</option>
+            <option value="Retour">Retour</option>
+          </select>
+        </div>
+        <div class="form-group">
+  
+          <h5>Do you tolerate ?</h5>
+       
+           <div class="option-setting" style="display: flex; align-items: center;">
+             <label class="switch" style="width: 60px;">
+                 <input  type="checkbox" name="chk1"  value="true"  required [(ngModel)]="carpoolingPreferences.smoking" class="setting-check ng-untouched ng-valid ng-dirty ">
+                 <span  class="switch-state"></span>
+             </label>
+             <span style="margin-left: 10px;">smoking</span>
+         </div>
+         
+       
+         
+         <div class="option-setting" style="display: flex; align-items: center;">
+           <label class="switch" style="width: 60px;">
+               <input  type="checkbox" name="chk1" value="true"  required [(ngModel)]="carpoolingPreferences.climatise" class="setting-check ng-untouched ng-valid ng-dirty" (ngModelChange)="updatePreferences()">
+               <span  class="switch-state"></span>
+           </label>
+           <span style="margin-left: 10px;">Air conditioner</span>
+       </div>
+       
+       
+       
+       <div class="option-setting" style="display: flex; align-items: center;">
+         <label class="switch" style="width: 60px;">
+             <input  type="checkbox" name="chk1" value="true"   required [(ngModel)]="carpoolingPreferences.chauffage"  class="setting-check ng-untouched ng-valid ng-dirty" (ngModelChange)="updatePreferences()">
+             <span  class="switch-state"></span>
+         </label>
+         <span style="margin-left: 10px;">Heater</span>
+       </div>
+       
+       
+       <div class="option-setting" style="display: flex; align-items: center;">
+         <label class="switch" style="width: 60px;">
+             <input  type="checkbox" name="chk1"  value="true"  required [(ngModel)]="carpoolingPreferences.radioon" class="setting-check ng-untouched ng-valid ng-dirty" (ngModelChange)="updatePreferences()">
+             <span  class="switch-state"></span>
+         </label>
+         <span style="margin-left: 10px;">open radio</span>
+       </div>
+         
+           </div>
+           
+        <div class="form-group">
+          <textarea placeholder="Message" class="form-control" rows="6" style="height: 150px;" required [(ngModel)]="carpoolingPreferences.description" (ngModelChange)="updatePreferences()"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

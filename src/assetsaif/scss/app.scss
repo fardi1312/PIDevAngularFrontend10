@@ -1,0 +1,27 @@
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+//@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+
+//@import "~@angular/cdk/overlay-prebuilt.css";
+
+//@import "~leaflet/dist/leaflet.css";
+
+
+
+
+@import "./vendors/chartist/chartist-settings";
+@import "./vendors/chartist/chartist";
+
+
+@import "ngx-toastr/toastr";
+@import "node_modules/ngx-toastr/toastr.css";
+
+@import "./layout/general";
+
+@import "./vendors/font-awesome";
+@import "./vendors/feather-icon";
+@import "./color1.scss";

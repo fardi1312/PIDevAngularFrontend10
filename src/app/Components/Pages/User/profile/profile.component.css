@@ -1,0 +1,18 @@
+/* profile.component.css */
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header, .card-footer {
+    padding: 10px 20px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .list-group-item {
+    border: none;
+  }
+  
