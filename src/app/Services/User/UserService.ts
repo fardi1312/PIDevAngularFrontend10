@@ -17,13 +17,7 @@ const BASE_URL = environment.apiUrlUser;
 export class UserService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-   getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.cookieService.get('JWT')
-    });
-    return headers;
-   }
-  headers = this.getHeaders();
+
 
   getAuthenticatedUser(): Observable<User> {
     return this.http.get<User>(BASE_URL + 'account').pipe(

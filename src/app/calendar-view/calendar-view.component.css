@@ -1,0 +1,59 @@
+#cal-date-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cal-date-nav-buttons button {
+  background-color: #e78851; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+#cal-date-nav-buttons button:hover {
+  background-color: #45a049; /* Darker green color on hover */
+} 
+#calendar-container {
+  width: 80%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the calendar horizontally */
+}
+
+
+#cal-view-nav-buttons { 
+
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  align-items: center;
+}
+
+.view-button {
+  padding: 10px;
+  background-color: #3498db; /* Blue background color */
+  color: white; /* White text color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Add cursor pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.view-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+.view-button.active {
+  background-color: #e74c3c; /* Different color for the clicked button */
+}
+
+#cal-date-field {
+  text-align: center; /* Center the date */
+  font-size: 18px;
+  margin: 10px 0;
+}

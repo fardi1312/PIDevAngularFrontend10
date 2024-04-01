@@ -1,0 +1,26 @@
+<app-head-back></app-head-back>
+<div class="container mt-4">
+  <h2>Collocation Feedbacks</h2>
+
+  <div *ngIf="feedbacks.length === 0" class="alert alert-info">
+    No feedbacks available.
+  </div>
+
+  <div *ngFor="let feedback of feedbacks" class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Feedback ID: {{ feedback.idCollocationFeedback }}</h5>
+      <p class="card-text">Description: {{ feedback.feedbackDescription }}</p>
+      <p class="card-text">Rating: {{ feedback.rating }}</p>
+      <p class="card-text">Feedback Date: {{ feedback.feedbackDate | date }}</p>
+
+  <div class="text-end">
+    <button class="btn btn-warning" (click)="updateFeedback(feedback.idCollocationFeedback)">Update</button>
+    <button class="btn btn-danger" (click)="deleteFeedback(feedback.idCollocationFeedback)">Delete</button>
+  </div>
+</div>
+
+      <div class="text-end">
+      </div>
+    </div>
+  </div>
+<app-footer-back></app-footer-back>

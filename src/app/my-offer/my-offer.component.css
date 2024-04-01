@@ -1,0 +1,44 @@
+.request-section {
+    padding: 20px 0;
+  }
+  
+  .request-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .request-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .approved {
+    color: rgb(37, 185, 37);
+  }
+  
+  .rejected {
+    color: red;
+  }
+  
+  .request-details {
+    font-size: 16px;
+  }
+  
+  .request-details p {
+    margin: 5px 0;
+  }
+  
+  .request-details h5 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  } 
+  .accepted-card {
+    background-color: green; /* Example styling for accepted cards */
+  }
+  
+  .zero-places-card {
+    background-color: red; /* Example styling for cards with zero available places */
+  }
+  
+  

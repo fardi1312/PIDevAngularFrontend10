@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -64,13 +64,51 @@ import { AdminUsersComponent } from './Components/Pages/User/admin-users/admin-u
 import { UserDetailsDialogComponent } from './Components/Pages/User/user-details-dialog/user-details-dialog.component';
 import { AdminProfileComponent } from './Components/Pages/User/admin-profile/admin-profile.component';
 import { AppRoutingModule } from './app.routing.module';
+import {
+  UpdateFeedbackComponent
+} from "./Components/Pages/Collocation/feedback/update-feedback/update-feedback.component";
+import {ShowRequestComponent} from "./Components/Pages/Collocation/show-request/show-request.component";
+import {AddFeedbackComponent} from "./Components/Pages/Collocation/feedback/add-feedback/add-feedback.component";
+import {ShowFeedbackComponent} from "./Components/Pages/Collocation/feedback/show-feedback/show-feedback.component";
+import {
+  ShowDetailsFeedbackComponent
+} from "./Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component";
+import {AddRequestComponent} from "./Components/Pages/Collocation/Request/add-request/add-request.component";
+import {AddCollocationComponent} from "./Components/Pages/Collocation/offer/add-collocation/add-collocation.component";
+import {
+  ShowCollocationComponent
+} from "./Components/Pages/Collocation/offer/show-collocation/show-collocation.component";
+import {
+  UpdateCollocationComponent
+} from "./Components/Pages/Collocation/offer/update-collocation/update-collocation.component";
+import {
+  DeleteCollocationComponent
+} from "./Components/Pages/Collocation/offer/delete-collocation/delete-collocation.component";
+import {
+  ShowDetailsCollocatinComponent
+} from "./Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component";
+import {
+  AddPreferencesComponent
+} from "./Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component";
+import {
+  ShowPreferencesComponent
+} from "./Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component";
+import {
+  UpdatePreferencesComponent
+} from "./Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component";
+import {UpdateRequestComponent} from "./Components/Pages/Collocation/update-request/update-request.component";
+import {DeleteRequestComponent} from "./Components/Pages/Collocation/delete-request/delete-request.component";
+import {MyOffersComponent} from "./my-offers/my-offers.component";
+import {MyOfferComponent} from "./my-offer/my-offer.component";
+import {RouterModule} from "@angular/router";
+import {SharedModule} from "./shared/shared.module";
+import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FootorComponent,
-    TemplateFrontComponent,
     FooterBackComponent,
     TemplateBackComponent,
     HeadBackComponent,
@@ -102,6 +140,27 @@ import { AppRoutingModule } from './app.routing.module';
     UserDetailsDialogComponent,
     AdminProfileComponent,
     TransferPointsComponent,
+    UpdateFeedbackComponent,
+    ShowRequestComponent,
+    AddFeedbackComponent,
+    ShowFeedbackComponent,
+    ShowDetailsFeedbackComponent,
+    TemplateFrontComponent,
+    AddRequestComponent,
+    FooterBackComponent,
+    TemplateBackComponent,
+    AddCollocationComponent,
+    ShowCollocationComponent,
+    UpdateCollocationComponent,
+    DeleteCollocationComponent,
+    ShowDetailsCollocatinComponent,
+    AddPreferencesComponent,
+    ShowPreferencesComponent,
+    UpdatePreferencesComponent,
+    UpdateRequestComponent,
+    DeleteRequestComponent,
+    MyOffersComponent,
+    MyOfferComponent,
     ViewPhotoDialogComponent
   ],
   imports: [
@@ -135,6 +194,18 @@ import { AppRoutingModule } from './app.routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     NgxDropzoneModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxDaterangepickerMd.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+    CommonModule,
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
@@ -143,6 +214,8 @@ import { AppRoutingModule } from './app.routing.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  exports: [],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
