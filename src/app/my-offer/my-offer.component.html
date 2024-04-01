@@ -1,0 +1,88 @@
+<app-header></app-header>
+<section class="shop-detail-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12 m-auto">
+                <div class="custom-block shop-detail-custom-block">
+                    <h3 class="mb-3">{{ collocationOffer.descriptionCollocation }}</h3>
+                    <p>Location: {{ collocationOffer.location }}</p>
+                    <p>Furniture: {{ collocationOffer.furnitureCollocation }}</p>
+                    <p>House Type: {{ collocationOffer.houseType }}</p>
+                    <p>Available Places: {{ collocationOffer.availablePlaces }}</p>
+                    <p>Price: ${{ collocationOffer.price }}</p>
+                    <p>Date Offer: {{ collocationOffer.dateRent | date: 'yyyy-MM-dd' }}</p>
+                    <p>Gender: {{ collocationOffer.gender }}</p>
+
+                    <div *ngIf="collocationOffer.roomDetailsList && collocationOffer.roomDetailsList.length > 0">
+                        <h4>Room Details:</h4>
+                        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+                            <p>Room {{ i + 1 }} - Type: {{ room.roomType }}, Available Places: {{ room.availablePlaces }}, Price: ${{ room.prix }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="shop-image-wrap">
+                    <img [src]="collocationOffer.imageCollocation" class="shop-image img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </div>     
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+        </div>
+    </div> 
+    <app-header></app-header>
+    <section class="shop-detail-section section-padding">
+        <!-- Previous content omitted for brevity -->
+    
+        <section class="request-section">
+            <div class="container">
+                <h3>Requests Associated with this Offer:</h3>
+                <div class="row">
+                    <div class="col">
+                        <ul class="request-list">
+                            <!-- Loop through collocationRequests array -->
+                            <li *ngFor="let request of collocationRequests" class="request-item">
+                                <div class="request-details">
+                                    <!-- Display request details excluding idCollocationRequest -->
+                                    <p [ngClass]="{'approved': request.request === 'Approved', 'rejected': request.request === 'Canceled'}">Request: {{ request.request }}</p>
+                                    <p>Places: {{ request.places }}</p>
+                                    <p>Description: {{ request.description }}</p> 
+                                    <p>Selected Date: {{ request.selectedDate[0] | date: 'yyyy-MM-dd' }}</p>
+                                    <p>Date: {{ request.date | date: 'yyyy-MM-dd' }}</p>
+                                    
+                                    <!-- Display room details -->
+                                    <div *ngIf="request.roomDetailsList && request.roomDetailsList.length > 0">
+                                        <h5>Room Details:</h5>
+                                        <ul>
+                                            <li *ngFor="let room of request.roomDetailsList">
+                                                <p>Room Type: {{ room.roomType }}</p>
+                                                <p>Available Places: {{ room.availablePlaces }}</p>
+                                                <p>Price: ${{ room.prix }}</p>
+                                                <!-- Add more room details as needed -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Add more request details here -->
+                                </div>
+                                
+                                <!-- Accept and Refuse buttons -->
+                                <div class="request-actions ml-auto" *ngIf="request.request !== 'Approved'">
+                                    <button class="btn btn-success" 
+                                    (click)="acceptRequest(request.idCollocationRequest)" 
+                                    [disabled]="isAcceptDisabled(request)">Accept</button>
+                            
+                            <!-- Refuse button -->
+                            <button class="btn btn-danger" 
+                                    (click)="refuseRequest(request.idCollocationRequest)"
+                                    [disabled]="request.request === 'Canceled'">Refuse</button>
+                                                            </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>  
+    </section>
+        <app-footer></app-footer>

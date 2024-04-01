@@ -1,0 +1,28 @@
+<!-- show-request.component.html -->
+
+<app-head-back></app-head-back>
+
+<div class="container mt-4">
+  <h2>Collocation Requests</h2>
+
+  <div *ngIf="requests.length === 0" class="alert alert-info">
+    No requests available.
+  </div>
+
+  <div *ngFor="let request of requests" class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Request ID: {{ request.idCollocationRequest }}</h5>
+      <p class="card-text">Status: {{ request.request }}</p>
+      <p class="card-text">Number of Places: {{ request.places }}</p>
+      <p class="card-text">Description: {{ request.description }}</p>
+
+      <!-- Update and Delete buttons -->
+      <div class="text-end">
+        <button class="btn btn-primary mx-2" (click)="updateRequest(request.idCollocationRequest)">Update</button>
+        <button class="btn btn-danger" (click)="deleteRequest(request.idCollocationRequest)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer-back></app-footer-back>

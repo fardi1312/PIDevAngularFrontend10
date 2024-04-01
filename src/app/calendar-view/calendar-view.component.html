@@ -1,0 +1,196 @@
+<app-header1></app-header1>
+<div
+      class="card"
+      mwlDroppable
+      (drop)="externalDrop($event.dropData.event)"
+      dragOverClass="drag-over"
+    >
+    <div class="card-body">
+      <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>
+      <ul>
+        <li
+          *ngFor="let event of externalEvents"
+          mwlDraggable
+          [dropData]="{event: event}"
+          [touchStartLongPress]="{ delay: 300, delta: 30 }"
+          dragActiveClass="drag-active"
+        >
+          <a href="javascript:;" >
+            {{ event.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  
+<div id="calendar-container" class="row text-center">
+  <div class="col-md-4">
+    <!-- Navigation buttons -->
+    <div class="btn-group">
+      <!-- Previous button -->
+      <div class="btn btn-primary"
+           mwlCalendarPreviousView
+           [view]="view"
+           [(viewDate)]="viewDate"
+           (viewDateChange)="closeOpenMonthViewDay()">Previous</div>
+      <!-- Today button -->
+      <div class="btn btn-outline-secondary"
+           mwlCalendarToday
+           [(viewDate)]="viewDate">Today</div>
+      <!-- Next button -->
+      <div class="btn btn-primary"
+           mwlCalendarNextView
+           [view]="view"
+           [(viewDate)]="viewDate"
+           (viewDateChange)="closeOpenMonthViewDay()">Next</div>
+    </div>
+  </div> 
+
+  <div class="col-md-4">
+    <!-- View date -->
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <!-- View buttons -->
+    <div class="btn-group">
+      <!-- Month view button -->
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Month)"
+           [class.active]="view === CalendarView.Month">Month</div>
+      <!-- Week view button -->
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Week)"
+           [class.active]="view === CalendarView.Week">Week</div>
+      <!-- Day view button -->
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Day)"
+           [class.active]="view === CalendarView.Day">Day</div>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<!-- Calendar view based on selected view -->
+<!-- Calendar view based on selected view -->
+<div [ngSwitch]="view">
+  <!-- Month view -->
+<!-- Calendar view based on selected view -->
+<div [ngSwitch]="view">
+  <!-- Month view -->
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+                            [viewDate]="viewDate"
+                            [events]="events"
+                            [refresh]="refresh"
+                            [activeDayIsOpen]="activeDayIsOpen"
+                            (dayClicked)="dayClicked($event.day)"
+                            (eventClicked)="handleEvent('Clicked', $event.event)"
+                            (eventTimesChanged)="eventTimesChanged($event)">
+                              > <!-- Pass object with date property -->
+  </mwl-calendar-month-view>
+  
+  <!-- Week view -->
+  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week"
+                           [viewDate]="viewDate"           
+                           [events]="events"
+                           [refresh]="refresh"
+                           (eventClicked)="handleEvent('Clicked', $event.event)"
+                           (eventTimesChanged)="eventTimesChanged($event)"
+                           (dayHeaderClicked)="clickedDate = $event.day.date"
+                           (hourSegmentClicked)="clickedDate = $event.date; openAddEventDialog($event.date)"> <!-- Removed comment -->
+  </mwl-calendar-week-view>
+  
+  <!-- Day view -->
+  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day"
+                          [viewDate]="viewDate"
+                          [events]="events"
+                          [refresh]="refresh"
+                          (eventClicked)="handleEvent('Clicked', $event.event)"
+                          (eventTimesChanged)="eventTimesChanged($event)"
+                          (hourSegmentClicked)="clickedDate = $event.date;openAddEventDialog($event.date)"> <!-- Removed comment -->
+  </mwl-calendar-day-view>
+</div>
+</div>
+
+<!-- Demo-only content -->
+<br /><br /><br />
+
+<!-- Edit events section -->
+
+
+<!-- Table to display events -->
+<div class="clearfix"></div>
+
+
+<!-- Modal template -->
+<!-- Inside your calendar component template -->
+<!-- Inside your calendar component template -->
+<!-- Modal template -->
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Edit Event</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Display event details for editing if modalData and modalData.event are defined -->
+    <div *ngIf="modalData && modalData.event">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input id="title" type="text" class="form-control" [(ngModel)]="modalData.event.title">
+      </div> 
+      <div class="col-md-6">
+        <h4>Offerer: {{ modalData.event.requester }}</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>Requester: {{ modalData.event.offerer }}</h4>
+      </div>
+  
+      <div class="form-group">
+        <label for="start">Start Date:</label>
+        <!-- Input for start date using Flatpickr -->
+        <input
+          id="start"
+          type="text"
+          class="form-control"
+          [(ngModel)]="modalData.event.start"
+          mwlFlatpickr
+          [altInput]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set"
+          (change)="refresh.next()"
+        >
+      </div>
+      <div class="form-group">
+        <label for="end">End Date:</label>
+        <!-- Input for end date using Flatpickr -->
+        <input
+          id="end"
+          type="text"
+          class="form-control"
+          [(ngModel)]="modalData.event.end"
+          mwlFlatpickr
+          [altInput]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set"
+          (change)="refresh.next()"
+        >
+      </div> 
+      
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!-- Save changes button (disabled if modalData or modalData.event is undefined) -->
+    <button type="button" class="btn btn-primary" [disabled]="!modalData || !modalData.event" (click)="saveAndClose(modalData!.event)">Save Changes</button>
+    <!-- Delete button -->
+    <button type="button" class="btn btn-danger" [disabled]="!modalData || !modalData.event" (click)="deleteAndClose(modalData!.event)">Delete</button>
+  </div>
+</ng-template>
+  
+<app-footer1></app-footer1>

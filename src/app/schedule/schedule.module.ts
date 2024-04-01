@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule, Routes } from '@angular/router';
@@ -8,7 +7,6 @@ import { CalendarViewComponent } from '../calendar-view/calendar-view.component'
 import { AppModule } from '../app.module';
 import { SharedModule } from '../shared/shared.module'; 
 import { TemplateFrontComponent } from '../FrontOffice/template-front/template-front.component';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {  FlatpickrModule } from 'angularx-flatpickr';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app.routing.module';  
@@ -18,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';  
 import { AddEventDialogComponent } from '../calendar-view/add-event-dialog/add-event-dialog.component'; 
 import { MatDialogModule,MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'; 
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -35,6 +34,7 @@ const routes: Routes = [
     CommonModule,  
     MatDialogModule, 
     NgbModalModule,  
+    
     NgxMaterialTimepickerModule, 
     FormsModule,    
     FlatpickrModule.forRoot(),

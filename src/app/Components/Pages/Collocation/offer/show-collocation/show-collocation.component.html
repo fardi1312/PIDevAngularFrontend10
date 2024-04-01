@@ -1,0 +1,55 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-6 mx-auto" *ngFor="let offer of offers"
+    style="border-bottom: 1px solid #ccc; padding-bottom: 15px;" #card>
+    <div class="card mb-3" (mouseenter)="card.classList.add('hovered')"
+      (mouseleave)="card.classList.remove('hovered')">
+      <div class="shop-thumb">
+        <div class="shop-image-wrap">
+          <a href="shop-detail.html">
+            <img [src]="offer.imageCollocation" class="shop-image img-fluid" alt="">
+          </a>
+        </div>
+
+        <div class="shop-body">
+          <h4>{{ offer.descriptionCollocation }}</h4>
+          <p>Localization: {{ offer.location }}</p>
+          <p>Furniture: {{ offer.furnitureCollocation }}</p>
+          <p>Available Places: {{ offer.availablePlaces }}</p>
+        </div>
+
+        <div class="shop-icons-wrap">
+          <div class="shop-icons d-flex flex-column align-items-center">
+            <a href="#" class="shop-icon bi-heart"></a>
+            <a href="#" class="shop-icon bi-bookmark"></a>
+          </div>
+        </div>
+
+        <div class="shop-pricing mb-0 mt-4">
+          <span class="badge custom-badge">${{ offer.price }}</span>
+        </div>
+
+        <div class="shop-date-offer mb-0 mt-4">
+          <span class="badge custom-badge">{{ offer.dateOffer | date: 'yyyy-MM-dd' }}</span>
+        </div>
+
+        <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2"
+          (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
+        <p class="vertical-space"></p>
+
+        <div *ngIf="card.classList.contains('hovered')" class="btn-group mt-2">
+          <button class="btn btn-danger" (click)="deleteOffer(offer.idCollocationOffer)">Delete</button>
+          <button class="btn btn-success" (click)="updateOffer(offer.idCollocationOffer)">Update</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<app-footer></app-footer>
