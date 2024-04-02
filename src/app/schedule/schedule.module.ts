@@ -27,13 +27,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [CalendarViewComponent,AddEventDialogComponent],
-  imports: [SharedModule,
+  imports: [SharedModule, 
     
 
     RouterModule, 
     CommonModule,  
     MatDialogModule, 
-    NgbModalModule,  
+    NgbModalModule,
     
     NgxMaterialTimepickerModule, 
     FormsModule,    

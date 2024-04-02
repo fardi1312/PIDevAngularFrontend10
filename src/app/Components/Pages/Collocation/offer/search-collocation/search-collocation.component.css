@@ -1,0 +1,68 @@
+.card {
+    width: 12rem;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  .custom-card {
+    margin-bottom: 10px;
+}
+  
+  .search-bar {
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+#map-detail { height: 50vh;
+    width: 100vh;
+    margin: auto; }
+  
+  .search-bar {
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-bar input[type="text"],
+.search-bar input[type="date"],
+.search-bar select,
+.search-bar input[type="number"],
+.search-bar button {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar input[type="text"],
+.search-bar button {
+    border-radius: 25px 0 0 25px;
+}
+
+.search-bar input[type="number"] {
+    border-radius: 0 25px 25px 0;
+}
+
+.search-bar button {
+    background-color: #ff5a5f;
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #d8474e;
+}
+
+  
+
+  
+  

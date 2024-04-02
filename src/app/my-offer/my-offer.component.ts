@@ -7,6 +7,7 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { CollocationRequest, RequestEnum } from '../models/Collocation/CollocationRequest';
 import { RoomDetails } from '../models/Collocation/RoomDetails';
 import { CollocationOffer, FurnitureCollocation, Gender } from '../models/Collocation/CollocationOffer';
+import { Interest, Pets } from '../models/Collocation/CollocationPreferences';
 
 
 @Component({
@@ -28,10 +29,16 @@ export class MyOfferComponent implements OnInit {
   }; 
   collocationRequests: CollocationRequest[] = []; 
 
-  collocationOffer: CollocationOffer = {
+  collocationOffer:  CollocationOffer = {
     idCollocationOffer: 0,
-    location: '',
+    locationLx: '',
+    locationLy: '',
     houseType: 0,
+    saved:false,
+    governorate: '',
+    country: '',
+    city: '',
+    streetAddress: '',
     availablePlaces: 0,
     dateRent: new Date(),
     dateOffer: new Date(),
@@ -40,8 +47,15 @@ export class MyOfferComponent implements OnInit {
     furnitureCollocation: FurnitureCollocation.Furnitured,
     descriptionCollocation: '',
     imageCollocation: '',
-    roomDetailsList: [] 
-  } 
+    roomDetailsList: [],
+    smokingAllowed: false,
+    petsAllowed: Pets.No,
+    interest:Interest.No,
+    matchPercentage:0,
+    user: undefined as any 
+
+
+  };
   idUser:number=1;  
 
   ngOnInit(): void {
@@ -124,7 +138,7 @@ export class MyOfferComponent implements OnInit {
     const startDate: string = request.date.toString();    
     const rentDate: string = offer.dateRent.toString();
     const priceToPay: number = offer.price; 
-    const place: string = offer.location; 
+    const place: string = offer.governorate; 
     const roomDetails: RoomDetails[] = request.roomDetailsList; 
     const clientName: number = this.idUser;  
     const serviceDescription: string = offer.descriptionCollocation; 

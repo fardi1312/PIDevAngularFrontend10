@@ -1,8 +1,16 @@
 import { RoomDetails } from "./RoomDetails";
-
+import { Interest, Pets, User } from "./CollocationPreferences";
   export interface CollocationOffer {
     idCollocationOffer: number;
-    location: string;
+
+    locationLx: string ;
+    locationLy: string;
+    governorate: string;
+    country: string;
+    city: string;
+    streetAddress: string;
+    saved:boolean;
+
     houseType: number;
     availablePlaces: number;
     dateRent: Date;
@@ -13,6 +21,14 @@ import { RoomDetails } from "./RoomDetails";
     descriptionCollocation: string;
     imageCollocation: string;
     roomDetailsList: RoomDetails[]; 
+   smokingAllowed: boolean;
+    petsAllowed: Pets; 
+    interest: Interest;
+   matchPercentage:number;
+   user:User;
+
+
+
   }
 export enum Gender {
   MALE = 'Male',

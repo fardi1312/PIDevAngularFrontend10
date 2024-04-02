@@ -1,0 +1,35 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+        
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+<app-header></app-header>
+<router-outlet></router-outlet>
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 class="heading">List of Subscriptions</h1>
+        <div *ngFor="let subscription of subscriptions" class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ subscription.name }}</h5>
+            <p class="card-text">Description: {{ subscription.description }}</p>
+            <p class="card-text">Price: {{ subscription.price }}</p>
+            <p class="card-text">Type: {{ subscription.type }}</p>
+            <p class="card-text">Duration: {{ subscription.duration }}</p>
+            <a [routerLink]="['add-registration', subscription.id]" class="btn btn-primary btn-buy">Buy</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

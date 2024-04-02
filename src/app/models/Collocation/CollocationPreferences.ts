@@ -1,5 +1,5 @@
 
-import { Gender } from "./CollocationOffer";
+import { FurnitureCollocation, Gender } from "./CollocationOffer";
 import { RoomType } from "./RoomDetails";
 
 export interface CollocationPreferences {
@@ -12,24 +12,48 @@ export interface CollocationPreferences {
     roomType: RoomType;
     houseType: number;
     location: string;
+    furnitureCollocation: FurnitureCollocation;
+    user:User;
   }
+  export class User {
+    id!: number;
+    email!: string;
+    firstName!: string;
+    lastName!: string;
+    gender!: string;
+    intro!: string;
+    hometown!: string;
+    currentCity!: string;
+    eduInstitution!: string;
+    workplace!: string;
+    profilePhoto!: string;
+    coverPhoto!: string;
+    role!: string;
+    followerCount!: number;
+    followingCount!: number;
+    enabled: boolean = false;
+    accountVerified: boolean = false;
+    emailVerified: boolean = false;
+    birthDate!: string;
+    joinDate!: string; 
+    dateLastModified!: string;
+    phoneNumber!: string;
+}
   
   export enum Pets {
     Cats = 'Cats', 
   Hamsters = 'Hamsters', 
   Dogs = 'Dogs', 
-  Birds = 'Birds', 
-  No = 'No'
-  }
-  
+  Birds = 'Birds',
+  No='No'
 
-  
-  export enum Interest { 
-    SPORT = 'Sport',
-    MUSIC = 'Music',
-    TRAVEL = 'Travel',
-    READING = 'Reading',
-    OTHER = 'Other'
-  
-  } 
+  }
+  export enum Interest {
+    Sport = 'Sport',
+    Music = 'Music',
+    Travel = 'Travel',
+    Reading = 'Reading',
+    No = 'No'
+}
+
 

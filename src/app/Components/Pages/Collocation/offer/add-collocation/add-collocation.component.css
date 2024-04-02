@@ -1,0 +1,14 @@
+
+
+.cart-container {
+    background-color: #f0f0f0; /* Grey background color */
+    padding: 20px; /* Add padding for spacing */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
+  }
+  #map {
+    top: 1px; /* Ajustez la position verticale si nécessaire */
+    height: calc(100vh - 100px); /* Taille de la carte pour correspondre à la hauteur de la fenêtre */
+    width: 300px; /* Largeur de la carte */
+    margin-left: 20px; /* Espace entre la carte et le contenu principal */
+  }

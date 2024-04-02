@@ -1,0 +1,59 @@
+
+<div class="col-md-8 mx-auto">
+    <div class="card card-plain">
+      <div class="card-header">
+        <h4 class="card-title">Collocation Preferences</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm" style="font-size: 15px; width: 80%; margin-left: 5%;">
+                <thead class="text-primary">
+              <tr>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Furniture</th>
+                <th>House Type</th>
+                <th>Available Places</th>
+                <th>Price</th>
+                <th>Date Offer</th>
+                <th>Gender</th>
+                <th>Room Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let offer of offers">
+                <td>{{ offer.descriptionCollocation }}</td>
+                <td>{{ offer.locationLx}}</td>
+                <td>{{ offer.furnitureCollocation }}</td>
+                <td>{{ offer.houseType }}</td>
+                <td>{{ offer.availablePlaces }}</td>
+                <td>${{ offer.price }}</td>
+                <td>{{ offer.gender }}</td>
+                <td>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Room Type</th>
+                        <th>Available Places</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let room of offer.roomDetailsList">
+                        <td>{{ room.roomType }}</td>
+                        <td>{{ room.availablePlaces }}</td>
+                        <td>${{ room.prix }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+
+
+  

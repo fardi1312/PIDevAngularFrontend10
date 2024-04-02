@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,9 +26,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TokenInterceptor } from './token.interceptor';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './FrontOffice/header/header.component';
 import { FootorComponent } from './FrontOffice/footor/footor.component';
 import { TemplateFrontComponent } from './FrontOffice/template-front/template-front.component';
 import { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
@@ -59,56 +60,51 @@ import { UpdatePasswordComponent } from './Components/Pages/User/update-password
 import { ShowPhotoProfileComponent } from './Components/Pages/User/show-photo-profile/show-photo-profile.component';
 import { PhotoUploadDialogComponent } from './Components/Pages/User/photo-upload-dialog/photo-upload-dialog.component';
 import { ViewPhotoDialogComponent } from './Components/Pages/User/view-photo-dialog/view-photo-dialog.component';
-import { TokenInterceptor } from './token.interceptor';
 import { AdminUsersComponent } from './Components/Pages/User/admin-users/admin-users.component';
 import { UserDetailsDialogComponent } from './Components/Pages/User/user-details-dialog/user-details-dialog.component';
 import { AdminProfileComponent } from './Components/Pages/User/admin-profile/admin-profile.component';
 import { AppRoutingModule } from './app.routing.module';
-import {
-  UpdateFeedbackComponent
-} from "./Components/Pages/Collocation/feedback/update-feedback/update-feedback.component";
-import {ShowRequestComponent} from "./Components/Pages/Collocation/show-request/show-request.component";
-import {AddFeedbackComponent} from "./Components/Pages/Collocation/feedback/add-feedback/add-feedback.component";
-import {ShowFeedbackComponent} from "./Components/Pages/Collocation/feedback/show-feedback/show-feedback.component";
-import {
-  ShowDetailsFeedbackComponent
-} from "./Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component";
-import {AddRequestComponent} from "./Components/Pages/Collocation/Request/add-request/add-request.component";
-import {AddCollocationComponent} from "./Components/Pages/Collocation/offer/add-collocation/add-collocation.component";
-import {
-  ShowCollocationComponent
-} from "./Components/Pages/Collocation/offer/show-collocation/show-collocation.component";
-import {
-  UpdateCollocationComponent
-} from "./Components/Pages/Collocation/offer/update-collocation/update-collocation.component";
-import {
-  DeleteCollocationComponent
-} from "./Components/Pages/Collocation/offer/delete-collocation/delete-collocation.component";
-import {
-  ShowDetailsCollocatinComponent
-} from "./Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component";
-import {
-  AddPreferencesComponent
-} from "./Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component";
-import {
-  ShowPreferencesComponent
-} from "./Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component";
-import {
-  UpdatePreferencesComponent
-} from "./Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component";
-import {UpdateRequestComponent} from "./Components/Pages/Collocation/update-request/update-request.component";
-import {DeleteRequestComponent} from "./Components/Pages/Collocation/delete-request/delete-request.component";
-import {MyOffersComponent} from "./my-offers/my-offers.component";
-import {MyOfferComponent} from "./my-offer/my-offer.component";
-import {RouterModule} from "@angular/router";
-import {SharedModule} from "./shared/shared.module";
-import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
+import { UpdateFeedbackComponent } from './Components/Pages/Collocation/feedback/update-feedback/update-feedback.component';
+import { ShowRequestComponent } from './Components/Pages/Collocation/show-request/show-request.component';
+import { AddFeedbackComponent } from './Components/Pages/Collocation/feedback/add-feedback/add-feedback.component';
+import { ShowFeedbackComponent } from './Components/Pages/Collocation/feedback/show-feedback/show-feedback.component';
+import { ShowDetailsFeedbackComponent } from './Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component';
+import { AddRequestComponent } from './Components/Pages/Collocation/Request/add-request/add-request.component';
+import { AddCollocationComponent } from './Components/Pages/Collocation/offer/add-collocation/add-collocation.component';
+import { ShowCollocationComponent } from './Components/Pages/Collocation/offer/show-collocation/show-collocation.component';
+import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer/update-collocation/update-collocation.component';
+import { DeleteCollocationComponent } from './Components/Pages/Collocation/offer/delete-collocation/delete-collocation.component';
+import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
+import { AddPreferencesComponent } from './Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component';
+import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
+import { UpdateRequestComponent } from './Components/Pages/Collocation/update-request/update-request.component';
+import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-request/delete-request.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
+import { MyOfferComponent } from './my-offer/my-offer.component';
+import { SharedModule } from './shared/shared.module';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { UpdateprefrencesComponent } from './Components/Pages/Collocation/Preferences/updateprefrences/updateprefrences.component';
+import { SearchCollocationComponent } from './Components/Pages/Collocation/offer/search-collocation/search-collocation.component';
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { HeaderComponent } from './FrontOffice/header/header.component';
+import { AddRegistrationComponent } from './Components/Pages/Registration/add-registration/add-registration.component';
+import { AllRegistrationComponent } from './Components/Pages/Registration/all-registration/all-registration.component';
+import { UpdateRegistrationComponent } from './Components/Pages/Registration/update-registration/update-registration.component';
+import { DetailsRegistrationComponent } from './Components/Pages/Registration/details-registration/details-registration.component';
+import { AddSubscriptionComponent } from './Components/Subscription/add-subscription/add-subscription.component';
+import { ListSubscriptionComponent } from './Components/Subscription/list-subscription/list-subscription/list-subscription.component';
+import { EditSubscriptionComponent } from './Components/Subscription/edit-subscription/edit-subscription.component';
+import { DeleteSubscriptionComponent } from './Components/Subscription/delete-subscription/delete-subscription.component';
+import { FrontSubscriptionComponent } from './front-subscription/front-subscription.component';
+import { PaymentComponent } from './payment/payment.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FootorComponent,
+    TemplateFrontComponent,
     FooterBackComponent,
     TemplateBackComponent,
     HeadBackComponent,
@@ -139,16 +135,12 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
     AdminUsersComponent,
     UserDetailsDialogComponent,
     AdminProfileComponent,
-    TransferPointsComponent,
     UpdateFeedbackComponent,
     ShowRequestComponent,
     AddFeedbackComponent,
     ShowFeedbackComponent,
     ShowDetailsFeedbackComponent,
-    TemplateFrontComponent,
     AddRequestComponent,
-    FooterBackComponent,
-    TemplateBackComponent,
     AddCollocationComponent,
     ShowCollocationComponent,
     UpdateCollocationComponent,
@@ -156,12 +148,25 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
     ShowDetailsCollocatinComponent,
     AddPreferencesComponent,
     ShowPreferencesComponent,
-    UpdatePreferencesComponent,
+    UpdateprefrencesComponent,
     UpdateRequestComponent,
     DeleteRequestComponent,
     MyOffersComponent,
     MyOfferComponent,
-    ViewPhotoDialogComponent
+    ViewPhotoDialogComponent,
+    SearchCollocationComponent,
+    AddRegistrationComponent,
+    AllRegistrationComponent,
+    UpdateRegistrationComponent,
+    DetailsRegistrationComponent,
+    AddSubscriptionComponent ,
+    ListSubscriptionComponent,
+    EditSubscriptionComponent,
+    DeleteSubscriptionComponent,
+    FrontSubscriptionComponent,
+    PaymentComponent,
+    WalletComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -204,7 +209,6 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
     FormsModule,
     HttpClientModule,
     CommonModule,
-    SharedModule,
     BrowserAnimationsModule
   ],
   providers: [
@@ -212,9 +216,9 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    DatePipe
   ],
-  exports: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+</head>
+<body>
+    <app-header></app-header>
+    <div class="container">
+        <h2>Registration Details</h2>
+        <div class="registration-details" *ngIf="registration">
+            <div class="detail-item">
+                <label>ID:</label>
+                <span>{{ registration.id }}</span>
+            </div>
+            <div class="detail-item">
+                <label>Subscription:</label>
+                <span>{{ registration.subscription.id }}</span>
+            </div>
+            <div class="detail-item">
+                <label>Start Date:</label>
+                <span>{{ registration.startDate  }}</span>
+            </div>
+            <div class="detail-item">
+                <label>End Date:</label>
+                <span>{{ registration.endDate  }}</span>
+            </div>
+            <div class="detail-item">
+                <label>Status:</label>
+                <span>{{ registration.status }}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

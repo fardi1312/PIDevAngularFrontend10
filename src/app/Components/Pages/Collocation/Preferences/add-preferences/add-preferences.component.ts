@@ -1,33 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PreferencesService } from 'src/app/Services/Collocation/preferences.service'; 
-import { Gender } from 'src/app/models/Collocation/CollocationOffer';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { CollocationPreferences, Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 import { RoomType } from 'src/app/models/Collocation/RoomDetails';
-
-
-@Component({
-  selector: 'app-add-preferences',
-  templateUrl: './add-preferences.component.html',
-  styleUrls: ['./add-preferences.component.css']
-})
+import { CollocationPreferencesService } from 'src/app/Services/Collocation/preferences.service';
 
 @Component({
   selector: 'app-add-preferences',
   templateUrl: './add-preferences.component.html',
   styleUrls: ['./add-preferences.component.css']
 })
-export class AddPreferencesComponent { 
+export class AddPreferencesComponent {
+  preferences: CollocationPreferences[] = [];
+  userId = 1; 
+
+
   collocationPreferences: CollocationPreferences = {
     idCollocationPreferences: 0,
-    pets: Pets.No,
+    pets:Pets.No,
     smoking: false,
     budget: 0,
     gender: Gender.MALE,
-    interest: Interest.SPORT,
+    interest: Interest.No,
     roomType: RoomType.SINGLE,
     houseType: 0,
-    location: ''
+    location: '',
+    furnitureCollocation: FurnitureCollocation.Furnitured,
+
+    user: undefined as any 
+
   };
 
   petOptions: string[] = Object.values(Pets);
@@ -38,18 +39,15 @@ export class AddPreferencesComponent {
 
 
 
-  idPreferences: number = 0;
 
   constructor(
-    private preferencesService: PreferencesService,
+    private preferencesService: CollocationPreferencesService,
     private router: Router,
   ) {}
-
-  ngOnInit(): void { 
-  }
+ 
 
   savePreferences(): void { 
-    this.preferencesService.createCollocationPreferences(this.collocationPreferences).subscribe(
+    this.preferencesService.savePreferences(this.collocationPreferences, CollocationPreferencesService.userId).subscribe(
       (createdPreferences: CollocationPreferences) => {  
         console.log('Preferences saved successfully:', createdPreferences);
       },
@@ -58,13 +56,40 @@ export class AddPreferencesComponent {
       }
     );
   }
+  ngOnInit(): void {
+   this.loadPreferencesByUserId(); 
+  }
+  loadPreferencesByUserId(): void {
+    this.preferencesService.getPreferencesByUserId(this.userId).subscribe(
+      (data) => {
+        this.preferences = data;
+      },
+      (error) => {
+        console.error('Error loading preferences:', error);
+      }
+    );
+  }
+
+
+
   
   onSubmit(): void {
     this.savePreferences();  
+this.loadPreferencesByUserId();
     console.log("saved"); 
-    this.goToPreferencesList(); 
   }
+  deletePreference(id: number){
+    if (confirm("Are you sure you want to delete this preference?")) {
+      this.preferencesService.deletePreferences(id).subscribe( data => {
+          console.log(data);
+          this.loadPreferencesByUserId();
+      });
+    }
+}
 
-  goToPreferencesList(): void {
-  }
+
+
+updatePrefernce(id: number){
+  this.router.navigate(['Preferences/update', id]);
+}
 }
