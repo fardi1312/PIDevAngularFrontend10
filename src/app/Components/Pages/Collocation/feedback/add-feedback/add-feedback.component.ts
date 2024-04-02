@@ -4,6 +4,7 @@ import { FeedbackService } from 'src/app/Services/Collocation/feedback.service';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 import { CollocationFedback } from 'src/app/models/Collocation/CollocationFeedback';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
+import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 
 @Component({
   selector: 'app-add-feedback',
@@ -28,8 +29,14 @@ setRating(rating: number) {
 
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    location: '',
+    locationLx: '',
+    locationLy: '',
     houseType: 0,
+    saved:false,
+    governorate: '',
+    country: '',
+    city: '',
+    streetAddress: '',
     availablePlaces: 0,
     dateRent: new Date(),
     dateOffer: new Date(),
@@ -38,8 +45,16 @@ setRating(rating: number) {
     furnitureCollocation: FurnitureCollocation.Furnitured,
     descriptionCollocation: '',
     imageCollocation: '',
-    roomDetailsList: []
+    roomDetailsList: [],
+    smokingAllowed: false,
+    petsAllowed: Pets.No,
+    interest:Interest.No,
+    matchPercentage:0,
+    user: undefined as any 
+
+
   };
+
 
   idOffer: number = 0;
 
@@ -80,6 +95,6 @@ setRating(rating: number) {
   }
 
   goToOfferList(): void {
-    this.router.navigate(['/Collocation/showOffer']);
+    this.router.navigate(['user/Collocation/showOffer']);
   }
 }

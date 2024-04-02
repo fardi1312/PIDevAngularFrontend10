@@ -1,0 +1,31 @@
+/* Custom CSS for styling the cards */
+.card {
+    background-color: #FFFFE0; /* Jaune clair */
+    border: 1px solid #ced4da; /* Add border */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    position: relative; /* Ajoutez cela si ce n'est pas déjà le cas */
+
+  }
+  
+  .card-title {
+    color: #343a40; /* Set title color */
+  }
+  
+  .card-text {
+    color: #6c757d; /* Set text color */
+  }
+  .card-body {
+    position: relative; /* Pour positionner le bouton par rapport au contenu de la carte */
+  }
+  
+  .btn-buy {
+    position: absolute; /* Position absolue par rapport au parent */
+    top: 50%; /* Aligner le bouton verticalement au centre */
+    right: 20px; /* Espacement à droite */
+    transform: translateY(-50%); /* Alignement vertical */
+    background-color: orange; /* Couleur orange */
+    color: white; /* Couleur du texte en blanc */
+  }
+  
+  

@@ -10,6 +10,7 @@ import { UserResponse } from 'src/app/Model/User/user-response';
 import { CookieService } from 'ngx-cookie-service';
 
 const BASE_URL = environment.apiUrlUser;
+const BASE_URL1 = environment.apiUrlR;
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +95,10 @@ export class UserService {
     return this.http.get<UserResponse | HttpErrorResponse>(`${BASE_URL}users/${userId}`);
   }
 
-
+  getUserById1(id: number): Observable<User> {
+    const url = `${BASE_URL1}`;
+    return this.http.get<User>(url);
+  }
 
 
   getProfilePhotoUrl(): Observable<string> {

@@ -1,37 +1,40 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CollocationPreferences } from 'src/app/models/Collocation/CollocationPreferences';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PreferencesService {
+export class CollocationPreferencesService {
+  static readonly userId: number = 1;
 
+  private apiUrl = 'http://localhost:8083/api/collocationPreferences';
 
-  
-  private apiUrl = 'http://localhost:8083/api/collocation/preferences'; 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getCollocationPreferences(): Observable<CollocationPreferences[]> {
-    return this.httpClient.get<CollocationPreferences[]>(`${this.apiUrl}`);
+  savePreferences(preferences: CollocationPreferences, userId: number): Observable<CollocationPreferences> {
+    return this.http.post<CollocationPreferences>(`${this.apiUrl}?userId=${userId}`, preferences);
   }
 
-  getCollocationPreferencesById(id: number): Observable<CollocationPreferences> {
-    return this.httpClient.get<CollocationPreferences>(`${this.apiUrl}/${id}`);
+  getPreferencesById(id: number): Observable<CollocationPreferences> {
+    return this.http.get<CollocationPreferences>(`${this.apiUrl}/${id}`);
   }
 
-  createCollocationPreferences(preferences: CollocationPreferences): Observable<CollocationPreferences> {
-    return this.httpClient.post<CollocationPreferences>(this.apiUrl, preferences);
+  getAllPreferences(): Observable<CollocationPreferences[]> {
+    return this.http.get<CollocationPreferences[]>(this.apiUrl);
   }
+  getPreferencesByUserId(userId: number): Observable<CollocationPreferences[]> {
+    return this.http.get<CollocationPreferences[]>(`${this.apiUrl}/user/${userId}`);
+  }
+
+
 
   updatePreferences(id: number, preferences: CollocationPreferences): Observable<CollocationPreferences> {
-    return this.httpClient.put<CollocationPreferences>(`${this.apiUrl}/${id}`, preferences);
+    return this.http.put<CollocationPreferences>(`${this.apiUrl}/${id}`, preferences);
   }
 
-  deleteCollocationPreferences(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  deletePreferences(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-
 }
-

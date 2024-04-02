@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PreferencesService } from 'src/app/Services/Collocation/preferences.service';
 import { CollocationPreferences } from 'src/app/models/Collocation/CollocationPreferences';
+import { CollocationPreferencesService } from 'src/app/Services/Collocation/preferences.service';
 
 @Component({
   selector: 'app-show-preferences',
@@ -10,13 +10,13 @@ import { CollocationPreferences } from 'src/app/models/Collocation/CollocationPr
 })
 export class ShowPreferencesComponent {
   preferences: CollocationPreferences[] = [];
-  constructor(    private preferencesService: PreferencesService,private router: Router) { }
+  constructor(    private preferencesService: CollocationPreferencesService,private router: Router) { }
 
   ngOnInit(): void {
     this.loadOffers();
   }
   loadOffers() {
-    this.preferencesService.getCollocationPreferences().subscribe(
+    this.preferencesService.getAllPreferences().subscribe(
       (data) => {
         this.preferences = data;
       },

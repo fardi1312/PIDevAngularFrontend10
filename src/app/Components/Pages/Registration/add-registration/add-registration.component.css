@@ -1,0 +1,40 @@
+.card {
+    background-color: #FFFFE0; /* Jaune clair */
+    border: 1px solid #ced4da; /* Add border */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    position: relative; /* Ajoutez cela si ce n'est pas déjà le cas */
+
+  }
+  
+  .card-title {
+    color: #343a40; /* Set title color */
+  }
+  
+  .card-text {
+    color: #6c757d; /* Set text color */
+  }
+  .card-body {
+    position: relative; /* Pour positionner le bouton par rapport au contenu de la carte */
+  }
+  .btn-orange {
+    background-color: orange; /* Couleur orange */
+    border-color: orange; /* Couleur de la bordure orange */
+    color: white; /* Texte blanc */
+  }
+  
+  .btn-orange:hover {
+    background-color: darkorange; /* Couleur orange foncé au survol */
+    border-color: darkorange; /* Couleur de la bordure orange foncé au survol */
+  }
+  .btn-pay {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  

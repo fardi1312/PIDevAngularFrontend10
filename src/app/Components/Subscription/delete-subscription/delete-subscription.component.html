@@ -1,0 +1,30 @@
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/backOffice/assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="/assets/backOffice/assets/img/favicon.png">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link href="/assets/backOffice/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="/assets/backOffice/assets/demo/demo.css" rel="stylesheet" />
+
+<app-head-back></app-head-back>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+<div *ngIf="subscription">
+  <h2>Delete Subscription</h2>
+  <div>
+    <p>Are you sure you want to delete the following subscription?</p>
+    <p><strong>Name:</strong> {{ subscription.name }}</p>
+    <p><strong>Description:</strong> {{ subscription.description }}</p>
+    <p><strong>Price:</strong> {{ subscription.price }}</p>
+    <p><strong>Type:</strong> {{ subscription.type }}</p>
+    <p><strong>Duration:</strong> {{ subscription.duration }}</p>
+  </div>
+  <div>
+    <button (click)="deleteConfirmed()">Confirm Delete</button>
+    <button (click)="deleteCanceled()">Cancel</button>
+  </div>
+</div>
+</div>
+</div>
+</div>

@@ -1,109 +1,140 @@
 <app-header></app-header>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
+
+<br><br>
+<h2 >Add Collocation Offer</h2>
+
+<br><br>
+<div class="cart-container">
+
+
+
 
 <div class="col-lg-8 col-12 text-center mx-auto">
-  <div class="row">
-    <div class="col-lg-8 col-12 text-center mx-auto">
-      <form class="custom-form hero-form" role="form" (ngSubmit)="onSubmit()">
+<br>
+<ng-container>
+  <div id="map" style="height: 400px;"></div>
+ 
+  <div class="col-lg-8 col-12 text-center mx-auto">
+    <form class="custom-form hero-form" role="form" (ngSubmit)="onSubmit()">
+      <div class="row">
         <div class="row">
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="location">Localisation</label>
-              <input type="text" name="location" id="location" class="form-control" placeholder="Ghazela, Technopole.." required [(ngModel)]="collocationOffer.location" #location="ngModel">
-              <div *ngIf="location.invalid && (location.dirty || location.touched)" class="text-danger">
-                Location is required.
-              </div>
-            </div>
-          </div>
 
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="price">Price</label>
-              <input type="number" name="price" id="price" class="form-control" required [(ngModel)]="collocationOffer.price" #price="ngModel" [min]="0">
-              <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
-                Price must be a positive number.
-              </div>
+          <div class="col-lg-3 col-md-6 col-12 ">
+
+          <small class="section-small-title">General Details</small>
+</div>
+</div>
+
+        <div class="col-lg-5 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="gender">For Who </label>
+            <select name="gender" class="form-select form-control" id="gender" [(ngModel)]="collocationOffer.gender">
+              <option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price" class="form-control" required [(ngModel)]="collocationOffer.price" #price="ngModel" [min]="0">
+            <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
+              Price must be a positive number.
+            </div>  
+          
+          </div>
+          
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="date-rent">Date Rent</label>
+            <input type="date" name="date-rent" id="date-rent" class="form-control" [(ngModel)]="collocationOffer.dateRent" #dateRent="ngModel">
+            <div *ngIf="errorMessage" class="text-danger">
+              {{ errorMessage }}
             </div>
+            
           </div>
         </div>
 
-        <div class="row mt-4">
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="house-type">House Type</label>
-              <select name="house-type" id="house-type" class="form-control" [(ngModel)]="collocationOffer.houseType" #houseType="ngModel" (change)="updateMaxRoomsAllowed()" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-              <div *ngIf="houseType.invalid && (houseType.dirty || houseType.touched)" class="text-danger">
-                House type must be a positive number.
-              </div>
-            </div>
-          </div>
+      </div>
 
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="available-places">Available Places</label>
-              <input type="number" name="available-places" id="available-places" class="form-control" [(ngModel)]="collocationOffer.availablePlaces" #availablePlaces="ngModel" [min]="0">
-              <div *ngIf="availablePlaces.invalid && (availablePlaces.dirty || availablePlaces.touched)" class="text-danger">
-                Available places must be a positive number.
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="date-rent">Date Rent</label>
-              <input type="date" name="date-rent" id="date-rent" class="form-control" [(ngModel)]="collocationOffer.dateRent" #dateRent="ngModel">
-              <div *ngIf="errorMessage" class="text-danger">
-                {{ errorMessage }}
-              </div>
+      <div class="row mt-4">
+        <div class="col-lg-5 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="house-type">House Type</label>
+            <select name="house-type" id="house-type" class="form-control" [(ngModel)]="collocationOffer.houseType" #houseType="ngModel" (change)="updateRooms()" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <div *ngIf="houseType.invalid && (houseType.dirty || houseType.touched)" class="text-danger">
+              House type must be a positive number.
             </div>
           </div>
         </div>
-
-        <div class="row mt-4">
-          <div class="col-lg-12 col-12">
-            <div class="input-group align-items-center">
-              <label for="description">Description</label>
-              <textarea name="description" id="description" class="form-control" [(ngModel)]="collocationOffer.descriptionCollocation" #description="ngModel" required></textarea>
-              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
-                Description is required.
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-5 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="available-places">Available Places</label>
+            <input type="number" name="available-places" id="available-places" class="form-control" [(ngModel)]="collocationOffer.availablePlaces" #availablePlaces="ngModel" [min]="0">
+            <div *ngIf="availablePlaces.invalid && (availablePlaces.dirty || availablePlaces.touched)" class="text-danger">
+              Available places must be a positive number.
+            </div>          </div>
         </div>
-
-        <div class="row mt-4">
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
+        <div class="row justify-content-start">
+          <div class="row mt-4" *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+            <div class="col-lg-5 col-md-4 col-12">
               <div class="input-group align-items-center">
-                <label for="images">Images</label>
-                <input type="file" name="images" id="images" class="form-control" (change)="handleFileInput($event)" multiple>
+                <label for="roomType{{ i }}">Room Type:</label>
+                <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" required [(ngModel)]="room.roomType">
+                  <option value="Single">Single</option>
+                  <option value="Double">Double</option>
+                  <option value="Triple">Triple</option>
+                </select>
+              </div>
+            </div>
+          
+            <div class="col-lg-4 col-md-4 col-12">
+              <div class="input-group align-items-center">
+                <label for="availablePlaces{{ i }}">Available Places:</label>
+                <select class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" required [(ngModel)]="room.availablePlaces">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-md-6 col-12">
+              <div class="input-group align-items-center">
+                <label for="prix{{ i }}">Price:</label>
+                <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" required [(ngModel)]="room.prix" #prix="ngModel" [min]="0">
+                <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
+                  Price must be a positive number.
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-2 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="furniture-collocation">Furniture Collocation</label>
-              <select name="furniture-collocation" class="form-select form-control" id="furniture-collocation" [(ngModel)]="collocationOffer.furnitureCollocation">
-                <option *ngFor="let furniture of furnitureOptions" [value]="furniture">{{ furniture }}</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-5 col-md-6 col-12">
-            <div class="input-group align-items-center">
-              <label for="gender">Gender</label>
-              <select name="gender" class="form-select form-control" id="gender" [(ngModel)]="collocationOffer.gender">
-                <option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</option>
-              </select>
-            </div>
-          </div>
         </div>
-
-        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="mt-4">
-          <div class="form-group">
+      </div>
+         
+    
+     
+       
+      
+  
+       
+    
+      <div class="row justify-content-start">
+        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
             <label for="roomType{{ i }}">Room Type:</label>
             <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" required [(ngModel)]="room.roomType">
               <option value="Single">Single</option>
@@ -111,7 +142,10 @@
               <option value="Triple">Triple</option>
             </select>
           </div>
-          <div class="form-group">
+        </div>
+      
+        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
             <label for="availablePlaces{{ i }}">Available Places:</label>
             <select class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" required [(ngModel)]="room.availablePlaces">
               <ng-container *ngIf="room.roomType === 'Single'">
@@ -131,8 +165,10 @@
               </ng-container>
             </select>
           </div>
-
-          <div class="form-group">
+        </div>
+      
+        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
             <label for="prix{{ i }}">Price:</label>
             <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" required [(ngModel)]="room.prix" #prix="ngModel" [min]="0">
             <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
@@ -140,12 +176,85 @@
             </div>
           </div>
         </div>
+      </div>
+      
+    
 
-        <button type="button" (click)="addRoomDetail()" [disabled]="collocationOffer.roomDetailsList.length >= maxRoomsAllowed" class="mt-4 btn btn-primary">Add Room Detail</button>
-        <button type="submit" class="mt-4 btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 col-12">
+          <div class="input-group align-items-center">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control" [(ngModel)]="collocationOffer.descriptionCollocation" #description="ngModel" required></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+              Description is required.
+            </div>
+                      </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+     
+      <div class="row">
+
+        <div class="col-lg-3  ">
+
+        <small class="section-small-title">Preferences Details</small>
+</div>
 </div>
 
-<app-footer></app-footer>
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <select name="furniture-collocation" class="form-select form-control" id="furniture-collocation" [(ngModel)]="collocationOffer.furnitureCollocation">
+              <option *ngFor="let furniture of furnitureOptions" [value]="furniture">{{ furniture }}</option>
+            </select>
+          </div>
+        </div>
+
+     
+        
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="interest">Interest</label>
+            <select name="interest" class="form-select form-control" id="interest" [(ngModel)]="collocationOffer.interest">
+              <option *ngFor="let interest of interestOptions" [value]="interest">{{ interest }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="pets">Pets</label>
+            <select name="pets" class="form-select form-control" id="pets" [(ngModel)]="collocationOffer.petsAllowed">
+              <option *ngFor="let pet of petOptions" [value]="pet">{{ pet }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 col-12 ">
+          <div class="input-group align-items">
+            <label for="smoking-allowed">Smoking Allowed</label>
+            <input type="checkbox" name="smoking-allowed" id="smoking-allowed" class="form-check-input" [(ngModel)]="collocationOffer.smokingAllowed">
+          </div>
+        </div>
+
+      </div>
+
+
+      
+   
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-primary" (click)="showMap = true"   >Go to map</button>
+
+     
+    </form>
+  </div>
+</ng-container>
+<div *ngIf="showMap">
+  <div id="map"></div>
+
+
+</div>
+</div>
+</div>
+
+<app-footor></app-footor>

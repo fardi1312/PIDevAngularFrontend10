@@ -1,0 +1,59 @@
+.container {
+    margin-top: 80px; /* Adjust the margin-top to create space for the navbar */
+  }
+  /* Add some basic styles to the body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the container */
+  .container {
+    margin-top: 50px;
+  }
+  
+  /* Style the delete confirmation box */
+  .delete-box {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .delete-box h2 {
+    margin-top: 0;
+  }
+  
+  .delete-box p {
+    margin-bottom: 10px;
+  }
+  
+  .delete-box strong {
+    font-weight: bold;
+  }
+  
+  .delete-box button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .delete-box button:hover {
+    background-color: #c82333;
+  }
+  
+  .delete-box button:last-child {
+    background-color: #6c757d;
+  }
+  
+  .delete-box button:last-child:hover {
+    background-color: #5a6268;
+  }
+  
+  

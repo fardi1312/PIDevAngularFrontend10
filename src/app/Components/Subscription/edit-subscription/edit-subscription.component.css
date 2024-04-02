@@ -1,0 +1,44 @@
+.edit-subscription-title {
+    color: rgb(163, 91, 163);
+    font-size: 24px;
+  }
+  
+  .edit-subscription-form {
+    background-color:  rgb(163, 91, 163);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .edit-subscription-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .edit-subscription-form input,
+  .edit-subscription-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .edit-subscription-form button {
+    padding: 8px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #fff;
+    color: purple;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-subscription-form button:hover {
+    background-color: #eee;
+  }
+  .container {
+    margin-top: 80px; /* Adjust the margin-top to create space for the navbar */
+  }

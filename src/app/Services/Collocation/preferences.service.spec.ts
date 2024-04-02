@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { CollocationPreferencesService } from './preferences.service';
 
-import { PreferencesService } from './preferences.service';
 
 describe('PreferencesService', () => {
-  let service: PreferencesService;
+  let service: CollocationPreferencesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PreferencesService);
+    service = TestBed.inject(CollocationPreferencesService);
   });
 
   it('should be created', () => {

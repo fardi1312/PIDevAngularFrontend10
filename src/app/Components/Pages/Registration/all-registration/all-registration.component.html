@@ -1,0 +1,36 @@
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/backOffice/assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="/assets/backOffice/assets/img/favicon.png">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link href="/assets/backOffice/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="/assets/backOffice/assets/demo/demo.css" rel="stylesheet" />
+<app-head-back></app-head-back>
+<!-- all-registration.component.html -->
+
+<div class="container">
+    <h2 style="text-align: center;">All Registrations</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Subscription</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let registration of registrations">
+          <td>{{ registration.id }}</td>
+          <td>{{ registration.user.idUser }}</td>
+          <td>{{ registration.subscription.id }}</td>
+          <td>{{ registration.startDate }}</td>
+          <td>{{ registration.endDate }}</td>
+          <td>{{ registration.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

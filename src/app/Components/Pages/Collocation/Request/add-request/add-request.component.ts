@@ -1,10 +1,11 @@
 // add-request.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 import { RequestService } from 'src/app/Services/Collocation/request.service';
-import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
+import {  CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { CollocationRequest, RequestEnum } from 'src/app/models/Collocation/CollocationRequest';
 import { RoomDetails, RoomType } from 'src/app/models/Collocation/RoomDetails';
 
@@ -35,6 +36,8 @@ idUser= 1 ;
         roomType: RoomType.SINGLE,
         availablePlaces: 0, // assign the correct value
         prix: 0, // assign the correct value
+        selected:true
+
       });
     }
   }  
@@ -59,7 +62,8 @@ idUser= 1 ;
         idRoomDetails:0,
         roomType: RoomType.SINGLE, 
         availablePlaces: 1,
-        prix: 0
+        prix: 0,
+        selected:true
       });
     }
   }
@@ -67,17 +71,30 @@ idUser= 1 ;
   idOffer: number = 0;
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    location: '',
+    locationLx: '',
+    locationLy: '',
     houseType: 0,
+    saved:false,
+    governorate: '',
+    country: '',
+    city: '',
+    streetAddress: '',
     availablePlaces: 0,
-    dateOffer: new Date(),
     dateRent: new Date(),
+    dateOffer: new Date(),
     gender: Gender.MALE,
     price: 0,
     furnitureCollocation: FurnitureCollocation.Furnitured,
     descriptionCollocation: '',
     imageCollocation: '',
-    roomDetailsList: []
+    roomDetailsList: [],
+    smokingAllowed: false,
+    petsAllowed: Pets.No,
+    interest:Interest.No,
+    matchPercentage:0,
+    user: undefined as any 
+
+
   };
 
   constructor(
@@ -116,7 +133,8 @@ idUser= 1 ;
         idRoomDetails: room.idRoomDetails,
         roomType: room.roomType,
         availablePlaces: room.availablePlaces,
-        prix: room.prix
+        prix: room.prix,
+        selected: true
       });
     });
   
@@ -148,10 +166,10 @@ idUser= 1 ;
   }
         
   goToRequestList(): void {
-    this.router.navigate(['/Collocation/showRequest']);
+    this.router.navigate(['user/Collocation/showRequest']);
   }
 
   goToOfferList() {
-    this.router.navigate(['/Collocation/showOffer']); 
+    this.router.navigate(['user/Collocation/showOffer']); 
   }
 }

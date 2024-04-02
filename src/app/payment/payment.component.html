@@ -1,0 +1,42 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+        
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+  <h5>Please click on the link below to proceed with the payment and fill in the required fields to complete the transaction.</h5>
+ <br>
+ <br>
+
+  <div id="card-element"></div>
+  <div class="text-danger" *ngIf="cardErrors">{{ cardErrors }}</div>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" required>
+      <br>
+      <br>
+      <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+        Payment successful! Redirecting...
+      </div>
+      
+    </div>
+    <!-- Add more form fields for payment information -->
+    <button type="submit" class="btn btn-primary">Pay Now</button>
+  </form>
+  
+</div>
+</div>
+</div>
+

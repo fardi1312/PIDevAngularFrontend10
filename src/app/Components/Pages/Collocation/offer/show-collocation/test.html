@@ -1,0 +1,80 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<div class="container-sm">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-6 ms-auto mb-5">
+      <form class="custom-form filter-form" #filterForm="ngForm">
+        <div class="vertical-line">
+          <div>
+            <h6 class="filter-form-small-title">House Type</h6>
+            <select name="houseType" class="form-select form-control" [(ngModel)]="filters.houseType" (ngModelChange)="applyFilters()">
+              <option value="" selected>Any</option>
+              <option value="1">House Type 1</option>
+              <option value="2">House Type 2</option>
+              <option value="3">House Type 3</option>
+            </select>
+          </div>
+          <div>
+            <h6 class="filter-form-small-title">Furnitured</h6>
+            <select name="furnitured" class="form-select form-control" [(ngModel)]="filters.Furnitured" (ngModelChange)="applyFilters()">
+              <option value="" selected>Any</option>
+              <option value="Furnitured">Yes</option>
+              <option value="Non-Furnitured">No</option>
+            </select>
+          </div>
+          <div>
+            <h6 class="filter-form-small-title">Price</h6>
+            <div>
+              <input type="checkbox" id="priceBelow500" name="priceBelow500" [(ngModel)]="filters.priceBelow500" (ngModelChange)="applyFilters()">
+              <label for="priceBelow500">Below 500dt</label>
+            </div>
+            <!-- Add similar ngModelChange bindings for other checkboxes -->
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mx-auto" *ngFor="let offer of (filtersApplied ? filteredOffers : offers)">
+      <div class="card mb-3" 
+           (mouseenter)="card.classList.add('hovered')" 
+           (mouseleave)="card.classList.remove('hovered')" #card>
+        <div class="shop-thumb">
+          <div class="shop-image-wrap">
+            <a href="shop-detail.html">
+              <img [src]="offer.imageCollocation" class="shop-image img-fluid" alt="" />
+            </a>
+          </div>
+          <div class="shop-body">
+            <h4>{{ offer.descriptionCollocation }}</h4>
+            <p>Localization: {{ offer.locationLx }}</p>
+            <p>Localization: {{ offer.locationLy }}</p>
+            <p>Furniture: {{ offer.furnitureCollocation }}</p>
+            <p>Available Places: {{ offer.availablePlaces }}</p>
+          </div>
+          <div class="shop-icons-wrap">
+            <div class="shop-icons d-flex flex-column align-items-center">
+              <a href="#" class="shop-icon bi-heart"></a>
+              <a href="#" class="shop-icon bi-bookmark"></a>
+            </div>
+          </div>
+          <div class="shop-pricing mb-0 mt-4">
+            <span class="badge custom-badge">dt{{ offer.price }}</span>
+          </div>
+          <div class="shop-date-offer mb-0 mt-4">
+            <span class="badge custom-badge">{{ offer.dateOffer | date: 'yyyy-MM-dd' }}</span>
+          </div>
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2" (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
+          <p class="vertical-space"></p>
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback(offer.idCollocationOffer)">Add Feedback</button>  
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addRequest(offer.idCollocationOffer)">Request</button> 
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-danger mt-2" (click)="deleteOffer(offer.idCollocationOffer)">delete</button>
+          <button *ngIf="card.classList.contains('hovered')" class="btn btn-success mt-2" (click)="updateOffer(offer.idCollocationOffer)">update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <app-footor></app-footor>
+</div>
