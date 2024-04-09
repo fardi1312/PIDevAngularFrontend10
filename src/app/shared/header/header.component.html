@@ -33,20 +33,20 @@
                         <a class="nav-link dropdown-toggle click-scroll" href="#section_3" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Carpooling</a>
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" [routerLink]="'/Carpooling/addC'">AddCarpooling</a></li>
+                            <li><a class="dropdown-item" [routerLink]="'/user/carpooling/addC'">AddCarpooling</a></li>
 
-                            <li><a class="dropdown-item"  [routerLink]="'/Carpooling/askC'">AskCarpooling</a></li>
+                            <li><a class="dropdown-item"  [routerLink]="'/user/carpooling/askC'">AskCarpooling</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle click-scroll" [routerLink]="'/Collocation/showOffer'" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Collocation</a>
+                        <a class="nav-link dropdown-toggle click-scroll" [routerLink]="'/user/Collocation/showOffer'" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Collocation</a>
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" [routerLink]="'/Collocation/addOffer'">Add Collocation Offer</a></li>
-                            <li><a class="dropdown-item" [routerLink]="'/schedule/calendar'">calendar</a></li>
+                            <li><a class="dropdown-item" [routerLink]="'/user/Collocation/addOffer'">Add Collocation Offer</a></li>
+                            <li><a class="dropdown-item" [routerLink]="'/user/schedule/calendar'">calendar</a></li>
  
-                            <li><a class="dropdown-item" [routerLink]="'/Collocation/myOffers'">my offers</a></li>
+                            <li><a class="dropdown-item" [routerLink]="'/user/Collocation/myOffers'">my offers</a></li>
 
                           
                         </ul>
@@ -84,8 +84,15 @@
                 <mat-menu #mainMenu="matMenu" xPosition="before">
                     <a mat-menu-item href="/user/profile">Profile</a>
                     <a mat-menu-item href="/user/showphotoprofile">Settings</a>
+                    <a mat-menu-item href="/user/Collocation/addPreferences">preferences</a>
+                    <a mat-menu-item href="/user/point">ByPoints</a>
+
+
                     <a mat-menu-item (click)="logout()">Logout</a>
+
+                    
                 </mat-menu>
+                
             </div>
         </div>
     </nav>

@@ -16,8 +16,10 @@ import { MatMenuModule } from '@angular/material/menu'; // Add this import
   ],
   imports: [
     RouterModule,
+    CommonModule,  
+
+    RouterModule,
     CommonModule,
-    BrowserModule,
     MatIconModule, // Include MatIconModule here
     MatMenuModule // Include MatMenuModule here
   ],

@@ -1,15 +1,17 @@
 <app-header></app-header>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
-<br><br>
-<h2 >Add Collocation Offer</h2>
 
-<br><br>
+
+
+<div class="col-lg-8 col-12 text-center mx-auto">
+
+  <h2 >Update Collocation Offer</h2></div>
+
 <div class="cart-container">
-
 
 
 
@@ -85,42 +87,7 @@ crossorigin=""></script>
               Available places must be a positive number.
             </div>          </div>
         </div>
-        <div class="row justify-content-start">
-          <div class="row mt-4" *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
-            <div class="col-lg-5 col-md-4 col-12">
-              <div class="input-group align-items-center">
-                <label for="roomType{{ i }}">Room Type:</label>
-                <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" required [(ngModel)]="room.roomType">
-                  <option value="Single">Single</option>
-                  <option value="Double">Double</option>
-                  <option value="Triple">Triple</option>
-                </select>
-              </div>
-            </div>
-          
-            <div class="col-lg-4 col-md-4 col-12">
-              <div class="input-group align-items-center">
-                <label for="availablePlaces{{ i }}">Available Places:</label>
-                <select class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" required [(ngModel)]="room.availablePlaces">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-            </div>
-          
-            <div class="col-lg-3 col-md-6 col-12">
-              <div class="input-group align-items-center">
-                <label for="prix{{ i }}">Price:</label>
-                <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" required [(ngModel)]="room.prix" #prix="ngModel" [min]="0">
-                <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
-                  Price must be a positive number.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    
       </div>
          
     
@@ -129,9 +96,9 @@ crossorigin=""></script>
       
   
        
-    
-      <div class="row justify-content-start">
-        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+  
+      <div class="row" *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="input-group align-items-center">
             <label for="roomType{{ i }}">Room Type:</label>
             <select class="form-control" id="roomType{{ i }}" name="roomType{{ i }}" required [(ngModel)]="room.roomType">
@@ -142,7 +109,7 @@ crossorigin=""></script>
           </div>
         </div>
       
-        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="input-group align-items-center">
             <label for="availablePlaces{{ i }}">Available Places:</label>
             <select class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" required [(ngModel)]="room.availablePlaces">
@@ -165,7 +132,7 @@ crossorigin=""></script>
           </div>
         </div>
       
-        <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index" class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="input-group align-items-center">
             <label for="prix{{ i }}">Price:</label>
             <input type="number" class="form-control" id="prix{{ i }}" name="prix{{ i }}" required [(ngModel)]="room.prix" #prix="ngModel" [min]="0">
@@ -175,7 +142,6 @@ crossorigin=""></script>
           </div>
         </div>
       </div>
-      
     
 
       <div class="row mt-4">
@@ -240,19 +206,20 @@ crossorigin=""></script>
 
       
    
-      <button type="submit" class="btn btn-primary">Update changes</button>
-      <button type="button" class="btn btn-primary" (click)="showMap = true"   >Go to map</button>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="button" class="btn btn-primary" (click)="Initmap()"   >Open map</button>
 
      
     </form>
+    <div id="map" style="height: 300px;"></div>
+
   </div>
 </ng-container>
-<div *ngIf="showMap">
-  <div id="map"></div>
 
 
+
 </div>
 </div>
-</div>
+
 
 <app-footor></app-footor>

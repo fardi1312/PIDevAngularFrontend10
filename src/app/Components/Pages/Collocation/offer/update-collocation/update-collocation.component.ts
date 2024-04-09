@@ -5,6 +5,7 @@ import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreference
 import { RoomDetails, RoomType } from 'src/app/models/Collocation/RoomDetails';
 import { OfferService } from 'src/app/Services/Collocation/offer.service';
 import { RoomDetailssService } from 'src/app/Services/Collocation/room-details.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-update-collocation',
@@ -179,6 +180,30 @@ model = {
 
       this.convertFileToBase64(file);
     }
+  }
+  map: L.Map | undefined;
+  Initmap(): void {
+    this.id = this.route.snapshot.params['id'];
+
+    this.offerService.getCollocationOfferById(this.id).subscribe(data => {
+      this.collocationOffer = data;
+
+      // Convert locationLx and locationLy to numbers
+      const locationLxNum = parseFloat(this.collocationOffer.locationLx);
+      const locationLyNum = parseFloat(this.collocationOffer.locationLy);
+
+      this.map = L.map('map-detail').setView([locationLyNum, locationLxNum], 13);
+
+      L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+
+      L.marker([locationLyNum, locationLxNum]).addTo(this.map)
+        .bindPopup('Collocation Location').openPopup();
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

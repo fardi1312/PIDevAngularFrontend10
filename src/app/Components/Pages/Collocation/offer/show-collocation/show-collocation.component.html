@@ -19,6 +19,10 @@
 
   </div>  </div>
   <br>
+  <div style="float: right;">
+    <button (click)="Locateme()">Locate me</button>
+  </div>
+  <br>
   <div class="row">
     <!-- Fixed content section -->
     <div class="col-lg-3 col-md-4 col-6 ms-auto mb-5">
@@ -103,8 +107,7 @@
             </div>
             <div class="shop-body">
               <h4>{{ offer.descriptionCollocation }}</h4>
-              <p>Localization: {{ offer.locationLx }}</p>
-              <p>Localization: {{ offer.locationLy }}</p>
+              <p>Localization: {{ offer.governorate }}</p>
               <p>Furniture: {{ offer.furnitureCollocation }}</p>
               <p>Available Places: {{ offer.availablePlaces }}</p>
             </div>
@@ -124,8 +127,6 @@
             <p class="vertical-space"></p>
             <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback(offer.idCollocationOffer)">Add Feedback</button>  
             <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addRequest(offer.idCollocationOffer)">Request</button> 
-            <button *ngIf="card.classList.contains('hovered')" class="btn btn-danger mt-2" (click)="deleteOffer(offer.idCollocationOffer)">delete</button>
-            <button *ngIf="card.classList.contains('hovered')" class="btn btn-success mt-2" (click)="updateOffer(offer.idCollocationOffer)">update</button>
           </div>
         </div>
       </div>

@@ -98,6 +98,7 @@ import { DeleteSubscriptionComponent } from './Components/Subscription/delete-su
 import { FrontSubscriptionComponent } from './front-subscription/front-subscription.component';
 import { PaymentComponent } from './payment/payment.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @NgModule({
   declarations: [
@@ -173,7 +174,7 @@ import { WalletComponent } from './wallet/wallet.component';
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, 
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
