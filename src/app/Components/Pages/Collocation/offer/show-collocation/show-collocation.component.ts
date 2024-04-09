@@ -173,7 +173,33 @@ export class ShowCollocationComponent  implements OnInit{
   
   
   
+  Locateme(): void {
+    this.watchPosition().then((userLocation) => {
+      console.log('User location:', userLocation);
+      this.offerService.getCollocationOffers().subscribe(
+        (data) => {
+          this.filteredOffers = data.filter((offer) => {
+            const distance = this.calculateDistance(userLocation.latitude, userLocation.longitude, parseFloat(offer.locationLy), parseFloat(offer.locationLx));
+            return distance <= 60; // Filter offers within 15 km radius
+          });
   
+          // Sort filteredOffers based on distance (from nearest to farthest)
+          this.filteredOffers.sort((a, b) => {
+            const distanceA = this.calculateDistance(userLocation.latitude, userLocation.longitude, parseFloat(a.locationLy), parseFloat(a.locationLx));
+            const distanceB = this.calculateDistance(userLocation.latitude, userLocation.longitude, parseFloat(b.locationLy), parseFloat(b.locationLx));
+            return distanceA - distanceB;
+          });
+  
+          console.log('Filtered offers near user:', JSON.stringify(this.filteredOffers, null, 2)); // Log filtered offers as JSON
+        },
+        (error) => {
+          console.error('Error loading offers:', error); // Log error
+        }
+      );
+    }).catch((error) => {
+      console.error('Error getting user location:', error); // Log error
+    });
+  }
   
   
   
