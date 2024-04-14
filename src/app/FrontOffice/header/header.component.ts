@@ -12,6 +12,7 @@ import { Subscription } from "rxjs";
 import { AppConstants } from 'src/app/Common/app-constants';
 import { Notification } from 'src/app/Model/User/notification';
 import { SnackbarComponent } from "../../Components/Pages/Forum/snackbar/snackbar.component";
+import { SearchDialogComponent } from 'src/app/Components/Pages/User/search-dialog/search-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -144,4 +145,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+	openSearchDialog(): void {
+		this.matDialog.open(SearchDialogComponent, {
+			autoFocus: true,
+			width: '500px'
+		});
+	}
+
+
+
+
+
+
+
 }
