@@ -51,7 +51,7 @@ import { TransferPointsComponent } from './Components/Pages/Carpooling/transfer-
 import { LoginComponent } from './Components/Pages/User/login/login.component';
 import { SignupComponent } from './Components/Pages/User/signup/signup.component';
 import { ForgotPasswordComponent } from './Components/Pages/User/forgot-password/forgot-password.component';
-import { ProfileComponent } from './Components/Pages/User/profile/profile.component';
+import { ProfileComponent } from './Components/Pages/User/profile/ProfileComponent';
 import { UpdateUserInfoComponentComponent } from './Components/Pages/User/update-user-info-component/update-user-info-component.component';
 import { DeleteUserComponent } from './Components/Pages/User/delete-user/delete-user.component';
 import { UpdatePhotoProfileComponent } from './Components/Pages/User/update-photo-profile/update-photo-profile.component';
@@ -99,6 +99,28 @@ import { FrontSubscriptionComponent } from './front-subscription/front-subscript
 import { PaymentComponent } from './payment/payment.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { ScheduleModule } from './schedule/schedule.module';
+import {TagDialogComponent} from "./Components/Pages/Forum/tag-dialog/tag-dialog.component";
+import {WaitingDialogComponent} from "./Components/Pages/Forum/waiting-dialog/waiting-dialog.component";
+import {PostDialogComponent} from "./Components/Pages/Forum/post-dialog/post-dialog.component";
+import {PostDetailComponent} from "./Components/Pages/Forum/post-detail/post-detail.component";
+import {MessageComponent} from "./Components/Pages/Forum/message/message.component";
+import {ErrorPageComponent} from "./Components/Pages/Forum/error-page/error-page.component";
+import {PostComponent} from "./Components/Pages/Forum/post/post.component";
+import {PostLikeDialogComponent} from "./Components/Pages/Forum/post-like-dialog/post-like-dialog.component";
+import {PostShareDialogComponent} from "./Components/Pages/Forum/post-share-dialog/post-share-dialog.component";
+import {PostCommentDialogComponent} from "./Components/Pages/Forum/post-comment-dialog/post-comment-dialog.component";
+import {CommentLikeDialogComponent} from "./Components/Pages/Forum/comment-like-dialog/comment-like-dialog.component";
+import {ConfirmationDialogComponent} from "./Components/Pages/Forum/confirmation-dialog/confirmation-dialog.component";
+import {
+  ShareConfirmDialogComponent
+} from "./Components/Pages/Forum/share-confirm-dialog/share-confirm-dialog.component";
+import {SnackbarComponent} from "./Components/Pages/Forum/snackbar/snackbar.component";
+import {
+  FollowingFollowerListDialogComponent
+} from "./Components/Pages/Forum/following-follower-list-dialog/following-follower-list-dialog.component";
+import { TimelineComponent } from './Components/Pages/Forum/timeline/TimelineComponent';
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
+import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 
 @NgModule({
   declarations: [
@@ -167,6 +189,24 @@ import { ScheduleModule } from './schedule/schedule.module';
     FrontSubscriptionComponent,
     PaymentComponent,
     WalletComponent,
+      ///////
+    TagDialogComponent,
+    WaitingDialogComponent,
+    PostDialogComponent,
+    PostDetailComponent,
+    MessageComponent,
+    ErrorPageComponent,
+    PostComponent,
+    PostLikeDialogComponent,
+    PostShareDialogComponent,
+    PostCommentDialogComponent,
+    CommentLikeDialogComponent,
+    ConfirmationDialogComponent,
+    ShareConfirmDialogComponent,
+    SnackbarComponent,
+    FollowingFollowerListDialogComponent,
+    TimelineComponent,
+    ProfileUserComponent,
 
   ],
   imports: [
@@ -174,7 +214,7 @@ import { ScheduleModule } from './schedule/schedule.module';
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -210,7 +250,8 @@ import { ScheduleModule } from './schedule/schedule.module';
     FormsModule,
     HttpClientModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatLegacyChipsModule
   ],
   providers: [
     {

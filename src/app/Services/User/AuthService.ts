@@ -7,7 +7,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserLogin } from 'src/app/Model/User/user-login';
 import { environment } from 'src/app/Environments/environment';
 import { UserSignup } from 'src/app/Model/User/user-signup';
-import { User } from 'src/app/Model/User/user';
 
 const BASE_URL = environment.apiUrl;
 
@@ -71,6 +70,14 @@ export class AuthService {
     );
   }
 
+  getAuthUserId(): Observable<number> {
+    return this.http.get<number>('http://localhost:8083/user/account/iduser');
+  }
+
+
+  isUserLoggedIn(): boolean {
+    return this.cookieService.check('JWT');
+  }
 
 
 

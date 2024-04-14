@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from 'src/app/Environments/environment';
 import { AuthService } from 'src/app/Services/User/AuthService';
@@ -25,6 +26,8 @@ export class PhotoUploadDialogComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private thisDialogRef: MatDialogRef<PhotoUploadDialogComponent>,
+    private router: Router,
+
     private matSnackbar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -78,6 +81,9 @@ export class PhotoUploadDialogComponent implements OnInit {
       console.error('No photo selected.');
       this.matSnackbar.open('No photo selected.', 'Close', { duration: 3000 });
     }
+    this.router.navigateByUrl(`user/profile`).then(() => {
+			window.location.reload();
+		});
   }
   
 }

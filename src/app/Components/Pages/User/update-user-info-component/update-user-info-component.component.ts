@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/Services/User/UserService';
 import { UpdateUserInfo } from 'src/app/Model/User/update-user-info';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-user-info-component',
@@ -13,7 +14,10 @@ export class UpdateUserInfoComponentComponent {
   updateUserInfoForm: FormGroup;
   updateUserInfo: UpdateUserInfo | undefined;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) 
+  constructor(
+     private userService: UserService,
+     private router: Router,
+     private formBuilder: FormBuilder) 
   {
     this.updateUserInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -46,5 +50,8 @@ export class UpdateUserInfoComponentComponent {
         );
       }
     }
+    this.router.navigateByUrl(`user/profile`).then(() => {
+			window.location.reload();
+		});
   }
 }

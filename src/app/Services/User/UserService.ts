@@ -8,6 +8,7 @@ import { UpdateUserPassword } from 'src/app/Model/User/update-user-password';
 import { environment } from 'src/app/Environments/environment';
 import { UserResponse } from 'src/app/Model/User/user-response';
 import { CookieService } from 'ngx-cookie-service';
+import {PostResponse} from "../../Model/User/post-response";
 
 const BASE_URL = environment.apiUrlUser;
 const BASE_URL1 = environment.apiUrlR;
@@ -28,6 +29,14 @@ export class UserService {
       })
     );
   }
+
+
+
+
+  getIdAuthenticatedUser(): Observable<number> {
+    return this.http.get<number>('http://localhost:8083/user/account/iduser');
+  }
+
 
   updateUserInfo(updateUserInfo: UpdateUserInfo): Observable<any> {
     return this.http.post<any>(BASE_URL + 'account/update/info', updateUserInfo).pipe(
@@ -59,7 +68,7 @@ export class UserService {
     );
   }
 
-  
+
   updateCoverPhoto(coverPhoto: File): Observable<User> {
     const formData = new FormData();
     formData.append('coverPhoto', coverPhoto);
@@ -71,7 +80,7 @@ export class UserService {
       })
     );
   }
-  
+
 
 
 
@@ -86,15 +95,11 @@ export class UserService {
 
 
 
-  getUserSearchResult(key: string, page: number, size: number): Observable<UserResponse[] | HttpErrorResponse> {
-    const reqParams = new HttpParams().set('key', key).set('page', page).set('size', size);
-    return this.http.get<UserResponse[] | HttpErrorResponse>(`${BASE_URL}/users/search`, { params: reqParams });
-  }
 
   getUserById(userId: number): Observable<UserResponse | HttpErrorResponse> {
-    return this.http.get<UserResponse | HttpErrorResponse>(`${BASE_URL}users/${userId}`);
+    return this.http.get<UserResponse | HttpErrorResponse>(`${BASE_URL}account/users/${userId}`);
   }
-
+  
   getUserById1(id: number): Observable<User> {
     const url = `${BASE_URL1}`;
     return this.http.get<User>(url);
@@ -123,8 +128,68 @@ export class UserService {
 
 
 
+////////////////////////////////////////////////////
+///////
 
 
+  getUserPosts(userId: number, page: number, size: number): Observable<PostResponse[] | HttpErrorResponse> {
+    const reqParams = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<PostResponse[] | HttpErrorResponse>(`${BASE_URL}account/users/posts`, { params: reqParams });
+  }
+
+
+
+/////
+
+
+
+  ///////////////////////////////
+  ///////////////////////////////
+  getUserFollowingList(userId: number, page: number, size: number): Observable<UserResponse[] | HttpErrorResponse> {
+		const reqParams = new HttpParams().set('page', page).set('size', size);
+		return this.http.get<UserResponse[] | HttpErrorResponse>(`${BASE_URL}account/users/${userId}/following`, { params: reqParams });
+	}
+
+	getUserFollowerList(userId: number, page: number, size: number): Observable<UserResponse[] | HttpErrorResponse> {
+		const reqParams = new HttpParams().set('page', page).set('size', size);
+		return this.http.get<UserResponse[] | HttpErrorResponse>(`${BASE_URL}account/users/${userId}/follower`, { params: reqParams });
+	}
+
+	getUserPosts1(userId: number, page: number, size: number): Observable<PostResponse[] | HttpErrorResponse> {
+		const reqParams = new HttpParams().set('page', page).set('size', size);
+		return this.http.get<PostResponse[] | HttpErrorResponse>(`${BASE_URL}account/users/${userId}/posts`, { params: reqParams });
+	}
+
+	followUser(userId: number): Observable<any | HttpErrorResponse> {
+		return this.http.post<any | HttpErrorResponse>(`${BASE_URL}account/follow/${userId}`, null);
+	}
+
+	unfollowUser(userId: number): Observable<any | HttpErrorResponse> {
+		return this.http.post<any | HttpErrorResponse>(`${BASE_URL}account/unfollow/${userId}`, null);
+	}
+
+	getUserSearchResult(key: string, page: number, size: number): Observable<UserResponse[] | HttpErrorResponse> {
+		const reqParams = new HttpParams().set('key', key).set('page', page).set('size', size);
+		return this.http.get<UserResponse[] | HttpErrorResponse>(`${BASE_URL}account/users/search`, { params: reqParams });
+	}
+
+
+  getProfilePhotoUrl1(userId: number): Observable<string> {
+    return this.http.get<string>(`${BASE_URL}account/users/${userId}/profilephoto`, { responseType: 'text' as 'json' }).pipe(
+      catchError(error => {
+        console.error('Error fetching user photo URL:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getCoverPhotoUrl1(userId: number): Observable<string> {
+    return this.http.get<string>(`${BASE_URL}account/users/${userId}/coverphoto`, { responseType: 'text' as 'json' }).pipe(
+      catchError(error => {
+        console.error('Error fetching user cover photo URL:', error);
+        return throwError(error);
+      })
+    );
+  }
 
 
 }
