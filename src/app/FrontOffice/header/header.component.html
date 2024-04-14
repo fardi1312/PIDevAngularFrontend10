@@ -17,7 +17,7 @@
  
     <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Co <span class="tooplate-red">&</span><span class="tooplate-green">Co</span></a>
+            <a class="navbar-brand" href="/user/profile">Co <span class="tooplate-red">&</span><span class="tooplate-green">Co</span></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@
                         <a class="nav-link click-scroll" href="#section_5">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_5">Contact</a>
+                        <a class="nav-link click-scroll" href="/user/timeline">Forum</a>
                     </li>
 
 
@@ -81,7 +81,9 @@
             
         </div>
         <div >
-
+            <button mat-icon-button (click)="openSearchDialog()">
+                <mat-icon>search</mat-icon>
+            </button>
             
             <button mat-icon-button [matMenuTriggerFor]="notificationMenu" (click)="handleUnseenNotifications()">
                 <mat-icon>notifications</mat-icon>
@@ -153,6 +155,7 @@
                             photo
                         </span>
                     </span>
+                    
     
                     <span *ngIf="notification.type === 'COMMENT_LIKE'">
                         <span *ngIf="notification.owningComment.likeCount > 1">
@@ -164,6 +167,7 @@
                         </span>
                         liked your comment "{{ notification.owningComment.content | slice:0:24 }}..."
                     </span>
+                    
                 </a>
     
                 <div (click)="$event.stopPropagation()" class="position-relative ps-3 pe-3">
@@ -191,8 +195,8 @@
 
   </header>
   <script src="/assets/frontOffice/assets/js/jquery.min.js"></script>
-<script src="/assets/frontOffice/assets/js/bootstrap.min.js"></script>
-<script src="/assets/frontOffice/assets/js/click-scroll.js"></script>
-<script src="/assets/frontOffice/assets/js/jquery.backstretch.min.js"></script>
-<script src="/assets/frontOffice/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/frontOffice/assets/js/custom.js"></script>
+  <script src="/assets/frontOffice/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/frontOffice/assets/js/click-scroll.js"></script>
+  <script src="/assets/frontOffice/assets/js/jquery.backstretch.min.js"></script>
+  <script src="/assets/frontOffice/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/frontOffice/assets/js/custom.js"></script>
