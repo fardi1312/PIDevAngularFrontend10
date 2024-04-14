@@ -9,7 +9,7 @@ import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer
 import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
 import { ShowBackOfficeComponent } from './Components/Pages/Collocation/offer/show-back-office/show-back-office.component';
 import { LoginComponent } from './Components/Pages/User/login/login.component';
-import { ProfileComponent } from './Components/Pages/User/profile/profile.component';
+import { ProfileComponent } from './Components/Pages/User/profile/ProfileComponent';
 import { UpdateUserInfoComponentComponent } from './Components/Pages/User/update-user-info-component/update-user-info-component.component';
 import { DeleteUserComponent } from './Components/Pages/User/delete-user/delete-user.component';
 import { UpdatePhotoProfileComponent } from './Components/Pages/User/update-photo-profile/update-photo-profile.component';
@@ -53,10 +53,23 @@ import { FrontSubscriptionComponent } from './front-subscription/front-subscript
 import { AddRegistrationComponent } from './Components/Pages/Registration/add-registration/add-registration.component';
 import { PaymentComponent } from './payment/payment.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { TimelineComponent } from './Components/Pages/Forum/timeline/TimelineComponent';
+import {PostDetailComponent} from "./Components/Pages/Forum/post-detail/post-detail.component";
+import {MessageComponent} from "./Components/Pages/Forum/message/message.component";
+import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: 'user/timeline', component: TimelineComponent },
+
+  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'posts/:postId', component: PostDetailComponent },
+  { path: 'message', component: MessageComponent },
+  { path: 'posts/tags/:tagName', component: TimelineComponent },
+  { path: 'user/profile/:userId', component: ProfileUserComponent },
+
+
+
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'admin', canActivate: [AuthGuard], 
     children: [
@@ -116,7 +129,9 @@ const routes: Routes = [
       { path: 'registration/wallet', component: WalletComponent },
       { path: 'schedule', loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule) }
     ]
-  }
+  },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+
 ];
 
 @NgModule({

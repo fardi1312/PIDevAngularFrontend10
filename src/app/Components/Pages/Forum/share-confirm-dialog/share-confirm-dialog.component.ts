@@ -5,11 +5,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { Post } from 'src/app/model/post';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import {environment} from "../../../../Environments/environment";
+import {Post} from "../../../../Model/User/post";
+import {PostService} from "../../../../Services/Forum/post.service";
 
 @Component({
 	selector: 'app-share-confirm-dialog',
@@ -17,8 +17,8 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 	styleUrls: ['./share-confirm-dialog.component.css']
 })
 export class ShareConfirmDialogComponent implements OnInit, OnDestroy {
-	targetPostId: number;
-	shareFormGroup: FormGroup;
+	targetPostId!: number;
+	shareFormGroup!: FormGroup;
 	creatingShare: boolean = false;
 	defaultProfilePhotoUrl = environment.defaultProfilePhotoUrl;
 
@@ -47,31 +47,36 @@ export class ShareConfirmDialogComponent implements OnInit, OnDestroy {
 	}
 
 	createNewPostShare(): void {
-		if (!this.creatingShare) {
+		if (!this.creatingShare && this.content?.value) {
 			this.creatingShare = true;
 			this.subscriptions.push(
-				this.postService.createPostShare(this.targetPostId, this.content.value).subscribe({
-					next: (newPostShare: Post) => {
-						this.thisMatDialogRef.close();
-						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: 'Post shared successfully.',
-							panelClass: ['bg-success'],
-							duration: 5000
+				this.postService.createPostShare(this.targetPostId, this.content.value).subscribe(
+					(result: Post | HttpErrorResponse) => {
+						if (result instanceof Post) {
+							this.thisMatDialogRef.close();
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: 'Post shared successfully.',
+								panelClass: ['bg-error'],
+								duration: 5000
+							});
+							this.creatingShare = false;
+						} else {
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: 'Post shared successfully.',
+								panelClass: ['bg-error'],
+								duration: 5000
+							});
+							this.creatingShare = false;
+
+						}
+
+						this.router.navigateByUrl(`user/profile`).then(() => {
+							window.location.reload();
 						});
-						this.creatingShare = false;
-						this.router.navigateByUrl(`/posts/${newPostShare.id}`);
-					},
-					error: (errorResponse: HttpErrorResponse) => {
-						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: AppConstants.snackbarErrorContent,
-							panelClass: ['bg-error'],
-							duration: 5000
-						});
-						this.creatingShare = false;
+
 					}
-				})
+				)
 			);
 		}
 	}
-
 }

@@ -5,13 +5,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { Post } from 'src/app/model/post';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { TagDialogComponent } from '../tag-dialog/tag-dialog.component';
+import {Post} from "../../../../Model/User/post";
+import {PostService} from "../../../../Services/Forum/post.service";
 
 @Component({
 	selector: 'app-post-dialog',
@@ -19,9 +18,9 @@ import { TagDialogComponent } from '../tag-dialog/tag-dialog.component';
 	styleUrls: ['./post-dialog.component.css']
 })
 export class PostDialogComponent implements OnInit, OnDestroy {
-	postFormGroup: FormGroup;
-	postPhoto: File;
-	postPhotoPreviewUrl: string;
+	postFormGroup!: FormGroup;
+	postPhoto!: File;
+	postPhotoPreviewUrl!: string;
 	postTags: any[] = [];
 	creatingPost: boolean = false;
 
@@ -119,8 +118,9 @@ export class PostDialogComponent implements OnInit, OnDestroy {
 		console.log(this.postTags)
 	}
 
+	
 	handlePostSubmit(): void {
-		if (this.content.value.length <= 0 && !this.postPhoto) {
+		if (this.content?.value.length <= 0 && !this.postPhoto) {
 			this.matSnackbar.openFromComponent(SnackbarComponent, {
 				data: 'Post cannot be empty.',
 				panelClass: ['bg-danger'],
@@ -140,71 +140,77 @@ export class PostDialogComponent implements OnInit, OnDestroy {
 		if (!this.creatingPost) {
 			this.creatingPost = true;
 			this.subscriptions.push(
-				this.postService.createNewPost(this.content.value, this.postPhoto, this.postTags).subscribe({
-					next: (createdPost: Post) => {
+				this.postService.createNewPost(this.content?.value, this.postPhoto, this.postTags).subscribe(
+					(result: Post | HttpErrorResponse) => {
+						if (result instanceof Post) {
+							this.matDialogRef.close();
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: 'Post created successfully.',
+								duration: 5000
+							});
+							this.creatingPost = false;
+
+						} else {
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: 'Post created successfully.',
+								panelClass: ['bg-danger'],
+								duration: 5000
+							});
+							this.creatingPost = false;
+						}
+					}
+				)
+			);
+		}
+		this.router.navigateByUrl(`user/profile`).then(() => {
+			window.location.reload();
+		});
+	}
+
+	private updatePost(): void {
+		this.subscriptions.push(
+			this.postService.updatePost(this.dataPost.id, this.content?.value, this.postPhoto, this.postTags).subscribe(
+				(result: Post | HttpErrorResponse) => {
+					if (result instanceof Post) {
 						this.matDialogRef.close();
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: 'Post created successfully.',
+							data: 'Post updated successfully.',
 							duration: 5000
 						});
-						this.creatingPost = false;
-						this.router.navigateByUrl(`/posts/${createdPost.id}`).then(() => {
-							window.location.reload();
+					} else {
+						this.matSnackbar.openFromComponent(SnackbarComponent, {
+							data: 'Post updated successfully.',
+							panelClass: ['bg-danger'],
+							duration: 5000
 						});
-					},
-					error: (errorResponse: HttpErrorResponse) => {
+					}
+				}
+			)
+		);
+		this.router.navigateByUrl(`user/profile`).then(() => {
+			window.location.reload();
+		});
+	}
+
+	private deletePostPhoto(): void {
+		this.subscriptions.push(
+			this.postService.deletePostPhoto(this.dataPost.id).subscribe(
+				(result: Post | HttpErrorResponse) => {
+					if (result instanceof Post) {
+						this.postPhotoPreviewUrl = '';
+						this.matSnackbar.openFromComponent(SnackbarComponent, {
+							data: 'Photo deleted successfully.',
+							duration: 5000
+						});
+					} else {
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
 							data: AppConstants.snackbarErrorContent,
 							panelClass: ['bg-danger'],
 							duration: 5000
 						});
-						this.creatingPost = false;
 					}
-				})
-			);
-		}
-	}
-
-	private updatePost(): void {
-		this.subscriptions.push(
-			this.postService.updatePost(this.dataPost.id, this.content.value, this.postPhoto, this.postTags).subscribe({
-				next: (createdPost: Post) => {
-					this.matDialogRef.close();
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: 'Post updated successfully.',
-						duration: 5000
-					});
-					this.router.navigateByUrl(`/posts/${createdPost.id}`);
-				},
-				error: (errorResponse: HttpErrorResponse) => {
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: AppConstants.snackbarErrorContent,
-						panelClass: ['bg-danger'],
-						duration: 5000
-					});
 				}
-			})
-		);
-	}
-
-	private deletePostPhoto(): void {
-		this.subscriptions.push(
-			this.postService.deletePostPhoto(this.dataPost.id).subscribe({
-				next: (createdPost: Post) => {
-					this.postPhotoPreviewUrl = null;
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: 'Photo deleted successfully.',
-						duration: 5000
-					});
-				},
-				error: (errorResponse: HttpErrorResponse) => {
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: AppConstants.snackbarErrorContent,
-						panelClass: ['bg-danger'],
-						duration: 5000
-					});
-				}
-			})
+			)
 		);
 	}
 

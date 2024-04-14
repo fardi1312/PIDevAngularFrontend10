@@ -3,11 +3,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { UserResponse } from 'src/app/model/user-response';
-import { UserService } from 'src/app/service/user.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { UserResponse } from "../../../../Model/User/user-response";
+import { environment } from "../../../../Environments/environment";
+import { UserService } from "../../../../Services/User/UserService";
 
 @Component({
 	selector: 'app-following-follower-list-dialog',
@@ -27,7 +27,8 @@ export class FollowingFollowerListDialogComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private userService: UserService,
-		private matSnackbar: MatSnackBar) { }
+		private matSnackbar: MatSnackBar
+	) { }
 
 	ngOnInit(): void {
 		this.loadUsers(1);
@@ -42,58 +43,56 @@ export class FollowingFollowerListDialogComponent implements OnInit {
 			if (this.data.type === 'following') {
 				if (this.data.user.followingCount > 0) {
 					this.fetchingResult = true;
-	
+
 					this.subscriptions.push(
-						this.userService.getUserFollowingList(this.data.user.id, currentPage, this.resultSize).subscribe({
-							next: (followingList: UserResponse[]) => {
-								followingList.forEach(uR => this.userResponseList.push(uR));
-								if (currentPage * this.resultSize < this.data.user.followingCount) {
-									this.hasMoreResult = true;
+						this.userService.getUserFollowingList(this.data.user.idUser, currentPage, this.resultSize).subscribe(
+							(followingList: UserResponse[] | HttpErrorResponse) => {
+								if (followingList instanceof Array) {
+									this.handleSuccess(followingList);
 								} else {
-									this.hasMoreResult = false;
+									this.handleError(followingList);
 								}
-								this.resultPage++;
-								this.fetchingResult = false;
-							},
-							error: (errorResponse: HttpErrorResponse) => {
-								this.matSnackbar.openFromComponent(SnackbarComponent, {
-									data: AppConstants.snackbarErrorContent,
-									panelClass: ['bg-danger'],
-									duration: 5000
-								});
-								this.fetchingResult = false;
 							}
-						})
+						)
 					);
 				}
 			} else if (this.data.type === 'follower') {
 				if (this.data.user.followerCount > 0) {
 					this.fetchingResult = true;
-	
+
 					this.subscriptions.push(
-						this.userService.getUserFollowerList(this.data.user.id, currentPage, this.resultSize).subscribe({
-							next: (followerList: UserResponse[]) => {
-								followerList.forEach(uR => this.userResponseList.push(uR));
-								if (currentPage * this.resultSize < this.data.user.followerCount) {
-									this.hasMoreResult = true;
+						this.userService.getUserFollowerList(this.data.user.idUser, currentPage, this.resultSize).subscribe(
+							(followerList: UserResponse[] | HttpErrorResponse) => {
+								if (followerList instanceof Array) {
+									this.handleSuccess(followerList);
 								} else {
-									this.hasMoreResult = false;
+									this.handleError(followerList);
 								}
-								this.resultPage++;
-								this.fetchingResult = false;
-							},
-							error: (errorResponse: HttpErrorResponse) => {
-								this.matSnackbar.openFromComponent(SnackbarComponent, {
-									data: AppConstants.snackbarErrorContent,
-									panelClass: ['bg-danger'],
-									duration: 5000
-								});
-								this.fetchingResult = false;
 							}
-						})
+						)
 					);
 				}
 			}
 		}
+	}
+
+	handleSuccess(resultList: UserResponse[]): void {
+		resultList.forEach(uR => this.userResponseList.push(uR));
+		if (this.resultPage * this.resultSize < this.data.user.followingCount) {
+			this.hasMoreResult = true;
+		} else {
+			this.hasMoreResult = false;
+		}
+		this.resultPage++;
+		this.fetchingResult = false;
+	}
+
+	handleError(errorResponse: HttpErrorResponse): void {
+		this.matSnackbar.openFromComponent(SnackbarComponent, {
+			data: AppConstants.snackbarErrorContent,
+			panelClass: ['bg-danger'],
+			duration: 5000
+		});
+		this.fetchingResult = false;
 	}
 }

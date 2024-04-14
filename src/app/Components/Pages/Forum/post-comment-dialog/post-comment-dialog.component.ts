@@ -4,19 +4,18 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { Comment } from 'src/app/model/comment';
-import { CommentResponse } from 'src/app/model/comment-response';
-import { Post } from 'src/app/model/post';
-import { User } from 'src/app/model/user';
-import { AuthService } from 'src/app/service/auth.service';
-import { CommentService } from 'src/app/service/comment.service';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { CommentLikeDialogComponent } from '../comment-like-dialog/comment-like-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { PostLikeDialogComponent } from '../post-like-dialog/post-like-dialog.component';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { environment } from "../../../../Environments/environment";
+import { CommentResponse } from "../../../../Model/User/comment-response";
+import { Post } from "../../../../Model/User/post";
+import { AuthService } from "../../../../Services/User/AuthService";
+import { PostService } from "../../../../Services/Forum/post.service";
+import { CommentService } from "../../../../Services/Forum/comment.service";
+import {Comment} from "../../../../Model/User/comment";
+import { UserService } from 'src/app/Services/User/UserService';
 
 @Component({
 	selector: 'app-post-comment-dialog',
@@ -26,15 +25,16 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 export class PostCommentDialogComponent implements OnInit, OnDestroy {
 	@Output() updatedCommentCountEvent = new EventEmitter<number>();
 	@Output() newItemEvent = new EventEmitter<string>();
-	authUserId: number;
+	authUserId!: number;
 	commentResponseList: CommentResponse[] = [];
 	resultPage: number = 1;
 	resultSize: number = 5;
 	hasMoreResult: boolean = false;
 	fetchingResult: boolean = false;
 	creatingComment: boolean = false;
-	commentFormGroup: FormGroup;
+	commentFormGroup!: FormGroup;
 	defaultProfilePhotoUrl = environment.defaultProfilePhotoUrl;
+	imageUrl: string | undefined;
 
 	private subscriptions: Subscription[] = [];
 
@@ -45,19 +45,49 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 		private commentService: CommentService,
 		private formBuilder: FormBuilder,
 		private matDialog: MatDialog,
-		private matSnackbar: MatSnackBar) { }
-	
+		private userService: UserService,
+		private matSnackbar: MatSnackBar
+	) { }
+
 	get content() { return this.commentFormGroup.get('content') }
 
 	ngOnInit(): void {
-		this.authUserId = this.authService.getAuthUserId();
+		this.userService.getIdAuthenticatedUser().subscribe((userId: number) => {
+			this.authUserId = userId;
+		});
 
 		this.commentFormGroup = this.formBuilder.group({
 			content: new FormControl('', [Validators.required, Validators.maxLength(1024)])
 		});
+		this.loadProfilePhotoUrl();
 
 		this.loadComments(1);
 	}
+
+	loadProfilePhotoUrl(): void {
+		this.userService.getProfilePhotoUrl1(this.authUserId ).subscribe(
+		  (imageUrl: string) => {
+			if (imageUrl){
+			this.imageUrl = imageUrl;
+			}
+			if (!imageUrl) {
+			  this.imageUrl = environment.defaultProfilePhotoUrl;
+			}
+		  },
+		  (error) => {
+			console.error('Error fetching profile photo URL:', error);
+		  }
+		);
+	  }
+
+
+
+
+
+
+
+
+
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -67,59 +97,64 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 		if (!this.fetchingResult) {
 			if (this.dataPost.commentCount > 0) {
 				this.fetchingResult = true;
-	
+
 				this.subscriptions.push(
-					this.postService.getPostComments(this.dataPost.id, currentPage, this.resultSize).subscribe({
-						next: (resultList: CommentResponse[]) => {
-							resultList.forEach(commentResponse => this.commentResponseList.push(commentResponse));
-							if (currentPage * this.resultSize < this.dataPost.commentCount) {
-								this.hasMoreResult = true;
+					this.postService.getPostComments(this.dataPost.id, currentPage, this.resultSize).subscribe(
+						(result: CommentResponse[] | HttpErrorResponse) => {
+							if (result instanceof Array) {
+								this.commentResponseList.push(...result);
+								if (currentPage * this.resultSize < this.dataPost.commentCount) {
+									this.hasMoreResult = true;
+								} else {
+									this.hasMoreResult = false;
+								}
+								this.resultPage++;
 							} else {
-								this.hasMoreResult = false;
+								console.error('HTTP Error:', result);
+								this.matSnackbar.openFromComponent(SnackbarComponent, {
+									data: AppConstants.snackbarErrorContent,
+									panelClass: ['bg-danger'],
+									duration: 5000
+								});
 							}
-							this.resultPage++;
-							this.fetchingResult = false;
-						},
-						error: (errorResponse: HttpErrorResponse) => {
-							this.matSnackbar.openFromComponent(SnackbarComponent, {
-								data: AppConstants.snackbarErrorContent,
-								panelClass: ['bg-danger'],
-								duration: 5000
-							});
 							this.fetchingResult = false;
 						}
-					})
+					)
 				);
-			} 
+			}
 		}
 	}
 
 	createNewComment(): void {
 		this.creatingComment = true;
 		this.subscriptions.push(
-			this.postService.createPostComment(this.dataPost.id, this.content.value).subscribe({
-				next: (newComment: CommentResponse) => {
-					this.commentFormGroup.reset();
-					Object.keys(this.commentFormGroup.controls).forEach(key => {
-						this.commentFormGroup.get(key).setErrors(null) ;
-					});
-					this.commentResponseList.unshift(newComment);
-					this.updatedCommentCountEvent.emit(this.commentResponseList.length);
-					this.creatingComment = false;
-
-				},
-				error: (errorResponse: HttpErrorResponse) => {
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: AppConstants.snackbarErrorContent,
-						panelClass: ['bg-danger'],
-						duration: 5000
-					});
-					this.creatingComment = false;
+			this.postService.createPostComment(this.dataPost.id, this.content?.value).subscribe(
+				(result: CommentResponse | HttpErrorResponse) => {
+					if (result instanceof CommentResponse) {
+						this.commentFormGroup.reset();
+						Object.keys(this.commentFormGroup.controls).forEach(key => {
+							const control = this.commentFormGroup.get(key);
+							if (control) {
+								control.setErrors(null);
+							}
+						});
+						this.commentResponseList.unshift(result);
+						this.updatedCommentCountEvent.emit(this.commentResponseList.length);
+						this.creatingComment = false;
+					} else {
+						this.matSnackbar.openFromComponent(SnackbarComponent, {
+							data: 'create comment Success',
+							panelClass: ['bg-danger'],
+							
+							duration: 5000
+						});
+						this.creatingComment = false;
+						this.ngOnInit();
+					}
 				}
-			})
+			)
 		);
 	}
-
 	openCommentLikeDialog(comment: Comment): void {
 		this.matDialog.open(CommentLikeDialogComponent, {
 			data: comment,
@@ -134,10 +169,13 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 				this.commentService.unlikeComment(commentResponse.comment.id).subscribe({
 					next: (response: any) => {
 						const targetCommentResponse = this.commentResponseList.find(cR => cR === commentResponse);
-						targetCommentResponse.likedByAuthUser = false;
-						targetCommentResponse.comment.likeCount--;
+						if (targetCommentResponse) {
+							targetCommentResponse.likedByAuthUser = false;
+							targetCommentResponse.comment.likeCount--;
+						}
 					},
 					error: (errorResponse: HttpErrorResponse) => {
+						console.error('HTTP Error:', errorResponse);
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
 							data: AppConstants.snackbarErrorContent,
 							panelClass: ['bg-danger'],
@@ -151,10 +189,13 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 				this.commentService.likeComment(commentResponse.comment.id).subscribe({
 					next: (response: any) => {
 						const targetCommentResponse = this.commentResponseList.find(cR => cR === commentResponse);
-						targetCommentResponse.likedByAuthUser = true;
-						targetCommentResponse.comment.likeCount++;
+						if (targetCommentResponse) {
+							targetCommentResponse.likedByAuthUser = true;
+							targetCommentResponse.comment.likeCount++;
+						}
 					},
 					error: (errorResponse: HttpErrorResponse) => {
+						console.error('HTTP Error:', errorResponse);
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
 							data: AppConstants.snackbarErrorContent,
 							panelClass: ['bg-danger'],
@@ -185,15 +226,18 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 			this.commentService.deleteComment(this.dataPost.id, commentResponse.comment.id).subscribe({
 				next: (response: any) => {
 					const targetIndex = this.commentResponseList.indexOf(commentResponse);
-					this.commentResponseList.splice(targetIndex, 1);
-					this.dataPost.commentCount--;
-
-					this.matSnackbar.openFromComponent(SnackbarComponent, {
-						data: 'Comment deleted successfully.',
-						duration: 5000
-					});
+					if (targetIndex !== -1) {
+						this.commentResponseList.splice(targetIndex, 1);
+						this.updatedCommentCountEvent.emit(this.commentResponseList.length);
+						this.matSnackbar.openFromComponent(SnackbarComponent, {
+							data: 'Comment deleted successfully.',
+							panelClass: ['bg-success'],
+							duration: 3000
+						});
+					}
 				},
 				error: (errorResponse: HttpErrorResponse) => {
+					console.error('HTTP Error:', errorResponse);
 					this.matSnackbar.openFromComponent(SnackbarComponent, {
 						data: AppConstants.snackbarErrorContent,
 						panelClass: ['bg-danger'],

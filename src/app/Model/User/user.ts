@@ -1,7 +1,8 @@
 export class User {
-    idUser!: number;
 
     id!: number;
+    idUser!: number;
+    username!: string;
     email!: string;
     firstName!: string;
     lastName!: string;

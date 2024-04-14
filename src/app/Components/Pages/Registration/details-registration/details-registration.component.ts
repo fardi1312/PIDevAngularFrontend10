@@ -40,7 +40,7 @@ const id = idString ? parseInt(idString, 10) : 0; // Assuming a default value of
         .subscribe(registration => {
           this.registration = registration;
           if (registration && registration.user) {
-            this.getUserDetails(registration.user.idUser);
+            this.getUserDetails(registration.user.id);
           }
         });
     }

@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 	styleUrls: ['./tag-dialog.component.css']
 })
 export class TagDialogComponent implements OnInit {
-	tagFormGroup: FormGroup;
+	tagFormGroup!: FormGroup;
 
 	constructor(
 		private thisDialogRef: MatDialogRef<TagDialogComponent>,
@@ -24,10 +24,11 @@ export class TagDialogComponent implements OnInit {
 
 	addTag(e: Event): void {
 		e.preventDefault();
-		this.thisDialogRef.close({tagName: this.name.value});
+		if (this.name?.value) {
+			this.thisDialogRef.close({tagName: this.name.value});
+		}
 		this.tagFormGroup.reset();
 		Object.keys(this.tagFormGroup.controls).forEach(key => {
-			this.tagFormGroup.get(key).setErrors(null) ;
+			this.tagFormGroup.get(key)?.setErrors(null);
 		});
-	}
-}
+	}}

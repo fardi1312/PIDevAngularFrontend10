@@ -3,12 +3,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { Post } from 'src/app/model/post';
-import { User } from 'src/app/model/user';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import {User} from "../../../../Model/User/user";
+import {environment} from "../../../../Environments/environment";
+import {Post} from "../../../../Model/User/post";
+import {PostService} from "../../../../Services/Forum/post.service";
 
 @Component({
 	selector: 'app-post-like-dialog',
@@ -43,28 +43,28 @@ export class PostLikeDialogComponent implements OnInit, OnDestroy {
 			if (this.dataPost.likeCount > 0) {
 				this.fetchingResult = true;
 				this.subscriptions.push(
-					this.postService.getPostLikes(this.dataPost.id, currentPage, this.resultSize).subscribe({
-						next: (resultList: User[]) => {
-							resultList.forEach(like => this.likeList.push(like));
-							if (currentPage * this.resultSize < this.dataPost.likeCount) {
-								this.hasMoreResult = true;
+					this.postService.getPostLikes(this.dataPost.id, currentPage, this.resultSize).subscribe(
+						(result: User[] | HttpErrorResponse) => {
+							if (result instanceof Array) {
+								result.forEach(like => this.likeList.push(like));
+								if (currentPage * this.resultSize < this.dataPost.likeCount) {
+									this.hasMoreResult = true;
+								} else {
+									this.hasMoreResult = false;
+								}
+								this.resultPage++;
+								this.fetchingResult = false;
 							} else {
-								this.hasMoreResult = false;
+								this.matSnackbar.openFromComponent(SnackbarComponent, {
+									data: AppConstants.snackbarErrorContent,
+									panelClass: ['bg-danger'],
+									duration: 5000
+								});
+								this.fetchingResult = false;
 							}
-							this.resultPage++;
-							this.fetchingResult = false;
-						},
-						error: (errorResponse: HttpErrorResponse) => {
-							this.matSnackbar.openFromComponent(SnackbarComponent, {
-								data: AppConstants.snackbarErrorContent,
-								panelClass: ['bg-danger'],
-								duration: 5000
-							});
-							this.fetchingResult = false;
 						}
-					})
+					)
 				);
 			}
 		}
-	}
-}
+	}}

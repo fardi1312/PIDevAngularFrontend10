@@ -10,7 +10,7 @@
 			<mat-form-field appearance="outline" class="w-100" style="padding-right: 90px;">
 				<mat-label>Type a tag name</mat-label>
 				<input matInput formControlName="name" placeholder="Type a tag name">
-				<mat-error *ngIf="name.hasError('minlength') || name.hasError('maxlength')">
+				<mat-error *ngIf="name?.hasError('minlength') || name?.hasError('maxlength')">
 					Must be 3 to 64 characters
 				</mat-error>
 			</mat-form-field>

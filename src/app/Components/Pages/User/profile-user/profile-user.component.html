@@ -10,11 +10,8 @@
                 [style.height.px]="300" 
                 [style.background-image]="'url(' + (coverPhotoUrl || '') + ')'">     
              <div align="end" class="float-end" style="margin-top: 10px; margin-right: 10px" 
-                  *ngIf="isProfileViewerOwner" 
                   (click)="openPhotoUploadDialog($event, 'coverPhoto')">
-               <button mat-mini-fab color="basic">
-                 <mat-icon class="text-secondary">upload</mat-icon>
-               </button>
+
              </div>
            </div>                
             </div>
@@ -27,11 +24,7 @@
                     style="margin-top: -100px; height: 180px; width: 180px; background-color: white; 
                            background-image: url('{{ imageUrl }}'); background-size: cover; background-position: center;"
                     (click)="openViewPhotoDialog(imageUrl ?? '')">                        
-                 <div align="end" class="float-end" style="margin-top: -20px; margin-right: -20px" *ngIf="isProfileViewerOwner">
-                   <button mat-mini-fab color="basic" (click)="openPhotoUploadDialog($event, 'profilePhoto')">
-                     <mat-icon class="text-secondary">upload</mat-icon>
-                   </button>
-                 </div>
+
                </div>
                
                 
@@ -51,7 +44,13 @@
                         </p>
                     </div>
 
+                    <div style="position: absolute; right: 30px; top: 30px;" >
+                        <button mat-raised-button color="primary" *ngIf="!viewerFollowsProfileUser" (click)="openFollowConfirmDialog(user?.idUser!)">Follow</button>
+						<button mat-raised-button color="warn" *ngIf="viewerFollowsProfileUser " (click)="openUnfollowConfirmDialog(user?.idUser!)">Unfollow</button>
+					</div>
 
+
+                 </div>
             </div>
         </div>
 

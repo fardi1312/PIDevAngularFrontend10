@@ -3,11 +3,7 @@ import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angu
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { PostResponse } from 'src/app/model/post-response';
-import { AuthService } from 'src/app/service/auth.service';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { PostCommentDialogComponent } from '../post-comment-dialog/post-comment-dialog.component';
 import { PostDialogComponent } from '../post-dialog/post-dialog.component';
@@ -16,6 +12,13 @@ import { PostShareDialogComponent } from '../post-share-dialog/post-share-dialog
 import { ShareConfirmDialogComponent } from '../share-confirm-dialog/share-confirm-dialog.component';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { WaitingDialogComponent } from '../waiting-dialog/waiting-dialog.component';
+import { PostResponse } from 'src/app/Model/User/post-response';
+import { environment } from 'src/app/Environments/environment';
+import { AuthService } from 'src/app/Services/User/AuthService';
+import { PostService } from 'src/app/Services/Forum/post.service';
+import { AppConstants } from 'src/app/Common/app-constants';
+import { User } from 'src/app/Model/User/user';
+import { UserService } from 'src/app/Services/User/UserService';
 
 @Component({
 	selector: 'app-post',
@@ -23,11 +26,13 @@ import { WaitingDialogComponent } from '../waiting-dialog/waiting-dialog.compone
 	styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit, OnDestroy {
-	@Input() postResponse: PostResponse;
-	@Input() isDetailedPost: boolean;
+	@Input() postResponse!: PostResponse;
+	@Input() isDetailedPost!: boolean;
 	@Output() postDeletedEvent = new EventEmitter<PostResponse>();
-	authUserId: number;
+	authUserId!: number;
 	defaultProfilePhotoUrl = environment.defaultProfilePhotoUrl;
+	imageUrl: string | undefined;
+
 
 	private subscriptions: Subscription[] = [];
 
@@ -35,15 +40,41 @@ export class PostComponent implements OnInit, OnDestroy {
 		private matDialog: MatDialog,
 		private matSnackbar: MatSnackBar,
 		private authService: AuthService,
+		private userService: UserService,
 		private postService: PostService) { }
 
 	ngOnInit(): void {
-		this.authUserId = this.authService.getAuthUserId();
+		this.userService.getIdAuthenticatedUser().subscribe((userId: number) => {
+			this.authUserId = userId;
+		});
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(sub => sub.unsubscribe());
 	}
+
+	loadProfilePhotoUrl(): void {
+		this.userService.getProfilePhotoUrl1(this.postResponse.post.author.idUser ).subscribe(
+		  (imageUrl: string) => {
+			if (imageUrl){
+			this.imageUrl = imageUrl;
+			}
+			if (!imageUrl) {
+			  this.imageUrl = environment.defaultProfilePhotoUrl;
+			}
+		  },
+		  (error) => {
+			console.error('Error fetching profile photo URL:', error);
+		  }
+		);
+	  }
+
+
+
+
+
+
+
 
 	openLikeDialog(): void {
 		this.matDialog.open(PostLikeDialogComponent, {

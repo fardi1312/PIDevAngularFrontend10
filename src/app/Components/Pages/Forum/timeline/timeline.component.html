@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="text-center fully-centered" *ngIf="loadingTimelinePostsInitially || loadingTimelineTagsInitially">
 	<mat-spinner style="zoom: 0.5;" class="text-center ms-auto me-auto"></mat-spinner>
 </div>
@@ -38,3 +40,8 @@
 		</div>
 	</div>
 </div>
+
+<button mat-fab color="primary" matTooltip="Create New Post" matTooltipPosition="left" class="position-fixed"
+	style="bottom: 30px; right: 30px;" (click)="openPostDialog()">
+	<mat-icon>add</mat-icon>
+</button>

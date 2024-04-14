@@ -10,11 +10,11 @@
 			<mat-form-field appearance="outline" class="w-100" style="padding-right: 90px;">
 				<mat-label>What do you want to say</mat-label>
 				<textarea matInput formControlName="content" placeholder="What do you want to say"></textarea>
-				<mat-error *ngIf="content.hasError('maxlength')">
+				<mat-error *ngIf="content?.hasError('maxlength')">
 					Cannot exceed 4096 characters
 				</mat-error>
 			</mat-form-field>
-			<button mat-raised-button color="primary" type="submit" class="position-absolute"
+			<button  mat-raised-button color="primary" type="submit" class="position-absolute"
 				style="top: 4px; right: 0;">Share</button>
 		</form>
 

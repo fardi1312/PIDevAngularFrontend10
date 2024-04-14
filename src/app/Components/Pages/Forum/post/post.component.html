@@ -1,10 +1,10 @@
 <mat-card class="position-relative mat-elevation-z3 mb-4" *ngIf="postResponse">
 	<mat-card-header>
 		<div mat-card-avatar class="centered-bg-image"
-			style="background-image: url('{{ postResponse.post.author.profilePhoto ? postResponse.post.author.profilePhoto : defaultProfilePhotoUrl }}');">
+			style="background-image: url('{{ imageUrl }}');">
 		</div>
 		<mat-card-title>
-			<a href="/users/{{ postResponse.post.author.id }}" class="text-decoration-none text-dark">
+			<a href="/user/profile/{{ postResponse.post.author.idUser }}" class="text-decoration-none text-dark">
 				{{ postResponse.post.author.firstName + ' ' + postResponse.post.author.lastName }}
 			</a>
 		</mat-card-title>
@@ -15,7 +15,7 @@
 	</mat-card-header>
 
 	<div align="end" style="position: absolute; top: 10px; right: 10px"
-		*ngIf="postResponse.post.author.id === authUserId">
+		*ngIf="postResponse.post.author.idUser === authUserId">
 		<button mat-icon-button [matMenuTriggerFor]="coverPhotoMenu">
 			<mat-icon>more_vert</mat-icon>
 		</button>
@@ -65,7 +65,7 @@
 
 				<div class="ps-5" style="margin-top: -38px;">
 					<a class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer"
-						href="/users/{{ postResponse.post.sharedPost.author.id }}">
+						href="/user/profile/{{ postResponse.post.sharedPost.author.idUser }}">
 						{{ postResponse.post.sharedPost.author.firstName + ' ' + postResponse.post.sharedPost.author.lastName }}
 					</a>
 

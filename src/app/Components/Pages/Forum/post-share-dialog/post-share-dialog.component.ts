@@ -3,13 +3,13 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppConstants } from 'src/app/common/app-constants';
-import { Post } from 'src/app/model/post';
-import { PostResponse } from 'src/app/model/post-response';
-import { PostService } from 'src/app/service/post.service';
-import { environment } from 'src/environments/environment';
+import { AppConstants } from 'src/app/Common/app-constants';
 import { PostLikeDialogComponent } from '../post-like-dialog/post-like-dialog.component';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import {PostResponse} from "../../../../Model/User/post-response";
+import {environment} from "../../../../Environments/environment";
+import {Post} from "../../../../Model/User/post";
+import {PostService} from "../../../../Services/Forum/post.service";
 
 @Component({
 	selector: 'app-post-share-dialog',
@@ -46,29 +46,29 @@ export class PostShareDialogComponent implements OnInit, OnDestroy {
 		if (!this.fetchingResult) {
 			this.fetchingResult = true;
 			this.subscriptions.push(
-				this.postService.getPostShares(this.dataPost.id, currentPage, this.resultSize).subscribe({
-					next: (resultList: PostResponse[]) => {
-						resultList.forEach(postShareResponse => this.postShareResponseList.push(postShareResponse));
-						if (currentPage * this.resultSize < this.dataPost.shareCount) {
-							this.hasMoreResult = true;
+				this.postService.getPostShares(this.dataPost.id, currentPage, this.resultSize).subscribe(
+					(result: PostResponse[] | HttpErrorResponse) => {
+						if (result instanceof Array) {
+							result.forEach(postShareResponse => this.postShareResponseList.push(postShareResponse));
+							if (currentPage * this.resultSize < this.dataPost.shareCount) {
+								this.hasMoreResult = true;
+							} else {
+								this.hasMoreResult = false;
+							}
+							this.resultPage++;
+							this.fetchingResult = false;
 						} else {
-							this.hasMoreResult = false;
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: AppConstants.snackbarErrorContent,
+								panelClass: ['bg-danger'],
+								duration: 5000
+							});
 						}
-						this.resultPage++;
-						this.fetchingResult = false;
-					},
-					error: (errorResponse: HttpErrorResponse) => {
-						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: AppConstants.snackbarErrorContent,
-							panelClass: ['bg-danger'],
-							duration: 5000
-						});
 					}
-				})
+				)
 			);
 		}
 	}
-
 	likeOrUnlikePostShare(likedByAuthUser: boolean, postResponse: PostResponse) {
 		if (likedByAuthUser) {
 			this.subscriptions.push(

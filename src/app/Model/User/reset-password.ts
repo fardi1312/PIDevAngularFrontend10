@@ -1,4 +1,4 @@
 export class ResetPassword {
-    password: string;
-    passwordRepeat: string;
+    password!: string;
+    passwordRepeat!: string;
 }

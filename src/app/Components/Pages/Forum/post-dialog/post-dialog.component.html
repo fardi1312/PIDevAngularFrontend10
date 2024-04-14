@@ -13,7 +13,7 @@
 				<textarea matInput formControlName="content" placeholder="What do you want to post?" cdkTextareaAutosize
 					cdkAutosizeMinRows="2" cdkAutosizeMaxRows="10">
 				</textarea>
-				<mat-error *ngIf="content.hasError('maxlength')">
+				<mat-error *ngIf="content?.hasError('maxlength')">
 					Cannot exceed 4096 characters
 				</mat-error>
 			</mat-form-field>
