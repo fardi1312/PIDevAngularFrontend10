@@ -1,10 +1,8 @@
 <app-header></app-header>
 
-<div class="text-center fully-centered" *ngIf="loadingTimelinePostsInitially || loadingTimelineTagsInitially">
-	<mat-spinner style="zoom: 0.5;" class="text-center ms-auto me-auto"></mat-spinner>
-</div>
 
-<div style="margin-top: 100px" *ngIf="!loadingTimelinePostsInitially && !loadingTimelineTagsInitially">
+
+<div style="margin-top: 100px" >
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-4">
@@ -24,6 +22,7 @@
 			</div>
 
 			<div class="col-6">
+
 				<div class="timeline-posts">
 					<p class="fw-500 text-center" *ngIf="noPost">No Post Found</p>
 					<app-post *ngFor="let postResponse of timelinePostResponseList" id="{{'profilePost' + postResponse.post.id}}" [postResponse]="postResponse" [isDetailedPost]="false"></app-post>
@@ -31,7 +30,7 @@
 
 				<div class="text-center mb-4">
 					<mat-spinner style="transform: scale(0.3);" class="text-center ms-auto me-auto" *ngIf="fetchingResult"></mat-spinner>
-					<button mat-raised-button color="primary" class="mat-btn-lg rounded-pill" *ngIf="hasMoreResult && !fetchingResult && !isTaggedPostPage" (click)="loadTimelinePosts(resultPage)">Load More</button>
+					<button mat-raised-button color="primary" class="mat-btn-lg rounded-pill" *ngIf="hasMoreResult && !fetchingResult " (click)="loadTaggedPosts(targetTagName, resultPage)">Load More</button>
 				</div>
 			</div>
 		</div>

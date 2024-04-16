@@ -57,6 +57,7 @@ import { TimelineComponent } from './Components/Pages/Forum/timeline/TimelineCom
 import {PostDetailComponent} from "./Components/Pages/Forum/post-detail/post-detail.component";
 import {MessageComponent} from "./Components/Pages/Forum/message/message.component";
 import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
+import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-tags.component';
 
 const routes: Routes = [
   { path: 'user/timeline', component: TimelineComponent },
@@ -65,7 +66,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'posts/:postId', component: PostDetailComponent },
   { path: 'message', component: MessageComponent },
-  { path: 'posts/tags/:tagName', component: TimelineComponent },
+  { path: 'posts/tags/:tagName', component: PostsTagsComponent },
   { path: 'user/profile/:userId', component: ProfileUserComponent },
 
 

@@ -143,14 +143,17 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 						this.creatingComment = false;
 					} else {
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: 'create comment Success',
+							data: 'create comment successfully ',
 							panelClass: ['bg-danger'],
 
 							duration: 5000
+							
 						});
-						this.creatingComment = false;
-						this.ngOnInit();
+						this.creatingComment = true;
 					}
+					this.creatingComment = true;
+					this.loadComments(1); 
+
 				}
 			)
 		);

@@ -5,7 +5,7 @@
 		</div>
 		<mat-card-title>
 			<a href="/user/profile/{{ postResponse.post.author.idUser }}" class="text-decoration-none text-dark">
-				{{ postResponse.post.author.firstName + ' ' + postResponse.post.author.lastName }}
+				<span style="color: #754e8f;">{{ postResponse.post.author.firstName + ' ' + postResponse.post.author.lastName }}</span>
 			</a>
 		</mat-card-title>
 		<mat-card-subtitle>
@@ -66,7 +66,7 @@
 				<div class="ps-5" style="margin-top: -38px;">
 					<a class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer"
 						href="/user/profile/{{ postResponse.post.sharedPost.author.idUser }}">
-						{{ postResponse.post.sharedPost.author.firstName + ' ' + postResponse.post.sharedPost.author.lastName }}
+						<span style="color: #754e8f;"> {{ postResponse.post.sharedPost.author.firstName + ' ' + postResponse.post.sharedPost.author.lastName }}</span>
 					</a>
 
 					<br>
@@ -99,6 +99,11 @@
 	<hr class="divider mb-4">
 
 	<mat-chip-list>
+		<span class="me-3 cursor-pointer"
+		style="padding: 4px 10px !important; min-height: 28px;" (click)="openLikeDialog()">
+		
+	    </span>
+
 		<mat-chip class="me-3 cursor-pointer"
 			style="padding: 4px 10px !important; min-height: 28px;" (click)="openLikeDialog()">
 			Likes
