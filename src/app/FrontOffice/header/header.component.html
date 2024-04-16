@@ -98,9 +98,11 @@
                  class="border border-1 border-start-0 border-end-0"
                  [ngClass]="last ? '' : 'border-bottom-0'"
                  style="height: auto; line-height: 1.6; white-space: normal; font-size: 14px; padding: 16px 20px;">
+                 <span >  
                      <mat-icon color="primary" style="margin-right: 5px;" *ngIf="notification.type === 'POST_LIKE' || notification.type === 'COMMENT_LIKE'">favorite</mat-icon>
                      <mat-icon color="primary" style="margin-right: 5px;" *ngIf="notification.type === 'POST_COMMENT'">comment</mat-icon>
                      <mat-icon color="primary" style="margin-right: 5px;" *ngIf="notification.type === 'POST_SHARE'">share</mat-icon>
+                 </span>
 
                      <span class="fw-500" *ngIf="notification.sender">{{ notification.sender.firstName + ' ' + notification.sender.lastName }}</span>
                      <span class="fw-500 text-danger" *ngIf="!notification.sender">An App User</span>

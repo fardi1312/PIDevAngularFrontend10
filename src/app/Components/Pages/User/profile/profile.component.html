@@ -99,6 +99,8 @@
                 </div>
             </div>
 
+
+
             <div class="col-6 mb-4">
                 <div class="profile-posts">
                     <app-post *ngFor="let postResponse of profileUserPostResponses" id="{{'profilePost' + postResponse.post.id}}" [postResponse]="postResponse" [isDetailedPost]="false" (postDeletedEvent)="handlePostDeletedEvent($event)"></app-post>

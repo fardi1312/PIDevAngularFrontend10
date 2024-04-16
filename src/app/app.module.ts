@@ -122,6 +122,7 @@ import { TimelineComponent } from './Components/Pages/Forum/timeline/TimelineCom
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 import { SearchDialogComponent } from './Components/Pages/User/search-dialog/search-dialog.component';
+import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-tags.component';
 
 @NgModule({
   declarations: [
@@ -208,7 +209,8 @@ import { SearchDialogComponent } from './Components/Pages/User/search-dialog/sea
     FollowingFollowerListDialogComponent,
     TimelineComponent,
     ProfileUserComponent,
-    SearchDialogComponent
+    SearchDialogComponent,
+    PostsTagsComponent
 
   ],
   imports: [

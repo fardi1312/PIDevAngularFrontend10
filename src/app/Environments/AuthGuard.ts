@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
       if (userRole === 'ROLE_ADMIN') {
         return true; 
       } else {
-        this.router.navigate(['']); 
+        this.router.navigate(['/login']); 
         return false;
       }
     } 
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       if ('ROLE_USER' === 'ROLE_USER') {
         return true; 
       } else {
-        this.router.navigate(['']); 
+        this.router.navigate(['/login']); 
         return false;
       }
     }

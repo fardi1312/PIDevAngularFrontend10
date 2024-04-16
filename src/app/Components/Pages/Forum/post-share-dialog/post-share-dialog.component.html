@@ -13,8 +13,9 @@
                 </div>
                 <div class="ps-5" style="margin-top: -38px;">
                     <a class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer"
-                       [href]="'/user/profile/' + postShareResponse.post.author.idUser">{{ postShareResponse.post.author.firstName + ' ' +
-                    postShareResponse.post.author.lastName }}</a>
+                       [href]="'/user/profile/' + postShareResponse.post.author.idUser">
+                       <span style="color: #00008B;"> {{ postShareResponse.post.author.firstName + ' ' + postShareResponse.post.author.lastName }}</span>
+                    </a>
                     <br>
                     <span class="text-secondary d-inline-block">
 						<mat-icon class="align-middle w-auto h-auto" style="font-size: 16px;">watch_later</mat-icon>
