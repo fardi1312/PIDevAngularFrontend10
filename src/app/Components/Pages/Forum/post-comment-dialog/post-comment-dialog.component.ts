@@ -52,6 +52,8 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 	get content() { return this.commentFormGroup.get('content') }
 
 	ngOnInit(): void {
+		this.loadProfilePhotoUrl();
+
 		this.userService.getIdAuthenticatedUser().subscribe((userId: number) => {
 			this.authUserId = userId;
 		});
@@ -61,11 +63,12 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 		});
 		this.loadProfilePhotoUrl();
 
+
 		this.loadComments(1);
 	}
 
 	loadProfilePhotoUrl(): void {
-		this.userService.getProfilePhotoUrl1(this.authUserId ).subscribe(
+		this.userService.getProfilePhotoUrl1(1).subscribe(
 		  (imageUrl: string) => {
 			if (imageUrl){
 			this.imageUrl = imageUrl;
