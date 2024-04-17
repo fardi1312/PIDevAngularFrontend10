@@ -54,7 +54,7 @@ export class PostComponent implements OnInit, OnDestroy {
 	}
 
 	loadProfilePhotoUrl(): void {
-		this.userService.getProfilePhotoUrl1(this.postResponse.post.author.idUser ).subscribe(
+		this.userService.getProfilePhotoUrl1(4).subscribe(
 		  (imageUrl: string) => {
 			if (imageUrl){
 			this.imageUrl = imageUrl;
