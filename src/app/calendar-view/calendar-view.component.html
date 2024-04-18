@@ -120,14 +120,17 @@
 
 
 <!-- Table to display events -->
-<div class="clearfix"></div>
+<div class="clearfix"></div> 
+
 
 
 <!-- Modal template -->
 <!-- Inside your calendar component template -->
 <!-- Inside your calendar component template -->
 <!-- Modal template -->
-<ng-template #modalContent let-close="close">
+<ng-template #modalContent let-close="close">  
+  
+  
   <div class="modal-header">
     <h5 class="modal-title">Edit Event</h5>
     <button type="button" class="close" (click)="close()">
@@ -139,8 +142,23 @@
     <div *ngIf="modalData && modalData.event">
       <div class="form-group">
         <label for="title">Title:</label>
-        <input id="title" type="text" class="form-control" [(ngModel)]="modalData.event.title">
+        <input id="title" type="text" class="form-control" [(ngModel)]="modalData.event.title" [disabled]="!isEditable(modalData.event)">
       </div>
+      <div class="form-group" *ngIf="offererOrRequester(modalData.event) === 0">
+        <label for="requester">Requester:</label>
+        <input id="requester" type="text" class="form-control" [(ngModel)]="modalData.event.requester" [disabled]="!isEditable(modalData.event)">
+      </div>
+      <div class="form-group" *ngIf="offererOrRequester(modalData.event) === 1">
+        <label for="offerer">Offerer:</label>
+        <input id="offerer" type="text" class="form-control" [(ngModel)]="modalData.event.offerer" [disabled]="!isEditable(modalData.event)">
+      </div> 
+      <div class="form-group" *ngIf="offererOrRequester(modalData.event) === -1"> 
+        <label for="requester">Requester:</label>
+        <input id="requester" type="text" class="form-control" [(ngModel)]="modalData.event.requester" [disabled]="!isEditable(modalData.event)">
+        <label for="offerer">Offerer:</label>
+        <input id="offerer" type="text" class="form-control" [(ngModel)]="modalData.event.offerer" [disabled]="!isEditable(modalData.event)">
+      </div> 
+
       <div class="form-group">
         <label for="start">Start Date:</label>
         <!-- Input for start date using Flatpickr -->
@@ -155,6 +173,7 @@
           dateFormat="Y-m-dTH:i"
           altFormat="F j, Y H:i"
           placeholder="Not set"
+          [disabled]="!isEditable(modalData.event)"
           (change)="refresh.next()"
         >
       </div>
@@ -170,19 +189,75 @@
           [altInput]="true"
           [enableTime]="true"
           dateFormat="Y-m-dTH:i"
-          altFormat="F j, Y H:i"
+          altFormat="F j, Y H:i" 
           placeholder="Not set"
+          [disabled]="!isEditable(modalData.event)"
           (change)="refresh.next()"
         >
-      </div>
-    </div>
+      </div>  
+      
+    </div> 
+  </div>   
+  <ng-container *ngIf="modalData?.event?.fixedRequester && modalData?.event?.fixedOfferer && modalData?.event?.acceptRenter!=null&&modalData?.event?.acceptRenting!=null">
+    <span class="confirmation-text">Confirmed</span>
+  </ng-container> 
+  <ng-container *ngIf="modalData?.event?.fixedRequester == null && modalData?.event?.fixedOfferer && modalData?.event?.fixedOfferer && offererOrRequester(modalData!.event) == 1">
+    <span class="confirmation-text pending-text">waiting for your Confirmation </span>
+  </ng-container>   
+
+  <ng-container *ngIf="modalData?.event?.fixedRequester == null && modalData?.event?.fixedOfferer && modalData?.event?.fixedOfferer && offererOrRequester(modalData!.event) == 0">
+    <span class="confirmation-text pending-text">waiting for {{modalData?.event?.requester}} Confirmation </span>
+  </ng-container>   
+
+  
+  <ng-container *ngIf="modalData?.event?.acceptRenter == null && modalData?.event?.acceptRenting && offererOrRequester(modalData!.event) == 0">
+    <span class="confirmation-text pending-text">Waiting for your Confirmation  </span>
+      </ng-container>  
+  <ng-container *ngIf="modalData?.event?.acceptRenter == null && modalData?.event?.acceptRenting && offererOrRequester(modalData!.event) == 1">
+    <span class="confirmation-text pending-text">waiting for confirmation from : {{modalData!.event.requester}}</span>
+  </ng-container> 
+
+  <ng-container *ngIf="modalData?.event?.acceptRenting == null && modalData?.event?.acceptRenter  ">
+    <span class="confirmation-text pending-text">waiting for Confirmation From {{ modalData!.event.requester }}</span>
+  </ng-container>
+
+
+
+
+  <ng-container *ngIf="modalData?.event?.fixedRequester == false && modalData?.event?.fixedOfferer">
+    <span class="confirmation-text refused-text">Refused</span>
+  </ng-container>
+  <div class="modal-footer"> 
+    <!-- Show specific buttons when the condition is met -->
+    <ng-container *ngIf="offererOrRequester(modalData!.event) == 0 && isCurrentDateSuperior(modalData!.event) && modalData?.event?.fixedRequester && modalData?.event?.fixedOfferer"> 
+    <button type="button" class="btn btn-primary" (click)="acceptRenter(modalData!.event)" [disabled]="modalData!.event.acceptRenter!=null">Accept Renter</button> 
+    <button type="button" class="btn btn-primary" (click)="refuseRenter(modalData!.event)" [disabled]="modalData!.event.acceptRenter!=null">Refuse Renter</button>
+
+    </ng-container>  
+
+    <ng-container *ngIf="offererOrRequester(modalData!.event) == 1 && isCurrentDateSuperior(modalData!.event) && modalData?.event?.fixedRequester && modalData?.event?.fixedOfferer"> 
+
+      <button type="button" class="btn btn-primary" (click)="acceptRenting(modalData!.event) "[disabled]="modalData?.event?.acceptRenting">Accept Renting</button> 
+      <button type="button" class="btn btn-primary" (click)="refuseRenting(modalData!.event) "[disabled]="modalData?.event?.acceptRenting!=null">Refuse Renting</button>
+
+    </ng-container>
+
+  
+    <!-- Show other buttons -->
+    <ng-container *ngIf="offererOrRequester(modalData!.event) == 0 && !(isCurrentDateSuperior(modalData!.event) && modalData?.event?.fixedRequester && modalData?.event?.fixedOfferer)">
+      <button type="button" class="btn btn-primary" [disabled]="!isEditable(modalData!.event)" (click)="saveAndClose(modalData!.event)">Save Changes</button> 
+      <button type="button" class="btn btn-primary" [disabled]="!isEditable(modalData!.event)" (click)="fix(modalData!.event)">Fix Time</button>
+      <button type="button" class="btn btn-danger" (click)="deleteAndClose(modalData!.event)">Delete</button>
+    </ng-container> 
+  
+    <!-- Show buttons for requester -->
+    <ng-container *ngIf="offererOrRequester(modalData!.event) !== 0 && !modalData!.event.fixedRequester ">
+      <button type="button" class="btn btn-success" [disabled]="modalData!.event.fixedRequester" (click)="accept(modalData!.event)">Accept</button>
+      <button type="button" class="btn btn-danger" [disabled]="modalData!.event.fixedRequester" (click)="refuse(modalData!.event)">Refuse</button>
+    </ng-container> 
   </div>
-  <div class="modal-footer">
-    <!-- Save changes button (disabled if modalData or modalData.event is undefined) -->
-    <button type="button" class="btn btn-primary" [disabled]="!modalData || !modalData.event" (click)="saveAndClose(modalData!.event)">Save Changes</button>
-    <!-- Delete button -->
-    <button type="button" class="btn btn-danger" [disabled]="!modalData || !modalData.event" (click)="deleteAndClose(modalData!.event)">Delete</button>
-  </div>
-</ng-template>
+    </ng-template>   
+
+  
   
 <app-footer></app-footer>

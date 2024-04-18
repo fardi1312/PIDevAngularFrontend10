@@ -12,7 +12,8 @@ import { RoomDetails } from "./RoomDetails";
     furnitureCollocation: FurnitureCollocation;
     descriptionCollocation: string;
     imageCollocation: string;
-    roomDetailsList: RoomDetails[]; 
+    roomDetailsList: RoomDetails[];  
+    averageRating:number;
   }
 export enum Gender {
   MALE = 'Male',

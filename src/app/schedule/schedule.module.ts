@@ -17,7 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';  
 import { AddEventDialogComponent } from '../calendar-view/add-event-dialog/add-event-dialog.component'; 
-import { MatDialogModule,MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'; 
+import { MatDialogModule,MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';  
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 
 
@@ -28,11 +30,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [CalendarViewComponent,AddEventDialogComponent],
-  imports: [SharedModule,
-    
+  imports: [SharedModule, 
 
     RouterModule, 
-    CommonModule,  
+    CommonModule,   
+    QRCodeModule, 
     MatDialogModule, 
     NgbModalModule,  
     NgxMaterialTimepickerModule, 
@@ -47,7 +49,7 @@ const routes: Routes = [
       useFactory: adapterFactory,
     }),
   ],
-  exports: [CalendarViewComponent],
+  exports: [],
   providers: [
     CalendarUtils,
     { provide: MAT_DIALOG_DATA, useValue: {} }

@@ -65,7 +65,8 @@ idUser= 1 ;
   
   idOffer: number = 0;
   collocationOffer: CollocationOffer = {
-    idCollocationOffer: 0,
+    idCollocationOffer: 0, 
+    averageRating:0, 
     location: '',
     houseType: 0,
     availablePlaces: 0,
@@ -148,7 +149,20 @@ idUser= 1 ;
         
   goToRequestList(): void {
     this.router.navigate(['/Collocation/showRequest']);
+  } 
+  checkDescription(): boolean {
+    const forbiddenWords = ['badword1', 'badword2']; 
+
+    for (const word of forbiddenWords) {
+      if (this.collocationRequest.description.toLowerCase().includes(word)) {
+        return true; 
+      }
+    }
+
+    return false; 
   }
+
+
 
   goToOfferList() {
     this.router.navigate(['/Collocation/showOffer']); 

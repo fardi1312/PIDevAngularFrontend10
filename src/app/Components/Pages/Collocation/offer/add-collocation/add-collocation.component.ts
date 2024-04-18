@@ -11,7 +11,8 @@ import { OfferService } from 'src/app/Services/Collocation/offer.service';
 })
 export class AddCollocationComponent implements OnInit {
   collocationOffer: CollocationOffer = {
-    idCollocationOffer: 0,
+    idCollocationOffer: 0, 
+    averageRating:0, 
     location: '',
     houseType: 0,
     availablePlaces: 0,

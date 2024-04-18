@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class MyOffersComponent { 
   offers: CollocationOffer[] = []; 
-  offer:CollocationOffer = {
+  offer:CollocationOffer = { 
+    averageRating:0, 
     idCollocationOffer: 0,
     location: '',
     houseType: 0,

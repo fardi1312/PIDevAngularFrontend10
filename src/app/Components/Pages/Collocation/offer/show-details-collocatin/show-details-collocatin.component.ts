@@ -12,7 +12,8 @@ export class ShowDetailsCollocatinComponent implements OnInit {
 
 
   id!: number;
-  collocationOffer: CollocationOffer = {
+  collocationOffer: CollocationOffer = { 
+    averageRating:0, 
     idCollocationOffer: 0,
     location: '',
     houseType: 0,

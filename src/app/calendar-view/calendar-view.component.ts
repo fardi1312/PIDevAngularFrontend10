@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Inject } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarEventTimesChangedEventType, CalendarView } from 'angular-calendar';
 import { Observable, Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleService } from '../Services/Collocation/schedule.service';
 import { CustomEvent } from './CustomEvent';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,12 @@ import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.com
 import { addHours, isSameDay, isSameMonth } from 'date-fns';
 import { ExternalEventService } from '../Services/Collocation/external-event.service';
 import { ExternalEvent } from '../Model/Collocation/ExternalEvent';
+import { MatDialogRef } from '@angular/material/dialog';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { RoomDetails } from '../Model/Collocation/RoomDetails';
+import { CollocationOffer, FurnitureCollocation, Gender } from '../Model/Collocation/CollocationOffer';
+import { CollocationRequest } from '../Model/Collocation/CollocationRequest';
+import { OfferService } from '../Services/Collocation/offer.service';
 
 @Component({
   selector: 'app-calendar-view',
@@ -30,8 +36,26 @@ import { ExternalEvent } from '../Model/Collocation/ExternalEvent';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarViewComponent implements OnInit {
-  externalEvents: CalendarEvent[] = [];
-  idUser = 1;
+  externalEvents: CalendarEvent[] = []; 
+  warningModal!: NgbModalRef;
+  collocationOffer: CollocationOffer = {
+    idCollocationOffer: 0, 
+    averageRating:0, 
+    location: '',
+    houseType: 0,
+    availablePlaces: 0,
+    dateRent: new Date(),
+    dateOffer: new Date(),
+    gender: Gender.MALE,
+    price: 0,
+    furnitureCollocation: FurnitureCollocation.Furnitured,
+    descriptionCollocation: '',
+    imageCollocation: '',
+    roomDetailsList: [] , 
+  }   
+
+
+  idUser =1; 
   schedules: CustomEvent[] = [];
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -59,41 +83,139 @@ export class CalendarViewComponent implements OnInit {
   activeDayIsOpen: boolean = true;
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
-
-  constructor(
-    private externalEventService: ExternalEventService,
+ 
+  constructor(   
+    private offerService:OfferService,
+    private externalEventService: ExternalEventService, 
+    private modalService: NgbModal, 
     private modal: NgbModal,
     private scheduleService: ScheduleService,
-    private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+    private dialog: MatDialog, 
 
-  ngOnInit(): void {
-    this.fetchSchedules();
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {  
+
   }
 
+
+  ngOnInit(): void {
+    this.fetchSchedules(); 
+
+  } 
+
+  
   fetchSchedules(): void {
     console.log("fetch initialized");
     this.scheduleService.getAllEventsByUser(this.idUser).subscribe(schedules => {   
-      schedules.forEach(event => {
-
+      // Filter events based on the condition
+      const filteredSchedules = schedules.filter(schedule => {
+        // Check if the user is an offerer or requester
+        const userType = this.offererOrRequester(schedule);
+        // Return false if user is the requester and event's fixedOfferer is false
+        if (userType === 1 && !schedule.fixedOfferer) {
+          return false;
+        }
+        return true;
       });
-    
-      this.schedules = schedules.map(schedule => new CustomEvent(schedule, this.scheduleService));
+      
+      this.schedules = filteredSchedules.map(schedule => new CustomEvent(schedule, this.scheduleService));
+      
+      // Convert custom events to calendar events
       this.events = this.schedules.map(schedule => {
         const calendarEvent = schedule.toCalendarEvent();
-        calendarEvent.draggable = true; // Set draggable to true
-        calendarEvent.resizable = {
-          beforeStart: true,
-          afterEnd: true
-        };  
         return calendarEvent;
       });
+      
       this.refresh.next();
     });
   }
-  
-  eventClicked({ event }: { event: CalendarEvent }): void {
+    offererOrRequester(event : CalendarEvent) : number { 
+    if (this.idUser == event.idOfferer)  
+      return 0 ;  
+    else if (this.idUser == event.idRequester) { 
+      return  1 
+    }
+    else { 
+      return - 1 ; 
+    }
+    
+  }  
+  isEditable(event:CalendarEvent):boolean { 
+    if (this.offererOrRequester(event) == 0 && event.fixedOfferer == true && event.fixedRequester!=false) {  
+        return false ; 
+    } 
+    else if (this.offererOrRequester(event) == 1 ) { 
+      return false ; 
+    } 
+      return true ; 
+     
+    
+  }   
+
+  acceptRenter(event: CalendarEvent):void {    
+    this.offerService.getCollocationOfferById(event.collocationOfferId).subscribe(
+      (offer: CollocationOffer) => {
+        
+        this.collocationOffer = offer;
+      },
+      (error: any) => {
+        // Handle errors that occur during retrieval
+        console.error('Error retrieving collocation offer:', error);
+      } 
+    );
+    console.log(event.collocationOfferId) ; 
+  this.scheduleService.acceptRenter( event).subscribe(
+    (updatedEvent: CalendarEvent) => { 
+      this.refresh.next() ; 
+
+      console.log('Event updated successfully:', updatedEvent);   
+      const contractData = this.generateContract(this.collocationOffer);
+      this.saveContractAsPDF(contractData);  
+
+      this.fetchSchedules() ; 
+
+      this.modal.dismissAll();  
+      alert("Congratulations on finding the perfect Roomie !!!!!") 
+      if (event.acceptRenting == true) {
+      this.fetchSchedules() ; 
+      }
+    }, 
+    (error: any) => {
+      console.error('Error updating event:', error);
+    }
+  );
+}  
+refuseRenting(event:CalendarEvent):void {  
+  const redirectUrl = 'http://localhost:4200/Collocation/addFeedback/' + event.collocationOfferId;  
+  const confirmation = confirm(`Are you sure you want to refuse the renting? Click OK to proceed.`);
+  if (confirmation) {  
+    window.location.href = redirectUrl;
+    this.deleteEvent(event) ; 
+    alert(`You have refused the renting. You can view more details at: ${redirectUrl}`);
+  }
+
+
+}
+
+acceptRenting (event:CalendarEvent):void {    
+
+  this.scheduleService.acceptRenting(event).subscribe(
+    (updatedEvent: CalendarEvent) => {
+      console.log('Event updated successfully:', updatedEvent);
+      this.modal.dismissAll(); 
+      alert("Congratulations on finding the perfect Roomie !!!!!");  
+      const contractData = this.generateContract(this.collocationOffer);
+      this.saveContractAsPDF(contractData);  
+      if (event.acceptRenter == true) {
+        this.fetchSchedules(); 
+        }
+    },
+    (error: any) => {
+      console.error('Error updating event:', error);
+    }
+  );
+} 
+    eventClicked({ event }: { event: CalendarEvent }): void {
     this.modalData = { action: 'Edit', event };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
@@ -130,16 +252,26 @@ export class CalendarViewComponent implements OnInit {
     const newEvent: CalendarEvent = {
       id: this.events.length + 1,
       title: 'New event',
+
+
+      idOfferer: 0,
+      collocationOfferId: 0,  
+      QrCodeOfferer:'sdsdfsfsfsdfsdfsdfsdf' ,  
+      QrCodeRequester:'sdfsdfsdfsdfsfdsf',
+      idRequester: 0,
       start: currentDateTime,
       end: oneHourLaterDateTime, 
-      offerer:'',  
-      qrCodeOfferer:  new Uint8Array(0),
-      qrCodeRequester:new Uint8Array(0), 
-      requester:'', 
+      idCollocationRequest: 0, 
+      fixedOfferer: false,
+      fixedRequester: false,
+      offerer: '',
+      requester: '',
       draggable: true,
       resizable: { beforeStart: true, afterEnd: true },
       actions: this.actions,
-      meta: { id: this.schedules.length + 1 }
+      meta: { id: this.schedules.length + 1 }, 
+      acceptRenter : false, 
+      acceptRenting : false     
     };
   
     this.saveEvent(newEvent); // Save the newly added event
@@ -155,8 +287,6 @@ export class CalendarViewComponent implements OnInit {
       }
     );
   } 
-
-  
 
   deleteEvent(event: CalendarEvent): void {
     const eventId = event.id;
@@ -175,12 +305,100 @@ export class CalendarViewComponent implements OnInit {
 
   setView(view: CalendarView) {
     this.view = view;
+  } 
+  refuseRenter(event:CalendarEvent) : void {  
+    const confirmation = confirm(`Are you sure you want to refuse the renting? Click OK to proceed.`);
+    if (confirmation) {   
+      this.deleteEvent(event) ; 
+    } 
+
   }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-  }
+  } 
+  accept(event: CalendarEvent): void {    
+    event.fixedRequester = true; 
+    this.scheduleService.updateEventForUser(this.idUser, event).subscribe(
+      async (updatedEvent: CalendarEvent) => {
+        try {
+          console.log('Event updated successfully:', updatedEvent);  
+          this.modal.dismissAll();
+        } catch (error) {
+          console.error('Error sending email:', error);
+        }
+      },
+      (error: any) => {
+        console.error('Error updating event:', error);
+      }
+    );
+  }  
+  
+refuse(event:CalendarEvent):void {   
+  event.fixedRequester = false ;  
+  event.draggable= true, 
+  event.resizable = { 
+    beforeStart:true , 
+    afterEnd:true 
+  }   
+  this.scheduleService.updateEventForUser(this.idUser, event).subscribe(
+    (updatedEvent: CalendarEvent) => {
+      console.log('Event updated successfully:', updatedEvent);
+      this.modal.dismissAll();
+    },
+    (error: any) => {
+      console.error('Error updating event:', error);
+    }
+  );
 
+} 
+isCurrentDateSuperior(event:CalendarEvent): boolean {
+  const currentDate = new Date(); 
+  if(event){
+  return currentDate > event.start;
+}
+  else 
+    return false ; 
+
+}
+
+
+
+fix(event: CalendarEvent): void {
+  const currentTime = new Date();
+  const oneHourLater = new Date(currentTime.getTime() + (1 * 60 * 60 * 1000)); // Add one hour to the current time
+
+  // Check if the event's start time is later than the current time by at least an hour
+     /* if (new Date(event.start) > oneHourLater) */  {
+    event.fixedOfferer = true; 
+    event.fixedRequester = null ; 
+    event.draggable = false;
+    event.resizable = {
+      beforeStart: false,
+      afterEnd: false
+    };
+ 
+    this.scheduleService.updateEventForUser(this.idUser, event).subscribe(
+      async (updatedEvent: CalendarEvent) => { // Mark the callback function as async
+        console.log('Event updated successfully:', updatedEvent); 
+        try {
+          console.log('sending mail'); 
+          await this.scheduleService.sendMail(event).toPromise(); // await inside async function
+
+          this.modal.dismissAll();
+        } catch (error) {
+          console.error('Error sending email:', error);
+        }
+      },
+      (error: any) => {
+        console.error('Error updating event:', error);
+      }
+    );
+  }/*   else { 
+    alert("please select a Time at least an hour from now") ; 
+  }   */
+}
+  
 saveAndClose(event: CalendarEvent): void {
   this.scheduleService.updateEventForUser(this.idUser, event).subscribe(
     (updatedEvent: CalendarEvent) => {
@@ -262,7 +480,7 @@ saveAndClose(event: CalendarEvent): void {
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
     const isExternalEvent = this.isExternalEvent(event); // Check if it's an external event
-    if (isExternalEvent) { // Do nothing if it's an external event
+    if (isExternalEvent) { 
       return;
     }
     // Update the event if it's not an external event
@@ -284,6 +502,9 @@ saveAndClose(event: CalendarEvent): void {
         end: newEnd,
       });
     }
+  } 
+  getQrCodeOfferer(event : CalendarEvent) { 
+    return event.QrCodeOfferer.toString() ; 
   }
 
   isExternalEvent(event: CalendarEvent): boolean {
@@ -305,4 +526,67 @@ saveAndClose(event: CalendarEvent): void {
       console.log("External event already exists on the calendar.");
     }
   }
+
+  generateContract(offer: CollocationOffer): string {
+    // Check if request.date is a Date object before calling toDateString
+    const rentDate: string = offer.dateRent.toString();
+    const priceToPay: number = offer.price; 
+    const place: string = offer.location; 
+    const clientName: number = this.idUser;  
+    const serviceDescription: string = offer.descriptionCollocation; 
+
+    const contractContent = `
+        Contract
+        --------
+        
+        This contract is made between ${clientName} and the service provider.
+        
+        
+        Rent Date: ${rentDate}
+        Location: ${place}
+        Price to Pay: ${priceToPay}
+        Service Description: ${serviceDescription}  
+        
+
+        Terms:
+        - Service Description:
+          The service provider agrees to provide ${serviceDescription} starting from ${rentDate}.
+        - Payment Terms:
+          The client agrees to pay ${priceToPay} for the service provided on a payment frequency basis.
+        - Termination:
+          Either party may terminate this contract with a month written notice to the other party.
+        - Governing Law:
+          This contract shall be governed by and construed in accordance with the laws of Collocation. 
+
+
+
+
+         Co&Co all rights are reserved
+    `;
+
+    return contractContent;
+}
+
+  async saveContractAsPDF(contractData: string): Promise<void> {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage();
+    page.drawText(contractData, {
+      x: 50,
+      y: page.getHeight() - 100,
+      size: 12,
+      font: await pdfDoc.embedFont(StandardFonts.Helvetica),
+      color: rgb(0, 0, 0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'contract.pdf';
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
 }  

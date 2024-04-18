@@ -35,15 +35,19 @@
 
         <div class="shop-date-offer mb-0 mt-4">
           <span class="badge custom-badge">{{ offer.dateOffer | date: 'yyyy-MM-dd' }}</span>
-        </div>
-
+          <div class="shop-average-rating mt-4">
+            <span class="badge bg-primary rating-badge">
+              {{ offer.averageRating > 0 ? 'Average Rating: ' + roundAverageRating(offer.averageRating) : 'No feedbacks yet' }}
+            </span>
+                      </div>
+          
         <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2"
           (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
         <p class="vertical-space"></p>
 
         <div *ngIf="card.classList.contains('hovered')" class="btn-group mt-2">
           <button class="btn btn-danger" (click)="deleteOffer(offer.idCollocationOffer)">Delete</button>
-          <button class="btn btn-success" (click)="updateOffer(offer.idCollocationOffer)">Update</button>
+          <button class="btn btn-success" (click)="updateOffer(offer.idCollocationOffer)">Update</button> 
         </div>
 
       </div>

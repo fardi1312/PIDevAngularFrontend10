@@ -5,9 +5,6 @@ import { CollocationOffer, FurnitureCollocation, Gender } from '../Model/Colloca
 import { RequestService } from '../Services/Collocation/request.service';
 import { CollocationRequest, RequestEnum } from '../Model/Collocation/CollocationRequest';
 import { RoomDetails } from '../Model/Collocation/RoomDetails'; 
-import { saveAs } from 'file-saver'; 
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-
 
 @Component({
   selector: 'app-my-offer',
@@ -29,7 +26,8 @@ export class MyOfferComponent implements OnInit {
   collocationRequests: CollocationRequest[] = []; 
 
   collocationOffer: CollocationOffer = {
-    idCollocationOffer: 0,
+    idCollocationOffer: 0, 
+    averageRating:0, 
     location: '',
     houseType: 0,
     availablePlaces: 0,
@@ -66,28 +64,18 @@ export class MyOfferComponent implements OnInit {
         response => {
           console.log(response);
           const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
-          if (acceptedRequest) { 
-            window.location.reload(); // Reload the page after an error 
-
-            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
-            this.saveContractAsPDF(contractData);
-          } else {
-            console.error("Accepted request not found.");
-          }
+          if (acceptedRequest) {  
+            window.location.reload(); 
+            alert("please check your Calendar") ;  
+          } 
         },
-        error => { 
-          window.location.reload(); // Reload the page after an error 
+        error => {  
 
+          window.location.reload(); 
+          alert("please check your Calendar") ;  
           console.error(error);
-          const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
-          if (acceptedRequest) {
-            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
-            this.saveContractAsPDF(contractData);
-          } else {
-            console.error("Accepted request not found.");
-          }
           this.sendMail(idRequest);
-
+ 
         }
       );
   }
@@ -119,7 +107,7 @@ export class MyOfferComponent implements OnInit {
       );
   } 
   
-  generateContract(request: CollocationRequest, offer: CollocationOffer): string {
+/*   generateContract(request: CollocationRequest, offer: CollocationOffer): string {
     // Check if request.date is a Date object before calling toDateString
     const startDate: string = request.date.toString();    
     const rentDate: string = offer.dateRent.toString();
@@ -160,28 +148,7 @@ export class MyOfferComponent implements OnInit {
 
     return contractContent;
 }
-
-  async saveContractAsPDF(contractData: string): Promise<void> {
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage();
-    page.drawText(contractData, {
-      x: 50,
-      y: page.getHeight() - 100,
-      size: 12,
-      font: await pdfDoc.embedFont(StandardFonts.Helvetica),
-      color: rgb(0, 0, 0),
-    });
-
-    const pdfBytes = await pdfDoc.save();
-
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'contract.pdf';
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
+ */
   isAcceptDisabled(request: CollocationRequest): boolean {
     return request.request === 'Canceled' || this.collocationOffer.availablePlaces === 0;
   }

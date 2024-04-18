@@ -8,8 +8,6 @@ import { ShowCollocationComponent } from './Components/Pages/Collocation/offer/s
 import { UpdateCollocationComponent } from './Components/Pages/Collocation/offer/update-collocation/update-collocation.component';
 import { ShowDetailsCollocatinComponent } from './Components/Pages/Collocation/offer/show-details-collocatin/show-details-collocatin.component';
 import { AddPreferencesComponent } from './Components/Pages/Collocation/Preferences/add-preferences/add-preferences.component';
-import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
-import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component'; 
 import { ShowFeedbackComponent } from './Components/Pages/Collocation/feedback/show-feedback/show-feedback.component';
 import { ShowDetailsFeedbackComponent } from './Components/Pages/Collocation/feedback/show-details-feedback/show-details-feedback.component';
 import { AddFeedbackComponent } from './Components/Pages/Collocation/feedback/add-feedback/add-feedback.component';
@@ -22,6 +20,8 @@ import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-re
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { MyOffersComponent } from './my-offers/my-offers.component'; 
 import { MyOfferComponent } from './my-offer/my-offer.component';
+import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component';
+import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
 
 
 const routes: Routes = [

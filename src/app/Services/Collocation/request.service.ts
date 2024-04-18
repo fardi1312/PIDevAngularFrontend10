@@ -8,6 +8,8 @@ import { CollocationRequest } from 'src/app/Model/Collocation/CollocationRequest
 })
 export class RequestService {
 
+
+ 
   private apiUrl = 'http://localhost:8083/api/collocationRequest';
 
   constructor(private httpClient: HttpClient) { }

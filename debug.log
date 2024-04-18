@@ -1,0 +1,5 @@
+[0401/181913.316:ERROR:registration_protocol_win.cc(107)] CreateFile: The system cannot find the file specified. (0x2)
+[0401/182007.548:ERROR:registration_protocol_win.cc(107)] CreateFile: The system cannot find the file specified. (0x2)
+[0402/003113.119:ERROR:registration_protocol_win.cc(107)] CreateFile: The system cannot find the file specified. (0x2)
+[0409/164009.833:ERROR:registration_protocol_win.cc(135)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0409/164009.836:ERROR:registration_protocol_win.cc(107)] CreateFile: The system cannot find the file specified. (0x2)

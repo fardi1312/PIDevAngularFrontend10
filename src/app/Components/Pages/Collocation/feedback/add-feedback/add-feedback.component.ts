@@ -28,7 +28,8 @@ setRating(rating: number) {
 
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    location: '',
+    location: '', 
+    averageRating:0, 
     houseType: 0,
     availablePlaces: 0,
     dateRent: new Date(),
