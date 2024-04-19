@@ -32,11 +32,16 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  } ,
-/*   "paths": {
+  } ,  
+
+  "include": [
+    "src",
+    "node_modules"
+  ],
+   "paths": {
     "file-saver-es": [
       "@types/file-saver"
     ]
-   }*/  
+   }  
 
 } 

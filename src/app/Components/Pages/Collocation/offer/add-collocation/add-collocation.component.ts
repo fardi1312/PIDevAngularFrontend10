@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/Model/Collocation/CollocationOffer';
 import { RoomDetails, RoomType } from 'src/app/Model/Collocation/RoomDetails';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
+import { OfferService } from 'src/app/Services/Collocation/offer.service'; 
+
 
 @Component({
   selector: 'app-add-collocation',

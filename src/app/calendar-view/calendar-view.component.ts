@@ -55,7 +55,7 @@ export class CalendarViewComponent implements OnInit {
   }   
 
 
-  idUser =1; 
+  idUser =2; 
   schedules: CustomEvent[] = [];
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -256,8 +256,6 @@ acceptRenting (event:CalendarEvent):void {
 
       idOfferer: 0,
       collocationOfferId: 0,  
-      QrCodeOfferer:'sdsdfsfsfsdfsdfsdfsdf' ,  
-      QrCodeRequester:'sdfsdfsdfsdfsfdsf',
       idRequester: 0,
       start: currentDateTime,
       end: oneHourLaterDateTime, 
@@ -503,9 +501,6 @@ saveAndClose(event: CalendarEvent): void {
       });
     }
   } 
-  getQrCodeOfferer(event : CalendarEvent) { 
-    return event.QrCodeOfferer.toString() ; 
-  }
 
   isExternalEvent(event: CalendarEvent): boolean {
     return this.externalEvents.includes(event);

@@ -1,0 +1,31 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-6 mx-auto" *ngFor="let club of clubs"
+    style="border-bottom: 1px solid #ccc; padding-bottom: 15px;" #card>
+    <div class="card mb-3" (mouseenter)="card.classList.add('hovered')"
+      (mouseleave)="card.classList.remove('hovered')">
+      <div class="shop-thumb">
+        <div class="shop-image-wrap">
+          <a href="shop-detail.html">
+            <img [src]="club.logo" class="shop-image img-fluid" alt="">
+          </a>
+        </div> 
+
+        <div class="shop-body"> 
+            <h2>{{ club.name }}</h2>
+
+          <h4>{{ club.category }}</h4>
+          <p>description:  {{ club.description }}</p>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<app-footer></app-footer>

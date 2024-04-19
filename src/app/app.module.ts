@@ -12,8 +12,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { TemplateFrontComponent } from './FrontOffice/template-front/template-front.component';
 import { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
@@ -35,16 +33,17 @@ import { DeleteRequestComponent } from './Components/Pages/Collocation/delete-re
 import { MyOffersComponent } from './my-offers/my-offers.component'; 
 import { MyOfferComponent } from './my-offer/my-offer.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import * as dayjs from 'dayjs/esm'; 
-import {saveAs} from 'file-saver'
 import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
 import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component';
+import { AddClubComponent } from './Components/Pages/add-club/add-club.component'; 
 
 
 
 @NgModule({
-  declarations: [ 
+  declarations: [  
+
     AppComponent, 
+    AddClubComponent,  
     UpdateFeedbackComponent,  
     ShowRequestComponent,  
     HeadBackComponent,  

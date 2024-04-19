@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CollocationPreferences, Gender, Interest, Pets, RoomType } from 'src/app/Model/Collocation/CollocationPreferences';
+import { CollocationPreferences,  Interest, Pets } from 'src/app/Model/Collocation/CollocationPreferences'; 
+import { RoomType } from 'src/app/Model/Collocation/RoomDetails'; 
+import { Gender } from 'src/app/Model/Collocation/CollocationOffer';
 import { PreferencesService } from 'src/app/Services/Collocation/preferences.service'; 
 
 
@@ -22,9 +24,9 @@ export class AddPreferencesComponent {
     pets: Pets.No,
     smoking: false,
     budget: 0,
-    gender: Gender.Male,
+    gender: Gender.MALE,
     interest: Interest.ART,
-    roomType: RoomType.Single,
+    roomType: RoomType.SINGLE,
     houseType: 0,
     location: ''
   };

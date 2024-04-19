@@ -2,7 +2,7 @@ import { CalendarEvent, CalendarEventAction } from "angular-calendar";
 import { EventColor } from "calendar-utils"; 
 import { ScheduleService } from "../Services/Collocation/schedule.service"; 
 import { parseISO } from 'date-fns'; 
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 import { CollocationOffer } from "../Model/Collocation/CollocationOffer";
 
 
@@ -19,8 +19,6 @@ export class CustomEvent implements CalendarEvent {
     collocationOfferId:number ; 
     offerer:string ; 
     color?: EventColor;   
-    QrCodeRequester:string ; 
-    QrCodeOfferer: string; 
     fixedOfferer:Boolean ;  
     idCollocationRequest:number ; 
     fixedRequester:Boolean | null; 
@@ -40,8 +38,6 @@ export class CustomEvent implements CalendarEvent {
         this.start = eventData.start;  
         this.fixedOfferer=eventData.fixedOfferer ; 
         this.fixedRequester=eventData.fixedRequester ;    
-        this.QrCodeOfferer = eventData.QrCodeOfferer ; 
-        this.QrCodeRequester = eventData.QrCodeRequester ; 
         this.idOfferer = eventData.idOfferer ;
         this.idRequester = eventData.idRequester   ;
         this.idCollocationRequest = eventData.idCollocationRequest 
@@ -109,8 +105,6 @@ export class CustomEvent implements CalendarEvent {
     
         return {
             id: this.id,  
-            QrCodeOfferer:this.QrCodeOfferer ,
-            QrCodeRequester:this.QrCodeRequester , 
             collocationOfferId:this.collocationOfferId, 
             start: startDate,
             end: endDate,

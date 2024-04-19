@@ -22,6 +22,7 @@ import { MyOffersComponent } from './my-offers/my-offers.component';
 import { MyOfferComponent } from './my-offer/my-offer.component';
 import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component';
 import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
+import { AddClubComponent } from './Components/Pages/add-club/add-club.component';
 
 
 const routes: Routes = [
@@ -49,10 +50,18 @@ const routes: Routes = [
       { path: 'updateRequest/:idRequest', component: UpdateRequestComponent },
       { path: 'deleteRequest/:idRequest', component: DeleteRequestComponent }, 
       {path: 'myOffers',component:MyOffersComponent}  ,
-      {path:'myOffer/:id',component:MyOfferComponent} 
+      {path:'myOffer/:id',component:MyOfferComponent}  
+      
 
     ],
-  },
+  }, 
+  {
+    path:'Club',
+    children :[ 
+      { path:'addClub', component : AddClubComponent}, 
+    ]
+  }, 
+
   {
     path: 'Preferences',
     children: [

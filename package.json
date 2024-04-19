@@ -25,7 +25,6 @@
     "@syncfusion/ej2-material-theme": "^25.1.35",
     "angular-calendar": "^0.31.0",
     "angularx-flatpickr": "^7.3.0",
-    "angularx-qrcode": "14.0.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
     "date-fns": "^2.29.3",
@@ -37,7 +36,7 @@
     "ngx-material-timepicker": "^13.1.1",
     "pdf-lib": "^1.17.1",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.6.2",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

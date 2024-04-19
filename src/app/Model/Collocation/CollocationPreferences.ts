@@ -24,12 +24,13 @@ export interface CollocationPreferences {
   
 
   
-  export enum Interest { 
+  export enum Interest {  
+    ART = 'ART', 
     SPORT = 'Sport',
     MUSIC = 'Music',
     TRAVEL = 'Travel',
     READING = 'Reading',
     OTHER = 'Other'
-  
+
   } 
 

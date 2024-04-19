@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <h2 class="card-header text-center">Add Club</h2> 
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()"> 
+            <div class="row mb-3">
+              <div class="col-12">
+                <label for="images" class="form-label fs-5">Club Logo</label>
+                <input type="file" name="images" id="images" class="form-control" (change)="handleFileInput($event)" multiple>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label fs-5">Club Name</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="club.name" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label fs-5">Description</label>
+              <textarea class="form-control" id="description" name="description" [(ngModel)]="club.description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label fs-5">Category</label>
+              <select class="form-select" id="category" name="category" [(ngModel)]="club.category" required>
+                <option value="SPORTS">Sports</option>
+                <option value="ACADEMIC">Academic</option>
+                <option value="CULTURAL">Cultural</option>
+                <option value="SOCIAL">Social</option>
+                <option value="PROFESSIONAL">Professional</option>
+                <option value="OTHER">Other</option>
+              </select> 
+            </div> 
+            <button type="submit" class="btn btn-orange w-100">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 mb-5"></div> 
+
+<app-footer></app-footer>

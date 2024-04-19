@@ -1,5 +1,5 @@
 
-enum Category {  
+export enum Category {  
     SPORTS,
     ACADEMIC,
     CULTURAL,
@@ -11,24 +11,22 @@ enum Category {
 export class Club {
   id: number;
   category: Category;
-  name: string;
-  description: string;
-  president: User;
-  members: User[];
+  name: string; 
+  description: string; 
+  registrationDate:Date ; 
 
   constructor(
     id: number,
     category: Category,
-    name: string,
+    name: string, 
+    registrationDate:Date, 
     description: string,
-    president: User,
-    members: User[]
   ) {
     this.id = id;
     this.category = category;
     this.name = name;
-    this.description = description;
-    this.president = president;
-    this.members = members;
+    this.description = description;  
+    this.registrationDate = registrationDate ; 
+    
   }
 }
