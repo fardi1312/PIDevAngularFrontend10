@@ -15,14 +15,15 @@ export class AddClubComponent implements OnInit{
   club:Club = {
     id: 0,
     name: '',
-    description: '', 
-    facebookUrl: '', 
-    twitterUrl: '', 
-    instagramUrl:'', 
+    description: '',
+    facebookUrl: '',
+    twitterUrl: '',
+    instagramUrl: '',
 
     category: Category.SPORTS,
     registrationDate: new Date(),
-    logo: ''
+    logo: '',
+    members: []
   };     
   showDropdown = false;
 

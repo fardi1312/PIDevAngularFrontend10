@@ -36,6 +36,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
 import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component';
 import { AddClubComponent } from './Components/Pages/add-club/add-club.component'; 
+import { ShowClubsComponent } from './Components/Pages/show-clubs/show-clubs.component';
 
 
 
@@ -66,7 +67,9 @@ import { AddClubComponent } from './Components/Pages/add-club/add-club.component
     UpdateRequestComponent,
     DeleteRequestComponent, 
     MyOffersComponent,  
-    MyOfferComponent, 
+    MyOfferComponent,  
+    AddClubComponent,  
+    ShowClubsComponent, 
     
   ],
   imports: [ 

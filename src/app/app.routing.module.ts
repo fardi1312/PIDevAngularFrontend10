@@ -58,6 +58,7 @@ const routes: Routes = [
   {
     path:'Club',
     children :[ 
+      { path:'showClubs', component : AddClubComponent}, 
       { path:'addClub', component : AddClubComponent}, 
     ]
   }, 
