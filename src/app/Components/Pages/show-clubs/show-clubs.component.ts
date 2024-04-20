@@ -14,14 +14,17 @@ export class ShowClubsComponent  implements OnInit{
     id: 0,
     name: '',
     description: '',
-    facebookUrl: '',
+    facebookUrl: '', 
+    otherCategory : '', 
     twitterUrl: '',
-    instagramUrl: '',
+    instagramUrl: '', 
+    openMembership: false,   
     category: Category.SPORTS,
     registrationDate: new Date(),
     logo: '',
     members: []
-  };       
+  };     
+  idUser = 1 ;    
    
   loadClubs() {
     this.clubService.getAllClubs().subscribe (
@@ -33,10 +36,23 @@ export class ShowClubsComponent  implements OnInit{
       }
     ); 
 
+  }  
+
+NavigateToMember(club: Club): void { 
+  console.log("initialized") ;  
+  if (club.openMembership) {  
+    console.log("entered if") ;  
+    this.clubService.addMemberToClub(club.id, this.idUser).subscribe(
+      (response) => {
+        console.log('Member added successfully:', response);
+      },
+      (error) => {
+        console.error('Error adding member:', error);
+    
+      }
+    );
   } 
-
-
-
+}
   constructor(private clubService:ClubService , private router: Router) {}
   ngOnInit(): void { 
     this.loadClubs() ;

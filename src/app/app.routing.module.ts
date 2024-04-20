@@ -23,6 +23,7 @@ import { MyOfferComponent } from './my-offer/my-offer.component';
 import { UpdatePreferencesComponent } from './Components/Pages/Collocation/Preferences/update-preferences/update-preferences.component';
 import { ShowPreferencesComponent } from './Components/Pages/Collocation/Preferences/show-preferences/show-preferences.component';
 import { AddClubComponent } from './Components/Pages/add-club/add-club.component';
+import { ShowClubsComponent } from './Components/Pages/show-clubs/show-clubs.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,7 @@ const routes: Routes = [
   {
     path:'Club',
     children :[ 
-      { path:'showClubs', component : AddClubComponent}, 
+      { path:'showClubs', component : ShowClubsComponent}, 
       { path:'addClub', component : AddClubComponent}, 
     ]
   }, 

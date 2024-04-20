@@ -12,17 +12,19 @@ export class Club {
   category: Category;
   logo: string;
   name: string; 
-  registrationDate: Date;
-
+  registrationDate: Date; 
+  otherCategory : string ;  
   description: string;
   facebookUrl: string;
   twitterUrl: string;
   instagramUrl: string;
   members: string[]; // Assuming members are represented by their usernames or IDs
-
+  openMembership:boolean
   constructor(
-    id: number,
-    category: Category,
+    id: number, 
+    openMembership:boolean, 
+    category: Category, 
+    otherCategory: string , 
     logo: string,
     name: string, 
     registrationDate:Date, 
@@ -34,8 +36,10 @@ export class Club {
   ) {
     this.id = id;
     this.category = category;
-    this.logo = logo;
-    this.name = name; 
+    this.logo = logo; 
+    this.otherCategory = otherCategory ; 
+    this.name = name;  
+    this.openMembership = openMembership ; 
     this.registrationDate = registrationDate ; 
     this.description = description;
     this.facebookUrl = facebookUrl;

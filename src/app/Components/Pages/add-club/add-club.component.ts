@@ -14,15 +14,16 @@ import axios from 'axios';
 export class AddClubComponent implements OnInit{ 
   club:Club = {
     id: 0,
-    name: '',
+    name: '', 
+    openMembership:false , 
     description: '',
     facebookUrl: '',
     twitterUrl: '',
-    instagramUrl: '',
-
+    instagramUrl: '', 
+    otherCategory:'', 
     category: Category.SPORTS,
-    registrationDate: new Date(),
-    logo: '',
+    registrationDate: new Date(),  
+    logo: '', 
     members: []
   };     
   showDropdown = false;
@@ -58,7 +59,13 @@ export class AddClubComponent implements OnInit{
   selectCategory(category: Category): void {
     this.club.category = category;
     this.hideDropdown();
-  } 
+  }  
+  onCategoryChange() {
+    if (this.club.category !== 'OTHER') {
+      this.club.otherCategory = '';
+    }
+  }
+  
     getEnumValue(categoryString: string): Category {
     return Category[categoryString as keyof typeof Category];
   }
@@ -83,7 +90,9 @@ export class AddClubComponent implements OnInit{
   onSubmit(): void {  
     this.clubService.createClub(this.club,this.userId).subscribe( 
       (createCub:Club) => { 
-        console.log("club Create Successfully" , createCub) ; 
+        console.log("club Create Successfully" , createCub) ;  
+      this.router.navigate(['Club/showClubs' ]);
+
       }, 
       (error)=> { 
         console.error("Error saving Club", error) ; 

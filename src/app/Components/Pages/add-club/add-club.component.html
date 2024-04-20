@@ -16,23 +16,40 @@
             <div class="mb-3">
               <label for="name" class="form-label fs-5">Club Name</label>
               <input type="text" class="form-control" id="name" name="name" [(ngModel)]="club.name" required>
-            </div>
+            </div> 
+                        
             <div class="mb-3">
               <label for="description" class="form-label fs-5">Description</label>
               <textarea class="form-control" id="description" name="description" [(ngModel)]="club.description" required></textarea>
             </div>
             <div class="mb-3">
               <label for="category" class="form-label fs-5">Category</label>
-              <select class="form-select" id="category" name="category" [(ngModel)]="club.category" required>
+              <select class="form-select" id="category" name="category" [(ngModel)]="club.category" (change)="onCategoryChange()" required>
                 <option value="SPORTS">Sports</option>
                 <option value="ACADEMIC">Academic</option>
                 <option value="CULTURAL">Cultural</option>
                 <option value="SOCIAL">Social</option>
                 <option value="PROFESSIONAL">Professional</option>
-                <option value="OTHER">Other</option>
-              </select> 
-            </div> 
+                <option value="OTHER">Other</option> 
+              </select>
+            </div>
+            <div *ngIf="club.category === 'OTHER'" class="mb-3">
+              <label for="otherCategory" class="form-label fs-5">Specify Other Category</label>
+              <input type="text" class="form-control" id="otherCategory" name="otherCategory" [(ngModel)]="club.otherCategory" required>
+            </div>  
+            <div class="mb-3">
+              <label for="membershipApplication" class="form-label fs-5">Open Membership Application:</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="membershipApplication" name="membershipApplication" [(ngModel)]="club.openMembership">
+                <label class="form-check-label" for="membershipApplication">open Membership Application : </label>
+              </div>
+            </div>
+
             <button type="submit" class="btn btn-orange w-100">Submit</button>
+            <!-- Notice for Club President Registration -->
+            <div class="mt-3 text-muted text-center">
+              <small>By submitting this form, you will be registered as the club president.</small>
+            </div>
           </form>
         </div>
       </div>

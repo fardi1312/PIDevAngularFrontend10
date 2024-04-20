@@ -21,7 +21,13 @@ export class ClubService {
 
   getClubById(id: number): Observable<Club> {
     return this.httpClient.get<Club>(`${this.apiUrl}/${id}`);
+  } 
+
+  addMemberToClub(clubId: number, userId: number): Observable<Club> {
+    const url = `${this.apiUrl}/${clubId}/members/${userId}`;
+    return this.httpClient.post<Club>(url, null);
   }
+
 
   updateClub(id: number, newClubData: Club): Observable<Club> {
     return this.httpClient.put<Club>(`${this.apiUrl}/${id}`, newClubData);

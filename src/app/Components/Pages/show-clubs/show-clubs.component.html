@@ -18,9 +18,29 @@
         <div class="shop-body"> 
             <h2>{{ club.name }}</h2>
 
-          <h4>{{ club.category }}</h4>
-          <p>description:  {{ club.description }}</p>
+            <h2>{{ club.category }}</h2>
+
+            <div *ngIf="club.category === 'OTHER'">
+              <h2>{{ club.otherCategory }}</h2> 
+            </div>  
+            <div *ngIf="club.openMembership === true"> 
+            <h3>Open Membership</h3>  
+            </div>
+            <div *ngIf="club.openMembership === false"> 
+              <h3>Interview Required</h3> 
+  
+
+          <p> {{ club.description }}</p> 
+        </div>  
+        <div class="shop-body d-flex flex-column align-items-center"> <!-- Add flexbox classes -->
+
+        <button *ngIf="card.classList.contains('hovered')" class="btn btn-join-now mt-2 btn-become-member"
+        (click)="NavigateToMember(club)">
+    <i class="bi bi-person-plus-fill me-1"></i> <!-- Bootstrap Icons - Person Plus -->
+    Join Now
+        </button> 
         </div>
+
           
       </div>
     </div>

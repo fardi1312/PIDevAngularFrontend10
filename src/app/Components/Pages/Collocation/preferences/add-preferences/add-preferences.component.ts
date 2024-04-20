@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CollocationPreferences,  Interest, Pets } from 'src/app/Model/Collocation/CollocationPreferences'; 
-import { RoomType } from 'src/app/Model/Collocation/RoomDetails'; 
+import { CollocationPreferences,  Interest, Pets } from 'src/app/Model/Collocation/CollocationPreferences';
 import { Gender } from 'src/app/Model/Collocation/CollocationOffer';
 import { PreferencesService } from 'src/app/Services/Collocation/preferences.service'; 
+import { RoomType } from 'src/app/Model/Collocation/RoomDetails';
 
 
 
