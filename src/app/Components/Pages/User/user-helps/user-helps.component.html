@@ -1,0 +1,15 @@
+<!-- user-helps.component.html -->
+
+<div class="helps-container" *ngIf="helps.length > 0; else noHelps">
+    <ul class="helps-list">
+      <li *ngFor="let help of helps" class="help-item">
+        <h3 class="help-title">{{ help.title }}</h3>
+        <p class="help-description">{{ help.description }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noHelps>
+    <p class="no-helps-message">No helps found.</p>
+  </ng-template>
+  

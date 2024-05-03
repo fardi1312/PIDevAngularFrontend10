@@ -1,0 +1,32 @@
+/* user-helps.component.css */
+
+.helps-container {
+    margin-top: 20px;
+  }
+  
+  .helps-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .help-item {
+    border: 1px solid #f3bfbf;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .help-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .help-description {
+    color: #666;
+  }
+  
+  .no-helps-message {
+    color: #999;
+    font-style: italic;
+  }
+  

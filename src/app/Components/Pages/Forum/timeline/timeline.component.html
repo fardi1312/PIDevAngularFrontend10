@@ -13,7 +13,7 @@
 						<h2 class="mat-h2">Most Used Tags</h2>
 						<a class="d-block p-3 text-decoration-none fw-500 border border-1 border-start-0 border-end-0"
 						 style=" font-size: 14px;"
-						 *ngFor="let tag of timelineTagList; let last = last;" href="/posts/tags/{{ tag.name }}" [ngClass]="last ? '' : 'border-bottom-0'">
+						 *ngFor="let tag of timelineTagList; let last = last;" [routerLink]="'/posts/tags/{{ tag.name }}'" [ngClass]="last ? '' : 'border-bottom-0'">
 							#{{ tag.name }} <span class="badge rounded-pill text-dark float-end" style="background-color: rgba(0,0,0,0.15);">{{ tag.tagUseCounter }}</span>
 						</a>
 					</div>

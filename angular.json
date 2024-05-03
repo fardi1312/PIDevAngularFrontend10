@@ -24,7 +24,6 @@
               "src/favicon.ico",
               "src/assets",
               "src/assetsaif"
-
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -33,12 +32,13 @@
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/angular-calendar/css/angular-calendar.css"
-
             ],
             "scripts": [
-              "node_modules/leaflet/dist/leaflet.js"
+              "node_modules/leaflet/dist/leaflet.js",
+              "./node_modules/chart.js/dist/Chart.js",
+              "./node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js",
+               "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
-            
           },
           "configurations": {
             "production": {
@@ -66,7 +66,7 @@
             }
           },
           "defaultConfiguration": "production"
-        },
+        },        
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {

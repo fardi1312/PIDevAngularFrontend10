@@ -27,7 +27,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 		if (!this.messageType || !this.messageHeader) {
 			// Handle the case where required items are missing in local storage
 			console.error('Required items missing in local storage');
-			this.router.navigateByUrl('/');
+			this.router.navigateByUrl('/login');
 		}
 	}
 

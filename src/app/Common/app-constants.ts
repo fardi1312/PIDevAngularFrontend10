@@ -33,5 +33,5 @@ export class AppConstants {
 	static notFoundErrorHeader = '404 Not Found';
 	static notFoundErrorDetail = 'What you are looking for does not exist.';
 
-	static snackbarErrorContent = 'Could not perform the task. Please, try again later.';
+	static snackbarErrorContent = 'Could not perform the task. Please, try again later., 3ndk mochkla JWT . 3awd marra okhra.';
 }

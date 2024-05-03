@@ -1,0 +1,40 @@
+<br>
+<br>
+
+<div class="account-verification">
+    <div class="wrapper">
+      <div class="single-card" [ngClass]="{'selected': selectedSubscription === 'one_month'}">
+        <div class="img-area">
+          <img src="/assets/userAssets/mass.jpg" alt="">
+          <div class="overlay">
+            <h5 class="card-title">Un mois</h5>
+            <p class="card-text">Abonnement d'un mois (20 points)</p>
+            <button *ngIf="!isVerified" class="add-to-cart" (click)="selectSubscription('one_month'); verifyAccount()">Demander la vérification du compte</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="single-card" [ngClass]="{'selected': selectedSubscription === 'six_months'}">
+        <div class="img-area">
+          <img src="/assets/userAssets/mass.jpg" alt="">
+          <div class="overlay">
+            <h5 class="card-title">Six mois</h5>
+            <p class="card-text">Abonnement de six mois (90 points)</p>
+            <button *ngIf="!isVerified" class="add-to-cart" (click)="selectSubscription('six_months'); verifyAccount()">Demander la vérification du compte</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="single-card" [ngClass]="{'selected': selectedSubscription === 'one_year'}">
+        <div class="img-area">
+          <img src="/assets/userAssets/mass.jpg" alt="">
+          <div class="overlay">
+            <h5 class="card-title">Un an</h5>
+            <p class="card-text">Abonnement d'un an (160 points)</p>
+            <button *ngIf="!isVerified" class="add-to-cart" (click)="selectSubscription('one_year'); verifyAccount()">Demander la vérification du compte</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

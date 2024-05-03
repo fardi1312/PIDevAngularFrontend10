@@ -61,7 +61,6 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 		this.commentFormGroup = this.formBuilder.group({
 			content: new FormControl('', [Validators.required, Validators.maxLength(1024)])
 		});
-		this.loadProfilePhotoUrl();
 
 
 		this.loadComments(1);
@@ -128,39 +127,67 @@ export class PostCommentDialogComponent implements OnInit, OnDestroy {
 		}
 	}
 
+
 	createNewComment(): void {
 		this.creatingComment = true;
-		this.subscriptions.push(
-			this.postService.createPostComment(this.dataPost.id, this.content?.value).subscribe(
-				(result: CommentResponse | HttpErrorResponse) => {
-					if (result instanceof CommentResponse) {
-						this.commentFormGroup.reset();
-						Object.keys(this.commentFormGroup.controls).forEach(key => {
-							const control = this.commentFormGroup.get(key);
-							if (control) {
-								control.setErrors(null);
-							}
-						});
-						this.commentResponseList.unshift(result);
-						this.updatedCommentCountEvent.emit(this.commentResponseList.length);
+		const contentValue = this.content?.value;
+		if (contentValue !== null && contentValue !== undefined) {
+			this.subscriptions.push(
+				this.postService.createPostComment(this.dataPost.id, contentValue).subscribe({
+					next: (response: CommentResponse | HttpErrorResponse) => {
+						if (response instanceof HttpErrorResponse) {
+							// Handle HTTP errors
+							console.error('HTTP error occurred:', response);
+							let errorMessage = 'An error occurred while posting the comment.';
+							this.matSnackbar.openFromComponent(SnackbarComponent, {
+								data: errorMessage,
+								panelClass: ['bg-danger'],
+								duration: 5000
+							});
+						} else {
+							// Success case
+							const newComment: CommentResponse = response;
+	
+							// Reset the comment form after successfully adding a new comment
+							this.commentFormGroup.reset();
+	
+							// Reset form control errors
+							Object.keys(this.commentFormGroup.controls).forEach(key => {
+								const control = this.commentFormGroup.get(key);
+								if (control) {
+									control.setErrors(null);
+								}
+							});
+	
+							// Add the new comment to the beginning of the commentResponseList array
+							this.commentResponseList.unshift(newComment);
+	
+							// Emit an event to notify the parent component about the updated comment count
+							this.updatedCommentCountEvent.emit(this.commentResponseList.length);
+						}
 						this.creatingComment = false;
-					} else {
+					},
+					error: (error) => {
+						// Handle unexpected errors
+						console.error('An unexpected error occurred:', error);
+						let errorMessage = 'An unexpected error occurred while posting the comment.';
 						this.matSnackbar.openFromComponent(SnackbarComponent, {
-							data: 'create comment successfully ',
+							data: errorMessage,
 							panelClass: ['bg-danger'],
-
 							duration: 5000
-							
 						});
-						this.creatingComment = true;
+						this.creatingComment = false;
 					}
-					this.creatingComment = true;
-					this.loadComments(1); 
-
-				}
-			)
-		);
+				})
+			);
+		}
 	}
+	
+	
+	
+	
+	
+	
 	openCommentLikeDialog(comment: Comment): void {
 		this.matDialog.open(CommentLikeDialogComponent, {
 			data: comment,

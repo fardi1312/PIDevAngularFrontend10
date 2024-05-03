@@ -123,6 +123,14 @@ import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 import { SearchDialogComponent } from './Components/Pages/User/search-dialog/search-dialog.component';
 import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-tags.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChartModule } from "@progress/kendo-angular-charts";
+import { UserstatComponent } from './Components/Pages/User/userstat/userstat.component';
+import { AccountVerificationComponent } from './Components/Pages/User/account-verification/account-verification.component';
+import { ForgotUpdPasswordComponent } from './Components/Pages/User/forgotupd-password/forgotupd-passwordcomponent';
+import { UserActivitiesComponent } from './Components/Pages/User/user-activities/user-activities.component';
+import { UserHelpsComponent } from './Components/Pages/User/user-helps/user-helps.component';
 
 @NgModule({
   declarations: [
@@ -210,11 +218,17 @@ import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-ta
     TimelineComponent,
     ProfileUserComponent,
     SearchDialogComponent,
-    PostsTagsComponent
+    PostsTagsComponent,
+    UserstatComponent,
+    AccountVerificationComponent,
+    ForgotUpdPasswordComponent,
+    UserActivitiesComponent,
+    UserHelpsComponent
 
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
@@ -255,7 +269,10 @@ import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-ta
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    MatLegacyChipsModule
+    MatLegacyChipsModule,
+    NgApexchartsModule,
+    ChartModule,
+    
   ],
   providers: [
     {

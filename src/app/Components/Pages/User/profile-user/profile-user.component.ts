@@ -41,6 +41,7 @@ export class ProfileUserComponent {
 	private subscriptions: Subscription[] = [];
 	profileUserId!: number;
 	userid!: number;
+	isVerified!: boolean ;
   
 	////////////////////////////////////
 	constructor(private userService: UserService,
@@ -81,6 +82,12 @@ export class ProfileUserComponent {
 					this.loadProfilePhotoUrl();
 					this.loadCoverPhotoUrl();
 					this.loadProfilePosts(1);
+
+					this.userService.isAccountVerifiedByUserId(this.profileUserId).subscribe(
+						(isVerified: boolean) => {
+							this.isVerified = isVerified;
+						}
+					);
 				}
 			},
 			(error) => {
@@ -130,6 +137,8 @@ export class ProfileUserComponent {
 		  }
 		},
 		(error) => {
+			this.router.navigateByUrl('/user/profile');
+
 		  console.error('Error fetching profile photo URL:', error);
 		  this.authenticationError = true;
 		}

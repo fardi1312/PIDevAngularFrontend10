@@ -51,6 +51,7 @@ export class PostsTagsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    
   }
 
   loadTaggedPosts(tagName: string | null, currentPage: number): void {

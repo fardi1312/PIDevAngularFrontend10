@@ -34,6 +34,9 @@
                     <div class="profile-info d-inline-block align-top ps-3" style="margin-top: -30px">
                         <h1 class="mat-display-1 mb-3" style="font-weight: 500;">
                             {{ user?.firstName + ' ' + user?.lastName }}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="blue" width="24" height="24">
+                                <path  *ngIf="isVerified" d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1zm0 20a9 9 0 1 0 0-18 9 9 0 0 0 0 18zm5.78-13.47l-6.225 6.224-3.234-3.234a1.258 1.258 0 0 0-1.782 1.773l4 4a1.26 1.26 0 0 0 1.785 0l7-7a1.259 1.259 0 1 0-1.754-1.786z"/>
+                            </svg>
                         </h1>
                         <p>
                             <a class="text-decoration-none text-secondary mat-h3 cursor-pointer" style="font-weight: 500;" (click)="openFollowingDialog(user!)">

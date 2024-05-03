@@ -1,4 +1,8 @@
 .custom-tab-group {
     width: 70%; /* Adjust as needed */
     margin: auto; /* Center the tab group horizontally */
+    border: 1px solid rgb(145, 145, 231);
+    padding: 10px;
   }
+
+

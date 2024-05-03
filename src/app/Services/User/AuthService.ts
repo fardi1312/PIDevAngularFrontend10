@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserLogin } from 'src/app/Model/User/user-login';
 import { environment } from 'src/app/Environments/environment';
 import { UserSignup } from 'src/app/Model/User/user-signup';
+import { Router } from '@angular/router';
 
 const BASE_URL = environment.apiUrl;
 
@@ -18,7 +19,7 @@ export class AuthService {
     throw new Error("Method not implemented.");
   }
 
-  constructor(private http: HttpClient, public cookieService: CookieService) { }
+  constructor(private http: HttpClient, public cookieService: CookieService, public router: Router) { }
 
   login(userLogin: UserLogin): Observable<any> {
     return this.http.post(BASE_URL + 'authenticate', userLogin)
@@ -55,13 +56,32 @@ export class AuthService {
 
 
   logout(): void {
-    this.cookieService.delete('JWT');
+    // Array of cookies to delete
+    try {
+      this.cookieService.deleteAll('JWT');
+      this.cookieService.deleteAll('userRole')
+      this.cookieService.set('JWT', '');
+      this.cookieService.set('userRole', '');
+      if(!this.cookieService.get('JWT') && !this.cookieService.get('userRole') )
+          {   
+          this.router.navigate(['/login']);
+            console.log('Logout successful: Cookies deleted');
+          } 
+      else {console.log('Error deleting cookies');}
+    } 
+    catch (error) {
+      console.error('Error deleting cookies during logout:', error); // Handle errors
+    }
+
+ 
+
   }
+  
 
 
 
 
-
+  
 
   forgotPassword(email: string): Observable<any> {
     const url = `${BASE_URL}forgot-password?email=${email}`;
