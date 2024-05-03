@@ -1,1 +1,14 @@
 @import "node_modules/angular-calendar/css/angular-calendar.css";
+
+/* Styles spécifiques à la courbe */
+.kendo-chart-series-item-line {
+    /* Couleur de la ligne */
+    stroke: blue;
+    /* Épaisseur de la ligne */
+    stroke-width: 2px;
+    /* Style de ligne (par exemple, solide, pointillé, etc.) */
+    stroke-dasharray: none;
+    /* Opacité de la ligne */
+    stroke-opacity: 1;
+  }
+  

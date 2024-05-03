@@ -6,5 +6,5 @@ export class Comment {
     likeCount!: number;
     dateCreated!: string;
     dateLastModified!: string;
-	author!: User;
+	author?: User;
 }

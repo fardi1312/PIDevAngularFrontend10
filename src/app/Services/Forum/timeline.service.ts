@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {environment} from "../../Environments/environment";
 import {PostResponse} from "../../Model/User/post-response";
 import {Tag} from "../../Model/User/tag";
+import { Post } from 'src/app/Model/User/post';
 
 
 @Injectable({
@@ -22,4 +23,9 @@ export class TimelineService {
 	getTimelineTags(): Observable<Tag[] | HttpErrorResponse> {
 		return this.httpClient.get<Tag[] | HttpErrorResponse>(`${this.host}tags`);
 	}
+
+	getAllPosts(): Observable<Post[] | HttpErrorResponse> {
+		return this.httpClient.get<Post[] | HttpErrorResponse>(`${this.host}allPosts`);
+	}
+
 }

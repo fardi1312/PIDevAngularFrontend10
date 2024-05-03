@@ -26,8 +26,16 @@
                   <div class="col">
                     <div class="form-group">
                       <label>Gender</label>
-                      <input class="form-control" type="text" formControlName="gender" placeholder="Male/Female/Other">
+                      <div>
+                        <label class="radio-inline">
+                          <input type="radio" formControlName="gender" value="male"> Male
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" formControlName="gender" value="female"> Female
+                        </label>
+                      </div>
                     </div>
+                    
                   </div>
                 </div>
                 <div class="row">

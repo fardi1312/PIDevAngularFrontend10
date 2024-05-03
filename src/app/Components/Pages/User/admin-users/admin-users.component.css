@@ -1,0 +1,13 @@
+
+/* Dans votre fichier CSS admin-users.component.css */
+.chart-container {
+    background-color: #f0f0f0; /* Couleur de fond du conteneur du graphique */
+    padding: 20px; /* Espacement autour du graphique */
+    border-radius: 10px; /* Bord arrondi du conteneur */
+  }
+  
+  /* Si vous souhaitez également changer la couleur du titre du graphique */
+  .chart-title {
+    color: #333; /* Couleur du texte du titre */
+  }
+    

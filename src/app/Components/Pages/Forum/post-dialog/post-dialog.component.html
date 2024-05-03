@@ -6,7 +6,7 @@
 	
 		<hr class="divider">
 	
-		<form [formGroup]="postFormGroup" (ngSubmit)="handlePostSubmit()" class="position-relative"
+		<form [formGroup]="postFormGroup"  (ngSubmit)="handlePostSubmit()" class="position-relative"
 			enctype="multipart/form-data">
 			<mat-form-field appearance="outline" class="w-100" style="padding-right: 90px;">
 				<mat-label>What do you want to post?</mat-label>
@@ -50,9 +50,10 @@
 				</button>
 			</div>
 			
-			<button mat-raised-button color="primary" type="submit" class="position-absolute" style="top: 4px; right: 0;">
+			<button mat-raised-button color="primary" type="submit" class="position-absolute" style="top: 4px; right: 0;" >
 				{{ dataPost ? 'Update' : 'Post' }}
 			</button>
+			
 		</form>
 	
 		<div *ngIf="creatingPost" class="position-absolute" style="transform: scale(0.3); top: -35px; right: -35px;">

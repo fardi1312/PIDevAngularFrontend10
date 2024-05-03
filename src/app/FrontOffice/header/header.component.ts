@@ -33,8 +33,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   hasMoreNotifications: boolean = false;
   fetchingResult: boolean = false;
   private subscriptions: Subscription[] = [];
-
   notifications: Notification[] = [];
+  isVerified!: boolean;
+
 
   constructor(
     private userService: UserService,
@@ -48,6 +49,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadAuthenticatedUser();
     this.loadNotifications(this.resultPage);
+
+
+    this.userService.isAccountVerified().subscribe(
+      (isVerified: boolean) => {
+        if (isVerified) {
+          this.isVerified = true;
+          console.log('Account is verified');     
+            }
+        if (!isVerified) {
+       this.isVerified = false;    
+      console.log('Account is not verified');
+      }
+      },
+      (error) => {
+        console.error('Error checking account verification:', error);
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -83,7 +101,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigateByUrl('/login');
   }
 
   loadNotifications(page: number): void {

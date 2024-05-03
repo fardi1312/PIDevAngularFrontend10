@@ -47,6 +47,8 @@ export class PostComponent implements OnInit, OnDestroy {
 		this.userService.getIdAuthenticatedUser().subscribe((userId: number) => {
 			this.authUserId = userId;
 		});
+		this.loadProfilePhotoUrl();
+
 	}
 
 	ngOnDestroy(): void {
@@ -54,7 +56,7 @@ export class PostComponent implements OnInit, OnDestroy {
 	}
 
 	loadProfilePhotoUrl(): void {
-		this.userService.getProfilePhotoUrl1(4).subscribe(
+		this.userService.getProfilePhotoUrl1(this.postResponse.post.author.idUser).subscribe(
 		  (imageUrl: string) => {
 			if (imageUrl){
 			this.imageUrl = imageUrl;

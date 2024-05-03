@@ -58,18 +58,22 @@ import {PostDetailComponent} from "./Components/Pages/Forum/post-detail/post-det
 import {MessageComponent} from "./Components/Pages/Forum/message/message.component";
 import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-tags.component';
+import { UserstatComponent } from './Components/Pages/User/userstat/userstat.component';
+import { AccountVerificationComponent } from './Components/Pages/User/account-verification/account-verification.component';
+import { ForgotUpdPasswordComponent } from './Components/Pages/User/forgotupd-password/forgotupd-passwordcomponent';
 
 const routes: Routes = [
   { path: 'user/timeline', component: TimelineComponent },
 
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'posts/:postId', component: PostDetailComponent },
   { path: 'message', component: MessageComponent },
   { path: 'posts/tags/:tagName', component: PostsTagsComponent },
   { path: 'user/profile/:userId', component: ProfileUserComponent },
+  { path: 'userstat', component: UserstatComponent },
 
-
+  { path: 'forgotupd/:email', component: ForgotUpdPasswordComponent },
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'admin', canActivate: [AuthGuard], 
@@ -101,6 +105,7 @@ const routes: Routes = [
       { path: 'carpooling/addC', component: SubmitPropertyComponent },
       { path: 'carpooling/askC', component: AgentListComponent },
       { path: 'point', component: TransferPointsComponent },
+      { path: 'accountVerif', component: AccountVerificationComponent },
       //ACHREF
       { path: 'Collocation/addOffer', component: AddCollocationComponent },
       { path: 'Collocation/showOffer', component: ShowCollocationComponent },
@@ -131,7 +136,7 @@ const routes: Routes = [
       { path: 'schedule', loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule) }
     ]
   },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+{ path: '**', redirectTo: '/login', pathMatch: 'full',  }
 
 ];
 

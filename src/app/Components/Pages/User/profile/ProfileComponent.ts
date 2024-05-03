@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
   hasNoPost: boolean = false;
   private subscriptions: Subscription[] = [];
   profileUserId!: number;
+  isVerified!: boolean ;
 
 
   ////////////////////////////////////
@@ -64,6 +65,21 @@ export class ProfileComponent implements OnInit {
         (error) => {
           console.error('Error fetching authenticated user:', error);
           this.authenticationError = true;
+        }
+      );
+      this.userService.isAccountVerified().subscribe(
+        (isVerified: boolean) => {
+          if (isVerified) {
+            this.isVerified = true;
+            console.log('Account is verified');     
+              }
+          if (!isVerified) {
+         this.isVerified = false;    
+        console.log('Account is not verified');
+        }
+        },
+        (error) => {
+          console.error('Error checking account verification:', error);
         }
       );
     }

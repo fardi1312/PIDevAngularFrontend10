@@ -23,36 +23,38 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item ps-0 pt-3 pe-0 pb-3" *ngFor="let commentResponse of commentResponseList">
                 <div class="rounded-circle d-inline-block align-middle centered-bg-image"
-                [style.width.px]="35" [style.height.px]="35"
-                [style.background-image]="'url(' + (imageUrl || '') + ')'"                >
+                    [style.width.px]="35" [style.height.px]="35"
+                    [style.background-image]="'url(' + (imageUrl || '') + ')'"
+                    style="background-size: cover;">
                 </div>
-                                                                                    
+        
                 <div class="ps-5" style="margin-top: -38px;">
-                    <a class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer" href="/user/profile/{{ commentResponse.comment.author.idUser }}">
-                        <span style="color: #00008B;"> {{ commentResponse.comment.author.firstName + ' ' + commentResponse.comment.author.lastName }}</span>
+                    <a *ngIf="commentResponse.comment.author" class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer" href="/user/profile/{{ commentResponse.comment.author.idUser }}">
+                        <span style="color: #00008B;"> {{ commentResponse.comment.author?.firstName + ' ' + commentResponse.comment.author?.lastName }}</span>
                     </a>
                     <br>
                     <span class="text-secondary d-inline-block">
                         <mat-icon class="align-middle w-auto h-auto" style="font-size: 16px;">watch_later</mat-icon>
                         <span class="align-middle ps-1 small fw-500">{{ commentResponse.comment.dateCreated | date:'medium' }}</span>
                     </span>
-
+        
                     <p class="pt-2 pb-3">{{ commentResponse.comment.content }}</p>
                     <mat-chip-list aria-label="Fish selection">
-
+        
                     </mat-chip-list>
-
+        
                     <div style="margin-top: -40px; text-align: right;">
                         <button mat-icon-button matTooltip="{{commentResponse.likedByAuthUser ? 'Unlike' : 'Like'}}" (click)="likeOrUnlikeComment(commentResponse)">
                             <mat-icon [ngClass]="commentResponse.likedByAuthUser ? 'text-danger' : 'text-secondary'">favorite</mat-icon>
                         </button>
-                        <button mat-icon-button matTooltip="Delete" *ngIf="commentResponse.comment.author.idUser === authUserId" (click)="openCommentDeleteConfirmDialog(commentResponse)">
+                        <button mat-icon-button matTooltip="Delete" *ngIf="commentResponse.comment.author && commentResponse.comment.author.idUser === authUserId" (click)="openCommentDeleteConfirmDialog(commentResponse)">
                             <mat-icon class="text-secondary">delete_sweep</mat-icon>
                         </button>
                     </div>
                 </div>
             </li>
         </ul>
+        
 
         <div class="mt-3 mb-3 text-center" *ngIf="hasMoreResult">
             <button mat-raised-button color="primary" class="rounded-pill align-middle" *ngIf="hasMoreResult && !(fetchingResult && resultPage > 1)" (click)="loadComments(resultPage)">Load More</button>

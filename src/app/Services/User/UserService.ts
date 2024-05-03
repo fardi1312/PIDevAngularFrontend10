@@ -9,6 +9,8 @@ import { environment } from 'src/app/Environments/environment';
 import { UserResponse } from 'src/app/Model/User/user-response';
 import { CookieService } from 'ngx-cookie-service';
 import {PostResponse} from "../../Model/User/post-response";
+import { UpdatePasswordForgetDTO } from 'src/app/Model/User/update-password-forget-dto';
+import { Help } from 'src/app/Model/User/help';
 
 const BASE_URL = environment.apiUrlUser;
 const BASE_URL1 = environment.apiUrlR;
@@ -34,7 +36,7 @@ export class UserService {
 
 
   getIdAuthenticatedUser(): Observable<number> {
-    return this.http.get<number>('http://localhost:8083/user/account/iduser');
+    return this.http.get<number>(BASE_URL + 'account/iduser');
   }
 
 
@@ -99,6 +101,9 @@ export class UserService {
   getUserById(userId: number): Observable<UserResponse | HttpErrorResponse> {
     return this.http.get<UserResponse | HttpErrorResponse>(`${BASE_URL}account/users/${userId}`);
   }
+
+
+
   
   getUserById1(id: number): Observable<User> {
     const url = `${BASE_URL1}`;
@@ -189,6 +194,71 @@ export class UserService {
         return throwError(error);
       })
     );
+  }
+
+  ////////////////////
+  verifyAccount(): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}account/verify`, null).pipe(
+      catchError(error => {
+        console.error('Error verifying account:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+////////////////////////////////////////////////////////////////////////////////////
+
+requestAccountVerification(subscriptionType: string): Observable<any> {
+  return this.http.post<any>(`${BASE_URL}account/verify`, { subscriptionType }).pipe(
+    catchError(error => {
+      console.error('Error verifying account:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+  isAccountVerified(): Observable<boolean> {
+    return this.http.get<boolean>(`${BASE_URL}account/isverify`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error checking account verification:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  isAccountVerifiedByUserId(userId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${BASE_URL}account/isverifybyid/${userId}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error checking account verification by user ID:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  ////////////////////////////////////////////////////////
+  updatePasswordForget(updatePasswordDTO: UpdatePasswordForgetDTO): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}account/update-password-forget`, updatePasswordDTO).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error updating password:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getUserActivitiesByConnectedUserId(): Observable<string[]> {
+    return this.http.get<string[]>(BASE_URL+'account/connected-user').pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error getting user activities:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+
+  getAllHelps(): Observable<Help[]> {
+    return this.http.get<Help[]>(BASE_URL+'account/helps');
   }
 
 

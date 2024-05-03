@@ -1,10 +1,14 @@
 <mat-card class="position-relative mat-elevation-z3 mb-4" *ngIf="postResponse">
 	<mat-card-header>
-		<div mat-card-avatar class="centered-bg-image"
-			style="background-image: url('{{ imageUrl }}');">
-		</div>
+		
+		<div mat-card-avatar class="centered-bg-image" 
+		[style.background-image]="'url(' + imageUrl + ')'"
+		style="background-size: cover;">
+        </div>
+   
+		
 		<mat-card-title>
-			<a href="/user/profile/{{ postResponse.post.author.idUser }}" class="text-decoration-none text-dark">
+			<a routerLink="/user/profile/{{ postResponse.post.author.idUser }}" class="text-decoration-none text-dark">
 				<span style="color: #754e8f;">{{ postResponse.post.author.firstName + ' ' + postResponse.post.author.lastName }}</span>
 			</a>
 		</mat-card-title>
@@ -43,13 +47,13 @@
 			postResponse.post.content }}
 		</p>
 
-		<a class="text-decoration-none fw-500" href="/posts/{{postResponse.post.id}}"
+		<a class="text-decoration-none fw-500" routerLink="/posts/{{postResponse.post.id}}"
 			*ngIf="!isDetailedPost && postResponse.post.content.length > 128">
 			View Full Post
 		</a>
 
 		<div *ngIf="postResponse.post.postTags.length > 0">
-			<a *ngFor="let tag of postResponse.post.postTags" href="/posts/tags/{{ tag.name }}"
+			<a *ngFor="let tag of postResponse.post.postTags" routerLink="/posts/tags/{{ tag.name }}"
 			 class="text-decoration-none d-inline-block ms-0 mt-2 me-2 mb-0">#{{ tag.name }}</a>
 		</div>	
 
@@ -65,7 +69,7 @@
 
 				<div class="ps-5" style="margin-top: -38px;">
 					<a class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer"
-						href="/user/profile/{{ postResponse.post.sharedPost.author.idUser }}">
+					routerLink="/user/profile/{{ postResponse.post.sharedPost.author.idUser }}">
 						<span style="color: #754e8f;"> {{ postResponse.post.sharedPost.author.firstName + ' ' + postResponse.post.sharedPost.author.lastName }}</span>
 					</a>
 
@@ -87,7 +91,7 @@
 						postResponse.post.sharedPost.content.length > 128 ? (postResponse.post.sharedPost.content |
 						slice:0:128) + '...' : postResponse.post.sharedPost.content }}</p>
 
-					<a class="text-decoration-none fw-500" href="/posts/{{postResponse.post.sharedPost.id}}">View Shared
+					<a class="text-decoration-none fw-500" routerLink="/posts/{{postResponse.post.sharedPost.id}}">View Shared
 						Post
 					</a>
 				</div>

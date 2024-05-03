@@ -1,0 +1,12 @@
+<!-- user-activities.component.html -->
+
+<div class="user-activities-container" *ngIf="userActivities.length > 0; else noActivities">
+    <ul class="activity-list">
+      <li class="activity-item" *ngFor="let activity of userActivities">{{ activity }}</li>
+    </ul>
+  </div>
+  
+  <ng-template #noActivities>
+    <p class="no-activities-message">No activities found.</p>
+  </ng-template>
+  
