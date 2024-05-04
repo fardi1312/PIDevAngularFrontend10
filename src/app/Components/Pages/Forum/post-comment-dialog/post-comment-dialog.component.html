@@ -30,7 +30,7 @@
         
                 <div class="ps-5" style="margin-top: -38px;">
                     <a *ngIf="commentResponse.comment.author" class="d-inline-block text-decoration-none text-dark align-middle fw-500 cursor-pointer" href="/user/profile/{{ commentResponse.comment.author.idUser }}">
-                        <span style="color: #00008B;"> {{ commentResponse.comment.author?.firstName + ' ' + commentResponse.comment.author?.lastName }}</span>
+                        <span style="color: #00008B;"> {{ commentResponse.comment.author.firstName + ' ' + commentResponse.comment.author.lastName }}</span>
                     </a>
                     <br>
                     <span class="text-secondary d-inline-block">
