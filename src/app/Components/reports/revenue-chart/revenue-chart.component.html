@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+      <h5>Charity and other categories</h5>
+    </div>
+    <div class="card-body pt-0">
+      <div class="revenue-container">
+        <div id="revenuechart">
+          <apx-chart [chart]="revenueChartData.chart" [dataLabels]="revenueChartData.dataLabels" [series]="revenueChartData.series"
+                     [labels]="revenueChartData.labels" [legend]="revenueChartData.legend" [colors]="revenueChartData.colors"
+                     [responsive]="revenueChartData.responsive">
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  

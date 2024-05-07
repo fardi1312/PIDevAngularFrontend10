@@ -7,8 +7,8 @@ import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { Tag } from "../../../../Model/User/tag";
 import { PostResponse } from "../../../../Model/User/post-response";
-import { PostService } from "../../../../Services/Forum/post.service";
-import { TimelineService } from 'src/app/Services/Forum/timeline.service';
+import { PostService } from "../../../../services/Forum/post.service";
+import { TimelineService } from 'src/app/services/Forum/timeline.service';
 import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 

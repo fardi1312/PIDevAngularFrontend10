@@ -10,7 +10,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { TagDialogComponent } from '../tag-dialog/tag-dialog.component';
 import {Post} from "../../../../Model/User/post";
-import {PostService} from "../../../../Services/Forum/post.service";
+import {PostService} from "../../../../services/Forum/post.service";
 
 @Component({
 	selector: 'app-post-dialog',

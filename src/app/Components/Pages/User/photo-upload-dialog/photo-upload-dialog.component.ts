@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from 'src/app/Environments/environment';
-import { AuthService } from 'src/app/Services/User/AuthService';
-import { UserService } from 'src/app/Services/User/UserService';
+import { AuthService } from 'src/app/services/User/AuthService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-photo-upload-dialog',

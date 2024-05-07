@@ -33,9 +33,9 @@
       </div>
       <div class="form-group">
         <label for="availablePlaces{{ i }}">Requested Places:</label>
-        <input type="number" class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" [(ngModel)]="room.availablePlaces" disabled>
+        <input type="number" class="form-control" id="availablePlaces{{ i }}" name="availablePlaces{{ i }}" [(ngModel)]="room.availablePlaces" disabled min="1">
       </div>
-      <div class="form-group">
+            <div class="form-group">
         <label for="price{{ i }}">Price:</label>
         <input type="number" class="form-control" id="price{{ i }}" name="price{{ i }}" [(ngModel)]="room.prix" disabled>
       </div>
@@ -53,9 +53,10 @@
     <div class="underline" style="margin-bottom: 20px;">
       <label for="description">Description:</label>
       <textarea rows="8" cols="80" id="description" name="description" [(ngModel)]="collocationRequest.description" required class="form-control"></textarea>
-    </div>  
-
-    <!-- Room selection -->
+      <div *ngIf="checkDescription()" style="color: red;">La description contient des mots interdits.</div>
+      <div *ngIf="collocationRequest.description.length > 200 || collocationRequest.description.length < 10" style="color: red;">La description doit avoir entre 10 et 200 caractères.</div>
+    </div>
+            <!-- Room selection -->
     <div class="room-selection">
       <p>Select rooms:</p>
       <div *ngFor="let room of collocationOffer.roomDetailsList; let i = index">
@@ -65,19 +66,19 @@
     </div> 
     <p>Select date range:</p>
     <input type="text" matInput
-    ngxDaterangepickerMd
-    [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
-    startKey="start"
-    endKey="end"
-    [(ngModel)]="dateRange"
-    name="daterange"
-    (change)="onDateRangeChange($event)"/> 
-    
-               
+           ngxDaterangepickerMd
+          
+           startKey="start"
+           endKey="end"
+           [(ngModel)]="dateRange"
+           name="daterange"
+           (change)="onDateRangeChange($event)"
+           required /> 
+                   
     <div class="text-center">
       <button class="btn btn-warning button-5" type="submit">Submit</button>
     </div>
   </form> 
 </div> 
 
-<app-footer></app-footer>
+<app-footor></app-footor>

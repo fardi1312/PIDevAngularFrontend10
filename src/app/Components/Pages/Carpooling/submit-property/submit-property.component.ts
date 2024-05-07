@@ -14,8 +14,8 @@ export class SubmitPropertyComponent {
   public themeLogo = 'assets/images/logo/2.png';
   public footerLogo = 'assets/images/logo/footer-logo.png';
  
-
   public addPropertyStepsData = addPropertyStepsData;
+
   public activeSteps: number=0;
   public activeId: number=0;
   public theme_default3 = '#ff5c41';

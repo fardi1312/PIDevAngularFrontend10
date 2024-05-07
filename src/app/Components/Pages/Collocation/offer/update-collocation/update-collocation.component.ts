@@ -3,8 +3,8 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 import { RoomDetails, RoomType } from 'src/app/models/Collocation/RoomDetails';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
-import { RoomDetailssService } from 'src/app/Services/Collocation/room-details.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
+import { RoomDetailssService } from 'src/app/services/Collocation/room-details.service';
 import * as L from 'leaflet';
 
 @Component({
@@ -21,7 +21,7 @@ export class UpdateCollocationComponent implements OnInit {
     locationLx: '',
     locationLy: '',
     houseType: 0,
-    saved:false,
+    saved: false,
 
     governorate: '',
     country: '',
@@ -38,11 +38,10 @@ export class UpdateCollocationComponent implements OnInit {
     imageCollocation: '',
     smokingAllowed: false,
     petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
+    interest: Interest.No,
+    matchPercentage: 0,
+    user: undefined as any,
+    averageRating: 0
   }
   
   furnitureOptions = Object.values(FurnitureCollocation);

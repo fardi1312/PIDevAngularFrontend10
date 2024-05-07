@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FeedbackService } from 'src/app/Services/Collocation/feedback.service';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
 import { CollocationFedback } from 'src/app/models/Collocation/CollocationFeedback';
-import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
+import { CollocationOffer , FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
+import { User } from 'src/app/models/Collocation/User';
+import { FeedbackService } from 'src/app/services/Collocation/feedback.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
 
 @Component({
   selector: 'app-add-feedback',
@@ -29,14 +30,9 @@ setRating(rating: number) {
 
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    locationLx: '',
-    locationLy: '',
-    houseType: 0,
-    saved:false,
     governorate: '',
-    country: '',
-    city: '',
-    streetAddress: '',
+    averageRating: 0,
+    houseType: 0,
     availablePlaces: 0,
     dateRent: new Date(),
     dateOffer: new Date(),
@@ -46,15 +42,18 @@ setRating(rating: number) {
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [],
+    locationLx: '',
+    locationLy: '',
+    country: '',
+    city: '',
+    streetAddress: '',
+    saved: false,
     smokingAllowed: false,
-    petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
+    petsAllowed: Pets.Cats,
+    interest: Interest.Sport,
+    matchPercentage: 0,
+    user: new User
   };
-
 
   idOffer: number = 0;
 
@@ -95,6 +94,6 @@ setRating(rating: number) {
   }
 
   goToOfferList(): void {
-    this.router.navigate(['user/Collocation/showOffer']);
+    this.router.navigate(['/Collocation/showOffer']);
   }
 }

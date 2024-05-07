@@ -1,0 +1,151 @@
+body {
+    background: deepskyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.coupon {
+    width: 250px; /* Réduire la largeur */
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    text-transform: uppercase;
+    color: #000;
+    background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
+}
+
+.coupon::before,
+.coupon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+}
+
+.coupon::before {
+    left: 0;
+    background-image: radial-gradient(circle at 100% 50%, transparent 0%, gold 50%);
+}
+
+.coupon::after {
+    right: 0;
+    background-image: radial-gradient(circle at 100% 50%, transparent 25px, gold 26%);
+}
+
+.coupon > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left {
+    width: 40px; /* Réduire la largeur */
+    border-right: 2px dashed rgba(0,0,0,0.5);
+}
+
+.left div {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.center {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    width: 60px; /* Réduire la largeur */
+    background-image: radial-gradient(circle at 100% 50%, transparent 25%, #fff 26px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px dashed rgba(0,0,0,0.5);
+    font-size: 1rem;
+}
+
+.right div {
+    font-family: 'Libre Barcode 128 Text', cursive;
+    transform: rotate(-90deg);
+    margin-top: 8px;
+}
+
+.center h2 {
+    background: #111;
+    color: gold;
+    padding: 3px 6px;
+    font-size: 1.2rem;
+    margin: 8px 0;
+    border-radius: 5px;
+}
+
+.center h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.center small {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #888;
+}
+.activeQuiz {
+    display: block; /* Show the modal */
+    /* Add your custom styles here */
+  }
+
+
+
+  .modal-header,
+  .modal-footer {
+    border-bottom: none; /* Remove border from header and footer */
+  }
+  
+
+  span.correct-answer {
+    color: green; /* Couleur verte pour la coche */
+    font-size: 20px; /* Taille de police de 20px */
+    margin-left: 5px; /* Marge à gauche pour séparer la réponse de la coche */
+  }
+  
+  /* Modal Body */
+  .modal-body {
+    padding: 10px 15px;
+  }
+
+  
+  /* Show Modal */
+  .modal.show {
+    display: block;
+  }
+  /* Style pour le bouton de fermeture */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333; /* Change la couleur au survol */
+}

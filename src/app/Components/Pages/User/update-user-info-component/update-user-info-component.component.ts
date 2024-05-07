@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 import { UpdateUserInfo } from 'src/app/Model/User/update-user-info';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/Services/User/AuthService';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AuthService } from 'src/app/services/User/AuthService';
 
 @Component({
   selector: 'app-forgot-password',

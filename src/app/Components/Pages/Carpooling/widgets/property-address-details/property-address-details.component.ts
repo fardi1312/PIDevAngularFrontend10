@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output, Input, AfterViewInit, ElementRef, Inje
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
 //import { Input, OnInit } from '@angular/core';
 
 
-import 'leaflet-routing-machine';
+//import 'leaflet-routing-machine';
 import { isPlatformBrowser } from '@angular/common';
 import { Marker, marker, CircleMarker } from 'leaflet';
 import * as L from 'leaflet';
@@ -71,7 +71,7 @@ Crdn : Coordinates={};
     });
 
   const marker1 = L.marker([36.90304675980363, 10.19084930419922], { icon: defaultIcon }).addTo(this.map);
-    this.map.on('click', (e) => {
+    this.map.on('click', (e:any) => {
       L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map!);
       L.Routing.control({
         waypoints: [
@@ -80,7 +80,7 @@ Crdn : Coordinates={};
           
         ],
       
-      }).on('routesfound', (e) => {
+      }).on('routesfound', (e:any) => {
         console.log('ons',e);
         e.routes[0].coordinates.forEach((c: L.LatLngLiteral, i: number) => {
           const crdn = { latitude: c.lat, longitude: c.lng };
@@ -95,6 +95,7 @@ Crdn : Coordinates={};
     });
     
    this.map.on('click', async (e: any) => {
+    console.log("test11",e);
     const latlng = e.latlng;
     this.lx=latlng.lat;
     this.ly=latlng.lng;

@@ -1,0 +1,74 @@
+
+<app-head-back></app-head-back>
+
+<div class="content">
+
+<br><br><br>
+      <div class="container-fluid">
+
+        <div class="col-md-7 mx-auto text-right">
+
+          <a  class="btn btn-primary pull-left btn-round" (click)="OpenAdd()">Add A Coupon </a>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
+          <div class="row">
+
+
+            <div class="col-lg-5 col-md-6 col-sm-6">
+              <div *ngFor="let promotion of promotions | paginate: { itemsPerPage: 2, currentPage: p }">
+                <div class="coupon">
+                  <!-- Your coupon content here -->
+                  <div class="left">
+                      <div>Enjoy Your Gift</div>
+                  </div>
+                  <div class="center">
+                      <h2>{{ promotion.discountPercentage }} %</h2>
+                      <h3>Coupon</h3>
+                      <small>Valid until {{ promotion.expirationDate }}</small>
+                  </div>
+                  <div class="right">
+                      <div>{{ promotion.code }}</div>
+                  </div>
+              </div>
+              <br>
+              </div>
+            </div>
+
+          </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+  
+  <div class="modal" [ngClass]="modalAdd ? 'show' : ''" *ngIf="modalAdd">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add A Coupon</h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <!-- Add your form fields here -->
+              <label for="code">Code:</label>
+              <input type="text" class="form-control" id="code" name="code" [(ngModel)]="coupon.code" required>
+              <label for="discountPercentage">Discount Percentage:</label>
+              <input type="number" class="form-control" id="discountPercentage" name="discountPercentage" [(ngModel)]="coupon.discountPercentage" required>
+              <label for="expirationDate">Expiration Date:</label>
+              <input type="date" class="form-control" id="expirationDate" name="expirationDate" [(ngModel)]="coupon.expirationDate" required>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="saveCoupon()">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

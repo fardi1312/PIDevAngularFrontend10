@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/app/Environments/environment';
 import { UserResponse } from 'src/app/Model/User/user-response';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 import { SnackbarComponent } from '../../Forum/snackbar/snackbar.component';
 import { AppConstants } from 'src/app/Common/app-constants';
 import { ConfirmationDialogComponent } from '../../Forum/confirmation-dialog/confirmation-dialog.component';

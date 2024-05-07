@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostResponse } from 'src/app/Model/User/post-response';
-import { AuthService } from 'src/app/Services/User/AuthService';
-import { PostService } from 'src/app/Services/Forum/post.service';
+import { AuthService } from 'src/app/services/User/AuthService';
+import { PostService } from 'src/app/services/Forum/post.service';
 import { AppConstants } from 'src/app/Common/app-constants';
 
 @Component({

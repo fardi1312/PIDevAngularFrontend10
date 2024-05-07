@@ -8,8 +8,8 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { User } from "../../../../Model/User/user";
 import { environment } from "../../../../Environments/environment";
 import { Post } from "../../../../Model/User/post";
-import { PostService } from "../../../../Services/Forum/post.service";
-import { UserService } from 'src/app/Services/User/UserService';
+import { PostService } from "../../../../services/Forum/post.service";
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-post-like-dialog',

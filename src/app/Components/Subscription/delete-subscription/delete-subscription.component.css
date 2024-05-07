@@ -1,59 +1,58 @@
 .container {
-    margin-top: 80px; /* Adjust the margin-top to create space for the navbar */
-  }
-  /* Add some basic styles to the body */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Style the container */
-  .container {
-    margin-top: 50px;
-  }
-  
-  /* Style the delete confirmation box */
-  .delete-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  .delete-box h2 {
-    margin-top: 0;
-  }
-  
-  .delete-box p {
-    margin-bottom: 10px;
-  }
-  
-  .delete-box strong {
-    font-weight: bold;
-  }
-  
-  .delete-box button {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .delete-box button:hover {
-    background-color: #c82333;
-  }
-  
-  .delete-box button:last-child {
-    background-color: #6c757d;
-  }
-  
-  .delete-box button:last-child:hover {
-    background-color: #5a6268;
-  }
-  
-  
+  margin-top: 50px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-8 {
+  max-width: 800px;
+}
+
+.card {
+  background-color: rgba(238, 130, 238, 0.2); /* Violet with opacity */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #800080; /* Purple */
+  font-size: 2.5rem; /* Larger font size */
+}
+
+.card p {
+  margin-bottom: 10px;
+  color: #000; /* Black */
+  font-size: 1.2rem; /* Larger font size */
+}
+
+button.confirm-delete {
+  background-color: #000; /* Black */
+  color: #fff;
+  border: none;
+  padding: 15px 30px; /* Larger padding */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+  font-size: 1.2rem; /* Larger font size */
+}
+
+button.cancel {
+  background-color: #000; /* Black */
+  color: #fff;
+  border: none;
+  padding: 15px 30px; /* Larger padding */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.2rem; /* Larger font size */
+}
+
+button:hover {
+  filter: brightness(85%);
+}

@@ -14,11 +14,11 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { WaitingDialogComponent } from '../waiting-dialog/waiting-dialog.component';
 import { PostResponse } from 'src/app/Model/User/post-response';
 import { environment } from 'src/app/Environments/environment';
-import { AuthService } from 'src/app/Services/User/AuthService';
-import { PostService } from 'src/app/Services/Forum/post.service';
+import { AuthService } from 'src/app/services/User/AuthService';
+import { PostService } from 'src/app/services/Forum/post.service';
 import { AppConstants } from 'src/app/Common/app-constants';
 import { User } from 'src/app/Model/User/user';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
 	selector: 'app-post',

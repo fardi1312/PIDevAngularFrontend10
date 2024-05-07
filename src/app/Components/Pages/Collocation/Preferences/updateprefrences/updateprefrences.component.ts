@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { CollocationPreferences, Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 import { RoomType } from 'src/app/models/Collocation/RoomDetails';
-import { CollocationPreferencesService } from 'src/app/Services/Collocation/preferences.service';
+import { CollocationPreferencesService } from 'src/app/services/Collocation/preferences.service';
 
 @Component({
   selector: 'app-updateprefrences',
@@ -60,7 +60,7 @@ export class UpdateprefrencesComponent {
     );
 }
 goToOfferList() {
-  this.router.navigate(['Preferences/addPreferences']);
+  this.router.navigate(['user/Collocation/addPreferences']);
 }
 
 

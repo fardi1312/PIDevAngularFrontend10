@@ -1,9 +1,12 @@
+
+
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 //import { Options } from 'ngx-slider-v2';
 import { agencyParams, areaFilter, bathParams, bedParams, categoryParams, img, priceFilter, roomsParams, statusParams } from '../../../../shared/interface/property';
 
 import { CarpoolingPreferences } from 'src/app/models/modelSM/CarpoolingPreferenes';
-import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
 @Component({
   selector: 'app-advance-filter',
@@ -12,6 +15,7 @@ import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
 })
 
 export class AdvanceFilterComponent {
+  
   @Output() activeSteps = new EventEmitter<number>();
   public activeStep: number = 1;
   carpoolingPreferences: CarpoolingPreferences = {};
@@ -28,19 +32,16 @@ desc:String='';
 constructor(private carpoolingService: CarpoolingService) { }
   userId: number = 1; 
   @Output() preferencesUpdated: EventEmitter<void> = new EventEmitter<void>();
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   updatePreferences(): void {
     const number = this.activeStep + 1;
     this.activeSteps.emit(number);
-   // this.addPreferces(this.userId, this.floors!, this.getlocation , this.nbplaces!,this.carpoolingtype! ,this.chaufage ,this.radionopen,this.smoking ,this.climatise,this.desc)
-    
-    console.log('kife',this.carpoolingPreferences);
+
+    console.log('kife', this.carpoolingPreferences);
     this.carpoolingService.updateCarpoolingPreferences(this.userId, this.carpoolingPreferences).subscribe(
-      
       (updatedPreferences) => {
+        console.log('kifeeeeeeeech', this.carpoolingPreferences);
         console.log('Preferences updated:', updatedPreferences);
         this.preferencesUpdated.emit();
       },
@@ -48,11 +49,9 @@ constructor(private carpoolingService: CarpoolingService) { }
         console.error('Error updating preferences:', error);
       }
     );
-  
- 
   }
  
-  addPreferces(userId: number, budget: number, getlocation :String, nbplaces : number,carpoolingType:String ,chaufage : boolean,radionopen : boolean,smoking : boolean,climatise : boolean,desc:String): void {
+/*  addPreferces(userId: number, budget: number, getlocation :String, nbplaces : number,carpoolingType:String ,chaufage : boolean,radionopen : boolean,smoking : boolean,climatise : boolean,desc:String): void {
     this.carpoolingPreferences.budget = budget;
     this.carpoolingPreferences.nbPlaces=nbplaces;
     this.carpoolingPreferences.carpoolingType= carpoolingType;
@@ -81,5 +80,5 @@ constructor(private carpoolingService: CarpoolingService) { }
         console.error('Error adding Preference:', error);
       }
     );
-  }
+  }*/
 }

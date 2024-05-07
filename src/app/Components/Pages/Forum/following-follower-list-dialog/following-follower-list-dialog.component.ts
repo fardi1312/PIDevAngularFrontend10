@@ -7,7 +7,7 @@ import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { UserResponse } from "../../../../Model/User/user-response";
 import { environment } from "../../../../Environments/environment";
-import { UserService } from "../../../../Services/User/UserService";
+import { UserService } from "../../../../services/User/UserService";
 
 @Component({
 	selector: 'app-following-follower-list-dialog',

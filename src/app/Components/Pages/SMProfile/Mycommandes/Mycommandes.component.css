@@ -1,0 +1,55 @@
+/* Styling for the user-dashboard section */
+.user-dashboard {
+  padding: 20px;
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .panier-section {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  h4 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #fa4e05;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+
+  .panier-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #f2ebeb;
+    }
+
+    th {
+      background-color: #fceaea;
+    }
+  }
+
+  tr:hover {
+    background-color: #f1dfd4;
+  }
+}
+
+/* Additional custom styling for footer */
+footer {
+  padding: 20px;
+  background-color: #f17777;
+  color: #e76c6c;
+  text-align: center;
+}

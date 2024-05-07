@@ -1,0 +1,14 @@
+Ons Ben Othmen
+.chart-title {
+    position: absolute;
+    bottom: -50px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px; /* Adjust the font size as needed */
+    font-weight: bold; /* Or use 'normal' for normal weight */
+    color: #333; /* Or any other color you prefer */
+  }
+  /* CSS pour la classe de la colonne contenant le graphique circulaire */
+.col-xl-6 {
+    margin-top: 20px; /* Marge supérieure de 20px (ajustez selon vos besoins) */
+  }

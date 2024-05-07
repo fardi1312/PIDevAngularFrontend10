@@ -61,11 +61,64 @@ import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-ta
 import { UserstatComponent } from './Components/Pages/User/userstat/userstat.component';
 import { AccountVerificationComponent } from './Components/Pages/User/account-verification/account-verification.component';
 import { ForgotUpdPasswordComponent } from './Components/Pages/User/forgotupd-password/forgotupd-passwordcomponent';
+import { Addpost9achComponent } from './Components/Pages/Ecommerce/addpost9ach/addpost9ach.component';
+import { Post9achComponent } from './Components/Pages/Ecommerce/post9ach/post9ach.component';
+import { MultiformsComponent } from './Components/Pages/Events/multiforms/multiforms.component';
+import { ShowClubsComponent } from './Components/Pages/Club/show-clubs/show-clubs.component';
+import { AddClubComponent } from './Components/Pages/Club/add-club/add-club.component';
+import { ShowClubDetailsComponent } from './Components/Pages/Club/show-club-details/show-club-details.component';
+import { MyClubComponent } from './Components/Pages/my-club/my-club.component';
+import { HedhahuComponent } from './Components/Pages/Events/hedhahu/hedhahu.component';
+import { HomeComponent } from './Components/Pages/Home/home/home.component';
+import { BackOfficeQuizComponent } from './Components/Pages/Home/back-office-quiz/back-office-quiz.component';
+import { CouponBackComponent } from './Components/Pages/Home/coupon-back/coupon-back.component';
+import { StatChartComponent } from './Components/Pages/Home/stat-chart/stat-chart.component';
+import { FavouritesComponent } from './Components/Pages/SMProfile/favourites/favourites.component';
+import { Mycommandes } from './Components/Pages/SMProfile/Mycommandes/Mycommandes.component';
+import { Mypost9achComponent } from './Components/Pages/SMProfile/MyPost9ach/Mypost9ach.component';
+import { MyCarpoolingRequest } from './Components/Pages/SMProfile/MyCarpoolingRequest/MyCarpoolingRequest.component';
+import { Editpost9achComponent } from './Components/Pages/Ecommerce/editpost9ach/editpost9ach.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { MessageamiraComponent } from './message/messageamira.component';
+import { StatSaifComponent } from './Components/Pages/Home/stat-saif/stat-saif.component';
 
 const routes: Routes = [
-  { path: 'user/timeline', component: TimelineComponent },
 
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'smprofile', 
+    children: [
+      { path: 'carpooling', component: FavouritesComponent },
+        { path: 'commandes', component: Mycommandes },
+        { path: 'post9ach', component: Mypost9achComponent },
+        { path: 'carpoolingrequest', component: MyCarpoolingRequest },
+        { path: 'edit-post/:idPost9ach', component: Editpost9achComponent },
+
+
+    ]
+
+    
+  },
+
+
+  {
+    path:'Club',
+    children :[ 
+      { path:'showClubs', component : ShowClubsComponent}, 
+      { path:'addClub', component : AddClubComponent},  
+      { path:'showClub/:id', component : ShowClubDetailsComponent}, 
+      {path:'myClub/:id',component : MyClubComponent} ,
+    ]
+  }, 
+
+  {path:"addEvent",component:MultiformsComponent},
+  {path:"show",component:HedhahuComponent},
+
+
+
+  { path: 'user/timeline', component: TimelineComponent },
+
   { path: 'signup', component: SignupComponent },
   { path: 'posts/:postId', component: PostDetailComponent },
   { path: 'message', component: MessageComponent },
@@ -78,20 +131,43 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'admin', canActivate: [AuthGuard], 
     children: [
+
       { path: 'admin-users', component: AdminUsersComponent },
       { path: 'admin-profile', component: AdminProfileComponent },
       { path: "showPreferences", component: ShowPreferencesComponent },
       { path: "showOffors", component: ShowBackOfficeComponent },
       { path: "subscription/add", component: AddSubscriptionComponent },
-      { path: "dashboard", component: ListSubscriptionComponent },
+      { path: "Subscriptions", component: ListSubscriptionComponent },
       { path: "subscription/delete/:id", component: DeleteSubscriptionComponent },
       { path: "subscription/edit/:id", component: EditSubscriptionComponent },
       { path: "registration/all", component: AllRegistrationComponent },
+      { path: 'registrations/:id/update', component: UpdateRegistrationComponent },
+      { path: 'admin-users', component: AdminUsersComponent },
+      { path: 'admin-profile', component: AdminProfileComponent },
+      { path: "showPreferences", component: ShowPreferencesComponent },
+      { path: "showOffors", component: ShowBackOfficeComponent },
+      { path: "subscription/add", component: AddSubscriptionComponent },
+      { path: "subscription/delete/:id", component: DeleteSubscriptionComponent },
+      { path: "subscription/edit/:id", component: EditSubscriptionComponent },
+      { path: "Registrations", component: AllRegistrationComponent },
+      { path: "Quiz", component: BackOfficeQuizComponent },
+      { path: "Coupon", component: CouponBackComponent },
+      { path: "registration/details/:id", component: DetailsRegistrationComponent },
+
+      { path: "StatCollocation", component: StatChartComponent },
+      { path: "StatMaram", component: ReportsComponent },
+      { path: 'Settings', component: SettingsComponent }
 
     ]
   },
+
+  {
+    path: 'statsaif', component:  StatSaifComponent
+  },
   { path: 'user', canActivate: [AuthGuard], 
     children: [
+      { path: 'home', component: HomeComponent },
+
       { path: 'client', component: TemplateFrontComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'updateuserinfo', component: UpdateUserInfoComponentComponent },
@@ -104,6 +180,8 @@ const routes: Routes = [
       { path: 'updatepassword', component: UpdatePasswordComponent },
       { path: 'carpooling/addC', component: SubmitPropertyComponent },
       { path: 'carpooling/askC', component: AgentListComponent },
+      { path: 'Ecommerce/addp', component: Addpost9achComponent },
+      { path: 'Ecommerce/askp', component: Post9achComponent },
       { path: 'point', component: TransferPointsComponent },
       { path: 'accountVerif', component: AccountVerificationComponent },
       //ACHREF
@@ -123,20 +201,35 @@ const routes: Routes = [
       { path: 'Collocation/myOffers', component: MyOffersComponent },
       { path: 'Collocation/myOffer/:id', component: MyOfferComponent },
       { path: 'Collocation/addPreferences', component: AddPreferencesComponent },
+
       { path: 'Collocation/showPreferences', component: ShowPreferencesComponent },
       { path: 'Collocation/update/:id', component: UpdateprefrencesComponent },
       { path: 'Collocation/SearchCollocation', component: SearchCollocationComponent },
       //AMIRA PATHS
       { path: "registration/update/:id", component: UpdateRegistrationComponent },
-      { path: "registration/details/:id", component: DetailsRegistrationComponent },
-      { path: "subscription/offers", component: FrontSubscriptionComponent },
-      { path: 'subscription/offers/add-registration/:subscriptionId', component: AddRegistrationComponent },
+      { path: "SubscriptionsOffers", component: FrontSubscriptionComponent },
+      { path: 'SubscriptionsOffers/add-registration/:subscriptionId', component: AddRegistrationComponent },
       { path: 'registration/payment', component: PaymentComponent },
       { path: 'registration/wallet', component: WalletComponent },
+      { path: 'chatfinal', component: MessageamiraComponent },
       { path: 'schedule', loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule) }
     ]
   },
-{ path: '**', redirectTo: '/login', pathMatch: 'full',  }
+
+
+{ 
+  path: 'Ecommerce', 
+  children: [
+    { path: 'addp', component: Addpost9achComponent },
+      { path: 'askp', component: Post9achComponent },
+    
+
+  ]
+
+  
+},
+
+{ path: '**', redirectTo: '/login', pathMatch: 'full',  },
 
 ];
 

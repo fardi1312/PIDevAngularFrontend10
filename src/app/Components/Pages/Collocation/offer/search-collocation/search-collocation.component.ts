@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CollocationOffer } from 'src/app/models/Collocation/CollocationOffer';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
 import * as L from 'leaflet';
 
 @Component({

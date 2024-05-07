@@ -19,6 +19,17 @@ export class ScheduleService {
 
   getEventByIdAndUser(id: number, userId: number): Observable<CalendarEvent> {
     return this.http.get<CalendarEvent>(`${this.apiUrl}/${id}/user/${userId}`);
+  } 
+  sendMail(event: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/send-mail`, event);
+  }
+
+  acceptRenting(event: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.post<CalendarEvent>(`${this.apiUrl}/acceptRenting`, event);
+  }
+
+  acceptRenter(event: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.post<CalendarEvent>(`${this.apiUrl}/acceptRenter`, event);
   }
 
   createEventForUser(userId: number, event: CalendarEvent): Observable<CalendarEvent> {

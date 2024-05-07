@@ -29,7 +29,7 @@ export class OfferService {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
   }
   createCollocation(collocationOffer: CollocationOffer, userId: number): Observable<CollocationOffer> {
-    return this.httpClient.post<CollocationOffer>(`${this.apiUrl}/offers/create?userId=${userId}`, collocationOffer);
+    return this.httpClient.post<CollocationOffer>(`${this.apiUrl}/offers/create`, collocationOffer);
   }
 
   updateOffer(id: number, updatedCollocationOffer: CollocationOffer): Observable<CollocationOffer> {
@@ -73,16 +73,9 @@ export class OfferService {
     );
   }
 
-  getCollocationImage(id: number): Observable<string> {
-    return this.httpClient.get<string>(`${this.apiUrl}getCollocationImage/${id}`);
-  }
 
-  uploadCollocationImage(id: number, image: File): Observable<CollocationOffer> {
-    const formData = new FormData();
-    formData.append('image', image);
 
-    return this.httpClient.post<CollocationOffer>(`${this.apiUrl}uploadCollocationImage/image/${id}`, formData);
-  }
+
   getMatchingOffersForUser(userId: number): Observable<CollocationOffer[]> {
     const url = `${this.apiUrl}/matchuser/${userId}`; // Use correct endpoint name
     return this.httpClient.get<CollocationOffer[]>(url);
@@ -98,6 +91,28 @@ export class OfferService {
     const url = `${this.apiUrl}/refuse/${offerId}/${requestId}`;
     return this.httpClient.put<string>(url, {});
   };
+
+
+
+  
+  
+  
+  updateImage(id: number, image: File): Observable<CollocationOffer> {
+    const formData: FormData = new FormData();  
+   
+    formData.append('image', image, image.name);
+  
+    return this.httpClient.post<CollocationOffer>(`${this.apiUrl}/uploadImage/${id}`, formData);
+  
+}
+
+
+
+getImageUrl(id: number): Observable<string> {
+  return this.httpClient.get(`${this.apiUrl}/getImage/${id}`, { responseType: 'text' });
+}
+
+
 
 
 

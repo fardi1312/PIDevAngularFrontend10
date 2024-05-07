@@ -5,26 +5,39 @@
 <link href="/assets/backOffice/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/assets/backOffice/assets/demo/demo.css" rel="stylesheet" />
-
 <app-head-back></app-head-back>
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-<div *ngIf="subscription">
-  <h2>Delete Subscription</h2>
-  <div>
-    <p>Are you sure you want to delete the following subscription?</p>
-    <p><strong>Name:</strong> {{ subscription.name }}</p>
-    <p><strong>Description:</strong> {{ subscription.description }}</p>
-    <p><strong>Price:</strong> {{ subscription.price }}</p>
-    <p><strong>Type:</strong> {{ subscription.type }}</p>
-    <p><strong>Duration:</strong> {{ subscription.duration }}</p>
+      <div *ngIf="subscription" class="card">
+        <h2>Delete Subscription</h2>
+        <br>
+        <div>
+          
+          <br>
+          <p><strong>Name:</strong> {{ subscription.name }}</p>
+          
+          <br>
+          <p><strong>Description:</strong> {{ subscription.description }}</p>
+          
+          <br>
+          <p><strong>Price:</strong> {{ subscription.price }}</p>
+          <br>
+
+          <p><strong>Type:</strong> {{ subscription.type }}</p>
+          
+          <br>
+          <p><strong>Duration:</strong> {{ subscription.duration }}</p>
+        </div>
+        <div>
+          <br>
+          <br>
+          <br>
+
+          <button class="confirm-delete" (click)="deleteConfirmed()">Confirm Delete</button>
+          <button class="cancel" (click)="deleteCanceled()">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <button (click)="deleteConfirmed()">Confirm Delete</button>
-    <button (click)="deleteCanceled()">Cancel</button>
-  </div>
-</div>
-</div>
-</div>
 </div>

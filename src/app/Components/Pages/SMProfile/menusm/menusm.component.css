@@ -1,0 +1,91 @@
+
+/* User Profile */
+.user-profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Change Profile Picture */
+.change-pic {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.change-pic img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.change-hover {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(245, 5, 5, 0.5);
+    border-radius: 50%;
+    padding: 5px;
+    display: none;
+}
+
+.change-hover button {
+    background: none;
+    border: none;
+    color: rgb(241, 77, 13);
+    cursor: pointer;
+}
+
+.change-pic:hover .change-hover {
+    display: block;
+}
+
+/* User Info */
+.user-profile h5, .user-profile h6 {
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Social Media Links */
+.connected-social {
+    text-align: center;
+}
+
+.agent-social {
+    list-style: none;
+    padding: 0;
+}
+
+.agent-social li {
+    display: inline-block;
+    margin: 5px;
+}
+
+.agent-social a {
+    color: #555;
+    font-size: 18px;
+}
+
+.agent-social a:hover {
+    color: #007bff; /* Change as needed */
+}
+
+/* Navigation */
+.dashboard-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-list .nav-link {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.dashboard-list .nav-link:hover {
+    background-color: #e9ecef;
+    color: #f43409; /* Change as needed */
+}
+/* Add this CSS for the active class */
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
 import * as L from 'leaflet';
 import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 
@@ -33,11 +33,10 @@ export class ShowDetailsCollocatinComponent implements OnInit {
     roomDetailsList: [],
     smokingAllowed: false,
     petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
+    interest: Interest.No,
+    matchPercentage: 0,
+    user: undefined as any,
+    averageRating: 0
   };
 
   furnitureOptions = Object.values(FurnitureCollocation);
@@ -69,4 +68,20 @@ export class ShowDetailsCollocatinComponent implements OnInit {
       console.log(error);
     });
   }
+
+  fetchImages(): void {
+   
+      this.offerService.getImageUrl(this.collocationOffer.idCollocationOffer).subscribe(
+        (imageUrl: string) => {
+          this.collocationOffer.imageCollocation = imageUrl;
+          
+        },
+        (error) => {
+          console.error("Error fetching  image:", error);
+        }
+      );
+  
+  }
+  
 }
+ 

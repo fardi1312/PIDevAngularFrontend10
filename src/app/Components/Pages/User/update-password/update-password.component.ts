@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UpdateUserPassword } from 'src/app/Model/User/update-user-password';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-update-password',

@@ -7,7 +7,7 @@ import { Marker, marker, LeafletMouseEvent, LeafletEvent, circleMarker, CircleMa
 import { Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { RoomDetails, RoomType } from 'src/app/models/Collocation/RoomDetails';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
 import * as L from 'leaflet';
 import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 
@@ -19,6 +19,8 @@ import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreference
 })
 export class AddCollocationComponent  implements OnInit {
 
+  public idNouveau:number = 0;
+  Uploaded :File |null=null;
   marker: Marker<any> | null = null;
   circleMarker: CircleMarker<any> | null = null;
   private map: L.Map | undefined;
@@ -101,7 +103,7 @@ export class AddCollocationComponent  implements OnInit {
     locationLx: '',
     locationLy: '',
     houseType: 0,
-    saved:false,
+    saved: false,
     governorate: '',
     country: '',
     city: '',
@@ -117,11 +119,10 @@ export class AddCollocationComponent  implements OnInit {
     roomDetailsList: [],
     smokingAllowed: false,
     petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
+    interest: Interest.No,
+    matchPercentage: 0,
+    user: undefined as any,
+    averageRating: 0
   };
 
   collocationId: number = 0; 
@@ -169,7 +170,7 @@ export class AddCollocationComponent  implements OnInit {
 
   errorMessage: string = '';
 
-  onSubmit() {
+  onSubmit1() {
     if (!this.isDateRentValid()) {
       this.errorMessage = 'Date of Rent must be superior to the system date.';
       return;
@@ -205,6 +206,69 @@ export class AddCollocationComponent  implements OnInit {
       }
     );
   }
+  onSubmit(event: any): void { 
+
+  
+    if (this.Uploaded) {
+        this.offerService.updateImage(this.idNouveau, this.Uploaded).subscribe(
+      
+          (data) => {
+            console.log(" Image Uploaded:", data);
+            alert(" Offer Uploaded Successfully");
+          },
+          (error) => {
+            console.error("Error uploading competition image:", error);
+          }
+        );
+      } else {
+        alert("Please select an image to upload.");
+      }
+    }
+
+
+
+  handleFileInput(event: any): void { 
+    this.Uploaded=event.target.files[0];
+    if (!this.isDateRentValid()) {
+      this.errorMessage = 'Date of Rent must be superior to the system date.';
+      return;
+    }
+  
+    if (!Array.isArray(this.collocationOffer.roomDetailsList)) {
+      this.errorMessage = 'RoomDetails is not an array';
+      return;
+    }
+  
+    this.collocationOffer.roomDetailsList = this.collocationOffer.roomDetailsList.map((roomDetail: RoomDetails) => ({
+      idRoomDetails: roomDetail.idRoomDetails,
+      availablePlaces: roomDetail.availablePlaces,
+      roomType: roomDetail.roomType,
+      prix: roomDetail.prix,
+      selected:true
+
+    }));
+  
+
+    this.offerService.createCollocation(this.collocationOffer,this.userId).subscribe(
+      (createdOffer: CollocationOffer) => {
+        console.log('Offer saved successfully:', createdOffer);
+       // this.collocationId = createdOffer.idCollocationOffer; // Assuming competitionID is the id you want to set
+       this.idNouveau=createdOffer.idCollocationOffer;
+
+
+        
+      },
+      (error) => {
+        console.error('Error saving offer:', error);
+        this.errorMessage = 'Error saving offer';
+      }
+    );
+
+    
+     
+      
+    
+      }
 
 // TypeScript
 /* updateRooms() {
@@ -265,11 +329,12 @@ updateRooms() {
   }
   uploadCompetitionImage() {
     if (this.uploadedImage) {
-      this.offerService.uploadCollocationImage(this.collocationId, this.uploadedImage).subscribe(
+      this.offerService.updateImage(this.collocationId, this.uploadedImage).subscribe(
         (data) => {
           console.log("Collocation Image Uploaded:", data);
           alert("Collocation Image Uploaded Successfully");
-          window.location.reload();
+          this.goToOfferList();
+
         },
         (error) => {
           console.error("Error uploading collocation image:", error);

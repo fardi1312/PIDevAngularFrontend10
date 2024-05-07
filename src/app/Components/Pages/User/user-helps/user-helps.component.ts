@@ -2,7 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Help } from 'src/app/Model/User/help';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 
 
 @Component({

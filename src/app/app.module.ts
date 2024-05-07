@@ -87,17 +87,10 @@ import { UpdateprefrencesComponent } from './Components/Pages/Collocation/Prefer
 import { SearchCollocationComponent } from './Components/Pages/Collocation/offer/search-collocation/search-collocation.component';
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { HeaderComponent } from './FrontOffice/header/header.component';
-import { AddRegistrationComponent } from './Components/Pages/Registration/add-registration/add-registration.component';
-import { AllRegistrationComponent } from './Components/Pages/Registration/all-registration/all-registration.component';
-import { UpdateRegistrationComponent } from './Components/Pages/Registration/update-registration/update-registration.component';
-import { DetailsRegistrationComponent } from './Components/Pages/Registration/details-registration/details-registration.component';
-import { AddSubscriptionComponent } from './Components/Subscription/add-subscription/add-subscription.component';
-import { ListSubscriptionComponent } from './Components/Subscription/list-subscription/list-subscription/list-subscription.component';
-import { EditSubscriptionComponent } from './Components/Subscription/edit-subscription/edit-subscription.component';
-import { DeleteSubscriptionComponent } from './Components/Subscription/delete-subscription/delete-subscription.component';
+
 import { FrontSubscriptionComponent } from './front-subscription/front-subscription.component';
 import { PaymentComponent } from './payment/payment.component';
-import { WalletComponent } from './wallet/wallet.component';
+
 import { ScheduleModule } from './schedule/schedule.module';
 import {TagDialogComponent} from "./Components/Pages/Forum/tag-dialog/tag-dialog.component";
 import {WaitingDialogComponent} from "./Components/Pages/Forum/waiting-dialog/waiting-dialog.component";
@@ -123,7 +116,7 @@ import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { ProfileUserComponent } from './Components/Pages/User/profile-user/profile-user.component';
 import { SearchDialogComponent } from './Components/Pages/User/search-dialog/search-dialog.component';
 import { PostsTagsComponent } from './Components/Pages/Forum/posts-tags/posts-tags.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartModule } from "@progress/kendo-angular-charts";
 import { UserstatComponent } from './Components/Pages/User/userstat/userstat.component';
@@ -131,9 +124,77 @@ import { AccountVerificationComponent } from './Components/Pages/User/account-ve
 import { ForgotUpdPasswordComponent } from './Components/Pages/User/forgotupd-password/forgotupd-passwordcomponent';
 import { UserActivitiesComponent } from './Components/Pages/User/user-activities/user-activities.component';
 import { UserHelpsComponent } from './Components/Pages/User/user-helps/user-helps.component';
+import { FavouritesComponent } from './Components/Pages/SMProfile/favourites/favourites.component';
+import { Mycommandes } from './Components/Pages/SMProfile/Mycommandes/Mycommandes.component';
+import { MenusmComponent } from './Components/Pages/SMProfile/menusm/menusm.component';
+import { Mypost9achComponent } from './Components/Pages/SMProfile/MyPost9ach/Mypost9ach.component';
+import { MyCarpoolingRequest } from './Components/Pages/SMProfile/MyCarpoolingRequest/MyCarpoolingRequest.component';
+import { Editpost9achComponent } from './Components/Pages/Ecommerce/editpost9ach/editpost9ach.component';
+import { CartHomeComponent } from './Components/Pages/Home/cart-home/cart-home.component';
+import { QuizComponent } from './Components/Pages/Home/quiz/quiz.component';
+import { SpinComponent } from './Components/Pages/Home/spin/spin.component';
+import { HomeComponent } from './Components/Pages/Home/home/home.component';
+import { BackOfficeQuizComponent } from './Components/Pages/Home/back-office-quiz/back-office-quiz.component';
+import { TransferFideliteComponent } from './Components/Pages/Home/transfer-fidelite/transfer-fidelite.component';
+import { CouponBackComponent } from './Components/Pages/Home/coupon-back/coupon-back.component';
+import { AcceuilPostComponent } from './Components/Pages/Home/acceuil-post/acceuil-post.component';
+import { MultiformsComponent } from './Components/Pages/Events/multiforms/multiforms.component';
+import { ShowEventsComponent } from './Components/Pages/Events/show-events/show-events.component';
+import { HedhahuComponent } from './Components/Pages/Events/hedhahu/hedhahu.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { RevenueChartComponent } from './Components/reports/revenue-chart/revenue-chart.component';
+import { PropertySalesComponent } from './Components/reports/property-sales/property-sales.component';
+import { IncomeAnalysisComponent } from './Components/reports/income-analysis/income-analysis.component';
+import { RecentTranscationComponent } from './Components/reports/recent-transcation/recent-transcation.component';
+import { SalesSummaryComponent } from './Components/reports/sales-summary/sales-summary.component';
+import { StatSaifComponent } from './Components/Pages/Home/stat-saif/stat-saif.component';
+import { PiechartComponent } from './Components/Pages/Home/piechart/piechart.component';
+import { NgxsModule } from '@ngxs/store';
+import { ToastrModule } from 'ngx-toastr';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
+import { ClubStat2Component } from './BackOffice/club-stat2/club-stat2.component';
+import { ClubStat3Component } from './BackOffice/club-stat3/club-stat3.component';
+import { ClubStatComponent } from './BackOffice/club-stat/club-stat.component';
+import { MyClubComponent } from './Components/Pages/my-club/my-club.component';
+import { ShowClubsComponent } from './Components/Pages/Club/show-clubs/show-clubs.component';
+import { AddClubComponent } from './Components/Pages/Club/add-club/add-club.component';
+import { AssignComponent } from './Components/Pages/Collocation/assign/assign.component';
+import { JoinComponent } from './Components/Pages/Club/join-component/join.component';
+import { ShowClubDetailsComponent } from './Components/Pages/Club/show-club-details/show-club-details.component';
+import { Addpost9achComponent } from './Components/Pages/Ecommerce/addpost9ach/addpost9ach.component';
+import { Post9achComponent } from './Components/Pages/Ecommerce/post9ach/post9ach.component';
+import { CartDialogComponent } from './Components/Pages/Ecommerce/cart-dialog/cart-dialog.component';
+import { StatChartComponent } from './Components/Pages/Home/stat-chart/stat-chart.component';
+import { StatgouvComponent } from './Components/Pages/Home/statgouv/statgouv.component';
+import { AddRegistrationComponent } from './Components/Pages/Registration/add-registration/add-registration.component';
+import { AllRegistrationComponent } from './Components/Pages/Registration/all-registration/all-registration.component';
+import { UpdateRegistrationComponent } from './Components/Pages/Registration/update-registration/update-registration.component';
+import { DetailsRegistrationComponent } from './Components/Pages/Registration/details-registration/details-registration.component';
+import { AddSubscriptionComponent } from './Components/Subscription/add-subscription/add-subscription.component';
+import { ListSubscriptionComponent } from './Components/Subscription/list-subscription/list-subscription/list-subscription.component';
+import { EditSubscriptionComponent } from './Components/Subscription/edit-subscription/edit-subscription.component';
+import { DeleteSubscriptionComponent } from './Components/Subscription/delete-subscription/delete-subscription.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MessageamiraComponent } from './message/messageamira.component';
 
 @NgModule({
   declarations: [
+    Post9achComponent,
+    CartDialogComponent,
+    Addpost9achComponent,
+    ClubStat2Component,
+    ClubStat3Component,
+    ClubStatComponent,
+    MyClubComponent,
+    ShowClubsComponent,
+    AddClubComponent,
+    ShowClubDetailsComponent,
+
     AppComponent,
     HeaderComponent,
     FootorComponent,
@@ -173,7 +234,9 @@ import { UserHelpsComponent } from './Components/Pages/User/user-helps/user-help
     AddFeedbackComponent,
     ShowFeedbackComponent,
     ShowDetailsFeedbackComponent,
+    AssignComponent,
     AddRequestComponent,
+    JoinComponent,
     AddCollocationComponent,
     ShowCollocationComponent,
     UpdateCollocationComponent,
@@ -223,17 +286,47 @@ import { UserHelpsComponent } from './Components/Pages/User/user-helps/user-help
     AccountVerificationComponent,
     ForgotUpdPasswordComponent,
     UserActivitiesComponent,
-    UserHelpsComponent
+    UserHelpsComponent,
+    FavouritesComponent,
+    Mycommandes,
+    MenusmComponent,
+    Mypost9achComponent,
+    MyCarpoolingRequest,
+
+    Editpost9achComponent,
+    CartHomeComponent,
+    QuizComponent,
+    SpinComponent,
+    HomeComponent,
+    BackOfficeQuizComponent,
+    TransferFideliteComponent,
+    CouponBackComponent,
+    AcceuilPostComponent,
+    MultiformsComponent,
+    ShowEventsComponent,
+    HedhahuComponent,
+    ReportsComponent,
+    RevenueChartComponent,
+    PropertySalesComponent,
+    IncomeAnalysisComponent,
+    RecentTranscationComponent,
+    SalesSummaryComponent,
+    StatSaifComponent,
+    PiechartComponent,
+    StatChartComponent,
+    StatgouvComponent,
+    SettingsComponent,
+    MessageamiraComponent
 
   ],
   imports: [
     BrowserModule,
-    NgbModule,
+    //NgbModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
+    
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
@@ -241,38 +334,110 @@ import { UserHelpsComponent } from './Components/Pages/User/user-helps/user-help
     MatMenuModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule,
+  
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDividerModule,
     MatListModule,
-    MatTooltipModule,
+  
     MatChipsModule,
     MatBadgeModule,
     MatDialogModule,
-    MatSnackBarModule,
+  
     MatRippleModule,
     MatTabsModule,
     MatSelectModule,
     MatRadioModule,
-    MatDatepickerModule,
+
     MatNativeDateModule,
     NgxDropzoneModule,
     MatDatepickerModule,
     MatNativeDateModule,
     NgxDaterangepickerMd.forRoot(),
     MatFormFieldModule,
-    MatInputModule,
-    AppRoutingModule,
-    RouterModule,
+
+     RouterModule,
     FormsModule,
-    HttpClientModule,
-    CommonModule,
-    BrowserAnimationsModule,
-    MatLegacyChipsModule,
-    NgApexchartsModule,
+   
+  
+
+   MatLegacyChipsModule,
+   NgApexchartsModule,
     ChartModule,
-    
+    NgxsModule,
+    ToastrModule,
+    MatStepperModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSnackBarModule,
+    NgxPaginationModule,
+    MatAutocompleteModule,
+    ToastrModule.forRoot({
+      // optional custom configuration
+
+  }),
+  NgxsModule.forRoot([]),
+
+
+
+
+
+
+
+
+
+  NgApexchartsModule, 
+ 
+ 
+  ReactiveFormsModule, 
+  MatAutocompleteModule, 
+  BrowserModule, 
+  MatDatepickerModule, 
+  MatDialogModule,
+  MatNativeDateModule, 
+ 
+  MatFormFieldModule,
+  MatInputModule,
+  AppRoutingModule,
+  RouterModule,
+  FormsModule,
+  HttpClientModule,
+  CommonModule,
+  BrowserAnimationsModule,  
+  ReactiveFormsModule ,
+
+ 
+  HttpClientModule,
+  FormsModule,
+  ReactiveFormsModule,
+  NgxDropzoneModule,
+  MatDialogModule,
+  BrowserAnimationsModule,
+  FormsModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatStepperModule,
+  MatFormFieldModule,
+  MatIconModule ,
+  ToastrModule.forRoot({
+    // optional custom configuration
+}),
+NgxsModule.forRoot([]),
+BrowserAnimationsModule,
+NgxPaginationModule,
+MatPaginatorModule,
+MatTableModule,
+MatSnackBarModule,
+MatDialogModule,
+MatTooltipModule,
+NgApexchartsModule
+
+
+
   ],
   providers: [
     {

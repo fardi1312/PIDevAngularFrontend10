@@ -12,3 +12,35 @@
 
 <link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
 <app-header></app-header>
+<div class="container">
+  <h2 style="text-align: center; color: #FFA500;">Edit Registration</h2>
+
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="user">User</label>
+      <input id="user" type="text" formControlName="user" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="subscription">Subscription  </label>
+      <input id="subscription" type="text" formControlName="subscription" readonly class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input id="startDate" type="date" formControlName="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input id="endDate" type="date" formControlName="endDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option value="PENDING">Pending</option>
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>

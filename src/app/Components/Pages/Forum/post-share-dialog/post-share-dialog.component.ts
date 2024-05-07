@@ -9,7 +9,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 import {PostResponse} from "../../../../Model/User/post-response";
 import {environment} from "../../../../Environments/environment";
 import {Post} from "../../../../Model/User/post";
-import {PostService} from "../../../../Services/Forum/post.service";
+import {PostService} from "../../../../services/Forum/post.service";
 
 @Component({
 	selector: 'app-post-share-dialog',

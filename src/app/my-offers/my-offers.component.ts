@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { OfferService } from '../Services/Collocation/offer.service';
-import { Router } from '@angular/router';
 import { CollocationOffer, FurnitureCollocation, Gender } from '../models/Collocation/CollocationOffer';
+import { OfferService } from '../services/Collocation/offer.service';
+import { Router } from '@angular/router';
 import { Interest, Pets } from '../models/Collocation/CollocationPreferences';
+import { User } from '../models/Collocation/User';
 
 @Component({
   selector: 'app-my-offers',
@@ -11,16 +12,11 @@ import { Interest, Pets } from '../models/Collocation/CollocationPreferences';
 })
 export class MyOffersComponent { 
   offers: CollocationOffer[] = []; 
-  offer  : CollocationOffer = {
+  offer:CollocationOffer = {
+    averageRating: 0,
     idCollocationOffer: 0,
-    locationLx: '',
-    locationLy: '',
-    houseType: 0,
-    saved:false,
     governorate: '',
-    country: '',
-    city: '',
-    streetAddress: '',
+    houseType: 0,
     availablePlaces: 0,
     dateRent: new Date(),
     dateOffer: new Date(),
@@ -30,21 +26,25 @@ export class MyOffersComponent {
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [],
+    locationLx: '',
+    locationLy: '',
+    country: '',
+    city: '',
+    streetAddress: '',
+    saved: false,
     smokingAllowed: false,
-    petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
-  };
+    petsAllowed: Pets.Cats,
+    interest: Interest.Sport,
+    matchPercentage: 0,
+    user: new User
+  }; 
 
   constructor(private offerService: OfferService,private router: Router) { }
 
   ngOnInit(): void {
     this.loadOffers();
   }
-idUser=2 ; 
+idUser=1; 
   loadOffers() {
     this.offerService.getCollocationOffersByUserId(this.idUser).subscribe(
       (data) => {
@@ -70,11 +70,11 @@ offerDetails(id: number){
 addFeedback(id: number): void {  
   console.log(id);
 
-  this.router.navigate(['user/Collocation/addFeedback',id ]);
+  this.router.navigate(['Collocation/addFeedback',id ]);
 } 
 addRequest(id:number) : void 
 { 
-  this.router.navigate(['user/Collocation/addRequest',id ]);
+  this.router.navigate(['Collocation/addRequest',id ]);
 
 }
 showRooms(id:number):void

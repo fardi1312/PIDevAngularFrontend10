@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<section class="user-dashboard small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-menusm></app-menusm>
+      </div>
+      <div class="col-lg-9">
+        <div class="panier-section">
+          <h4>Your Carpooling Request :</h4>
+          
+          <div class="table-responsive">
+            <table class="panier-table">
+              <thead>
+                <tr>
+                  <th>Location</th>
+                  <th>Price</th>
+                  <th>nbs places</th>
+                  <th>Buy Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of carpoolingrequests">
+                  <td>
+                    <ul>
+                      <li > {{ item.location}} 
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{ item.priceRequeste }} points</td>
+                  <td>{{ item.nbPlacesAller }}</td>
+                  <td>{{ item.reservationDate }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footor></app-footor>

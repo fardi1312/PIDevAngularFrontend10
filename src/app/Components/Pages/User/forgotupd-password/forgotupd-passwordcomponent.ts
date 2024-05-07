@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { UserService } from 'src/app/Services/User/UserService';
 import { UpdateUserPassword } from 'src/app/Model/User/update-user-password';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-forgotupd-password',
@@ -69,6 +69,7 @@ export class ForgotUpdPasswordComponent implements OnInit {
       () => {
         this.errorMessage = undefined;
         console.log('Password updated successfully');
+        this.updatePasswordForm.reset();
       },
       (error) => {
         console.error('Failed to update password:', error);

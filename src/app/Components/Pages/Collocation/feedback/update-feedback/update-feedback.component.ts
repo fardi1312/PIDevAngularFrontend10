@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FeedbackService } from 'src/app/Services/Collocation/feedback.service';
 import { CollocationFedback } from 'src/app/models/Collocation/CollocationFeedback';
+import { FeedbackService } from 'src/app/services/Collocation/feedback.service';
 
 @Component({
   selector: 'app-update-feedback',

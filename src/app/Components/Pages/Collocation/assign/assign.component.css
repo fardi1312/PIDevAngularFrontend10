@@ -1,0 +1,28 @@
+.modal-content {
+    width: 800px; /* Adjust the width as needed */
+    height: auto; /* Set height to auto to accommodate the content */
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: none;
+    justify-content: space-between;
+}
+
+.btn-primary {
+    background-color: #d6570e;
+    border-color: #d6570e;
+}
+
+.btn-primary:hover {
+    background-color: #d6570e;
+    border-color: #d6570e;
+} 
+
+.bg-orange {
+    background-color: #d6570e;
+}
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoUploadDialogComponent } from '../photo-upload-dialog/photo-upload-dialog.component';
 import { ViewPhotoDialogComponent } from '../view-photo-dialog/view-photo-dialog.component';
@@ -15,7 +15,7 @@ import { PostDialogComponent } from '../../Forum/post-dialog/post-dialog.compone
 import { UserResponse } from 'src/app/Model/User/user-response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/app/Environments/environment';
-import { AuthService } from 'src/app/Services/User/AuthService';
+import { AuthService } from 'src/app/services/User/AuthService';
 import { User } from 'src/app/Model/User/user';
 @Component({
   selector: 'app-profile-user',

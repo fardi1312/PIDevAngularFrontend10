@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
             }
         else if(this.cookieService.get('userRole') === 'ROLE_ADMIN')
             {   
-            this.router.navigate(['/user/timeline']); 
+            this.router.navigate(['/admin/admin-profile']); 
             return false;
             }
         else 

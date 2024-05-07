@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoUploadDialogComponent } from '../photo-upload-dialog/photo-upload-dialog.component';
 import { ViewPhotoDialogComponent } from '../view-photo-dialog/view-photo-dialog.component';

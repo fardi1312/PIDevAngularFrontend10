@@ -9,7 +9,7 @@ import { AppConstants } from 'src/app/Common/app-constants';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import {environment} from "../../../../Environments/environment";
 import {Post} from "../../../../Model/User/post";
-import {PostService} from "../../../../Services/Forum/post.service";
+import {PostService} from "../../../../services/Forum/post.service";
 
 @Component({
 	selector: 'app-share-confirm-dialog',

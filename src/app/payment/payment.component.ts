@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
-declare var Stripe: any;
 
 @Component({
   selector: 'app-payment',
@@ -11,49 +10,59 @@ declare var Stripe: any;
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  stripe: any;
-  card: any;
-  cardErrors: string;
+  stripe!: Stripe;
+  card!: StripeCardElement;
+  cardErrors: string = '';
   paymentForm: FormGroup;
-  showSuccessMessage: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router
+
   ) {
-    this.cardErrors = '';
     this.paymentForm = this.fb.group({
       name: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      expMonth: ['', Validators.required],
+      expYear: ['', Validators.required],
+      cvc: ['', Validators.required],
+      postalCode: [''] // Make sure this matches the name in your template
     });
+    
   }
 
   ngOnInit(): void {
-    this.stripe = Stripe('pk_test_51O4QygB7yd8zfaNumUXDluikCYZYxle9Y17JiZPBHXZPpDG06i1D1B5wMKNEet3OBbZ13GOHC3LKiOpcc3IVzSD9009wtIbPmv');
-    const elements = this.stripe.elements();
-    this.card = elements.create('card');
-    this.card.mount('#card-element');
-  }
-
-  onSubmit(): void {
-    this.stripe.createToken(this.card).then((result: any) => {
-      if (result.error) {
-        this.cardErrors = result.error.message;
-      } else {
-        const token = result.token.id;
-        this.http.post<any>('sk_test_51O4QygB7yd8zfaNuCL9pBMPNzGwHX77eCipF8qlzjB41nn4rHKGe39AgDxCydptEuP4UcLZ1ej42t9C6rCiKMV8100m2KWM5Di', { token }).subscribe(
-          response => {
-            console.log(response); // Log the response from the backend
-            this.showSuccessMessage = true; // Display success message
-            setTimeout(() => {
-              this.router.navigate(['/success']); // Redirect to success page after a delay
-            }, 3000); // Redirect after 3 seconds (adjust as needed)
-          },
-          error => {
-            console.error(error);
-          }
-        );
-      }
+    // Initialize Stripe
+    loadStripe('pk_test_51P5eP8031s5yHYhke8QTATU3qYrXz2xQ28EDQ1vmPIfh3iav4zImaqfX0Y4hmPSl0mQLhR0WsNeeDQjQQ7L0HLed002ueGECXz').then(stripe => {
+      this.stripe = stripe!;
+      const elements = this.stripe.elements();
+      this.card = elements.create('card');
+      this.card.mount('#card-element');
+    }).catch(error => {
+      console.error('Error initializing Stripe:', error);
     });
   }
+  async onSubmit(): Promise<void> {
+    const { token, error } = await this.stripe.createToken(this.card);
+    if (error) {
+      this.cardErrors = error.message || '';
+    } else if (token) {
+      console.log('Token:', token);
+      // Handle token - send to server for payment processing
+  
+      // Display SweetAlert confirmation
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful',
+        text: 'Thank you for your payment!',
+      }).then(() => {
+        // Redirect to another page after the alert is closed
+        this.router.navigate(['/user/subscription/offers']);
+      });
+    } else {
+      console.error('Token is undefined.');
+    }
+  }
+  
+  
 }

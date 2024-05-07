@@ -1,7 +1,7 @@
 // account-verification.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-account-verification',

@@ -1,0 +1,101 @@
+
+<app-head-back></app-head-back>
+    <div class="content">
+      
+
+        <div class="container-fluid">
+            <div class="col-md-7 mx-auto text-right">
+             
+                <br><br><br>
+
+                <button type="button" class="btn btn-primary pull-left" (click)="onclick()" >Add Questions</button>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table">
+                              <thead class="text-primary">
+                                <th>Question ID</th>
+                                <th>Question</th>
+                                <th>Options</th>
+                            <th>Actions</th>
+
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let question of questions">
+                                  <td>{{ question.id }}</td>
+                                  <td>{{ question.question }}</td>
+                                  <td>
+                                    <ul>
+                                      <li *ngFor="let option of question.options">
+                                        {{ option.answer }}
+                                        <span *ngIf="option.correct">
+                                          <input type="checkbox" checked disabled>
+                                        </span>
+                                      </li>
+                                    </ul>
+                                  </td>
+                                  <td>
+                                    <button class="btn btn-danger" (click)="deleteQuestion(question.id!)">Delete</button>
+                                </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal" [ngClass]="showAddQuestionModal ? 'show' : ''" *ngIf="showAddQuestionModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Questions</h5>
+              <button type="button" class="close" (click)="closeQuestionModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="question">Question:</label>
+                  <input type="text" id="question" class="form-control" [(ngModel)]="question" name="question" required>
+                </div>
+                <div *ngFor="let answer of answers; let i = index" class="form-group">
+                  <label for="answer{{i+1}}">Answer {{i+1}}:</label>
+
+                  <input type="text" id="answer{{i+1}}" class="form-control" [(ngModel)]="answers[i]" name="answer{{i+1}}" required>
+                  <label>
+                    <input type="radio" name="correctAnswer" [(ngModel)]="correctAnswerIndex" [value]="i"> Correct Answer
+                  </label>
+                </div>
+                <button type="button" class="btn btn-secondary" (click)="addAnswer()">Add Answer</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="showAddQuestionModal = false">Close</button>
+              <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      
