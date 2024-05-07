@@ -1,0 +1,40 @@
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<div class="row">
+  <div class="row">
+    <div class="search-bar">
+      <input type="date" [(ngModel)]="searchParams.date" placeholder="Date ">
+      
+      <input type="time" [(ngModel)]="searchParams.time" placeholder="Time">
+      <input type="number" placeholder="Price" [(ngModel)]="searchParams.price">
+      <button (click)="search()">Search</button>
+    
+    <select name="Type" class="form-select form-control" [(ngModel)]="filters.Type" (ngModelChange)="applyFilters()">
+      <option value="">All</option>
+      <option value="Retour">Retour</option>
+      <option value="Aller">Aller</option>
+    </select>
+    <a _ngcontent-ng-c2966600256="" (click)="locateMe()"  class="btn btn-light-bg btn-pill color-2 ng-star-inserted"><span _ngcontent-ng-c2966600256="">locateMe</span></a>
+
+
+  </div></div>
+</div><div id="map" style="height: 400px;"></div>
+<select name="Type" class="form-select form-control" [(ngModel)]="filters.Type" (ngModelChange)="applyFilters()">
+  <option value="">All</option>
+  <option value="Retour">Retour</option>
+  <option value="Aller">Aller</option>
+</select>
+
+<div class="row column-sm property-label" [class.list-view]="listView" [ngClass]="{ 'property-2 property-grid' : type != 'profile' }">
+  <ng-container *ngFor="let offer of filteredOffers; trackBy: trackByFn">
+    <div [class.col-md-6]="col_md_6" [class.col-xl-4]="col_xl_4 || type == 'profile'" [class.col-lg-6]="col_lg_6" [class.col-lg-4]="col_lg_4">
+      <app-agency-agents [carpoolingOffers]="offer"></app-agency-agents>
+    </div>
+  </ng-container>
+</div>
+
+
+

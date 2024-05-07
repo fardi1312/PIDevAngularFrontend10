@@ -1,0 +1,76 @@
+<!-- participate-modal.component.html -->
+<div *ngIf="test === 0">
+  <div id="participateModal" tabindex="-1" role="dialog" aria-labelledby="participateModalLabel" aria-hidden="true">
+    <div Fp role="document">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h5 class="" id="participateModalLabel">Participate in Event</h5>
+          <button mat-button mat-dialog-close  class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="event-details-container">
+            <div class="event-info">
+              <h2  class="modal-title">{{ eventee?.title }}</h2>
+              <div class="title-image-container">
+                <img [src]="eventee?.image" alt="Event Image">
+              </div>
+              <p class="organizer">Organized by: {{ eventee?.userE?.firstName }}</p>
+              <p class="attendee-rest">Available Places: {{ eventee?.attendeeRest }}</p>
+              <p class="price">Price: {{ eventee?.price }}P</p>
+              <p class="category">Category: {{ eventee?.category }}</p>
+              <p class="description">{{ eventee?.description }}</p>
+              <p class="date">Date: {{ eventee?.dateE | date:'medium' }}</p>
+              <p class="conditions">Conditions: {{ eventee?.conditionOfParticipation }}</p>
+            </div>
+          </div>
+          <hr>
+          <p>Are you sure you want to participate in "{{ eventee?.title }}"?</p>
+          <ng-container *ngIf="eventee?.conditionOfParticipation">
+            <p>Event condition: {{ eventee?.conditionOfParticipation }}</p>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="acceptConditions" [(ngModel)]="acceptConditions">
+              <label class="form-check-label" for="acceptConditions">
+                Accept all conditions
+              </label>
+            </div>
+          </ng-container>     
+          <div class="comments-section">
+            <button class="toggle-comments" (click)="toggleComments()">
+              {{ showComments ? 'Hide Comments' : 'Show Comments' }}
+            </button>
+            <form >
+              <textarea [(ngModel)]="newComment" placeholder="Add your comment here..."></textarea>
+              <button type="submit" (click)="addComment()">Add Your Comment</button>
+            </form>
+            <div *ngIf="showComments" class="comments">
+              <div *ngIf="comments.length > 0; else noComments">
+                <div *ngFor="let comment of comments" class="comment">
+                  <div class="comment-header">
+                    <strong>{{ comment.user?.firstName }} {{ comment.user?.lastName }}</strong> - {{ comment.createdAt | date:'medium' }}
+                  </div>
+                  <div class="comment-content">
+                    <p>{{ comment.content }}</p>
+                  </div>
+                  <div class="comment-actions">
+                    <button (click)="deleteComment(comment.id!)">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <ng-template #noComments>
+                <p class="no-comments">No comments available.</p>
+              </ng-template>
+            </div>
+            
+          </div>         
+          <div class="modal-footer">
+            <button mat-button mat-dialog-close class="btn btn-primary" (click)="confirmParticipation()" [disabled]="!acceptConditions">Yes</button>
+            <button mat-button mat-dialog-close class="btn btn-secondary" data-dismiss="modal" >No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

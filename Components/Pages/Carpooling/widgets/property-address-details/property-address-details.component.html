@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+
+
+<h2>Address</h2>
+<p class="font-roboto">Add your property Location</p>
+<form class="row gx-3" novalidate [formGroup]="myForm">
+  <div class="form-group col-sm-6">
+    <label>Delegation</label>
+    <input type="text" class="form-control" placeholder="Delegation of your property" formControlName="address" [ngClass]="{ 'is-invalid' : (address?.touched || validate) && address?.errors , 'is-valid' : !address?.errors}"required [(ngModel)]="delegation">
+  </div>
+  <div class="form-group col-sm-6">
+    <label>Zip code</label>
+    <input type="number" class="form-control" placeholder="39702" formControlName="pin_code" [ngClass]="{ 'is-invalid' : (pin_code?.touched || validate) && pin_code?.errors , 'is-valid' : !pin_code?.errors}"required [(ngModel)]="code">
+  </div>
+
+  <div class="form-group col-sm-4">
+    <label>Location</label>
+    <input type="text" class="form-control" placeholder="Location" formControlName="landmark" [ngClass]="{ 'is-invalid' : (landmark?.touched || validate) && landmark?.errors , 'is-valid' : !landmark?.errors}"  required [(ngModel)]="loc">
+  </div>  
+  
+</form>
+<a _ngcontent-ng-c2966600256="" (click)="locateMe()"  class="btn btn-light-bg btn-pill color-2 ng-star-inserted"><span _ngcontent-ng-c2966600256="">locateMe</span></a>
+<div id="map" style="height: 400px;"></div>
+
+<div class="next-btn d-flex">
+  <button type="button" class="btn btn-dashed color-2 prev1 btn-pill" (click)="previous()"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+  <button type="button" class="btn btn-gradient color-2 next2 btn-pill" (click)="next(myForm,loc)">Next <i class="fas fa-arrow-right ms-2"></i></button>
+</div>
+

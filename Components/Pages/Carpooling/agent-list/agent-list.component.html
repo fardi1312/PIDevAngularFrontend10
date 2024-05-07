@@ -1,0 +1,27 @@
+<app-header></app-header>
+<app-customizer></app-customizer>
+<section class="agent-section property-section">
+  <div class="container">
+    <div class="row ratio2_3 agent-section property-section">
+      <div class="col-xl-9 col-lg-8 property-grid-3 agent-grids">
+        <div class="filter-panel">
+          <div class="top-panel">
+            <div class="title-2 ng-star-inserted">
+              <h2>OUR CARPOOLING OFFER</h2>
+            </div>
+          </div>
+        </div>
+        <div class="property-wrapper-grid list-view">
+          <app-common-agency [as]="activeSteps" [agencyData]="agentsData" [type]="'list'" [totalData]="9"></app-common-agency>
+
+
+         
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-4">
+        <app-advance-filter  (activeSteps)="receiveChildData($event)" (preferencesUpdated)="getAllOffers2()"></app-advance-filter>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footor></app-footor>
