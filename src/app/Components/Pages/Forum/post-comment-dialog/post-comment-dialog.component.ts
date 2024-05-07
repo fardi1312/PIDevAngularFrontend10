@@ -11,11 +11,11 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { environment } from "../../../../Environments/environment";
 import { CommentResponse } from "../../../../Model/User/comment-response";
 import { Post } from "../../../../Model/User/post";
-import { AuthService } from "../../../../Services/User/AuthService";
-import { PostService } from "../../../../Services/Forum/post.service";
-import { CommentService } from "../../../../Services/Forum/comment.service";
+import { AuthService } from "../../../../services/User/AuthService";
+import { PostService } from "../../../../services/Forum/post.service";
+import { CommentService } from "../../../../services/Forum/comment.service";
 import {Comment} from "../../../../Model/User/comment";
-import { UserService } from 'src/app/Services/User/UserService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
 	selector: 'app-post-comment-dialog',

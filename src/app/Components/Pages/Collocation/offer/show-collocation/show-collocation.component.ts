@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollocationOffer } from 'src/app/models/Collocation/CollocationOffer';
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
 import { Filter } from 'src/app/models/Collocation/Filter';
 
 
@@ -13,6 +13,8 @@ import { Filter } from 'src/app/models/Collocation/Filter';
   styleUrls: ['./show-collocation.component.css']
 })
 export class ShowCollocationComponent  implements OnInit{
+  str!:String;
+
   filtersApplied = false;
   isOfferSaved: boolean = false;
   searchParams = {
@@ -46,6 +48,22 @@ export class ShowCollocationComponent  implements OnInit{
     this.loadOffers();
    // this.watchPosition();
 
+  }
+  fetchImages(): void {
+    console.log("++++++++++++++9baaaaaaaaal+++++++++")
+
+    this.allOffers.forEach((offer) => {
+      this.offerService.getImageUrl(offer.idCollocationOffer).subscribe(
+        (imageUrl: string) => {
+          offer.imageCollocation = imageUrl;
+        },
+        (error) => {
+          console.log( "-------------------------------------------")
+
+          console.error("Error fetching  image:", error);
+        }
+      );
+    });
   }
 
   
@@ -102,9 +120,11 @@ export class ShowCollocationComponent  implements OnInit{
   loadOffers(): void {
     this.offerService.getCollocationOffers().subscribe(
       (data) => {
+
         this.allOffers = data; 
         let matchingOfferIds: number[] = [];
-  
+        this.fetchImages();
+
         this.offerService.getMatchingOffersForUser(1).subscribe(
           (matchingOffers: CollocationOffer[]) => {
             matchingOfferIds = matchingOffers.map(offer => offer.idCollocationOffer);

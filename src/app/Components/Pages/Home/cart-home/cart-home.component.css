@@ -1,0 +1,311 @@
+.info_box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+
+.info_box.activeInfo {
+    display: block;
+}
+
+.info-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-list {
+    margin-bottom: 20px;
+}
+
+.info-list .info {
+    margin-bottom: 10px;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.buttons button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #ff7300;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #df900a;
+}
+/* quiz-app.component.css */
+
+/* Set background color for result box */
+.result_box {
+    background: #ffffff;
+}
+
+/* Style for score text inside result box */
+.result_box .score_text span {
+    display: flex;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Additional style for score text span */
+.result_box .score_text span p {
+    padding: 0 4px;
+    font-weight: 600;
+}
+
+/* Style for buttons inside result box */
+.result_box .buttons button {
+    margin: 10px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.result_box .score_text span {
+    display: flex;
+    margin: 10px 0;
+}
+
+.result_box .score_text span {
+    display: flex;
+    margin: 10px 0;
+}
+
+
+footer button.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+.quiz_box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+}
+
+.quiz_box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.quiz_box.activeQuiz {
+    display: block;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.quiz_box header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f8f8; /* Lighter shade of white */
+}
+
+.quiz_box .title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.quiz_box .timer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the left */
+}
+
+.quiz_box .timer_sec {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.quiz_box .time_line {
+    height: 5px;
+    background-color: #ccc;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+.quiz_box section {
+    margin-bottom: 20px;
+}
+
+.quiz_box .que_text {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.quiz_box .option {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz_box .option:hover {
+    background: #eaeaea;
+}
+
+section .option.correct {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+section .option.incorrect {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+section .option.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.quiz_box .option span {
+    font-size: 16px;
+    color: #333;
+}
+
+.quiz_box .option .icon {
+    display: none;
+}
+
+.quiz_box .option.correct .icon {
+    display: block;
+    color: #5cb85c;
+}
+
+.quiz_box footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.quiz_box footer button {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 8px 20px;
+    border: none;
+    background-color: #ff7300;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz_box footer button:hover {
+    background-color: #df900a;
+}
+
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .total_que {
+    display: inline-flex;
+    align-items: center;
+}
+
+.total_que p {
+    margin: 0 5px; /* Adjust the margin as needed */
+}
+
+  .result_box .icon {
+    font-size: 100px;
+    color: #ff7300;
+    margin-bottom: 10px;
+  }
+  
+  .result_box .complete_text {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .result_box .score_text span {
+    display: flex;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  /* Styles for when result_box is active */
+  .result_box.activeResult {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  /* Styles for buttons inside start_btn */
+  .start_btn button {
+    font-size: 25px;
+    font-weight: 500;
+    color: #ff7300;
+    padding: 15px 30px;
+  }
+  
+  
+  
+ 
+  
+

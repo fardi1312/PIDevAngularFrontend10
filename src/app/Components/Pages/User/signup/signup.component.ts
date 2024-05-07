@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserSignup } from 'src/app/Model/User/user-signup';
-import { AuthService } from 'src/app/Services/User/AuthService';
+import { AuthService } from 'src/app/services/User/AuthService';
 
 @Component({
   selector: 'app-signup',
@@ -38,6 +38,7 @@ export class SignupComponent implements OnInit {
     // Call the service signup method with UserSignup object
     this.service.signup(this.userSignup).subscribe((response) => {
       console.log(response);
+      this.signupForm.reset();
     });
   }
   callGithubMethod() {

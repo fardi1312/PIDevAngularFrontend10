@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'src/app/Model/Subscription/Subscription';
-import { SubscriptionService } from 'src/app/Services/Subscription/service-subscription.service';
+import { SubscriptionService } from 'src/app/services/Subscription/service-subscription.service';
 @Component({
   selector: 'app-edit-subscription',
   templateUrl: './edit-subscription.component.html',

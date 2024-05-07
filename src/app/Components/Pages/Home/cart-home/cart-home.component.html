@@ -1,0 +1,131 @@
+
+<section class="featured-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <div class="custom-block featured-custom-block">
+                    <h2 class="mt-2 mb-4">Quiz Hour</h2>
+            
+                    <div class="d-flex">
+                        <i class="featured-icon bi-clock me-3"></i>
+            
+                        <div>
+                            <p class="mb-2">
+                              everyday ~
+                                <strong class="d-inline">
+                                    7:00 PM - 8:00 PM
+                                </strong>
+                            </p>
+            
+                            <!-- Button to open quiz -->
+                            <div class="start_btn">
+                                <button [disabled]="isStartButtonDisabled" (click)="continue()">Start Quiz</button>
+                              </div>
+                              
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+            
+  
+        </div>
+    </div>
+  </section>
+  
+ 
+
+  
+  <div class="info_box"  [ngClass]="showWarning ? 'activeInfo' : ''">
+    <div class="info-title"><span>Some Rules of this Quiz</span></div>
+    <div class="info-list">
+      <div class="info">1. You will have only <span>10 seconds</span> per each question.</div>
+      <div class="info">2. Once you select your answer, it can't be undone.</div>
+      <div class="info">3. You can't select any option once time goes off.</div>
+      <div class="info">4. You can't exit from the Quiz Once Started.</div>
+    </div>
+    <div class="buttons">
+      <button class="quit" (click)="quit()" >Exit Quiz</button>
+      <button class="restart" (click)="startQuiz1()">Continue</button>
+    </div>
+  </div>
+  
+  <div class="quiz_box" [ngClass]="isQuizStarted ? 'activeQuiz' : ''">
+    <header>
+      <div class="title">Awesome Quiz Application</div>
+      <div class="timer">
+        <div class="time_left_txt">Time Off</div>
+        <div class="timer_sec">{{remain}}</div>
+      </div>
+    </header>
+    <section>
+        <div class="que_text"><span>{{currentQuestions+1}}. {{questionsList[currentQuestions].question}} </span></div>
+        <div class="option_list">
+            <div class="option" 
+            [ngClass]="{'correct': option.isSelected && option.correct,
+                        'incorrect': option.isSelected && !option.correct,
+                        'disabled': isOptionSelected(questionsList[currentQuestions].options)
+}"
+            (click)="selectOption(option)" 
+            *ngFor="let option of questionsList[currentQuestions].options">
+         <span>{{ option.answer }}</span>
+
+       </div>
+       </div>
+       </section>
+      
+    <footer>
+        <div class="total_que">
+            <p>{{currentQuestions+1}}</p> of <p>{{questionsList.length}}</p> Questions
+       
+        </div>
+        <button *ngIf="currentQuestions+1 == questionsList.length"  class="next_btn show" (click)="
+        finish1()">finish</button>
+          <button  *ngIf="currentQuestions+1 !== questionsList.length" class="next_btn show" (click)="
+          nextQestion()">Next Que</button>
+      </footer>
+      
+  </div>
+  
+  
+
+  <div *ngIf="isQuizEnded" class="result_box activeResult">
+    <div class="icon">
+      <i class="fas fa-crown"></i>
+    </div>
+    <div class="complete_text">You've completed the Quiz!</div>
+    <div class="score_text">
+      <span>And congrats! You got <p>{{ correctNum }}</p> out of {{ questionsList.length }}</span>
+
+    </div>
+    </div>
+  
+  
+  
+    <div *ngIf="showModal">
+      <app-spin></app-spin>
+    </div>
+      
+  
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+  
+  <link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+  
+  <link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+  
+  <link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
+  
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i" rel="stylesheet">
+
+  

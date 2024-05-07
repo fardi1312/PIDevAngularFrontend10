@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { User } from "../../../../Model/User/user";
 import { environment } from "../../../../Environments/environment";
-import { CommentService } from "../../../../Services/Forum/comment.service";
+import { CommentService } from "../../../../services/Forum/comment.service";
 import { Comment } from "../../../../Model/User/comment";
 import { AppConstants } from 'src/app/Common/app-constants';
 

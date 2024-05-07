@@ -1,0 +1,80 @@
+<app-header></app-header>
+<app-customizer></app-customizer>
+
+
+
+<div class="container">
+    <div class="col-xl-9 col-lg-8 property-grid-3 agent-grids">
+        <div class="filter-panel">
+            <div class="top-panel">
+                <div class="title-2 ng-star-inserted">
+                    <h2>OUR Special Events</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    
+    h4 {
+      font-weight: bold; 
+    }
+  </style>
+<h4>Select a category:</h4>
+<app-show-events  *ngIf="eventsService.getModalStatus()"></app-show-events>
+
+<div class="category-filter">
+    
+    <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterEvents(selectedCategory)">
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+ 
+</div>
+
+<div class="container">
+    <section class="events-grid2">
+        <div class="card-row">
+            <ng-container *ngFor="let event of paginatedEvents; let i = index">
+                <div class="card event-card">
+                    <div class="property-image">
+                        <img [src]="event.image" alt="{{ event.title }}">
+                        <div class="price-overlay">{{ event.price  }}P</div>
+                        <div *ngIf="likeStatus[i+1] === 1">
+                            <button (click)="addLike(1, event.eventID!)" class="heart-overlay">&#9825; {{ event.likesCount }}</button>
+                        </div>
+                        <div *ngIf="likeStatus[i+1] === 0">
+                            <button (click)="addLike(1, event.eventID!)" class="heart-overlayyy">&#9825; {{ event.likesCount }}</button>
+                        </div>
+                          
+                        
+
+                       
+                        
+
+                    </div>
+                    
+                    <div class="property-details">
+                        <h3 class="title"><span class="icon-type">🎉</span>{{ event.title }}</h3>
+                        <p class="event-info">
+                            <span class="icon-date">📅</span> {{ event.dateE | date }}
+                            <span class="icon-attendees">| 👥</span> Attendees: {{ event.attendeeCount }}
+                        </p>
+                        <p class="category">
+                            Category: {{ event.category }}
+                        </p>
+                        <p class="description">Available Places: {{ event.attendeeRest }}</p>
+                        <button class="join-button" (click)="getEventById(event.eventID! )">Event Details</button>
+                    </div>
+                    
+                    
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Add the mat-paginator component for pagination -->
+      
+    </section>
+</div>
+
+<app-footor></app-footor>

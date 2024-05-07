@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Services/User/AuthService';
+import { AuthService } from 'src/app/services/User/AuthService';
 
 @Component({
   selector: 'app-head-back',

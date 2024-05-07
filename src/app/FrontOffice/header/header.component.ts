@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/app/Environments/environment';
 import { User } from 'src/app/Model/User/user';
-import { UserService } from 'src/app/Services/User/UserService';
-import { AuthService } from 'src/app/Services/User/AuthService';
-import { NotificationService } from "../../Services/Forum/notification.service";
+import { UserService } from 'src/app/services/User/UserService';
+import { AuthService } from 'src/app/services/User/AuthService';
+import { NotificationService } from "../../services/Forum/notification.service";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -13,6 +13,8 @@ import { AppConstants } from 'src/app/Common/app-constants';
 import { Notification } from 'src/app/Model/User/notification';
 import { SnackbarComponent } from "../../Components/Pages/Forum/snackbar/snackbar.component";
 import { SearchDialogComponent } from 'src/app/Components/Pages/User/search-dialog/search-dialog.component';
+import { CouponService } from 'src/app/services/serviceOns/coupon.service';
+import { Promotion } from 'src/app/models/modelOns/Promotion';
 
 @Component({
   selector: 'app-header',
@@ -36,14 +38,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notifications: Notification[] = [];
   isVerified!: boolean;
 
+  promotions: Promotion[] = [];
 
+
+showModal:boolean=false;
+  
+  openModal(){
+
+console.log("nzdklz");
+   
+      this.promotionService.getAllPromotionsValable().subscribe(promotions => {
+        this.promotions = promotions;
+        if (this.promotions.length > 0) {
+          this.showModal = true;
+          
+        }
+      });
+    
+
+  }
+  close(){
+    this.showModal=false;
+  }
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService,
     private matDialog: MatDialog,
-    private matSnackbar: MatSnackBar
+    private matSnackbar: MatSnackBar,
+    private promotionService: CouponService
   ) { }
 
   ngOnInit(): void {

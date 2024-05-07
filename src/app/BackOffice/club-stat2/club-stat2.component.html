@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header pb-0">
+      <h5>Income Analysis</h5>
+    </div>
+    <div class="card-body income-wrap">
+      <ul class="overview-content">
+        <li>
+          <div class="d-flex">
+            <span><span class="label label-success"></span></span>
+          </div>
+        </li>
+        <li>
+          <div class="d-flex">
+            <span><span class="label label-success"></span></span>
+          </div>
+        </li>
+      </ul>
+      <div class="income-container">
+        <div id="incomechart">
+          <apx-chart [series]="incomeAnalysisChart.series" [chart]="incomeAnalysisChart.chart" [markers]="incomeAnalysisChart.markers"
+                     [dataLabels]="incomeAnalysisChart.dataLabels" [stroke]="incomeAnalysisChart.stroke" [legend]="incomeAnalysisChart.legend"
+                     [colors]="incomeAnalysisChart.colors" [fill]="incomeAnalysisChart.fill" [grid]="incomeAnalysisChart.grid" [responsive]="incomeAnalysisChart.responsive"
+                     [yaxis]="incomeAnalysisChart.yaxis" [xaxis]="incomeAnalysisChart.xaxis" [tooltip]="incomeAnalysisChart.tooltip">
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>

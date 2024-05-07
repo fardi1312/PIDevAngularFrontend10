@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
 import { CollocationPreferences, Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
 import { RoomType } from 'src/app/models/Collocation/RoomDetails';
-import { CollocationPreferencesService } from 'src/app/Services/Collocation/preferences.service';
+import { CollocationPreferencesService } from 'src/app/services/Collocation/preferences.service';
 
 @Component({
   selector: 'app-add-preferences',
@@ -90,6 +90,6 @@ this.loadPreferencesByUserId();
 
 
 updatePrefernce(id: number){
-  this.router.navigate(['Preferences/update', id]);
+  this.router.navigate(['user/Collocation/update', id]);
 }
 }

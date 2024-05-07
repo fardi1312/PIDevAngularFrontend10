@@ -1,22 +1,29 @@
 import { CalendarEvent, CalendarEventAction } from "angular-calendar";    
 import { EventColor } from "calendar-utils"; 
-import { ScheduleService } from "../Services/Collocation/schedule.service"; 
+import { ScheduleService } from "../services/Collocation/schedule.service";
 import { parseISO } from 'date-fns'; 
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
+
 
 
 
 export class CustomEvent implements CalendarEvent {
-    id?: number;
+    id: number;
     start: Date;
-    end: Date;
-    title: string; 
-    Requester?:string;  
-    qrCodeOfferer:  string ;
-    qrCodeRequester:  string
-
-    Offerer?:string ; 
-    color?: EventColor;
+    end: Date; 
+    meetingLink: string;
+    title: string;  
+    idOfferer:number ; 
+    idRequester:number ;   
+    acceptRenter: Boolean ; 
+    acceptRenting: Boolean ; 
+    collocationOfferId:number ; 
+    offerer:string ; 
+    color?: EventColor;   
+    fixedOfferer:Boolean ;  
+    idCollocationRequest:number ; 
+    fixedRequester:Boolean | null; 
+    requester:string ; 
     actions?: CalendarEventAction[];
     allDay?: boolean;
     cssClass?: string;
@@ -27,10 +34,16 @@ export class CustomEvent implements CalendarEvent {
     draggable?: boolean;
     meta?: any;
     idUser=1 ; 
-    constructor(eventData: CalendarEvent, private scheduleService: ScheduleService) {
-        this.id = eventData.id;
-        this.start = eventData.start; 
-
+    constructor(eventData: CalendarEvent, private scheduleService: ScheduleService) { 
+        this.id = eventData.id; 
+        this.meetingLink = eventData.meetingLink ; 
+        this.start = eventData.start;  
+        this.fixedOfferer=eventData.fixedOfferer ; 
+        this.fixedRequester=eventData.fixedRequester ;    
+        this.idOfferer = eventData.idOfferer ;
+        this.idRequester = eventData.idRequester   ;
+        this.idCollocationRequest = eventData.idCollocationRequest 
+        this.collocationOfferId = eventData.collocationOfferId
         if (eventData.end !== undefined) {
             this.end = eventData.end;
         } else {
@@ -38,18 +51,18 @@ export class CustomEvent implements CalendarEvent {
             this.end = new Date(); // For example, you can assign the current date
         }
         this.title = eventData.title; 
-        this.Requester= eventData.requester ;  
-        this.Offerer= eventData.offerer ;   
-        this.qrCodeOfferer = eventData.qrCodeOfferer; 
-        this.qrCodeRequester=eventData.qrCodeRequester ; 
-                  
+        this.requester= eventData.requester ;  
+        this.offerer= eventData.offerer ;  
+        this.acceptRenter = eventData.acceptRenter ; 
+        this.acceptRenting = eventData.acceptRenting ;   
         this.color = eventData.color;
         this.actions = eventData.actions;
         this.allDay = eventData.allDay;
         this.cssClass = eventData.cssClass;
         this.resizable = eventData.resizable;
         this.draggable = eventData.draggable;
-        this.meta = eventData.meta; 
+        this.meta = eventData.meta;  
+
     }  
 
     addEvent(event: CalendarEvent): void {
@@ -91,21 +104,27 @@ export class CustomEvent implements CalendarEvent {
         // Convert start and end properties to JavaScript date objects
         const startDate = new Date(this.start);
         const endDate = new Date(this.end); 
-        console.log(  this.qrCodeOfferer) ; 
     
-        return {
-            id: this.id,
+        return { 
+
+            id: this.id,   
+            meetingLink:this.meetingLink, 
+            collocationOfferId:this.collocationOfferId, 
             start: startDate,
             end: endDate,
-            title: this.title, 
-            requester:this.Requester, 
-            offerer:this.Offerer,   
-            qrCodeOfferer:this.qrCodeOfferer,  
-            qrCodeRequester:this.qrCodeRequester,  
-            
+            title: this.title,  
+            idCollocationRequest:this.idCollocationRequest, 
+            offerer:this.offerer,   
+            requester:this.requester,   
+            fixedOfferer:this.fixedOfferer, 
+            fixedRequester:this.fixedRequester,  
             color: this.color,
             actions: this.actions,
-            draggable: this.draggable,
+            draggable: this.draggable, 
+            idOfferer:this.idOfferer ,  
+            acceptRenter:this.acceptRenter , 
+            acceptRenting:this.acceptRenting, 
+            idRequester:this.idRequester ,  
             resizable: this.resizable,
             meta: this.meta,
         };

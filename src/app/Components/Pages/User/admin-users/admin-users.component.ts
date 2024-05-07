@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Model/User/user';
-import { AdminService } from 'src/app/Services/User/AdminService';
+import { AdminService } from 'src/app/services/User/AdminService';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailsDialogComponent } from '../user-details-dialog/user-details-dialog.component';
 import Chart from 'chart.js/auto';

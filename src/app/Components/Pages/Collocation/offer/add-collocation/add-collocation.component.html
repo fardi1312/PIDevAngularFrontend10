@@ -18,7 +18,7 @@ crossorigin=""></script>
 
  
   <div class="col-lg-8 col-12 text-center mx-auto">
-    <form class="custom-form hero-form" role="form" (ngSubmit)="onSubmit()">
+    <form class="custom-form hero-form" role="form" (ngSubmit)="onSubmit($event)">
       <div class="row">
         <div class="row">
 
@@ -198,7 +198,17 @@ crossorigin=""></script>
             <label for="smoking-allowed">Smoking Allowed</label>
             <input type="checkbox" name="smoking-allowed" id="smoking-allowed" class="form-check-input" [(ngModel)]="collocationOffer.smokingAllowed">
           </div>
+
+          
         </div>
+          <div class="col-lg-4 col-md-6 col-12">
+          <div class="input-group align-items-center">
+            <label for="interest">Image</label>
+            <input type="file" name="images" id="images" class="form-control" (change)="handleFileInput($event)" multiple>
+          </div>
+        </div>
+
+
 
       </div>
 

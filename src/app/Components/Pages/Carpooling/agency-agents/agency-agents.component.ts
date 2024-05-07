@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
 import { CarpoolingRequest } from 'src/app/models/modelSM/CarpoolingRequest';
-import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
 
 @Component({
   selector: 'app-agency-agents',

@@ -1,3 +1,41 @@
-.container {
-    margin-top: 20px;
+
+  .container {
+    margin-top: 50px;
+    text-align: center;
   }
+  
+  .message-container {
+    background-color: #f9f9f9; /* Light Gray */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-container p {
+    color: #333; /* Dark Gray */
+    font-weight: bold;
+  }
+  
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  button {
+    background-color: #800080; /* Purple */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #6a006a; /* Darker Purple */
+  }
+  

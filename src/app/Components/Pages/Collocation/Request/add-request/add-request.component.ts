@@ -1,13 +1,13 @@
 // add-request.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer'; 
 import { Interest, Pets } from 'src/app/models/Collocation/CollocationPreferences';
-
-import { OfferService } from 'src/app/Services/Collocation/offer.service';
-import { RequestService } from 'src/app/Services/Collocation/request.service';
-import {  CollocationOffer, FurnitureCollocation, Gender } from 'src/app/models/Collocation/CollocationOffer';
-import { CollocationRequest, RequestEnum } from 'src/app/models/Collocation/CollocationRequest';
+import { CollocationRequest, RequestEnum  } from 'src/app/models/Collocation/CollocationRequest'; 
 import { RoomDetails, RoomType } from 'src/app/models/Collocation/RoomDetails';
+import { User } from 'src/app/models/Collocation/User';
+import { OfferService } from 'src/app/services/Collocation/offer.service';
+import { RequestService } from 'src/app/services/Collocation/request.service';
 
 @Component({
   selector: 'app-add-request',
@@ -35,9 +35,8 @@ idUser= 1 ;
         idRoomDetails: 0, // or assign a valid id
         roomType: RoomType.SINGLE,
         availablePlaces: 0, // assign the correct value
-        prix: 0, // assign the correct value
-        selected:true
-
+        prix: 0,
+        selected: false
       });
     }
   }  
@@ -58,12 +57,12 @@ idUser= 1 ;
     this.collocationRequest.roomDetailsList = [];
   
     for (let i = 0; i < this.collocationRequest.places; i++) {
-      this.collocationRequest.roomDetailsList.push({ 
-        idRoomDetails:0,
-        roomType: RoomType.SINGLE, 
+      this.collocationRequest.roomDetailsList.push({
+        idRoomDetails: 0,
+        roomType: RoomType.SINGLE,
         availablePlaces: 1,
         prix: 0,
-        selected:true
+        selected: false
       });
     }
   }
@@ -71,30 +70,29 @@ idUser= 1 ;
   idOffer: number = 0;
   collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    locationLx: '',
-    locationLy: '',
-    houseType: 0,
-    saved:false,
+    averageRating: 0,
     governorate: '',
-    country: '',
-    city: '',
-    streetAddress: '',
+    houseType: 0,
     availablePlaces: 0,
-    dateRent: new Date(),
     dateOffer: new Date(),
+    dateRent: new Date(),
     gender: Gender.MALE,
     price: 0,
     furnitureCollocation: FurnitureCollocation.Furnitured,
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [],
+    locationLx: '',
+    locationLy: '',
+    country: '',
+    city: '',
+    streetAddress: '',
+    saved: false,
     smokingAllowed: false,
-    petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
+    petsAllowed: Pets.Cats,
+    interest: Interest.Sport,
+    matchPercentage: 0,
+    user: new User
   };
 
   constructor(
@@ -124,20 +122,6 @@ idUser= 1 ;
   // Add a room to roomDetailsList based on the requested places
   
   saveRequest(): void {
-    const selectedRooms = this.collocationOffer.roomDetailsList.filter(room => room.selected);
-  
-    this.collocationRequest.roomDetailsList = [];
-  
-    selectedRooms.forEach(room => {
-      this.collocationRequest.roomDetailsList.push({
-        idRoomDetails: room.idRoomDetails,
-        roomType: room.roomType,
-        availablePlaces: room.availablePlaces,
-        prix: room.prix,
-        selected: true
-      });
-    });
-  
     console.log('Room details selected for collocation request:', this.collocationRequest.roomDetailsList); 
     const updatedRoomDetailsList = this.collocationRequest.roomDetailsList.map((roomDetail: RoomDetails) => ({
       idRoomDetails: roomDetail.idRoomDetails,
@@ -166,10 +150,23 @@ idUser= 1 ;
   }
         
   goToRequestList(): void {
-    this.router.navigate(['user/Collocation/showRequest']);
+    this.router.navigate(['/Collocation/showRequest']);
+  } 
+  checkDescription(): boolean {
+    const forbiddenWords = ['badword1', 'badword2']; 
+
+    for (const word of forbiddenWords) {
+      if (this.collocationRequest.description.toLowerCase().includes(word)) {
+        return true; 
+      }
+    }
+
+    return false; 
   }
 
+
+
   goToOfferList() {
-    this.router.navigate(['user/Collocation/showOffer']); 
+    this.router.navigate(['/Collocation/showOffer']); 
   }
 }

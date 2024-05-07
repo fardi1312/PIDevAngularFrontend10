@@ -1,46 +1,330 @@
 .card-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 350px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    margin: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-body {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  h3 {
-    margin-top: 0;
-  }
-  
-  p {
-    margin-bottom: 15px;
-  }
-  
-  .pay-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .pay-button:hover {
-    background-color: #45a049; /* Darker Green */
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 350px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+.pay-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pay-button:hover {
+  background-color: #45a049; /* Darker Green */
+}
+/* Modal backdrop */
+.modal-backdrop {
+opacity: 0.5 !important; /* Adjust backdrop opacity as needed */
+}
+
+/* Modal dialog */
+.modal-dialog {
+margin: 10% auto;
+}
+
+/* Modal content */
+.modal-content {
+border-radius: 0.5rem;
+}
+
+/* Modal header */
+.modal-header {
+padding: 1rem;
+border-bottom: 1px solid #dee2e6;
+background-color: #f8f9fa;
+}
+
+/* Modal title */
+.modal-title {
+margin-bottom: 0;
+}
+
+/* Modal body */
+.modal-body {
+padding: 1rem;
+}
+
+/* Modal footer */
+.modal-footer {
+padding: 1rem;
+border-top: 1px solid #dee2e6;
+background-color: #f8f9fa;
+}
+.info_box {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+padding: 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+
+.info_box.activeInfo {
+display: block;
+}
+
+.info-title {
+font-size: 1.2em;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.info-list {
+margin-bottom: 20px;
+}
+
+.info-list .info {
+margin-bottom: 10px;
+}
+
+.buttons {
+text-align: center;
+}
+
+.buttons button {
+margin-right: 10px;
+padding: 5px 10px;
+border: none;
+background-color: #007bff;
+color: white;
+cursor: pointer;
+}
+
+.buttons button:hover {
+background-color: #0056b3;
+}
+/* quiz-app.component.css */
+
+/* Set background color for result box */
+.result_box {
+background: #0263ca;
+}
+
+/* Style for score text inside result box */
+.result_box .score_text span {
+display: flex;
+margin: 10px 0;
+font-size: 18px;
+font-weight: 500;
+}
+
+/* Additional style for score text span */
+.result_box .score_text span p {
+padding: 0 4px;
+font-weight: 600;
+}
+
+/* Style for buttons inside result box */
+.result_box .buttons button {
+margin: 10px;
+height: 45px;
+padding: 8px 20px;
+font-size: 18px;
+font-weight: 500;
+cursor: pointer;
+}
+
+
+.result_box .score_text span {
+display: flex;
+margin: 10px 0;
+}
+
+.result_box .score_text span {
+display: flex;
+margin: 10px 0;
+}
+
+
+footer button.show {
+opacity: 1;
+pointer-events: auto;
+transform: scale(1);
+}
+.quiz_box {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+padding: 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+.quiz_box.activeQuiz {
+display: block;
+}
+
+.quiz_box header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.quiz_box .title {
+font-size: 1.2em;
+font-weight: bold;
+}
+
+.quiz_box .timer {
+display: flex;
+align-items: center;
+}
+
+.quiz_box .timer_sec {
+font-size: 1.2em;
+font-weight: bold;
+margin-left: 10px;
+}
+
+.quiz_box .time_line {
+height: 5px;
+background-color: #ccc;
+width: 100%;
+}
+
+.quiz_box section {
+margin-bottom: 20px;
+}
+
+.quiz_box .que_text {
+font-size: 1.2em;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.quiz_box .option {
+background: #f9f9f9;
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 10px;
+margin-bottom: 10px;
+cursor: pointer;
+}
+
+.quiz_box .option:hover {
+background: #eaeaea;
+}
+
+section .option.correct {
+color: #155724;
+background: #d4edda;
+border: 1px solid #c3e6cb;
+}
+
+/* Styling for incorrect option */
+section .option.incorrect {
+color: #721c24;
+background: #f8d7da;
+border: 1px solid #f5c6cb;
+}
+
+/* Styling for disabled option */
+section .option.disabled {
+/* Add your disabled styles here */
+pointer-events: none; /* Disable pointer events */
+opacity: 0.5; /* Reduce opacity for disabled look */
+}
+
+.quiz_box .option span {
+font-size: 16px;
+}
+
+.quiz_box .option .icon {
+display: none;
+}
+
+.quiz_box .option.correct .icon {
+display: block;
+color: #5cb85c;
+}
+footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.total_que {
+display: flex;
+align-items: center;
+}
+
+.total_que p {
+margin: 0 5px; /* Adjust the margin as needed */
+}
+.result_box .icon {
+font-size: 100px;
+color: #007bff;
+margin-bottom: 10px;
+}
+
+.result_box .complete_text {
+font-size: 20px;
+font-weight: 500;
+}
+
+.result_box .score_text span {
+display: flex;
+margin: 10px 0;
+font-size: 18px;
+font-weight: 500;
+}
+
+/* Styles for when result_box is active */
+.result_box.activeResult {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+opacity: 1;
+z-index: 5;
+pointer-events: auto;
+transform: translate(-50%, -50%) scale(1);
+}
+
+/* Styles for buttons inside start_btn */
+.start_btn button {
+font-size: 25px;
+font-weight: 500;
+color: #007bff;
+padding: 15px 30px;
+}

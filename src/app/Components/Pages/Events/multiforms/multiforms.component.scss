@@ -1,0 +1,77 @@
+
+/* General styling */
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.wizard-section {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+ 
+}
+
+.wizard-form-details {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.theme-card {
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Form styling */
+.input-container {
+  margin-bottom: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.mat-label {
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.step-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-raised-button {
+  margin-left: 10px;
+  color: #f20909;
+  background-color: #f53f08;
+}
+
+
+
+/* App Footer */
+app-footor {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Stepper styling */
+.mat-stepper-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-stepper-horizontal, mat-stepper-vertical {
+  border-radius: 15px;
+  background-color: #e4d5ca;
+  padding: 10px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 160px;
+}

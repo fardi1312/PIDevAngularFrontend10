@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { OfferService } from '../Services/Collocation/offer.service';
+import { OfferService } from '../services/Collocation/offer.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RequestService } from '../Services/Collocation/request.service';
-
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import { CollocationRequest, RequestEnum } from '../models/Collocation/CollocationRequest';
-import { RoomDetails } from '../models/Collocation/RoomDetails';
 import { CollocationOffer, FurnitureCollocation, Gender } from '../models/Collocation/CollocationOffer';
+import { RequestService } from '../services/Collocation/request.service';
+import { CollocationRequest, RequestEnum } from '../models/Collocation/CollocationRequest';
+import { RoomDetails } from '../models/Collocation/RoomDetails'; 
 import { Interest, Pets } from '../models/Collocation/CollocationPreferences';
-
+import { User } from '../models/Collocation/User';
 
 @Component({
   selector: 'app-my-offer',
@@ -29,16 +27,11 @@ export class MyOfferComponent implements OnInit {
   }; 
   collocationRequests: CollocationRequest[] = []; 
 
-  collocationOffer:  CollocationOffer = {
+  collocationOffer: CollocationOffer = {
     idCollocationOffer: 0,
-    locationLx: '',
-    locationLy: '',
-    houseType: 0,
-    saved:false,
+    averageRating: 0,
     governorate: '',
-    country: '',
-    city: '',
-    streetAddress: '',
+    houseType: 0,
     availablePlaces: 0,
     dateRent: new Date(),
     dateOffer: new Date(),
@@ -48,14 +41,18 @@ export class MyOfferComponent implements OnInit {
     descriptionCollocation: '',
     imageCollocation: '',
     roomDetailsList: [],
+    locationLx: '',
+    locationLy: '',
+    country: '',
+    city: '',
+    streetAddress: '',
+    saved: false,
     smokingAllowed: false,
-    petsAllowed: Pets.No,
-    interest:Interest.No,
-    matchPercentage:0,
-    user: undefined as any 
-
-
-  };
+    petsAllowed: Pets.Cats,
+    interest: Interest.Sport,
+    matchPercentage: 0,
+    user: new User
+  } 
   idUser:number=1;  
 
   ngOnInit(): void {
@@ -78,30 +75,19 @@ export class MyOfferComponent implements OnInit {
     this.offerService.acceptCollocationRequest(this.id, idRequest)
       .subscribe(
         response => {
-          console.log(response);
           const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
-          if (acceptedRequest) { 
-            window.location.reload(); // Reload the page after an error 
-
-            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
-            this.saveContractAsPDF(contractData);
-          } else {
-            console.error("Accepted request not found.");
-          }
+          if (acceptedRequest) {  
+            window.location.reload(); 
+            alert("please check your Calendar") ;  
+          } 
         },
-        error => { 
-          window.location.reload(); // Reload the page after an error 
+        error => {  
 
+          window.location.reload(); 
+          alert("please check your Calendar") ;  
           console.error(error);
-          const acceptedRequest = this.collocationRequests.find(request => request.idCollocationRequest === idRequest);
-          if (acceptedRequest) {
-            const contractData = this.generateContract(acceptedRequest, this.collocationOffer);
-            this.saveContractAsPDF(contractData);
-          } else {
-            console.error("Accepted request not found.");
-          }
           this.sendMail(idRequest);
-
+ 
         }
       );
   }
@@ -133,12 +119,12 @@ export class MyOfferComponent implements OnInit {
       );
   } 
   
-  generateContract(request: CollocationRequest, offer: CollocationOffer): string {
+/*   generateContract(request: CollocationRequest, offer: CollocationOffer): string {
     // Check if request.date is a Date object before calling toDateString
     const startDate: string = request.date.toString();    
     const rentDate: string = offer.dateRent.toString();
     const priceToPay: number = offer.price; 
-    const place: string = offer.governorate; 
+    const place: string = offer.location; 
     const roomDetails: RoomDetails[] = request.roomDetailsList; 
     const clientName: number = this.idUser;  
     const serviceDescription: string = offer.descriptionCollocation; 
@@ -174,28 +160,7 @@ export class MyOfferComponent implements OnInit {
 
     return contractContent;
 }
-
-  async saveContractAsPDF(contractData: string): Promise<void> {
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage();
-    page.drawText(contractData, {
-      x: 50,
-      y: page.getHeight() - 100,
-      size: 12,
-      font: await pdfDoc.embedFont(StandardFonts.Helvetica),
-      color: rgb(0, 0, 0),
-    });
-
-    const pdfBytes = await pdfDoc.save();
-
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'contract.pdf';
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
+ */
   isAcceptDisabled(request: CollocationRequest): boolean {
     return request.request === 'Canceled' || this.collocationOffer.availablePlaces === 0;
   }

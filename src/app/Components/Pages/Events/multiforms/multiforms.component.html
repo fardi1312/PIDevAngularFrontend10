@@ -1,0 +1,170 @@
+<app-header></app-header>
+
+<section class="wizard-section" >
+    <div class="wizard-form-details col-xxl-9 col-lg-8">
+        <div class="theme-card my-5" >
+            <div class="filter-panel">
+                <div class="top-panel">
+                    <div class="title-2">
+                        <h2 style="color: #f27d09">Add Your EVENT OFFER</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Introduction and Encouragement -->
+            <div class="introduction">
+                <p>Welcome to the event creation portal! 🎉</p>
+                <p>
+                    Organizing events is a great way to bring students together, build community, and create memorable experiences.
+                    Whether you want to host a workshop, a charity event, or a sports game, you can use this form to share your event with others on campus.
+                </p>
+                <p>
+                    Follow the steps below to provide the event details and submit your event for others to see.
+                    Let’s get started and make the campus more lively!
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+                <mat-stepper [linear]="isLinear" #stepper [animationDuration]="animationDuration">
+                    <!-- Step 1: Fill Basic Details -->
+                    <mat-step>
+                        <ng-template matStepLabel>Fill Basic Details</ng-template>
+                        <div class="input-container">
+                            <!-- Title input -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Title</mat-label>
+                                <input matInput formControlName="title" required>
+                                <mat-error *ngIf="eventForm.get('title')?.hasError('required')">Title is required</mat-error>
+                                <mat-error *ngIf="eventForm.get('title')?.hasError('minlength')">Title must be at least 4 characters</mat-error>
+                            </mat-form-field>
+
+                            <!-- Date input -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date</mat-label>
+                                <input matInput [matDatepicker]="datePicker" formControlName="dateE" required>
+                                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #datePicker></mat-datepicker>
+                                <mat-error *ngIf="eventForm.get('dateE')?.hasError('required')">Date is required</mat-error>
+                                <mat-error *ngIf="eventForm.get('dateE')?.hasError('invalidDate')">Date should be after today</mat-error>
+                            </mat-form-field>
+
+                            <!-- Price input -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Price</mat-label>
+                                <input matInput formControlName="price" type="number" required>
+                                <mat-error *ngIf="eventForm.get('price')?.hasError('required')">Price is required</mat-error>
+                                <mat-error *ngIf="eventForm.get('price')?.hasError('min')">Price must be greater than 0</mat-error>
+                            </mat-form-field>
+
+                            <!-- Step buttons -->
+                            <div class="step-buttons">
+                                <button mat-raised-button color="primary" matStepperNext 
+                                        [disabled]="!eventForm.get('title')?.valid || 
+                                                    !eventForm.get('dateE')?.valid || 
+                                                    !eventForm.get('price')?.valid">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </mat-step>
+
+                    <!-- Step 2: Fill Out Contact Info -->
+                    <mat-step>
+                        <ng-template matStepLabel>Fill out contact info</ng-template>
+                        <div class="input-container">
+                            <!-- Category input -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Category</mat-label>
+                                <mat-select formControlName="category" required>
+                                    <mat-option *ngFor="let category of categories" [value]="category">
+                                        {{ category }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="eventForm.get('category')?.hasError('required')">Category is required</mat-error>
+                            </mat-form-field>
+
+                            <!-- Attendee Count input -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Attendee Count</mat-label>
+                                <input matInput formControlName="attendeeCount" type="number" required>
+                                <mat-error *ngIf="eventForm.get('attendeeCount')?.hasError('required')">Attendee count is required</mat-error>
+                                <mat-error *ngIf="eventForm.get('attendeeCount')?.hasError('min')">Attendee count must be greater than 10</mat-error>
+                            </mat-form-field>
+
+                            <!-- Step buttons -->
+                            <div class="step-buttons">
+                                <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
+                                <button mat-raised-button color="primary" matStepperNext 
+                                        [disabled]="!eventForm.get('category')?.valid || 
+                                                    !eventForm.get('attendeeCount')?.valid">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </mat-step>
+
+<!-- Step 3: Fill out event details -->
+<mat-step [optional]="isOptional">
+    <ng-template matStepLabel>Fill out event details</ng-template>
+    <div class="input-container">
+        <!-- Description input -->
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" required></textarea>
+            <mat-error *ngIf="eventForm.get('description')?.hasError('required')">Description is required</mat-error>
+        </mat-form-field>
+
+        <!-- Condition of Participation input -->
+        <mat-form-field appearance="fill">
+            <mat-label>Condition of Participation</mat-label>
+            <textarea matInput formControlName="conditionOfParticipation"></textarea>
+            <!-- Informative text to let the user know it's optional -->
+            <mat-hint align ="end">Optional</mat-hint>
+        </mat-form-field>
+
+        <!-- Button to upload a picture -->
+        <div>
+            <button mat-raised-button
+                matTooltip="upload a picture to advertise your event"
+                matTooltipPosition="below"
+                matTooltipHideDelay="100000" 
+                (click)="fileInput.click()">Upload Picture</button>
+            <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;" />
+        </div>
+        
+
+        <!-- Display the selected image if it exists -->
+        
+
+        <!-- Step buttons -->
+        <div class="step-buttons">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button> |
+            <button mat-raised-button color="warn" type="submit" 
+                    [disabled]="!eventForm.valid || !selectedImage">
+                Submit
+            </button>
+        </div>
+    </div>
+</mat-step>
+
+
+                    <!-- Step 4: Congratulatory message -->
+                    <mat-step>
+                        <ng-template matStepLabel>Congratulations</ng-template>
+                        <div class="congratulatory-container">
+                            <h3>Congratulations! 🎉</h3>
+                            <p>Your event has been added successfully.</p>
+                            <div class="step-buttons">
+                                <button mat-raised-button color="primary" (click)="stepper?.reset()">Add Another Event</button>
+                            </div>
+                        </div>
+                    </mat-step>
+                </mat-stepper>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<app-footor></app-footor>

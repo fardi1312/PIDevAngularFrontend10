@@ -1,8 +1,10 @@
-import { RoomDetails } from "./RoomDetails";
-import { Interest, Pets, User } from "./CollocationPreferences";
+import { RoomDetails } from "./RoomDetails"; 
+import { Interest, Pets } from "./CollocationPreferences"; 
+import { User } from "./User";
+
   export interface CollocationOffer {
     idCollocationOffer: number;
-
+    averageRating:number;
     locationLx: string ;
     locationLy: string;
     governorate: string;

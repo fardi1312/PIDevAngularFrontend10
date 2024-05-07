@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<section class="user-dashboard small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-menusm></app-menusm>
+      </div>
+      <div class="col-lg-9">
+        <div class="panier-section">
+          <h4>Your Commandes :</h4>
+          
+          <div class="table-responsive">
+            <table class="panier-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Buy Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of panier9ach">
+                  <td>
+                    <ul>
+                      <li *ngFor="let post of postsByPanier[item.idPanier9ach!]"> {{ post.quantity}} x {{ post.title }}, 
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{ item.totaleprice }} points</td>
+                  <td>{{ item.satatuspanier }}</td>
+                  <td>{{ item.BuyDate }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footor></app-footor>

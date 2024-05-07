@@ -4,8 +4,8 @@ import { Chart } from 'chart.js';
 import { Post } from 'src/app/Model/User/post';
 import { Tag } from 'src/app/Model/User/tag';
 import { User } from 'src/app/Model/User/user'; // Verifique se o caminho de importação está correto
-import { TimelineService } from 'src/app/Services/Forum/timeline.service';
-import { AdminService } from 'src/app/Services/User/AdminService';
+import { TimelineService } from 'src/app/services/Forum/timeline.service';
+import { AdminService } from 'src/app/services/User/AdminService';
 
 @Component({
   selector: 'app-userstat',

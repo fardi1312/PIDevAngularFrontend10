@@ -1,0 +1,119 @@
+<app-header></app-header>
+<section class="user-dashboard small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <app-menusm></app-menusm>
+      </div>
+      <div class="col-lg-8">
+        <div class="dashboard-content">
+          <div class="tab-listing" id="listing">
+            <div class="property-section">
+              <div class="property-grid-2 ratio_63">
+                <div class="property-2 row column-sm zoom-gallery property-label property-grid list-view">
+                  <ng-container  *ngFor=" let offer of  carpoolingOffers " >
+                    <ng-container >
+                      <div class="col-md-10">
+                        <div class="property-box liked-img">
+                          <div class="property-image">
+                            <div class="property-slider" [class]="'color-6'">
+                              <a href="javascript:void(0)" class="bg-size"[style.background-image]="'url('+offer.img+')'">
+                                <img [src]="offer.img" class="bg-img" alt="agency-image">
+                              </a>
+                             
+                              
+                            </div>
+                            <div class="labels-left">
+                              <ng-container >
+                                <div>
+                                 
+                                  <ng-container *ngIf="offer.carpoolingStatus=='Active'" >
+                                    <span class="label label-success">Active</span>
+                                  </ng-container>
+                                  <ng-container >
+                                    <span class="label label-shadow"  *ngIf="offer.carpoolingStatus=='Expired'" >Complete</span>
+                                  </ng-container>
+                                </div>
+                              </ng-container>
+                            </div>
+                            <div class="seen-data"  *ngIf="offer.carpoolingStatus=='Active'">
+                              <span>{{offer.placeDispoAller}}</span>
+                            </div>
+                            <div class="overlay-property-box">
+                              
+                              <a (click)="editPost(offer.carpoolingOfferID!)" class="effect-round"  ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                              </svg>
+                              </a>
+                              <a (click)="removePost(offer.carpoolingOfferID!)" class="effect-round like added" data-bs-toggle="tooltip" data-bs-placement="left" title="wishlist" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                              </svg>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="property-details">
+                            <span class="font-roboto">{{ offer.location }}</span>
+                            <div *ngIf="carpoolingRequestsMap[offer.carpoolingOfferID!]">
+                              <ul>
+                                <li *ngIf="!requesterNamesMap[offer.carpoolingOfferID!] || requesterNamesMap[offer.carpoolingOfferID!].length === 0">
+                                  No requesters found.
+                                </li>
+                                <ng-container *ngIf="requesterNamesMap[offer.carpoolingOfferID!] && requesterNamesMap[offer.carpoolingOfferID!].length > 0">
+                                  <li>
+                                    REQUESTER NAME:
+                                    <ul>
+                                      <ng-container *ngFor="let name of requesterNamesMap[offer.carpoolingOfferID!]; let i = index">
+                                        <li>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                          </svg>
+                                          {{ name }} x {{ fadit[offer.carpoolingOfferID!][i] }}
+                                          <span *ngIf="i < requesterNamesMap[offer.carpoolingOfferID!].length - 1">,</span>
+                                        </li>
+                                      </ng-container>
+                                    </ul>
+                                  </li>
+                                </ng-container>
+                              </ul>
+                            
+                            </div>
+                            <div *ngIf="carpoolingRequestsMap[offer.carpoolingOfferID!]">
+                              <ul>
+                                <li *ngIf="!requesterNamesMap[offer.carpoolingOfferID!] || requesterNamesMap[offer.carpoolingOfferID!].length === 0">
+                                  No requesters found.
+                                </li>
+                                <ng-container *ngIf="requesterNamesMap[offer.carpoolingOfferID!] && requesterNamesMap[offer.carpoolingOfferID!].length > 0">
+                                  <li>
+                                    YOU RECIVE:
+                                    <ul>
+                                      <ng-container >
+                                        <li *ngFor="let request of carpoolingRequestsMap[offer.carpoolingOfferID!]">
+                                          +{{request.priceRequeste}}POINTS 
+                                        </li>
+                                      </ng-container>
+                                    </ul>
+                                  </li>
+                                </ng-container>
+                              </ul>
+                              <div class="property-btn">
+                                <span>{{ offer.dateAller }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footor></app-footor>

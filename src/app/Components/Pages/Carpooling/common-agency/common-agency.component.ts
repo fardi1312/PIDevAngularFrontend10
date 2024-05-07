@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { agencyAgent } from 'src/app/shared/interface/property';
 import { Marker, marker, CircleMarker } from 'leaflet';
 import { CarpoolingOffer } from 'src/app/models/modelSM/CarpoolingOffer';
-import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
 import { CarpoolingRequest } from 'src/app/models/modelSM/CarpoolingRequest';
 import { getLocaleDateFormat } from '@angular/common';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -201,22 +201,20 @@ if (this.markera) {
   }
   
   searchOffersByLocation() {
-    console.log('saif0', this.llxx, this.llyy);
+   
     const radiusInMeters = 8000;
   
-    console.log('saif1', this.carpoolingOffers);
     const filteredOffers = this.carpoolingOffers.filter(offer => {
       const lat = parseFloat(offer.locationLx);
       const lng = parseFloat(offer.locationLy);
   
       const distance = this.calculateDistance(lat, lng, this.llxx!, this.llyy!);
-      console.log('Distance:', distance);
-  
+      
       return distance <= radiusInMeters;
     });
   
     this.filteredOffers = filteredOffers;
-    console.log('Filtered offers:', this.filteredOffers);
+    
     this.showMarkersOnMap();
   
 

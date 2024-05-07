@@ -1,0 +1,34 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+        
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/bootstrap-icons.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/owl.carousel.min.css" rel="stylesheet">
+
+<link href="/assets/frontOffice/assets/css/tooplate-moso-interior.css" rel="stylesheet">
+<app-header></app-header>
+<router-outlet></router-outlet>
+<div class="container">
+  <h2>Messages</h2>
+
+  <div *ngFor="let message of messages">
+    <div class="message">
+      <div class="sender">{{ message.sender }}</div>
+      <div class="timestamp">{{ message.timestamp }}</div>
+      <div class="content">{{ message.content }}</div>
+    </div>
+  </div>
+
+  <h2>Create New Message</h2>
+  <form (ngSubmit)="createMessage()">
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" [(ngModel)]="newMessage.content" required></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+</div>

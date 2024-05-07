@@ -1,0 +1,133 @@
+<div class="posts-container">
+ 
+    <div *ngFor="let post of posts" class="post">
+        <div class="user">
+            <img src="url_de_l_image_utilisateur.jpg">
+            <span class="user-name" *ngIf="post.userO">{{ post.userO.username }}</span>
+            <span class="user-name" *ngIf="!post.userO">{{ post.user.username }}</span>
+
+        </div>
+        <span class="post-date" *ngIf="post.offerDate">{{ post.offerDate }}</span>
+        <span class="post-date" *ngIf="!post.offerDate">{{ post.dateOffer }}</span>
+
+        <div class="description" *ngIf="post.description">{{ post.description }}</div>
+        <div class="description" *ngIf="!post.description">{{ post.descriptionCollocation }}</div>
+             <div class="actions">
+            <button class="like-btn">❤️</button>
+            <button class="comment-btn">Commentaires</button>
+        </div>
+    </div>
+    
+    
+</div>
+
+.post {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-info {
+    display: flex;
+    align-items: center;
+}
+
+.post-date {
+    color: #888;
+    font-size: 0.8em;
+}
+
+.post-content {
+    margin-top: 10px;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.post-actions {
+    margin-top: 10px;
+}
+
+.like-button, .comment-button, .share-button {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.like-button:hover, .comment-button:hover, .share-button:hover {
+    text-decoration: underline;
+}
+
+.posts-container {
+    width: 600px; /* Largeur fixe de la zone des publications */
+    margin: 0 auto; /* Centrer la zone des publications */
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.date {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+}
+.actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.like-btn, .comment-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #888;
+}
+
+.like-btn:focus, .comment-btn:focus {
+    outline: none;
+}
+
+.like-btn:hover, .comment-btn:hover {
+    color: #333;
+}

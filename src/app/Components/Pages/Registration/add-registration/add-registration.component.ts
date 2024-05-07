@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubscriptionService } from 'src/app/Services/Subscription/service-subscription.service';
-import { ServiceRegistrationService } from 'src/app/Services/Registration/service-registration.service';
+import { SubscriptionService } from 'src/app/services/Subscription/service-subscription.service';
+import { ServiceRegistrationService } from 'src/app/services/Registration/service-registration.service';
 import { Subscription } from 'src/app/Model/Subscription/Subscription';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Registration } from 'src/app/Model/Registration/Registration';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/Model/User/user';
-import { UserService } from 'src/app/Services/User/UserService';
+import { AuthService } from 'src/app/services/User/AuthService';
+import { UserService } from 'src/app/services/User/UserService';
 
 @Component({
   selector: 'app-add-registration',
@@ -27,17 +28,19 @@ export class AddRegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private subscriptionService: SubscriptionService,
     private registrationService: ServiceRegistrationService,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private userService: UserService
+    
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.subscriptionId = +params['subscriptionId'];
       this.getSubscriptionDetails();
-      this.getUserData();
+      this.getCurrentUser(); // Call getCurrentUser method
     });
 
     this.paymentForm = this.fb.group({
@@ -47,7 +50,6 @@ export class AddRegistrationComponent implements OnInit {
 
   getSubscriptionDetails() {
     this.subscriptionService.getSubscriptionById(this.subscriptionId).subscribe(
-      
       (data: Subscription) => {
         this.subscriptionDetails = data;
         this.showPaymentOptions = true;
@@ -57,31 +59,17 @@ export class AddRegistrationComponent implements OnInit {
       }
     );
   }
-
-  getUserData() {
-    this.userService.getUserById1(3).subscribe(
+  getCurrentUser() {
+    this.userService.getAuthenticatedUser().subscribe( // Changed to authService
       (user: User) => {
         this.user = user;
       },
       (error) => {
-        console.error('Error fetching user:', error);
+        console.error('Error fetching current user:', error);
       }
     );
-    console.log(this.user);
   }
-
   onPay() {
-
-
-
-    console.log(this.user);
-
-
-
-
-
-
-
 
 
 

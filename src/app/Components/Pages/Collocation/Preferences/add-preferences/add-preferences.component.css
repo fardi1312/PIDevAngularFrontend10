@@ -1,0 +1,65 @@
+.preferences-section {
+    background-color: #f8f9fa;
+    padding: 30px 0;
+  }
+  
+  .preferences-custom-block {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .preferences-custom-block p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+  }
+  
+  .checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .checkbox-field {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff6f00;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background-color: #b35100d9;
+  }
+  .checkbox-inline {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .checkbox-inline input[type="checkbox"],
+  .checkbox-inline label {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }

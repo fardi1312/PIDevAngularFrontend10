@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CarpoolingService } from 'src/app/Services/servicesSM/carpoolings.service';
+import { CarpoolingService } from 'src/app/services/servicesSM/carpooling.service';
 
 @Component({
   selector: 'app-transfer-points',
@@ -14,9 +14,10 @@ export class TransferPointsComponent implements OnInit {
   ngOnInit() {
     this.invokeStripe();
   }
+  userid:number=1;
 
   Payment(amount: number) {
-    console.log('1');
+    console.log('1',amount);
     switch(amount) {
       case 10:
         this.pcn = 10;
@@ -83,4 +84,37 @@ export class TransferPointsComponent implements OnInit {
       window.document.body.appendChild(script);
     }
   }
+  isModalEnded = false;
+  showFidelite:Boolean=false;
+
+points:number=0
+  openPointsModal() {
+    this.isModalEnded = true;
+    this.carpoolingService.getPointsByUser(this.userid).subscribe(
+      (pointCount) => {
+        console.log('Points count:', pointCount);
+        this.points = pointCount;
+       
+      },
+      (error) => {
+        console.error('Failed to get points:', error);
+      }
+    );
+  }
+
+  closeModal() {
+    this.isModalEnded = false;
+  }
+
+  convertPointsToMoney() {
+  
+    this.showFidelite = true;
+    this.isModalEnded = false;
+  }
+  
+
+  
+  
+  
+
 }

@@ -1,0 +1,88 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="responsive-container-block outer-container"> 
+  <img class="team-img" [src]="club.logo" alt = "club logo"> 
+  </div>
+  <div class="container"> 
+    <div class="row"> 
+      <div class="responsive-container-block inner-container"> 
+        <div class="col-12 text-center">
+          <h1 class="waiting-text">Waiting to Join Your Team</h1> 
+          <style>
+            .waiting-text {
+              font-size: 32px;
+              color: #333; /* Change color to match your design */
+              margin-top: 50px; /* Adjust spacing as needed */
+            }
+          </style> 
+          </div>
+          
+    
+                            <div class="col-md-4 col-sm-6" *ngFor="let memerbshipApplication of club.memberShipApplications"> 
+
+                                <div class="our-team"> 
+                                    <div class="pic">
+                                        <img [src] = "memerbshipApplication.user.profilePhoto" alt="Profile Photo">
+                                        <ul class="social">
+                                            <li><a href="#" class="fa fa-facebook"></a></li>
+                                            <li><a href="#" class="fa fa-google-plus"></a></li>
+                                            <li><a href="#" class="fa fa-instagram"></a></li>
+                                            <li><a href="#" class="fa fa-linkedin"></a></li>
+                                        </ul>
+                                    </div>
+                                        <div class="team-content">
+                                        <h3 class="title">{{ memerbshipApplication.user.firstName + ' ' +memerbshipApplication.user.lastName }}</h3> 
+                                        
+                                        <h3 *ngIf="memerbshipApplication.status == 'Canceled'" class="title rejected">Rejected</h3>  
+                                        <h3 *ngIf="memerbshipApplication.status !== 'Canceled'" class="title">{{memerbshipApplication.status }}</h3>  
+
+                                        </div>   
+                                        <button *ngIf="!memerbshipApplication.interviewer" 
+                                        (click)="openModal(memerbshipApplication)"
+                                        class="assign-button">
+                                          Assign Interviewer
+                                       </button>
+                                          <p class="text-blk name" *ngIf="!memerbshipApplication.interviewer">
+                                          not assigned yet  
+                                        </p>  
+                                        <p class="text-blk name" *ngIf="memerbshipApplication.interviewer">
+                                          interviewer : {{memerbshipApplication.interviewer}} 
+                                        </p> 
+                              
+                                    </div> 
+                                </div>           
+                    </div> 
+                                        <!-- Carousel controls -->
+            </div>
+
+      <div class="container"> 
+        <div class="row"> 
+          <div class="col-12 text-center">
+
+                <h1 class ="waiting-text" >Your Team</h1> 
+                </div>
+                                <div class="col-md-4 col-sm-6" *ngFor="let member of club.clubMemberShip">
+                                    <div class="our-team"> 
+                                        <div class="pic">
+                                            <img [src] = "member.member.profilePhoto" alt="Profile Photo">
+                                            <ul class="social">
+                                                <li><a href="#" class="fa fa-facebook"></a></li>
+                                                <li><a href="#" class="fa fa-google-plus"></a></li>
+                                                <li><a href="#" class="fa fa-instagram"></a></li>
+                                                <li><a href="#" class="fa fa-linkedin"></a></li>
+                                            </ul>
+                                        </div>
+                                            <div class="team-content">
+                                            <h3 class="title">{{ member.member.firstName + ' ' +member.member.lastName }}</h3> 
+                                            <span class="post">{{ member.position  }}</span>  
+                                            <h3 class="title">{{ member.description  }}</h3> 
+                                            </div> 
+                                        </div> 
+                                    </div>           
+                        </div>  
+                        </div>
+                </div>
+
+  
+<app-footer></app-footer>

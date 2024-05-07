@@ -5,8 +5,6 @@ export interface Schedule {
   startDate: Date;
   endDate: Date;
   description: string; 
-  qrCodeOfferer: string[]; // Array of strings for qrCodeOfferer
-  qrCodeRequester: string[]; // Array of strings for qrCodeRequester
 
 }
 

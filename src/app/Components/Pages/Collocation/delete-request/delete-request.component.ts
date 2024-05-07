@@ -2,7 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RequestService } from 'src/app/Services/Collocation/request.service';
+import { RequestService } from 'src/app/services/Collocation/request.service';
 
 @Component({
   selector: 'app-delete-request',

@@ -1,0 +1,109 @@
+<app-header></app-header> 
+
+<section>
+<head>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> 
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Club Details</h1>
+            </div>
+            <div class="container "> 
+                <div class="row"> 
+
+                    <div class="our-team"> 
+
+                    <div class="pic">
+
+                    <img [src]="club.logo"class="mr-3" alt="Club Logo">  
+
+                    <ul class="social">
+                        <li><a href="https://{{club.facebookUrl}}" class="fa fa-facebook"></a></li>
+                        <li><a href="https://{{club.twitterUrl}}" class="fa fa-twitter"></a></li>
+                        <li><a href="https://{{club.instagramUrl}} "class="fa fa-instagram"></a></li> 
+                        <li><a href="https://{{club.linkedinUrl}} "class="fa fa-linkedin"></a></li>
+
+                    </ul>
+                    </div>
+                </div>
+                </div>
+                <p><strong>Name:</strong> {{ club.name }}</p>
+                <p><strong>Description:</strong> {{ club.description }}</p> 
+                <ng-container *ngIf="club.category !== 'OTHER'">
+                <p><strong>Category:</strong> {{ club.category }}</p> 
+                </ng-container> 
+                <ng-container *ngIf="club.category == 'OTHER'">
+                    <p><strong>Category:</strong> {{ club.otherCategory }}</p> 
+                    </ng-container>
+    
+
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mx-auto"> <!-- Adjusting size to fit 2 cards in a row and centering -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>President</h3> 
+                </div> 
+                <div class="container mt-2">   
+                    <div class="row">  
+                        <div class="our-team mx-auto"> <!-- Centering the content -->
+                            <div class="pic"> 
+                                <img [src]="club.president.profilePhoto" class="mr-2" alt="Club Logo">  
+                                <ul class="social">
+                                    <li><a href="https://{{club.facebookUrl}}" class="fa fa-facebook"></a></li>
+                                    <li><a href="https://{{club.twitterUrl}}" class="fa fa-twitter"></a></li>
+                                    <li><a href="https://{{club.instagramUrl}} "class="fa fa-instagram"></a></li> 
+                                    <li><a href="https://{{club.linkedinUrl}} "class="fa fa-linkedin"></a></li>
+                                </ul>
+                            </div>    
+                            <div class="team-content">
+                                <h4>{{ club.president.firstName }}</h4> 
+                                <span>{{ club.president.lastName }}</span>  
+                                <h4>{{ club.president.email }}</h4>   
+                            </div>
+                        </div>
+                    </div> 
+                </div>  
+            </div>
+        </div>  
+        </div>
+                                
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="container"> 
+        <div class="row">
+                <h1>Meet Our Team</h1>
+                                <div class="col-md-4 col-sm-6" *ngFor="let member of club.clubMemberShip">
+                                    <div class="our-team"> 
+                                        <div class="pic">
+                                            <img src = "club.clubMembership.member.profilePhoto" alt="Profile Photo">
+                                            <ul class="social">
+                                                <li><a href="#" class="fa fa-facebook"></a></li>
+                                                <li><a href="#" class="fa fa-google-plus"></a></li>
+                                                <li><a href="#" class="fa fa-instagram"></a></li>
+                                                <li><a href="#" class="fa fa-linkedin"></a></li>
+                                            </ul>
+                                        </div>
+                                            <div >
+                                            <h3 class="title">{{ member.member.firstName + ' ' +member.member.lastName }}</h3> 
+                                            <span class="post">{{ member.position  }}</span>  
+                                            <h3 class="title">{{ member.description  }}</h3> 
+                                            </div> 
+                                        </div> 
+                                    </div>
+                                            
+                        </div> 
+                                            <!-- Carousel controls -->
+                </div> 
+</body>
+
+</section>
+    <app-footor></app-footor>
+
+    <!-- Bootstrap JS -->

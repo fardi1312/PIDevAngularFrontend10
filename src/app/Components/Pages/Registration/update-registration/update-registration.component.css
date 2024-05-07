@@ -1,0 +1,53 @@
+
+    .container {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 2px solid #FFA500; /* Couleur orange */
+        border-radius: 10px;
+    }
+    
+      
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      label {
+        display: block;
+        font-weight: bold;
+        color: #008000; /* Couleur verte */
+      }
+      
+      input[type="text"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #FFA500; /* Couleur orange */
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #FFA500; /* Couleur orange */
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #fff; /* Couleur blanche pour le fond du select */
+      }
+      
+      button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFA500; /* Couleur orange */
+        color: #fff; /* Texte en blanc */
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #FF8C00; /* Couleur orange foncée au survol */
+      }
+      

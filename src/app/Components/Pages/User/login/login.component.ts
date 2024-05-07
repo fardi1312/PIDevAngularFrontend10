@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Services/User/AuthService';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/services/User/AuthService';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         if (response.jwtToken) {
           const jwtToken = response.jwtToken;
           this.cookieService.set('JWT', jwtToken);
+          localStorage.setItem('JWT', jwtToken);
           const userRole = response.role;
           console.log("User role:", userRole); 
           if (userRole === 'ROLE_USER') {

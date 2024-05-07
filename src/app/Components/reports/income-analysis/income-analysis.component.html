@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header pb-0">
+    <h5>Income Analysis</h5>
+  </div>
+  <div class="card-body income-wrap">
+    <ul class="overview-content">
+      <li>
+        <div class="d-flex">
+        <h1> Events income monthly</h1>
+        </div>
+      </li>
+      
+    </ul>
+    <div class="income-container">
+      <div id="incomechart">
+        <apx-chart [series]="incomeAnalysis.series" [chart]="incomeAnalysis.chart" [markers]="incomeAnalysis.markers"
+                   [dataLabels]="incomeAnalysis.dataLabels" [stroke]="incomeAnalysis.stroke" [legend]="incomeAnalysis.legend"
+                   [colors]="incomeAnalysis.colors" [fill]="incomeAnalysis.fill" [grid]="incomeAnalysis.grid" [responsive]="incomeAnalysis.responsive"
+                   [yaxis]="incomeAnalysis.yaxis" [xaxis]="incomeAnalysis.xaxis" [tooltip]="incomeAnalysis.tooltip">
+        </apx-chart>
+      </div>
+    </div>
+  </div>
+</div>

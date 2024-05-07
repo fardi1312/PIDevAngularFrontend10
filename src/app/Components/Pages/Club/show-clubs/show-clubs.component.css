@@ -1,0 +1,12 @@
+.btn-join-now {
+    background-color: #fa8e00; /* Orange color */
+    border-color: #FFA500; /* Match button border with background color */
+    color: #fff; /* Text color */
+    transition: all 0.3s ease; /* Smooth transition effect */
+  }
+  
+  .btn-join-now:hover {
+    background-color: #d67e0a; /* Darker shade of orange on hover */
+    border-color: #dfbe06; /* Change border color on hover */
+  }
+  

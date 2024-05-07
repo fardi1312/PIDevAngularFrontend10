@@ -26,9 +26,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_1">Home</a>
+                        <a class="nav-link click-scroll" href="/user/home">Home</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/user/SubscriptionsOffers">SubscriptionsOffers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/user/chatfinal">chat</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle click-scroll" href="#section_3" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Carpooling</a>
 
@@ -52,8 +57,26 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" routerLink="#section_4">Charity</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle click-scroll"  id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Furnisher</a>
+
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" [routerLink]="'/user/Ecommerce/addp'">Add Furnisher </a></li>
+                            <li><a class="dropdown-item" [routerLink]="'/user/Ecommerce/askp'">ask Furnisher</a></li>
+ 
+
+                          
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle click-scroll" href="#section_3" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" [routerLink]="'/addEvent'">Add Event</a></li>
+
+                            <li><a class="dropdown-item"  [routerLink]="'/show'">Events</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item">
@@ -75,7 +98,7 @@
                 
 
 
-                
+                <img src="assets/frontOffice/assets/images/gif.gif" class="img-fluid" alt="image" style="width: 70px;" (click)="openModal()">
 
                 
             </div>
@@ -191,6 +214,8 @@
                 <a mat-menu-item routerLink="/user/showphotoprofile">Settings</a>
                 <a mat-menu-item routerLink="/user/Collocation/addPreferences">preferences</a>
                 <a mat-menu-item routerLink="/user/point">ByPoints</a>
+                <a class="dropdown-item" [routerLink]="'/smprofile/commandes'">yours</a>
+
                 <a mat-menu-item (click)="logout()">Logout</a>   
             </mat-menu>
         </div>
@@ -203,3 +228,34 @@
   <script src="/assets/frontOffice/assets/js/jquery.backstretch.min.js"></script>
   <script src="/assets/frontOffice/assets/js/owl.carousel.min.js"></script>
   <script src="/assets/frontOffice/assets/js/custom.js"></script>
+  <div class="modal" [ngClass]="showModal ? 'show' : ''" *ngIf="showModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="couponModalLabel"> Use Coupon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div  *ngFor="let promotion of promotions">
+
+                <div class="coupon">
+                    <!-- Your coupon content here -->
+                    <div class="left">
+                        <div>Enjoy Your Gift</div>
+                    </div>
+                    <div class="center">
+                        <h2>{{ promotion.discountPercentage }} %</h2>
+                        <h3>Coupon</h3>
+                        <small>Valid until {{ promotion.expirationDate }}</small>
+                    </div>
+                    <div class="right">
+                        <div>{{ promotion.code }}</div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

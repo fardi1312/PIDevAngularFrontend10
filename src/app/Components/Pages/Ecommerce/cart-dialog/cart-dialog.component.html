@@ -1,0 +1,57 @@
+<div class="customizer-wrap" >
+   
+    <section class="cart-container" >
+  
+        <a _ngcontent-ng-c2966600256="" (click)="toggleCartDialog2()" class="btn btn-outline-danger ng-star-inserted">x</a>
+    
+     
+        <br><br>
+        <h2 class="cart-title">Shopping Cart</h2>
+    
+        <div *ngFor="let cartItem of cartItems" class="cart-item">
+            <article class="item-details">
+                <p class="item-title">{{ cartItem.post.title }}</p>
+                <p class="item-price">{{ cartItem.post.price | currency }} x {{ cartItem.quantity }}</p>
+                <p class="item-total">{{ (cartItem.post.price! * cartItem.quantity)  }} points</p> 
+            </article>
+            
+            <button class="btn remove-button" (click)="removeItem(cartItem.post)" aria-label="Remove item from cart">
+                x
+            </button>
+        </div>
+    
+        <div class="cart-total">
+            <p>Total: {{ totalPrice  }} points</p>
+        </div>
+
+
+
+
+        <p class="ApplyCoupons">Apply Coupons:</p>
+        <div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="code" class="input-field" placeholder="Apply your coupon">
+                <div tabindex="0" class="plusButton" (click)="calculateDiscount()"> <!-- Utilize (click) to handle the click -->
+                    <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                        <g mask="url(#mask0_21_345)">
+                            <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z"></path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="discountCalculated">Discount: <span style="padding-left: 60px;">-{{ discount }} points</span></p>
+        <p *ngIf="discountCalculated">Total After Dicount: <span style="padding-left: 40px;">{{ newTotal }} points</span></p>
+        
+
+
+    
+        <div class="actions-container">
+            <button class="btn buy-cart-button" (click)="buyPanier()" aria-label="Buy items in the cart">Buy cart</button>
+            <button class="btn clear-cart-button" (click)="clearCart()" aria-label="Clear cart">
+                Clear Cart
+            </button>
+        </div>
+    </section>
+</div>
+

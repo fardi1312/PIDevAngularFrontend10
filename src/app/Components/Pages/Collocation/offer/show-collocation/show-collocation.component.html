@@ -20,13 +20,13 @@
   </div>  </div>
   <br>
   <div style="float: right;">
-    <button (click)="Locateme()">Locate me</button>
+    <img src="assets/frontOffice/assets/images/map.jpeg" class="img-fluid" alt="image" style="width: 50px;" (click)="Locateme()">
+
   </div>
   <br>
   <div class="row">
     <!-- Fixed content section -->
     <div class="col-lg-3 col-md-4 col-6 ms-auto mb-5">
-      <div class="custom-form filter-form">
         <form class="custom-form filter-form" #filterForm="ngForm">
           <div class="vertical-line">
             <div>
@@ -75,26 +75,47 @@
 
           </div>
         </form>
-            </div>
+           
     </div>
 
 <div class="col-lg-9 col-md-8 col-6 mx-auto">
   <div class="row">
-    <ng-container *ngFor="let offer of matchingOffers">
+   
+  <ng-container *ngFor="let offer of filteredOffers">
       <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-4">
-        <div class="card">
-          <!-- Contenu de la carte -->
-          <div class="shop-body">
-            <h4>{{ offer.descriptionCollocation }}</h4>
-            <p>Localization: {{ offer.idCollocationOffer }}</p>
-            <p>Furniture: {{ offer.dateRent }}</p>
-            <p>Available Places: {{ offer.country }}</p>
-            <p>Matching Percentage:</p>
+        <div class="card" 
+             (mouseenter)="card.classList.add('hovered')" 
+             (mouseleave)="card.classList.remove('hovered')" #card>
+          <div class="shop-thumb">
+            <div class="shop-image-wrap">
+              <a href="shop-detail.html">
+                <img [src]="offer.imageCollocation"  />
+              </a>
+            </div>
+            <div class="shop-body">
+              <h4>{{ offer.descriptionCollocation }}</h4>
+              <p>Localization: {{ offer.governorate }}</p>
+              <p>Furniture: {{ offer.furnitureCollocation }}</p>
+              <p>Available Places: {{ offer.availablePlaces }}</p>
+            </div>
+         
+            <div class="shop-pricing mb-0 mt-4">
+              <span class="badge custom-badge">dt{{ offer.price }}</span>
+            </div>
+            <div class="shop-date-offer mb-0 mt-4">
+              <span class="badge custom-badge">{{ offer.dateOffer | date: 'yyyy-MM-dd' }}</span>
+            </div>
+            <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2" (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
+            <p class="vertical-space"></p>
+            <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback(offer.idCollocationOffer)">Add Feedback</button>  
+            <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addRequest(offer.idCollocationOffer)">Request</button> 
           </div>
         </div>
       </div>
     </ng-container>
-    <ng-container *ngFor="let offer of filteredOffers">
+ 
+
+    <ng-container *ngFor="let offer of matchingOffers">
       <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-4">
         <div class="card" 
              (mouseenter)="card.classList.add('hovered')" 
@@ -111,36 +132,30 @@
               <p>Furniture: {{ offer.furnitureCollocation }}</p>
               <p>Available Places: {{ offer.availablePlaces }}</p>
             </div>
-            <div class="shop-icons-wrap">
-              <div class="shop-icons d-flex flex-column align-items-center">
-                <a href="#" class="shop-icon bi-heart"></a>
-                <a class="shop-icon bi-bookmark" (click)="toggleSaveOffer(offer.idCollocationOffer)"></a>
-              </div>
-            </div>
+        
             <div class="shop-pricing mb-0 mt-4">
               <span class="badge custom-badge">dt{{ offer.price }}</span>
             </div>
             <div class="shop-date-offer mb-0 mt-4">
               <span class="badge custom-badge">{{ offer.dateOffer | date: 'yyyy-MM-dd' }}</span>
+              <div class="hover-effect" *ngIf="card.classList.contains('hovered')" >You just matched</div>
+
             </div>
             <button *ngIf="card.classList.contains('hovered')" class="btn btn-warning mt-2" (click)="offerDetails(offer.idCollocationOffer)">View Details</button>
             <p class="vertical-space"></p>
             <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addFeedback(offer.idCollocationOffer)">Add Feedback</button>  
             <button *ngIf="card.classList.contains('hovered')" class="btn btn-primary mt-2" (click)="addRequest(offer.idCollocationOffer)">Request</button> 
           </div>
+
         </div>
       </div>
     </ng-container>
- 
-  
- 
-    
-  </div>
+
+
+</div>
 </div>
 
 
 
-  </div>
-</div>
-
+<br> <br>
 <app-footor></app-footor>

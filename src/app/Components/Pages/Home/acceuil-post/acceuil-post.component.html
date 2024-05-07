@@ -1,0 +1,95 @@
+<app-customizer></app-customizer>
+<section class="title-section">
+    <div class="title-container">
+        <h2 class="tooplate-green">Our Services</h2>
+        <p>Discover Carpooling best things to do, Collocation, Events, Form and more</p>
+    </div>
+</section>
+<section class="card-container">
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 >Colocation</h3>
+            <p>Find and offer shared accommodation.</p>
+        </div>
+    </div>
+
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 >Carpooling</h3>
+            <p>Share rides and reduce travel costs.</p>
+        </div>
+    </div>
+
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 class="card-title">Form</h3>
+            <p>Create and manage forms for various purposes.</p>
+        </div>
+    </div>
+
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 class="card-title">Event</h3>
+            <p>You can participate in various categories, including charity.</p>
+        </div>
+    </div>
+
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 class="card-title">Chat</h3>
+            <p>Chat with other users in real-time.</p>
+        </div>
+    </div>
+
+    <div class="card" appCardMove (click)="onClick($event)">
+        <div class="card-body">
+            <h3 class="card-title">E-commerce</h3>
+            <p>When you buy your old furniture.</p>
+        </div>
+    </div>
+</section>
+
+<div class="background-container-4">
+    <img src="assetsaif/images/2.jpg" class="img-fluid">
+    <div class="image-title">Our Latest Post</div>
+    <div class="posts-container" >
+        <div class="card-overlay-4" [ngClass]="{'post-roll-left': isPostRollingLeft, 'post-roll-right': isPostRollingRight}" (animationend)="animationEnded()">
+            <div class="card-4">
+                <div class="navigation-button previous" (click)="previousPost()">
+                    <i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="card-body-4">
+                    <div class="user">
+                        <h6 class="user-name" *ngIf="posts[currentPostIndex]?.userO">{{ posts[currentPostIndex].userO.username }}</h6>
+                        <h6 class="user-name" *ngIf="!posts[currentPostIndex]?.userO">{{ posts[currentPostIndex].user.username }}</h6>
+                        <a href="/sheltos/property/image-box" class="price-container">
+                            <span class="label label-dark label-pill price" *ngIf="posts[currentPostIndex]?.price">{{ posts[currentPostIndex].price }}pt</span>
+                            <span class="label label-dark label-pill price" *ngIf="!posts[currentPostIndex]?.price">{{ posts[currentPostIndex].price }}pt</span>
+                        </a>
+                    </div>
+                    <p class="post-date" *ngIf="posts[currentPostIndex]?.offerDate">{{ posts[currentPostIndex].offerDate }}</p>
+                    <p class="post-date" *ngIf="!posts[currentPostIndex]?.offerDate">{{ posts[currentPostIndex].dateOffer }}</p>
+                    <p class="description" *ngIf="posts[currentPostIndex]?.description">{{ posts[currentPostIndex].description }}</p>
+                    <p class="description" *ngIf="!posts[currentPostIndex]?.description">{{ posts[currentPostIndex].descriptionCollocation }}</p>
+                    <ul>
+                    </ul>
+                    <a href="javascript:void(0)">
+                        <p class="round-half color-1">
+                            <app-feather-icons></app-feather-icons>
+                        </p>
+                    </a>
+                    <div class="property-btn-4">
+                        <a href="/sheltos/property/image-box" class="btn btn-dashed btn-pill color-1">Details</a>
+                    </div>
+                </div>
+                <div class="navigation-button next" (click)="nextPost()">
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+  

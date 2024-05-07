@@ -1,0 +1,112 @@
+<app-header></app-header>
+<app-customizer></app-customizer>
+<section  style="display: flex; justify-content: center;">
+ 
+    <div class="wizard-form-details col-xxl-9 col-lg-8" style="display: flex; justify-content: right;">
+   
+      
+      <div class="theme-card my-3">
+        <div class="filter-panel">
+          <div class="top-panel">
+          <app-customizer></app-customizer>
+           
+            <div _ngcontent-ng-c1193402911="" class="title-2 ng-star-inserted">
+              <h2 _ngcontent-ng-c1193402911="">Add Your Meubles OFFER</h2></div>
+           
+          </div>
+        </div>
+    <div class="wizard-step-1" >
+        
+     
+    <h2>General</h2>
+    <p class="font-roboto">Basic information about property</p>
+    <form class="row gx-3" novalidate [formGroup]="myForm1" >
+      <div class="form-group col-sm-4">
+        <label>Title</label>
+      <input class="form-control ng-pristine ng-invalid is-invalid ng-touched" type="text" formControlName="property_status" [ngClass]="{ 'is-invalid' : (property_status?.touched || validate) && property_status?.errors , 'is-valid' : !property_status?.errors}"  required [(ngModel)]="title">
+   
+      </div>
+     
+
+      <div class="form-group col-sm-4">
+        <label>Price</label>
+        <input type="number" class="form-control" placeholder="COpointCO" formControlName="property_price" [ngClass]="{ 'is-invalid' : (property_price?.touched || validate) && property_price?.errors , 'is-valid' : !property_price?.errors}" required [(ngModel)]="price">
+      </div>
+    
+      <div class="form-group col-sm-4">
+        <label>Quantity</label>
+      <input class="form-control ng-pristine ng-invalid is-invalid ng-touched" type="number" formControlName="phone" [ngClass]="{ 'is-invalid' : (phone?.touched || validate) && phone?.errors , 'is-valid' : !phone?.errors}"  required [(ngModel)]="pn">
+   
+      </div>
+      
+      <div class="form-group col-sm-4">
+        <label>Location</label>
+      <input class="form-control ng-pristine ng-invalid is-invalid ng-touched" type="text" formControlName="location" [ngClass]="{ 'is-invalid' : (location?.touched || validate) && location?.errors , 'is-valid' : !location?.errors}"  required [(ngModel)]="location1">
+   
+      </div>
+
+      <div class="form-group col-sm-4">
+        <label>Category</label>
+        <select class="form-control" formControlName="typee"   [ngClass]="{ 'is-invalid' : (typee?.touched || validate) && typee?.errors , 'is-valid' : !typee?.errors} "  required [(ngModel)]="type">
+          <ng-container> 
+            <option value="Canapés et fauteuils"  class="ng-star-inserted" >Sofas and armchairs</option>
+            <option value="Tables et chaises"  class="ng-star-inserted">Tables and chairs</option>
+            <option value="Lits et matelas"  class="ng-star-inserted">Beds and mattresses</option>
+            <option value="Meubles de rangement"  class="ng-star-inserted" >Storage furniture</option>
+            <option value="Électroménagers"  class="ng-star-inserted">Appliances</option>
+            <option value="Meubles de cuisine"  class="ng-star-inserted">Kitchen furniture</option>
+            <option value="Other"  class="ng-star-inserted">Other</option>
+
+          </ng-container>
+         
+      </select>
+      </div>
+
+      <div class="form-group col-sm-4">
+        <label>Etat</label>
+        <select class="form-control" formControlName="etatt"   [ngClass]="{ 'is-invalid' : (etatt?.touched || validate) && etatt?.errors , 'is-valid' : !etatt?.errors} "  required [(ngModel)]="etat">
+          <ng-container> 
+            <option value="Neuf"  class="ng-star-inserted" >Neuf</option>
+            <option value="Occasion"  class="ng-star-inserted">Occasion</option>
+
+          
+          </ng-container>
+         
+      </select>
+      </div>
+
+    </form>
+<div class="form-group ">    <form class="dropzone" id="multiFileUpload">
+        <ngx-dropzone (change)="onSelect($event)" [ngClass]="{ 'is-invalid': files.length < 1 && validation, 'is-valid': files.length >= 1 }">
+          <ngx-dropzone-label>
+            <div class="dz-message needsclick">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+            </div>
+          </ngx-dropzone-label>
+          <ng-container *ngFor="let f of files; trackBy: trackFn">
+            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ng-container>
+        </ngx-dropzone>
+      </form>
+    </div>
+
+    
+    <form class="row gx-3" novalidate [formGroup]="myForm1" >
+      <div class="form-group col-sm-12">
+        <label>Description</label>
+        <textarea class="form-control" rows="4" formControlName="description" [ngClass]="{ 'is-invalid' : (description?.touched || validate) && description?.errors , 'is-valid' : !description?.errors}"  required [(ngModel)]="descriprion1" ></textarea>
+      </div>
+    </form>
+    
+    <div class="next-btn text-end">
+        <a _ngcontent-kjn-c21="" _ngcontent-ng-c2966600256="" class="btn btn-gradient btn-pill color-2 ng-star-inserted"  (click)="addpost(title,price!,pn,location1,descriprion1,type!,etat!)" >Add</a> 
+     
+    </div>
+
+</div></div></div>
+</section>
+
+<app-footor></app-footor>

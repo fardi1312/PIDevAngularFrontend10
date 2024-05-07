@@ -1,0 +1,20 @@
+<div class="modal" [ngClass]="showModal1 ? 'show' : ''" *ngIf="showModal1">
+
+  <div class="modal-content">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+<button id="spin" (click)="spin()">{{ selectedSliceContent }}</button>
+<span class="arrow"></span>
+
+<div class="container" [style.transform]="'rotate(' + rotationDegrees + 'deg)'">
+
+  <div class="img1"><img  alt="Anothor Time"></div>
+  <div class="one">1</div>
+  <div class="five">5</div>
+  <div class="two">2</div>
+  <div class="fifteen">15</div>
+  <div class="img2"><img alt="Anothor Time"></div>
+  <div class="twenty">20</div>
+  <div class="img3"><img  alt="Anothor Chance"></div>
+</div></div></div>

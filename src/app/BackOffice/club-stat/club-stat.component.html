@@ -1,0 +1,59 @@
+
+<div class="card sales-details">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="sales-status">
+            <h5 class="light-font">Events per month</h5>
+            <div class="status-price">
+              <h3>
+              </h3>
+              <span>
+                <span class="font-success">
+                  <app-feather-icons [icon]="'trending-up'"></app-feather-icons>
+                </span>
+              </span>
+            </div>
+          </div>
+          
+          <div class="chart-legends">
+            <ul>
+              <li>
+                <div class="bg-primary circle-label"></div>
+                <span>Last week</span>
+              </li>
+              <li class="mt-1">
+                <div class="bg-secondary circle-label"></div>
+                <span>Running week</span>
+              </li>
+            </ul>
+          </div>
+          <div class="last-updated light-box">
+            <span>Last updated</span>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="monthly-sales">
+            <div class="icon-box">
+              <i class="fas fa-chevron-left light-font"></i>
+            </div>
+            <h6> 2024 </h6>
+            <div class="icon-box">
+              <i class="fas fa-chevron-right light-font"></i>
+            </div>
+          </div>
+          <div class="bar-sales">
+            <div id="sale-chart">
+              <apx-chart [series]="salesSummaryChart.series" [chart]="salesSummaryChart.chart" [colors]="salesSummaryChart.colors"
+                         [plotOptions]="salesSummaryChart.plotOptions" [dataLabels]="salesSummaryChart.dataLabels" [legend]="salesSummaryChart.legend"
+                         [xaxis]="salesSummaryChart.xaxis" [responsive]="salesSummaryChart.responsive">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <app-club-stat2></app-club-stat2> 
+  <app-club-stat3></app-club-stat3>
+

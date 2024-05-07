@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollocationPreferences } from 'src/app/models/Collocation/CollocationPreferences';
-import { CollocationPreferencesService } from 'src/app/Services/Collocation/preferences.service';
+import { CollocationPreferencesService } from 'src/app/services/Collocation/preferences.service';
 
 @Component({
   selector: 'app-show-preferences',

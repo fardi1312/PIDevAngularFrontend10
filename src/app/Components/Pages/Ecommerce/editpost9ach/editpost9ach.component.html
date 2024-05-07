@@ -1,0 +1,86 @@
+<app-header></app-header>
+<app-customizer></app-customizer>
+<section style="display: flex; justify-content: center;">
+    <div class="wizard-form-details col-xxl-9 col-lg-8">
+        <div class="theme-card my-3">
+            <div class="filter-panel">
+                <div class="top-panel">
+                    <app-customizer></app-customizer>
+                    <div class="title-2">
+                        <h2>Edit Your Meubles OFFER</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard-step-1">
+                <h2>General</h2>
+                <p class="font-roboto">Basic information about the property</p>
+                <form class="row gx-3" [formGroup]="myForm1">
+                    <div class="form-group col-sm-4">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" formControlName="title" [ngClass]="{ 'is-invalid': title?.touched && title?.invalid }" />
+                        <div *ngIf="title?.invalid && title?.touched" class="invalid-feedback">Title is required.</div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" formControlName="price" [ngClass]="{ 'is-invalid': price?.touched && price?.invalid }" />
+                        <div *ngIf="price?.invalid && price?.touched" class="invalid-feedback">Price is required and must be a positive value.</div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" formControlName="quantity" [ngClass]="{ 'is-invalid': quantity?.touched && quantity?.invalid }" />
+                        <div *ngIf="quantity?.invalid && quantity?.touched" class="invalid-feedback">Quantity is required.</div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" formControlName="location" [ngClass]="{ 'is-invalid': location?.touched && location?.invalid }" />
+                        <div *ngIf="location?.invalid && location?.touched" class="invalid-feedback">Location is required.</div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category" formControlName="category" [ngClass]="{ 'is-invalid': category?.touched && category?.invalid }">
+                            <option value="Canapés et fauteuils">Sofas and armchairs</option>
+                            <option value="Tables et chaises">Tables and chairs</option>
+                            <option value="Lits et matelas">Beds and mattresses</option>
+                            <option value="Meubles de rangement">Storage furniture</option>
+                            <option value="Électroménagers">Appliances</option>
+                            <option value="Meubles de cuisine">Kitchen furniture</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">Category is required.</div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="etat">Etat</label>
+                        <select class="form-control" id="etat" formControlName="etat" [ngClass]="{ 'is-invalid': etat?.touched && etat?.invalid }">
+                            <option value="Neuf">Neuf</option>
+                            <option value="Occasion">Occasion</option>
+                        </select>
+                        <div *ngIf="etat?.invalid && etat?.touched" class="invalid-feedback">Etat is required.</div>
+                    </div>
+                </form>
+                <form class="dropzone" id="multiFileUpload" [formGroup]="myForm1">
+                    <ngx-dropzone (change)="onSelect($event)" [ngClass]="{ 'is-invalid': files.length < 1 && validate }">
+                        <ngx-dropzone-label>
+                            <div class="dz-message needsclick">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is a demo dropzone. Selected files are not actually uploaded.)</span>
+                            </div>
+                        </ngx-dropzone-label>
+                        <ng-container *ngFor="let f of files; trackBy: trackFn">
+                            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ng-container>
+                    </ngx-dropzone>
+                </form>
+                <div class="form-group col-sm-12" [formGroup]="myForm1">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="4" formControlName="description" [ngClass]="{ 'is-invalid': description?.touched && description?.invalid }"></textarea>
+                </div>
+                <div class="next-btn text-end">
+                    <button class="btn btn-gradient btn-pill color-2" (click)="updatePost()">Update Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footor></app-footor>

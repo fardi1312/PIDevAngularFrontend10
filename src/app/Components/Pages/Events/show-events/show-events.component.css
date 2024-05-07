@@ -1,0 +1,195 @@
+/* Add these styles to your global styles.css or component styles */
+#participateModal .modal-content {
+  border-radius: 10px;
+}
+
+#participateModal .modal-header {
+  background-color: #e7bcad; /* Orange background for the header */
+  color: white; /* White text color */
+  border-radius: 10px 10px 0 0; /* Rounded corners on top */
+}
+
+#participateModal .modal-body {
+  padding: 20px;
+  size: 1rem
+}
+
+#participateModal .modal-footer {
+  border-top: none; 
+}
+
+/* Event details container */
+.event-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title-image-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.title-image-container img {
+  width: 250px;
+  height: auto;
+  margin-right: 20px; 
+}
+
+/* Event info */
+.event-info {
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.organizer, .attendee-rest, .price, .category, .date, .conditions {
+  margin-top: 15px; /* Increase the margin for spacing */
+  font-size: 20px; /* Increase font size */
+}
+
+
+.attendee-rest::before {
+  content: '';
+}
+
+.date::before {
+  content: '\1F4C5'; /* Emoji for calendar */
+  margin-right: 5px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+/* Conditions and checkbox */
+.form-check {
+  margin-top: 10px;
+}
+
+/* Buttons */
+.modal-footer .btn {
+  padding: 10px 20px; /* Adjust button padding */
+  border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.btn-primary {
+  background-color: #2196F3; /* Blue button color */
+  color: white; /* White text color */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray button color */
+  color: white; /* White text color */
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  opacity: 0.9; /* Reduce opacity on hover for visual feedback */
+}
+
+/* Increase font size for confirmation message */
+.modal-body p {
+  font-size: 2rem;
+}
+
+/* Additional styling for comments section */
+.comments-section {
+  margin-top: 20px;
+}
+
+.toggle-comments {
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #28a745; /* Green button color */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-comments:hover {
+  opacity: 0.9;
+}
+
+.comments {
+  margin-top: 10px;
+}
+
+.comments form {
+  margin-bottom: 10px;
+}
+
+.comments textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.comments button[type="submit"] {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Blue button color */
+  color: white;
+  cursor: pointer;
+}
+
+.comments button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+.no-comments {
+  font-size: 1.2rem;
+  color: #6c757d; /* Gray text color */
+}
+
+.modal-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.comment {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comment-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-content {
+  margin-bottom: 10px;
+}
+
+.comment-actions button {
+  background-color: #ff6666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.comment-actions button:hover {
+  background-color: #ff4d4d;
+}
+
+.no-comments {
+  color: #666;
+  font-style: italic;
+}

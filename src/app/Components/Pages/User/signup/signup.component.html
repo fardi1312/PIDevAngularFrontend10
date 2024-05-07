@@ -1,141 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
+    <title>Login 07</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
 
-    <!-- Custom fonts for this template-->
-    <link href="/assets/userAssets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Custom styles for this template-->
-    <link href="/assets/userAssets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/Usertemp/css/style.css">
+
 
 </head>
-
-<body class="bg-gradient-primary">
-
+<body>
+<section class="ftco-section">
     <div class="container">
 
-        <!-- Outer Row -->
         <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image" style="background-image: url('/assets/userAssets/masss.jpg');"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Sign-Up !</h1>
-                                    </div>
-                                    <form class="user" [formGroup]="signupForm" (ngSubmit)="signup()">
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                                    placeholder="First Name" formControlName="firstName">
-                                                <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched"
-                                                    class="text-danger">
-                                                    <small *ngIf="signupForm.get('firstName')?.errors?.['required']">First Name is
-                                                        required</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                                    placeholder="Last Name" formControlName="lastName">
-                                                <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched"
-                                                    class="text-danger">
-                                                    <small *ngIf="signupForm.get('lastName')?.errors?.['required']">Last Name is
-                                                        required</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                                placeholder="Email Address" formControlName="email">
-                                            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
-                                                class="text-danger">
-                                                <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</small>
-                                                <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user"
-                                                    id="exampleInputPassword" placeholder="Password" formControlName="password">
-                                                <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
-                                                    class="text-danger">
-                                                    <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is
-                                                        required</small>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-sm-6">
-                                                <input type="password" class="form-control form-control-user"
-                                                    id="exampleRepeatPassword" placeholder="Repeat Password"
-                                                    formControlName="passwordRepeat">
-                                                <div *ngIf="signupForm.get('passwordRepeat')?.invalid && signupForm.get('passwordRepeat')?.touched"
-                                                    class="text-danger">
-                                                    <small *ngIf="signupForm.get('passwordRepeat')?.errors?.['required']">Repeat Password
-                                                        is required</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" [disabled]="signupForm.invalid"
-                                            class="btn btn-primary btn-user btn-block">
-                                            Register Account
-                                        </button>
-        
-                                        <hr>
-                                        <a class="btn btn-google btn-user btn-block" (click)="redirectToGoogleAuthorization()">
-                                            <i class="fab fa-google fa-fw"></i> Register with Google
-                                        </a>
-                                        <a  class="btn btn-facebook btn-user btn-block" (click)="redirectToGitHubAuthorization()">
-                                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub Logo" width="20" height="20">
-                                            Register with GitHub
-                                        </a>      
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" routerLink="/forgot-password">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" routerLink="">Already have an account? Login!</a>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+                        <div class="text w-100">
+                            <h2>Welcome to Sign Up</h2>
+                            <p>Already have an account?</p>
+                            <a routerLink="/login" class="btn btn-white btn-outline-white">Login</a>
                         </div>
                     </div>
+                    
+                    <div class="login-wrap p-4 p-lg-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Sign Up</h3>
+                            </div>
+                            <div class="w-100">
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a  class="social-icon d-flex align-items-center justify-content-center" (click)="redirectToGitHubAuthorization()"><img src="/assets/Usertemp/github-logo.png" alt="GitHub Logo" width="20" height="20"></a>
+                                        <a  class="social-icon d-flex align-items-center justify-content-center" (click)="redirectToGoogleAuthorization()"><img src="/assets/Usertemp/google.png" alt="Google Logo" width="20" height="20"></a>
+                                    </p>
+                                </div>
+                                
+
+                                
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                        <form [formGroup]="signupForm" class="signin-form">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control" id="exampleFirstName" placeholder="First Name" formControlName="firstName">
+                                    <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="text-danger">
+                                        <small *ngIf="signupForm.get('firstName')?.errors?.['required']">First Name is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="exampleLastName" placeholder="Last Name" formControlName="lastName">
+                                    <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="text-danger">
+                                        <small *ngIf="signupForm.get('lastName')?.errors?.['required']">Last Name is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email Address" formControlName="email">
+                                <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+                                    <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</small>
+                                    <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" formControlName="password">
+                                    <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger">
+                                        <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" id="exampleRepeatPassword" placeholder="Repeat Password" formControlName="passwordRepeat">
+                                    <div *ngIf="signupForm.get('passwordRepeat')?.invalid && signupForm.get('passwordRepeat')?.touched" class="text-danger">
+                                        <small *ngIf="signupForm.get('passwordRepeat')?.errors?.['required']">Repeat Password is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" (click)="signup()" [disabled]="signupForm.invalid" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </button>
+                        
+                            <div class="form-group d-md-flex">
+                                <br>
+                                <div class="w-50 text-left">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a routerLink="/forgot-password">Forgot Password</a>
+                                </div>
+                            </div>
+                    
+                        </form>
+                        
+                    </div>
+
+
                 </div>
-
             </div>
-
-
+        </div>
     </div>
+</section>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/assets/userAssets/vendor/jquery/jquery.min.js"></script>
-    <script src="/assets/userAssets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/assets/userAssets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/assets/userAssets/js/sb-admin-2.min.js"></script>
+<script src="/assets/Usertemp/js/jquery.min.js"></script>
+<script src="/assets/Usertemp/js/popper.js"></script>
+<script src="/assets/Usertemp/js/bootstrap.min.js"></script>
+<script src="/assets/Usertemp/js/main.js"></script>
 
 </body>
-
 </html>

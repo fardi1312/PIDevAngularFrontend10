@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Registration } from 'src/app/Model/Registration/Registration';
-import { ServiceRegistrationService } from 'src/app/Services/Registration/service-registration.service';
+import { ServiceRegistrationService } from 'src/app/services/Registration/service-registration.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from 'src/app/Model/User/user';

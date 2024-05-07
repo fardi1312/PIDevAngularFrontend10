@@ -1,0 +1,75 @@
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 700;
+  color: #333;
+}
+
+form {
+  margin-top: 20px;
+  text-align: right; /* Align form elements to the right */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+  width: calc(100% - 22px); /* Adjusted width for better alignment */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Messages */
+.messages {
+  float: left; /* Align Messages section to the left */
+  width: 70%; /* Adjusted width for better spacing */
+}
+
+.new-message {
+  float: right; /* Align New Message section to the right */
+  width: 30%; /* Adjusted width for better spacing */
+}
+
+.message {
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.message .sender {
+  font-weight: bold;
+}
+
+.message .timestamp {
+  color: #666;
+}
+
+.message .content {
+  margin-top: 5px;
+}

@@ -1,0 +1,99 @@
+.sales-details {
+  overflow: hidden;
+  .sales-status {
+      .status-price {
+          margin-top: 30px;
+
+          svg {
+              width: 16px;
+              height: 16px;
+              vertical-align: middle;
+              margin-left: 5px;
+              stroke-width: 3px;
+          }
+
+          span {
+              color: rgba(grey, 0.7);
+          }
+      }
+  }
+}
+
+
+.chart-legends {
+  margin: 60px 0;
+
+  ul {
+      .circle-label {
+          width: 10px;
+          height: 10px;
+          border-radius: 25px;
+          display: inline-block;
+          margin-right: 14px;
+      }
+
+      li {
+          display: block;
+
+          span {
+              color: black;
+              letter-spacing: 0.3px;
+          }
+      }
+  }
+}
+
+.monthly-sales {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .icon-box {
+      padding: 2px 10px;
+      background-color: rgba(#007bff, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      cursor: pointer;
+
+      i {
+          vertical-align: baseline;
+          font-size: 14px;
+      }
+  }
+
+  h6 {
+      margin: 0 15px;
+      font-weight: 400;
+  }
+  
+}
+
+.bar-sales {
+  margin-top: 30px;
+  overflow: hidden;
+  margin-bottom: -10px;
+
+  .apexcharts-tooltip {
+      &.light {
+          border: none;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+          .apexcharts-tooltip-title {
+              display: none;
+              margin-bottom: 0;
+          }
+      }
+
+      .apexcharts-tooltip-text {
+          font-family: Arial, Helvetica;
+      }
+
+      .apexcharts-tooltip-series-group {
+          padding-top: 4px;
+      }
+
+      .apexcharts-tooltip-marker {
+          box-shadow: 4px 9px 22.5px 10px rgba(0, 0, 0, 0.07);
+      }
+  }
+}
